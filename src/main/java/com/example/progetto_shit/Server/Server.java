@@ -1,3 +1,4 @@
+
 package com.example.progetto_shit.Server;
 import com.example.progetto_shit.Client.*;
 
@@ -31,7 +32,7 @@ public class Server extends Application {
     @Override
     public void start(Stage primaryStage) {
         // Leggi le email dal file
-        List<String> emails = readEmailsFromFile("email.txt");
+        List<String> emails = readEmailsFromFile();
 
         // Crea l'interfaccia JavaFX
         VBox root = new VBox();
@@ -52,18 +53,18 @@ public class Server extends Application {
         primaryStage.show();
     }
 
-    private List<String> readEmailsFromFile(String filePath) {
+    private List<String> readEmailsFromFile() {
         try {
-            Path path = Paths.get(filePath).toAbsolutePath();
+            // Specifica il percorso assoluto del file email.txt
+            String absolutePath = Paths.get("src/main/java/com/example/progetto_shit/email.txt").toAbsolutePath().toString();
+            Path path = Paths.get(absolutePath);
             System.out.println("Tentativo di lettura del file da: " + path.toString());
             return Files.readAllLines(path);
         } catch (IOException e) {
             System.err.println("Errore nella lettura del file: " + e.getMessage());
-            e.printStackTrace();
-            return List.of("Errore", "Errore", "Errore");
+            return java.util.Collections.emptyList();
         }
     }
-
 
     private void handleEmailSelection(String email) {
         System.out.println("Email selezionata: " + email);
