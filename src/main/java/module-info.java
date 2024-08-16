@@ -15,4 +15,6 @@ module com.example.progetto_shit {
     exports com.example.progetto_shit;
     exports com.example.progetto_shit.Server;
     opens com.example.progetto_shit.Server to javafx.fxml;
+    exports com.example.progetto_shit.Client;
+    opens com.example.progetto_shit.Client to javafx.fxml;
 }

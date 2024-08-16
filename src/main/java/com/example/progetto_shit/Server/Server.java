@@ -1,8 +1,8 @@
-
 package com.example.progetto_shit.Server;
-import com.example.progetto_shit.Client.*;
 
+import com.example.progetto_shit.Client.EmailClientManager;
 import javafx.application.Application;
+import javafx.application.Platform; // Aggiungi questa importazione
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -15,9 +15,10 @@ import java.util.List;
 
 public class Server extends Application {
     private static final int PORT = 55555;
+    private static Stage primaryStage;
 
     public static void main(String[] args) {
-        // Avvia il server (qui non è incluso, ma è lo stesso codice di prima)
+        // Avvia il server
         new Thread(Server::startServer).start();
 
         // Avvia JavaFX
@@ -30,33 +31,40 @@ public class Server extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) {
-        // Leggi le email dal file
-        List<String> emails = readEmailsFromFile();
-
-        // Crea l'interfaccia JavaFX
-        VBox root = new VBox();
-        root.setSpacing(10);
-
-        Label label = new Label("Scegli una delle seguenti email:");
-
-        // Crea i pulsanti per ogni email
-        for (String email : emails) {
-            Button emailButton = new Button(email);
-            emailButton.setOnAction(e -> handleEmailSelection(email));
-            root.getChildren().add(emailButton);
-        }
-
-        Scene scene = new Scene(root, 300, 200);
-        primaryStage.setTitle("Scegli una Email");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+    public void start(Stage stage) {
+        Server.primaryStage = stage;
+        showEmailSelection();
     }
 
-    private List<String> readEmailsFromFile() {
-        try {
-            // Specifica il percorso assoluto del file email.txt
+    public static void showEmailSelection() {
+        if (primaryStage != null) {
+            primaryStage.close(); // Chiudi la finestra corrente se esiste
+        }
 
+        Platform.runLater(() -> {
+            Stage stage = new Stage();
+            VBox root = new VBox();
+            root.setSpacing(10);
+
+            Label label = new Label("Scegli una delle seguenti email:");
+            List<String> emails = readEmailsFromFile();
+
+            for (String email : emails) {
+                Button emailButton = new Button(email);
+                emailButton.setOnAction(e -> handleEmailSelection(email));
+                root.getChildren().add(emailButton);
+            }
+
+            Scene scene = new Scene(root, 300, 200);
+            stage.setTitle("Scegli una Email");
+            stage.setScene(scene);
+            stage.show();
+            Server.primaryStage = stage; // Aggiorna il riferimento al primaryStage
+        });
+    }
+
+    private static List<String> readEmailsFromFile() {
+        try {
             String absolutePath = Paths.get("src/main/java/com/example/progetto_shit/email.txt").toAbsolutePath().toString();
             Path path = Paths.get(absolutePath);
             System.out.println("Tentativo di lettura del file da: " + path.toString());
@@ -67,14 +75,10 @@ public class Server extends Application {
         }
     }
 
-    private void handleEmailSelection(String email) {
+    private static void handleEmailSelection(String email) {
         System.out.println("Email selezionata: " + email);
 
-        // Avvia il client corrispondente in un nuovo thread
-        Thread clientThread = new Thread(() -> {
-            EmailClient client = new EmailClient("localhost", PORT, email);
-            client.run();  // Lancia l'interfaccia grafica del client
-        });
-        clientThread.start();
+        // Usa EmailClientManager per avviare il client
+        EmailClientManager.getInstance().startApplication(email);
     }
 }
