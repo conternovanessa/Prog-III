@@ -1,3 +1,4 @@
+
 package com.example.progetto_shit.Client;
 
 import com.example.progetto_shit.Server.Server;
@@ -8,6 +9,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import java.util.List;
 
 public class EmailClientManager {
     private static EmailClientManager instance;
@@ -50,7 +52,8 @@ public class EmailClientManager {
         backButton.setOnAction(e -> goBackToEmailSelection());
         forwardButton.setOnAction(e -> forwardEmailTo());
 
-        root.getChildren().addAll(emailLabel, refreshButton, emailListView, sendButton, backButton);
+        root.getChildren().addAll(emailLabel, refreshButton, emailListView, sendButton, forwardButton, backButton);
+
 
         Scene scene = new Scene(root, 400, 300);
         primaryStage.setTitle("Email Client - " + userEmail);
@@ -58,7 +61,13 @@ public class EmailClientManager {
     }
 
     private void forwardEmailTo() {
+        // Ottieni l'email selezionata dall'interfaccia utente (esempio)
+        String selectedEmail = "Email di esempio da inoltrare"; // Da sostituire con la logica per ottenere l'email selezionata
+        List<String> recipients = List.of("client1@example.com", "client2@example.com"); // Lista di destinatari
 
+        // Inoltra l'email utilizzando la classe EmailForwarder
+        EmailForwarder forwarder = new EmailForwarder("localhost", 8080); // Assumi che il server sia su localhost e porta 8080
+        forwarder.forwardEmail(selectedEmail, recipients);
     }
 
     private void goBackToEmailSelection() {     // do not touch

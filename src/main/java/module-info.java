@@ -12,7 +12,6 @@ module com.example.progetto_shit {
     requires com.almasb.fxgl.all;
 
     opens com.example.progetto_shit to javafx.fxml;
-    exports com.example.progetto_shit;
     exports com.example.progetto_shit.Server;
     opens com.example.progetto_shit.Server to javafx.fxml;
     exports com.example.progetto_shit.Client;
