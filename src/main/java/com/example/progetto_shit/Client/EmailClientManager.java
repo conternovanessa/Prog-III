@@ -4,16 +4,21 @@ package com.example.progetto_shit.Client;
 import com.example.progetto_shit.Server.Server;
 import javafx.application.Platform; // Aggiungi questa importazione
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
 import java.util.List;
 
 public class EmailClientManager {
     private static EmailClientManager instance;
     private Stage primaryStage;
+    private String email;
 
     private EmailClientManager() {
     }
@@ -83,6 +88,66 @@ public class EmailClientManager {
     }
 
     private void sendEmail() {
-        // Codice per inviare l'email al server
+            Stage composeStage = new Stage();
+            VBox composeRoot = new VBox();
+            composeRoot.setSpacing(10);
+
+            // Creazione dei campi di input
+            TextField recipientField = new TextField();
+            recipientField.setPromptText("Destinatario");
+            TextField subjectField = new TextField();
+            subjectField.setPromptText("Oggetto");
+            TextArea bodyArea = new TextArea();
+            bodyArea.setPromptText("Corpo del messaggio");
+
+            Button sendButton = new Button("Invia");
+            Label errorLabel = new Label();
+            errorLabel.setStyle("-fx-text-fill: red;");
+
+            sendButton.setOnAction(e -> {
+                String recipient = recipientField.getText();
+                String subject = subjectField.getText();
+                String body = bodyArea.getText();
+
+                // Validazione del destinatario
+                if (!recipient.equals(this.email)) {
+                    errorLabel.setText("Errore: Email inviata dal client sbagliato!");
+                } else {
+                    String serverAddress="localhost";
+                    int serverPort=55555;
+                    try (Socket socket = new Socket(serverAddress, serverPort);
+                         PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+                         BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
+
+                        // Invia l'email al server
+                        out.println("To: " + recipient);
+                        out.println("Subject: " + subject);
+                        out.println("Body: " + body);
+                        out.println("EndOfEmail"); // Simbolo di fine email
+
+                        System.out.println("Inviato: " + body);
+
+                        // Leggi la risposta dal server
+                        String response = in.readLine();
+                        System.out.println("Risposta dal server: " + response);
+
+                        if (response.equals("OK")) {
+                            composeStage.close(); // Chiudi la finestra solo se l'invio ha successo
+                        } else {
+                            errorLabel.setText("Errore: Il server ha risposto con un errore.");
+                        }
+                    } catch (IOException ex) {
+                        errorLabel.setText("Errore di connessione al server: " + ex.getMessage());
+                    }
+                }
+            });
+
+            composeRoot.getChildren().addAll(new Label("Componi Email"), recipientField, subjectField, bodyArea, sendButton, errorLabel);
+
+            Scene scene = new Scene(composeRoot, 400, 300);
+            composeStage.setTitle("Componi Nuova Email");
+            composeStage.setScene(scene);
+            composeStage.show();
+
     }
 }
