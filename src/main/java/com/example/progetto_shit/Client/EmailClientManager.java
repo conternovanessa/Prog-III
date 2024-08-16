@@ -41,12 +41,14 @@ public class EmailClientManager {
         Label emailLabel = new Label("Account: " + userEmail);
         ListView<String> emailListView = new ListView<>();
         Button refreshButton = new Button("Aggiorna");
-        Button sendButton = new Button("Invia Email");
+        Button sendButton = new Button("Nuova Email");
+        Button forwardButton = new Button("Inoltra a");
         Button backButton = new Button("Torna alla selezione delle email");
 
         refreshButton.setOnAction(e -> refreshEmailList(emailListView));
         sendButton.setOnAction(e -> sendEmail());
         backButton.setOnAction(e -> goBackToEmailSelection());
+        forwardButton.setOnAction(e -> forwardEmailTo());
 
         root.getChildren().addAll(emailLabel, refreshButton, emailListView, sendButton, backButton);
 
@@ -55,7 +57,11 @@ public class EmailClientManager {
         primaryStage.setScene(scene);
     }
 
-    private void goBackToEmailSelection() {
+    private void forwardEmailTo() {
+
+    }
+
+    private void goBackToEmailSelection() {     // do not touch
         if (primaryStage != null) {
             primaryStage.close(); // Chiudi la finestra del client
             // Riavvia la selezione delle email
