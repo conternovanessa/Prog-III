@@ -56,6 +56,7 @@ public class Server extends Application {
     private List<String> readEmailsFromFile() {
         try {
             // Specifica il percorso assoluto del file email.txt
+
             String absolutePath = Paths.get("src/main/java/com/example/progetto_shit/email.txt").toAbsolutePath().toString();
             Path path = Paths.get(absolutePath);
             System.out.println("Tentativo di lettura del file da: " + path.toString());
