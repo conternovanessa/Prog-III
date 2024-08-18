@@ -1,9 +1,11 @@
 package com.example.progetto_shit.Server;
 
+import com.example.progetto_shit.Server.MessageStorage;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -40,7 +42,7 @@ public class Server extends Application {
             buttonBox.getChildren().addAll(statusLabel, stopButton);
             layout.setCenter(buttonBox);
 
-            Scene scene = new Scene(layout, 300, 200); // Modifica la dimensione della finestra
+            Scene scene = new Scene(layout, 300, 400); // Modifica la dimensione della finestra
             primaryStage.setScene(scene);
             primaryStage.show();
 
@@ -88,6 +90,27 @@ public class Server extends Application {
         // Pulisci il contenuto attuale
         buttonBox.getChildren().clear();
 
+        // Mostra le e-mail ricevute
+        VBox emailBox = new VBox(10);
+        List<String> receivedMails = getReceivedMailsForClient(selectedClient); // Utilizza MessageStorage
+        for (String email : receivedMails) {
+            Label emailLabel = new Label(email); // Mostra ogni email come Label
+            emailBox.getChildren().add(emailLabel);
+        }
+
+        // Usa un ScrollPane per gestire la visualizzazione delle e-mail
+        ScrollPane emailScrollPane = new ScrollPane(emailBox);
+        emailScrollPane.setFitToWidth(true);
+        emailScrollPane.setPrefHeight(200); // Altezza fissa per la visualizzazione
+
+        // Crea una VBox per contenere email e pulsanti
+        VBox contentBox = new VBox(10);
+        contentBox.getChildren().addAll(emailScrollPane, createActionButtons());
+
+        buttonBox.getChildren().add(contentBox);
+    }
+
+    private VBox createActionButtons() {
         Button newMailButton = new Button("Nuova Mail");
         Button receivedMailsButton = new Button("Aggiorna");
         Button forwardButton = new Button("Inoltra");
@@ -100,7 +123,9 @@ public class Server extends Application {
         replyButton.setOnAction(event -> handleReply());
         backButton.setOnAction(event -> handleBack());
 
+        VBox buttonBox = new VBox(10);
         buttonBox.getChildren().addAll(newMailButton, receivedMailsButton, forwardButton, replyButton, backButton);
+        return buttonBox;
     }
 
     private void handleNewMail() {
@@ -110,15 +135,9 @@ public class Server extends Application {
     }
 
     private void handleReceivedMails() {
+        // La logica per la visualizzazione dei messaggi verrà gestita dal client.
         System.out.println("Showing received emails...");
-        List<String> emails = MessageStorage.getMessagesForRecipient(selectedClient);
-        if (emails.isEmpty()) {
-            System.out.println("Non ci sono email per " + selectedClient);
-        } else {
-            for (String email : emails) {
-                System.out.println(email);
-            }
-        }
+        updateClientInterface(); // Ricarica l'interfaccia per mostrare le e-mail aggiornate
     }
 
     private void handleForward() {
@@ -136,6 +155,11 @@ public class Server extends Application {
     private void handleBack() {
         // Torna alla schermata iniziale ripristinando i client e il pulsante Stop Server
         loadClientsFromFile(FILE_PATH);
+    }
+
+    private List<String> getReceivedMailsForClient(String client) {
+        // Utilizza MessageStorage per ottenere le e-mail ricevute
+        return MessageStorage.getMessagesForRecipient(client);
     }
 
     public static void main(String[] args) {
