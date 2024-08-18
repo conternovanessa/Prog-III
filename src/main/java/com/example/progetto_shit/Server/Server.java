@@ -31,15 +31,16 @@ public class Server extends Application {
             primaryStage.setTitle("Mail Server");
 
             // Setup GUI elements
-            statusLabel = new Label("Server Status: Starting...");
+            statusLabel = new Label("Server Status: Running...");
             layout = new BorderPane();
             buttonBox = new VBox(10);
             Button stopButton = new Button("Stop Server");
 
+            // Imposta il layout iniziale
             buttonBox.getChildren().addAll(statusLabel, stopButton);
-            layout.setTop(buttonBox);
+            layout.setCenter(buttonBox);
 
-            Scene scene = new Scene(layout, 300, 200);  // Riduci la dimensione della finestra
+            Scene scene = new Scene(layout, 300, 200); // Modifica la dimensione della finestra
             primaryStage.setScene(scene);
             primaryStage.show();
 
@@ -54,10 +55,14 @@ public class Server extends Application {
         }
     }
 
-    // Method to load clients from the specified file path and create buttons
+    // Metodo per caricare i client da file
     private void loadClientsFromFile(String filePath) {
-        buttonBox.getChildren().clear(); // Clear previous buttons
-        buttonBox.getChildren().addAll(statusLabel, new Button("Stop Server")); // Add statusLabel and stopButton
+        // Pulizia del buttonBox e ripristino del pulsante "Stop Server"
+        buttonBox.getChildren().clear();
+        Button stopButton = new Button("Stop Server");
+        buttonBox.getChildren().addAll(statusLabel, stopButton);
+
+        stopButton.setOnAction(event -> ServerController.stopServer(statusLabel));
 
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
@@ -65,22 +70,13 @@ public class Server extends Application {
                 String client = line.trim();
                 clientList.add(client);
 
-                // Create a button for each client
                 Button clientButton = new Button("Connect to " + client);
                 clientButton.setOnAction(event -> {
                     selectedClient = client;
-                    updateClientInterface(); // Update the interface with client options
+                    updateClientInterface();
                 });
 
-                // Add button to the VBox
                 buttonBox.getChildren().add(clientButton);
-            }
-
-            // Check if clients were added correctly
-            if (clientList.isEmpty()) {
-                System.out.println("No clients found in the specified file.");
-            } else {
-                System.out.println("Clients loaded: " + clientList);
             }
 
         } catch (IOException e) {
@@ -88,28 +84,25 @@ public class Server extends Application {
         }
     }
 
-    // Method to update the interface with client options
     private void updateClientInterface() {
-        buttonBox.getChildren().clear(); // Clear previous buttons
+        // Pulisci il contenuto attuale
+        buttonBox.getChildren().clear();
 
         Button newMailButton = new Button("Nuova Mail");
-        Button receivedMailsButton = new Button("Email Ricevute");
+        Button receivedMailsButton = new Button("Aggiorna");
         Button forwardButton = new Button("Inoltra");
         Button replyButton = new Button("Rispondi");
         Button backButton = new Button("Torna Indietro");
 
-        // Set actions for the buttons
         newMailButton.setOnAction(event -> handleNewMail());
         receivedMailsButton.setOnAction(event -> handleReceivedMails());
         forwardButton.setOnAction(event -> handleForward());
         replyButton.setOnAction(event -> handleReply());
         backButton.setOnAction(event -> handleBack());
 
-        // Add buttons to the VBox
         buttonBox.getChildren().addAll(newMailButton, receivedMailsButton, forwardButton, replyButton, backButton);
     }
 
-    // Placeholder methods for button actions
     private void handleNewMail() {
         System.out.println("Creating a new mail...");
         NewMailHandler newMailHandler = new NewMailHandler(selectedClient);
@@ -118,9 +111,14 @@ public class Server extends Application {
 
     private void handleReceivedMails() {
         System.out.println("Showing received emails...");
-        ReceivedMailsHandler receivedMailsHandler = new ReceivedMailsHandler(selectedClient);
-        String emails = receivedMailsHandler.getReceivedMails();
-        System.out.println(emails);
+        List<String> emails = MessageStorage.getMessagesForRecipient(selectedClient);
+        if (emails.isEmpty()) {
+            System.out.println("Non ci sono email per " + selectedClient);
+        } else {
+            for (String email : emails) {
+                System.out.println(email);
+            }
+        }
     }
 
     private void handleForward() {
@@ -136,7 +134,7 @@ public class Server extends Application {
     }
 
     private void handleBack() {
-        // Reload the list of clients
+        // Torna alla schermata iniziale ripristinando i client e il pulsante Stop Server
         loadClientsFromFile(FILE_PATH);
     }
 

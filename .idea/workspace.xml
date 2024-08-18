@@ -4,14 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0a55273f-6121-464b-90af-ee02c84e2271" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Server/ClientHandler.java" afterDir="false" />
+    <list default="true" id="0a55273f-6121-464b-90af-ee02c84e2271" name="Changes" comment="ora funzionano molte cose bisogna solo mettere le mail da quache parte (creazione  nuovo file letto poi da un package?)">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Server/MessageStorage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Client/EmailClientManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Client/EmailClientManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Server/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Server/ServerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Server/ServerController.java" afterDir="false" />
     </list>
-    <list id="b471e744-8766-4bda-bc81-7f1d28496c3d" name="Changes by dfabi" comment="" />
+    <list id="b471e744-8766-4bda-bc81-7f1d28496c3d" name="Changes by dfabi" comment="aiuto arrivano i messaggi adesso">
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Server/ReceivedMailsHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Server/ReceivedMailsHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Server/Server.java" afterDir="false" />
+    </list>
     <list id="fe27ce86-7bd2-43e5-bee3-b764d56b4b84" name="Changes by user" comment="">
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Server/NewMailHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Server/NewMailHandler.java" afterDir="false" />
     </list>
@@ -98,9 +98,17 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1723988838683</updated>
-      <workItem from="1723988840291" duration="1932000" />
+      <workItem from="1723988840291" duration="4187000" />
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="ora funzionano molte cose bisogna solo mettere le mail da quache parte (creazione  nuovo file letto poi da un package?)">
+      <option name="closed" value="true" />
+      <created>1723990810427</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1723990810427</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -121,6 +129,8 @@
     <MESSAGE value="fuk u" />
     <MESSAGE value="emailForward nuovo e qualche acciacco di client Server client" />
     <MESSAGE value="ciao ho fatto tutto da capo per avere l'MVC del cazzo" />
-    <option name="LAST_COMMIT_MESSAGE" value="ciao ho fatto tutto da capo per avere l'MVC del cazzo" />
+    <MESSAGE value="ora funzionano molte cose bisogna solo mettere le mail da quache parte (creazione  nuovo file letto poi da un package?)" />
+    <MESSAGE value="aiuto arrivano i messaggi adesso" />
+    <option name="LAST_COMMIT_MESSAGE" value="aiuto arrivano i messaggi adesso" />
   </component>
 </project>
