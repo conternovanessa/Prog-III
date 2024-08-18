@@ -4,7 +4,6 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -22,7 +21,6 @@ public class Server extends Application {
     private String selectedClient = null;
     private BorderPane layout;
     private VBox buttonBox;
-    private TextArea messageArea;
 
     // Specifica il percorso del file email.txt direttamente nel codice
     private static final String FILE_PATH = "src/main/java/com/example/progetto_shit/email.txt";
@@ -34,29 +32,21 @@ public class Server extends Application {
 
             // Setup GUI elements
             statusLabel = new Label("Server Status: Starting...");
-            layout = new BorderPane(); // Use BorderPane to layout different sections
-            buttonBox = new VBox(10); // VBox for the buttons
+            layout = new BorderPane();
+            buttonBox = new VBox(10);
             Button stopButton = new Button("Stop Server");
-            messageArea = new TextArea(); // Area to display messages
-            messageArea.setEditable(false); // Make it non-editable
 
-            // Set up layout
             buttonBox.getChildren().addAll(statusLabel, stopButton);
             layout.setTop(buttonBox);
-            layout.setCenter(messageArea);
 
-            // Show the scene
-            Scene scene = new Scene(layout, 600, 400); // Adjust size as needed
+            Scene scene = new Scene(layout, 300, 200);  // Riduci la dimensione della finestra
             primaryStage.setScene(scene);
             primaryStage.show();
 
-            // Load clients from the predefined file path and create buttons
+            // Load clients and start server
             loadClientsFromFile(FILE_PATH);
-
-            // Start server
             ServerController.startServer(statusLabel, clientList);
 
-            // Stop server logic
             stopButton.setOnAction(event -> ServerController.stopServer(statusLabel));
 
         } catch (Exception e) {
@@ -117,7 +107,6 @@ public class Server extends Application {
 
         // Add buttons to the VBox
         buttonBox.getChildren().addAll(newMailButton, receivedMailsButton, forwardButton, replyButton, backButton);
-        layout.setCenter(messageArea); // Ensure messageArea is still shown
     }
 
     // Placeholder methods for button actions
@@ -131,7 +120,7 @@ public class Server extends Application {
         System.out.println("Showing received emails...");
         ReceivedMailsHandler receivedMailsHandler = new ReceivedMailsHandler(selectedClient);
         String emails = receivedMailsHandler.getReceivedMails();
-        messageArea.setText(emails); // Display emails in the messageArea
+        System.out.println(emails);
     }
 
     private void handleForward() {

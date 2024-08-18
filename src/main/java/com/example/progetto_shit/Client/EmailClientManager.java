@@ -7,6 +7,8 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+// Import statements remain the same
+
 public class EmailClientManager {
 
     private String serverAddress;
@@ -27,21 +29,22 @@ public class EmailClientManager {
             System.err.println("Unknown host: " + serverAddress);
         } catch (IOException e) {
             System.err.println("IOException while communicating with server: " + e.getMessage());
-            throw e;  // Re-throw the exception after logging it
+            throw e;
         }
     }
 
-    public Object receiveMessageFromServer() throws IOException, ClassNotFoundException {
-        try (Socket socket = new Socket(serverAddress, serverPort);
-             ObjectInputStream in = new ObjectInputStream(socket.getInputStream())) {
+    public void receiveMessages() {
+        new Thread(() -> {
+            try (Socket socket = new Socket(serverAddress, serverPort);
+                 ObjectInputStream in = new ObjectInputStream(socket.getInputStream())) {
 
-            return in.readObject();
-        } catch (UnknownHostException e) {
-            System.err.println("Unknown host: " + serverAddress);
-            throw e;
-        } catch (IOException e) {
-            System.err.println("IOException while receiving from server: " + e.getMessage());
-            throw e;
-        }
+                while (true) {
+                    String message = (String) in.readObject();
+                    System.out.println("New message from server: " + message);
+                }
+            } catch (IOException | ClassNotFoundException e) {
+                System.err.println("Error receiving messages from server: " + e.getMessage());
+            }
+        }).start();
     }
 }

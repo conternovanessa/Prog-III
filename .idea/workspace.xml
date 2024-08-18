@@ -4,20 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0a55273f-6121-464b-90af-ee02c84e2271" name="Changes" comment="emailForward nuovo e qualche acciacco di client Server client">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Client/ClientController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Server/ForwardHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Server/NewMailHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Server/ReceivedMailsHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Server/ReplyHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Server/ServerController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/View/client_view.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/View/server_view.fxml" afterDir="false" />
+    <list default="true" id="0a55273f-6121-464b-90af-ee02c84e2271" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Server/ClientHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Client/EmailClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Client/EmailClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Client/EmailClientManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Client/EmailClientManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Client/EmailForwarder.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Server/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Server/ServerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Server/ServerController.java" afterDir="false" />
+    </list>
+    <list id="b471e744-8766-4bda-bc81-7f1d28496c3d" name="Changes by dfabi" comment="" />
+    <list id="fe27ce86-7bd2-43e5-bee3-b764d56b4b84" name="Changes by user" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Server/NewMailHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Server/NewMailHandler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,22 +36,75 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "conternovanessa"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/conternovanessa/Prog-III/",
+    "accountId": "d24558fd-777a-4128-b7fc-0f0c30dcd9f0"
+  }
+}]]></component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 2
+}]]></component>
+  <component name="ProjectId" id="2kpmLJyReEzHifbv02UqULTXYaC" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.Server.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "Server-Client",
+    "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
-    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable"
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-b114ca120d71-intellij.indexing.shared.core-IU-242.20224.387" />
+        <option value="bundled-js-predefined-d6986cc7102b-410509235cf1-JavaScript-IU-242.20224.387" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
+    <task id="LOCAL-00001" summary="ciao ho fatto tutto da capo per avere l'MVC del cazzo">
+      <option name="closed" value="true" />
+      <created>1723887240520</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1723887240520</updated>
+    </task>
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0a55273f-6121-464b-90af-ee02c84e2271" name="Changes" comment="" />
+      <created>1723988838683</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1723988838683</updated>
+      <workItem from="1723988840291" duration="1932000" />
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -71,6 +120,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="fuk u" />
     <MESSAGE value="emailForward nuovo e qualche acciacco di client Server client" />
-    <option name="LAST_COMMIT_MESSAGE" value="emailForward nuovo e qualche acciacco di client Server client" />
+    <MESSAGE value="ciao ho fatto tutto da capo per avere l'MVC del cazzo" />
+    <option name="LAST_COMMIT_MESSAGE" value="ciao ho fatto tutto da capo per avere l'MVC del cazzo" />
   </component>
 </project>

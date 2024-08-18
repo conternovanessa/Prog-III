@@ -4,11 +4,15 @@ import com.example.progetto_shit.Client.EmailClientManager;
 import javafx.scene.control.Label;
 
 import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.List;
 
 public class ServerController {
 
     private static boolean serverRunning = false;
+    private static ServerSocket serverSocket;
+    private static final int PORT = 12345;
 
     public static void startServer(Label statusLabel, List<String> clientList) {
         if (!serverRunning) {
@@ -17,6 +21,18 @@ public class ServerController {
 
             System.out.println("Server started.");
             System.out.println("Clients available: " + clientList);
+
+            new Thread(() -> {
+                try {
+                    serverSocket = new ServerSocket(PORT);
+                    while (serverRunning) {
+                        Socket clientSocket = serverSocket.accept();
+                        new ClientHandler(clientSocket, clientList).start();
+                    }
+                } catch (IOException e) {
+                    System.err.println("Error in server socket: " + e.getMessage());
+                }
+            }).start();
         }
     }
 
@@ -25,32 +41,15 @@ public class ServerController {
             serverRunning = false;
             statusLabel.setText("Server Status: Stopped");
 
+            try {
+                if (serverSocket != null) {
+                    serverSocket.close();
+                }
+            } catch (IOException e) {
+                System.err.println("Error closing server socket: " + e.getMessage());
+            }
+
             System.out.println("Server stopped.");
-        }
-    }
-
-    // Metodo che gestisce la selezione di un client
-    public static void handleClientSelection(String clientName) {
-        System.out.println("Handling selection for client: " + clientName);
-
-        // Assumiamo che il server sia in esecuzione sulla stessa macchina e porta
-        String serverAddress = "localhost";
-        int serverPort = 12345; // Porta usata dal server
-
-        // Creiamo un'istanza di EmailClientManager per questo client
-        EmailClientManager clientManager = new EmailClientManager(serverAddress, serverPort);
-
-        // Qui puoi inviare e ricevere messaggi usando clientManager
-        try {
-            // Simula l'invio di un messaggio dal client al server
-            clientManager.sendMessageToServer("Hello from client: " + clientName);
-
-            // Simula la ricezione di un messaggio dal server
-            Object response = clientManager.receiveMessageFromServer();
-            System.out.println("Received message from server: " + response);
-
-        } catch (IOException | ClassNotFoundException e) {
-            System.err.println("Error during client-server communication: " + e.getMessage());
         }
     }
 }
