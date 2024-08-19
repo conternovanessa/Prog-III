@@ -1,11 +1,8 @@
 package com.example.progetto_shit.Server;
 
-import com.example.progetto_shit.Server.MessageStorage;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -23,8 +20,8 @@ public class Server extends Application {
     private String selectedClient = null;
     private BorderPane layout;
     private VBox buttonBox;
+    private String selectedEmail = null;
 
-    // Specifica il percorso del file email.txt direttamente nel codice
     private static final String FILE_PATH = "src/main/java/com/example/progetto_shit/email.txt";
 
     @Override
@@ -59,7 +56,6 @@ public class Server extends Application {
 
     // Metodo per caricare i client da file
     private void loadClientsFromFile(String filePath) {
-        // Pulizia del buttonBox e ripristino del pulsante "Stop Server"
         buttonBox.getChildren().clear();
         Button stopButton = new Button("Stop Server");
         buttonBox.getChildren().addAll(statusLabel, stopButton);
@@ -92,10 +88,23 @@ public class Server extends Application {
 
         // Mostra le e-mail ricevute
         VBox emailBox = new VBox(10);
-        List<String> receivedMails = getReceivedMailsForClient(selectedClient); // Utilizza MessageStorage
+        List<String> receivedMails = getReceivedMailsForClient(selectedClient);
         for (String email : receivedMails) {
-            Label emailLabel = new Label(email); // Mostra ogni email come Label
-            emailBox.getChildren().add(emailLabel);
+            String[] emailLines = email.split("\n", 3); // Splitta le prime due righe (Mittente e Oggetto)
+
+            if (emailLines.length >= 2) {
+                String sender = emailLines[0].replace("From: ", "");
+                String subject = emailLines[1].replace("Subject: ", "");
+                String buttonText = sender + " - " + subject;
+
+                Button emailButton = new Button(buttonText);
+                emailButton.setOnAction(event -> {
+                    selectedEmail = email; // Memorizza l'email selezionata
+                    showEmailDetailView(email); // Mostra l'interfaccia dettagliata
+                });
+
+                emailBox.getChildren().add(emailButton);
+            }
         }
 
         // Usa un ScrollPane per gestire la visualizzazione delle e-mail
@@ -103,11 +112,44 @@ public class Server extends Application {
         emailScrollPane.setFitToWidth(true);
         emailScrollPane.setPrefHeight(200); // Altezza fissa per la visualizzazione
 
-        // Crea una VBox per contenere email e pulsanti
         VBox contentBox = new VBox(10);
         contentBox.getChildren().addAll(emailScrollPane, createActionButtons());
 
         buttonBox.getChildren().add(contentBox);
+    }
+
+
+    // Metodo per visualizzare i dettagli dell'email selezionata
+    private void showEmailDetailView(String email) {
+        // Estrae i dettagli dell'email
+        String[] emailLines = email.split("\n", 3);
+        String sender = emailLines.length > 0 ? emailLines[0].replace("From: ", "") : "Unknown Sender";
+        String subject = emailLines.length > 1 ? emailLines[1].replace("Subject: ", "") : "No Subject";
+        String body = emailLines.length > 2 ? emailLines[2] : "No Content";
+
+        // Crea una nuova finestra per i dettagli dell'email
+        Stage emailDetailStage = new Stage();
+        emailDetailStage.setTitle("Email Details");
+
+        // Crea i controlli per visualizzare i dettagli
+        Label senderLabel = new Label("From: " + sender);
+        Label subjectLabel = new Label("Subject: " + subject);
+        TextArea bodyArea = new TextArea(body);
+        bodyArea.setWrapText(true);
+        bodyArea.setEditable(false);
+
+        // Pulsanti per rispondere e inoltrare
+        Button replyButton = new Button("Reply");
+        replyButton.setOnAction(event -> handleReply());
+        Button forwardButton = new Button("Forward");
+        forwardButton.setOnAction(event -> handleForward());
+
+        VBox detailBox = new VBox(10, senderLabel, subjectLabel, bodyArea, replyButton, forwardButton);
+        detailBox.setPrefSize(400, 300);
+
+        Scene detailScene = new Scene(detailBox);
+        emailDetailStage.setScene(detailScene);
+        emailDetailStage.show();
     }
 
     private VBox createActionButtons() {
@@ -135,30 +177,45 @@ public class Server extends Application {
     }
 
     private void handleReceivedMails() {
-        // La logica per la visualizzazione dei messaggi verrà gestita dal client.
         System.out.println("Showing received emails...");
-        updateClientInterface(); // Ricarica l'interfaccia per mostrare le e-mail aggiornate
-    }
-
-    private void handleForward() {
-        System.out.println("Forwarding email...");
-        ForwardHandler forwardHandler = new ForwardHandler(selectedClient);
-        forwardHandler.forwardEmail();
+        updateClientInterface();
     }
 
     private void handleReply() {
-        System.out.println("Replying to email...");
-        ReplyHandler replyHandler = new ReplyHandler(selectedClient);
-        replyHandler.replyToEmail();
+        System.out.println("Rispondendo all'email...");
+        if (selectedEmail != null) {
+            ReplyHandler replyHandler = new ReplyHandler(selectedEmail);
+            // Implementa la logica per rispondere all'email
+        } else {
+            showAlert("Selezione Mancante", "Per favore seleziona un'email a cui rispondere.");
+        }
     }
 
+    private void handleForward() {
+        System.out.println("Inoltrando l'email...");
+        if (selectedEmail != null) {
+            ForwardHandler forwardHandler = new ForwardHandler(selectedClient);
+            //forwardHandler.forwardEmail(selectedEmail); // Implementa il metodo nel ForwardHandler
+        } else {
+            showAlert("Selezione Mancante", "Per favore seleziona un'email da inoltrare.");
+        }
+    }
+
+    // Metodo di utilità per mostrare avvisi
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+
     private void handleBack() {
-        // Torna alla schermata iniziale ripristinando i client e il pulsante Stop Server
         loadClientsFromFile(FILE_PATH);
     }
 
     private List<String> getReceivedMailsForClient(String client) {
-        // Utilizza MessageStorage per ottenere le e-mail ricevute
         return MessageStorage.getMessagesForRecipient(client);
     }
 

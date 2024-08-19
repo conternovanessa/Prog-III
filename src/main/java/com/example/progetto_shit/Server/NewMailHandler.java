@@ -22,7 +22,10 @@ public class NewMailHandler extends Application {
             "vanessaconterno@progetto.com"
     );
 
-    public NewMailHandler(String selectedClient) {
+    private String currentSender; // Email del mittente
+
+    public NewMailHandler(String currentSender) {
+        this.currentSender = currentSender;
     }
 
     @Override
@@ -51,8 +54,10 @@ public class NewMailHandler extends Application {
         bodyArea.setPromptText("Corpo");
         bodyArea.setPrefRowCount(5);
 
-        VBox vbox = new VBox(10, new Label("Destinatario:"), recipientField,
-                new Label("Oggetto:"), subjectField, new Label("Corpo:"), bodyArea);
+        VBox vbox = new VBox(10,
+                new Label("Destinatario:"), recipientField,
+                new Label("Oggetto:"), subjectField,
+                new Label("Corpo:"), bodyArea);
 
         javafx.scene.control.Button sendButton = new javafx.scene.control.Button("Invia");
         javafx.scene.control.Button cancelButton = new javafx.scene.control.Button("Annulla");
@@ -75,13 +80,13 @@ public class NewMailHandler extends Application {
             }
 
             if (!subject.isEmpty() && !body.isEmpty()) {
-                // Invio l'email a MessageStorage
-                MessageStorage.saveMessage(recipient, subject, body);
+                // Invio l'email a MessageStorage includendo il mittente (dinamico)
+                MessageStorage.saveMessage(currentSender, recipient, subject, body);
 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Nuova Mail");
                 alert.setHeaderText(null);
-                alert.setContentText("Mail inviata a: " + recipient + "\nOggetto: " + subject + "\nCorpo: " + body);
+                alert.setContentText("Mail inviata da: " + currentSender + "\nA: " + recipient + "\nOggetto: " + subject + "\nCorpo: " + body);
                 alert.showAndWait();
                 dialog.close();
             } else {
