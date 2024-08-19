@@ -8,8 +8,18 @@ public class MessageStorage {
 
     private static final String BASE_DIR = "messages/";
 
+    // Metodo per assicurarsi che la directory esista
+    private static void ensureDirectoryExists() {
+        File directory = new File(BASE_DIR);
+        if (!directory.exists()) {
+            directory.mkdirs(); // Crea la directory, inclusi eventuali genitori mancanti
+        }
+    }
+
     // Salva un messaggio per un destinatario specifico
     public static void saveMessage(String recipient, String subject, String body) {
+        ensureDirectoryExists(); // Assicurati che la directory esista prima di salvare il messaggio
+
         String filePath = BASE_DIR + recipient + ".txt";
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
             writer.write("Subject: " + subject);
@@ -44,7 +54,7 @@ public class MessageStorage {
                     message.append(line).append("\n");
                 }
             }
-            // Add last message if exists
+            // Aggiungi l'ultimo messaggio se esiste
             if (message.length() > 0) {
                 messages.add(message.toString());
             }
