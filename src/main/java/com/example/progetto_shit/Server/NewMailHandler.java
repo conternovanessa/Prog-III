@@ -44,8 +44,9 @@ public class NewMailHandler extends Application {
         dialog.initModality(Modality.APPLICATION_MODAL);
         dialog.setTitle("Nuova Email");
 
-        TextField recipientField = new TextField();
-        recipientField.setPromptText("Inserisci l'indirizzo email del destinatario");
+        // Usa un TextArea per inserire più destinatari separati da virgole
+        TextArea recipientArea = new TextArea();
+        recipientArea.setPromptText("Inserisci gli indirizzi email dei destinatari separati da virgola");
 
         TextField subjectField = new TextField();
         subjectField.setPromptText("Oggetto");
@@ -55,7 +56,7 @@ public class NewMailHandler extends Application {
         bodyArea.setPrefRowCount(5);
 
         VBox vbox = new VBox(10,
-                new Label("Destinatario:"), recipientField,
+                new Label("Destinatari:"), recipientArea,
                 new Label("Oggetto:"), subjectField,
                 new Label("Corpo:"), bodyArea);
 
@@ -63,39 +64,42 @@ public class NewMailHandler extends Application {
         javafx.scene.control.Button cancelButton = new javafx.scene.control.Button("Annulla");
 
         sendButton.setOnAction(e -> {
-            String recipient = recipientField.getText();
+            String recipients = recipientArea.getText();
             String subject = subjectField.getText();
             String body = bodyArea.getText();
 
-            if (!VALID_RECIPIENTS.contains(recipient)) {
-                Alert errorAlert = new Alert(Alert.AlertType.ERROR);
-                errorAlert.setTitle("Errore");
-                errorAlert.setHeaderText("Indirizzo email non valido");
-                errorAlert.setContentText("L'indirizzo email inserito non è valido.\nI destinatari validi sono:\n" +
-                        "• fabiodelia@progetto.com\n" +
-                        "• filippoditto@progetto.com\n" +
-                        "• vanessaconterno@progetto.com");
-                errorAlert.showAndWait();
-                return;
-            }
-
-            if (!subject.isEmpty() && !body.isEmpty()) {
-                // Invio l'email a MessageStorage includendo il mittente (dinamico)
-                MessageStorage.saveMessage(currentSender, recipient, subject, body);
-
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Nuova Mail");
-                alert.setHeaderText(null);
-                alert.setContentText("Mail inviata da: " + currentSender + "\nA: " + recipient + "\nOggetto: " + subject + "\nCorpo: " + body);
-                alert.showAndWait();
-                dialog.close();
-            } else {
+            if (recipients.isEmpty() || subject.isEmpty() || body.isEmpty()) {
                 Alert errorAlert = new Alert(Alert.AlertType.ERROR);
                 errorAlert.setTitle("Errore");
                 errorAlert.setHeaderText("Dettagli mancanti");
                 errorAlert.setContentText("Per favore, compila tutti i campi.");
                 errorAlert.showAndWait();
+                return;
             }
+
+            // Dividi i destinatari usando la virgola come separatore e rimuovi eventuali spazi
+            String[] recipientArray = recipients.split(",");
+            for (String recipient : recipientArray) {
+                recipient = recipient.trim(); // Rimuove gli spazi in eccesso
+                if (!VALID_RECIPIENTS.contains(recipient)) {
+                    Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+                    errorAlert.setTitle("Errore");
+                    errorAlert.setHeaderText("Indirizzo email non valido");
+                    errorAlert.setContentText("L'indirizzo email " + recipient + " non è valido.");
+                    errorAlert.showAndWait();
+                    return;
+                }
+
+                // Invio l'email a MessageStorage includendo il mittente (dinamico)
+                MessageStorage.saveMessage(currentSender, recipient, subject, body);
+            }
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Nuova Mail");
+            alert.setHeaderText(null);
+            alert.setContentText("Mail inviata da: " + currentSender + "\nA: " + recipients + "\nOggetto: " + subject + "\nCorpo: " + body);
+            alert.showAndWait();
+            dialog.close();
         });
 
         cancelButton.setOnAction(e -> dialog.close());

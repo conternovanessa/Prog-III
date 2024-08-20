@@ -184,12 +184,18 @@ public class Server extends Application {
     private void handleReply() {
         System.out.println("Rispondendo all'email...");
         if (selectedEmail != null) {
-            ReplyHandler replyHandler = new ReplyHandler(selectedEmail);
-            // Implementa la logica per rispondere all'email
+            // Estrae il mittente dall'email selezionata
+            String[] emailLines = selectedEmail.split("\n", 3);
+            String sender = emailLines.length > 0 ? emailLines[0].replace("From: ", "") : "Unknown Sender";
+
+            // Inizializza il ReplyHandler con l'indirizzo del mittente e del client corrente
+            ReplyHandler replyHandler = new ReplyHandler(sender, selectedClient);
+            replyHandler.replyToEmail();
         } else {
             showAlert("Selezione Mancante", "Per favore seleziona un'email a cui rispondere.");
         }
     }
+
 
     private void handleForward() {
         System.out.println("Inoltrando l'email...");
