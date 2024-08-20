@@ -12,7 +12,7 @@ public class ServerController {
 
     private static boolean serverRunning = false;
     private static ServerSocket serverSocket;
-    private static final int PORT = 12345;
+    private static final int PORT = 55555;
 
     public static void startServer(Label statusLabel, List<String> clientList) {
         if (!serverRunning) {
