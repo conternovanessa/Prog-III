@@ -1,5 +1,6 @@
 package com.example.progetto_shit.Controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -30,7 +31,7 @@ public class ClientController {
     private List<String> clientList = new ArrayList<>();
     private String selectedClient;
     private String selectedEmail;
-    private ServerController serverController; // Aggiungi una variabile per ServerController
+    private ServerController serverController;
     @FXML
     private Label serverAddressLabel;
 
@@ -38,45 +39,36 @@ public class ClientController {
 
     public void initialize() {
         // Questo metodo viene chiamato dopo che l'FXML è stato caricato
-        // Può essere vuoto se non hai bisogno di inizializzazione aggiuntiva
     }
-    // Metodo per inizializzare il controller con l'indirizzo del server
+
     public void initialize(String serverAddress) {
         this.serverAddress = serverAddress;
         serverAddressLabel.setText("Server Address: " + serverAddress);
     }
 
-    // Metodo per impostare l'istanza di ServerController
     public void setServerController(ServerController serverController) {
         this.serverController = serverController;
     }
 
-    // Questo metodo viene chiamato per connettere il client al server e per aggiornare la UI
     public void connectToServer() {
-        // Logica di connessione al server
         System.out.println("Connecting to server...");
     }
 
-    // Questo metodo aggiorna l'interfaccia utente in base ai dati ricevuti dal server
     public void updateUI(String data) {
-        // Aggiorna la UI con i dati del server
         emailContentArea.setText(data);
     }
 
     @FXML
     private void handleSendEmail() {
-        // Logica per inviare una email al server
         System.out.println("Sending email...");
     }
 
     @FXML
     private void handleRefreshEmails() {
-        // Logica per aggiornare la lista di email dal server
         System.out.println("Refreshing emails...");
         updateClientInterface();
     }
 
-    // Metodo per caricare i client da file
     public void loadClientsFromFile(String filePath) {
         buttonBox.getChildren().clear();
 
@@ -110,14 +102,12 @@ public class ClientController {
     }
 
     private void updateClientInterface() {
-        // Pulisci il contenuto attuale
         buttonBox.getChildren().clear();
 
-        // Mostra le e-mail ricevute
         VBox emailBox = new VBox(10);
         List<String> receivedMails = getReceivedMailsForClient(selectedClient);
         for (String email : receivedMails) {
-            String[] emailLines = email.split("\n", 3); // Splitta le prime due righe (Mittente e Oggetto)
+            String[] emailLines = email.split("\n", 3);
 
             if (emailLines.length >= 2) {
                 String sender = emailLines[0].replace("From: ", "");
@@ -126,18 +116,17 @@ public class ClientController {
 
                 Button emailButton = new Button(buttonText);
                 emailButton.setOnAction(event -> {
-                    selectedEmail = email; // Memorizza l'email selezionata
-                    showEmailDetailView(email); // Mostra l'interfaccia dettagliata
+                    selectedEmail = email;
+                    showEmailDetailView(email);
                 });
 
                 emailBox.getChildren().add(emailButton);
             }
         }
 
-        // Usa un ScrollPane per gestire la visualizzazione delle e-mail
         ScrollPane emailScrollPane = new ScrollPane(emailBox);
         emailScrollPane.setFitToWidth(true);
-        emailScrollPane.setPrefHeight(200); // Altezza fissa per la visualizzazione
+        emailScrollPane.setPrefHeight(200);
 
         VBox contentBox = new VBox(10);
         contentBox.getChildren().addAll(emailScrollPane, createActionButtons());
@@ -145,117 +134,75 @@ public class ClientController {
         buttonBox.getChildren().add(contentBox);
     }
 
-    // Metodo per ottenere le email ricevute per un client specifico
     private List<String> getReceivedMailsForClient(String client) {
-        // Logica per ottenere le email ricevute dal server per il client selezionato
-        // Placeholder per il contenuto reale
         List<String> emails = new ArrayList<>();
         emails.add("From: example1@example.com\nSubject: Hello World\nThis is a test email.");
         emails.add("From: example2@example.com\nSubject: Another Email\nHere is some more content.");
         return emails;
     }
 
-    // Metodo per visualizzare i dettagli dell'email selezionata
     private void showEmailDetailView(String email) {
-        // Estrae i dettagli dell'email
         String[] emailLines = email.split("\n", 3);
         String sender = emailLines.length > 0 ? emailLines[0].replace("From: ", "") : "Unknown Sender";
         String subject = emailLines.length > 1 ? emailLines[1].replace("Subject: ", "") : "No Subject";
         String body = emailLines.length > 2 ? emailLines[2] : "No Content";
 
-        // Crea una nuova finestra per i dettagli dell'email
         Stage emailDetailStage = new Stage();
         emailDetailStage.setTitle("Email Details");
 
-        // Crea i controlli per visualizzare i dettagli
         Label senderLabel = new Label("From: " + sender);
         Label subjectLabel = new Label("Subject: " + subject);
         TextArea bodyArea = new TextArea(body);
         bodyArea.setWrapText(true);
         bodyArea.setEditable(false);
 
-        // Pulsanti per rispondere e inoltrare
-        Button replyButton = new Button("Reply");
-        replyButton.setOnAction(event -> handleReply());
-        Button forwardButton = new Button("Forward");
-        forwardButton.setOnAction(event -> handleForward());
+        VBox emailDetailBox = new VBox(10);
+        emailDetailBox.getChildren().addAll(senderLabel, subjectLabel, bodyArea);
 
-        VBox detailBox = new VBox(10, senderLabel, subjectLabel, bodyArea, replyButton, forwardButton);
-        detailBox.setPrefSize(400, 300);
-
-        Scene detailScene = new Scene(detailBox);
-        emailDetailStage.setScene(detailScene);
+        Scene scene = new Scene(emailDetailBox, 300, 400);
+        emailDetailStage.setScene(scene);
         emailDetailStage.show();
     }
 
     private VBox createActionButtons() {
-        Button newMailButton = new Button("Nuova Mail");
-        Button receivedMailsButton = new Button("Aggiorna");
-        Button forwardButton = new Button("Inoltra");
-        Button replyButton = new Button("Rispondi");
-        Button backButton = new Button("Torna Indietro");
+        Button replyButton = new Button("Reply");
+        Button forwardButton = new Button("Forward");
 
-        newMailButton.setOnAction(event -> handleNewMail());
-        receivedMailsButton.setOnAction(event -> handleReceivedMails());
-        forwardButton.setOnAction(event -> handleForward());
         replyButton.setOnAction(event -> handleReply());
-        backButton.setOnAction(event -> handleBack());
+        forwardButton.setOnAction(event -> handleForward());
 
-        VBox buttonBox = new VBox(10);
-        buttonBox.getChildren().addAll(newMailButton, receivedMailsButton, forwardButton, replyButton, backButton);
-        return buttonBox;
-    }
+        VBox actionButtons = new VBox(10);
+        actionButtons.getChildren().addAll(replyButton, forwardButton);
 
-    private void handleNewMail() {
-        System.out.println("Creating a new mail...");
-        NewMailHandler newMailHandler = new NewMailHandler(selectedClient);
-        newMailHandler.createNewMail();
-    }
-
-    private void handleReceivedMails() {
-        System.out.println("Showing received emails...");
-        updateClientInterface();
+        return actionButtons;
     }
 
     @FXML
     private void handleReply() {
-        System.out.println("Rispondendo all'email...");
-        if (selectedEmail != null) {
-            // Estrae il mittente dall'email selezionata
-            String[] emailLines = selectedEmail.split("\n", 3);
-            String sender = emailLines.length > 0 ? emailLines[0].replace("From: ", "") : "Unknown Sender";
-
-            // Inizializza il ReplyHandler con l'indirizzo del mittente e del client corrente
-            ReplyHandler replyHandler = new ReplyHandler(sender, selectedClient);
-            replyHandler.replyToEmail();
-        } else {
-            showAlert("Selezione Mancante", "Per favore seleziona un'email a cui rispondere.");
+        if (selectedEmail == null) {
+            showErrorAlert("No email selected", "Please select an email to reply to.");
+            return;
         }
+        System.out.println("Replying to email: " + selectedEmail);
     }
 
     @FXML
     private void handleForward() {
-        System.out.println("Inoltrando l'email...");
-        if (selectedEmail != null) {
-            ForwardHandler forwardHandler = new ForwardHandler(selectedClient);
-            forwardHandler.forwardEmail(selectedEmail);
-        } else {
-            showAlert("Selezione Mancante", "Per favore seleziona un'email da inoltrare.");
+        if (selectedEmail == null) {
+            showErrorAlert("No email selected", "Please select an email to forward.");
+            return;
         }
+        System.out.println("Forwarding email: " + selectedEmail);
     }
 
-    @FXML
-    private void handleBack() {
-        System.out.println("Tornando indietro...");
-        // Implementa la logica per tornare alla schermata precedente
-    }
-
-    // Metodo di utilità per mostrare avvisi
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.WARNING);
+    private void showErrorAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    public void handleBack(ActionEvent actionEvent) {
     }
 }

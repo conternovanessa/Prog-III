@@ -83,9 +83,9 @@ public class ServerController {
     private void openClientInterface(String clientAddress) {
         Platform.runLater(() -> {
             try {
-                // Passa l'indirizzo del client al costruttore di ClientApp
+                // Inizializza il ClientApp con l'indirizzo del client
                 ClientApp clientApp = new ClientApp(clientAddress);
-                clientApp.start(new Stage()); // Questo deve essere eseguito nel thread della JavaFX Application
+                clientApp.start(new Stage()); // Avvia il nuovo stage per il client
             } catch (Exception e) {
                 e.printStackTrace();
             }

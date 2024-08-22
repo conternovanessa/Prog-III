@@ -40,7 +40,6 @@ public class ClientApp extends Application {
     }
 
     public static void launchClient(String clientAddress) {
-        // Lancia l'app JavaFX e passa l'indirizzo del client come parametro
         Application.launch(ClientApp.class, clientAddress);
     }
 
