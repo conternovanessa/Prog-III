@@ -1,5 +1,6 @@
-package com.example.progetto_shit.Server;
+package com.example.progetto_shit.Controller;
 
+import com.example.progetto_shit.Model.MessageStorage;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;

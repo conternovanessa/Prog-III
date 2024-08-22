@@ -1,4 +1,4 @@
-package com.example.progetto_shit.Server;
+package com.example.progetto_shit.Controller;
 
 import java.io.BufferedReader;
 import java.io.File;

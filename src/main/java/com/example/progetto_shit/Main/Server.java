@@ -1,5 +1,10 @@
-package com.example.progetto_shit.Server;
+package com.example.progetto_shit.Main;
 
+import com.example.progetto_shit.Controller.ForwardHandler;
+import com.example.progetto_shit.Controller.NewMailHandler;
+import com.example.progetto_shit.Controller.ReplyHandler;
+import com.example.progetto_shit.Controller.ServerController;
+import com.example.progetto_shit.Model.MessageStorage;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.*;

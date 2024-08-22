@@ -1,4 +1,4 @@
-package com.example.progetto_shit.Server;
+package com.example.progetto_shit.Model;
 
 import java.io.*;
 import java.util.ArrayList;

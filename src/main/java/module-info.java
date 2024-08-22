@@ -11,9 +11,13 @@ module com.example.progetto_shit {
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
 
-    opens com.example.progetto_shit to javafx.fxml;
-    exports com.example.progetto_shit.Server;
-    opens com.example.progetto_shit.Server to javafx.fxml;
-    exports com.example.progetto_shit.Client;
-    opens com.example.progetto_shit.Client to javafx.fxml;
+    // Esporta i pacchetti principali del progetto
+    exports com.example.progetto_shit.Model;
+    exports com.example.progetto_shit.Controller;
+    exports com.example.progetto_shit.Main;
+
+    // Apre i pacchetti per riflessione a javafx.fxml
+    opens com.example.progetto_shit.Model to javafx.fxml;
+    opens com.example.progetto_shit.Controller to javafx.fxml;
+    opens com.example.progetto_shit.Main to javafx.fxml;
 }

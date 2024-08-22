@@ -4,7 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progetto_shit.Server.ServerController">
+<VBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progetto_shit.Controller.ServerController">
     <Label fx:id="statusLabel" text="Server Status: Stopped" />
     <Button fx:id="startButton" text="Start Server" />
     <Button fx:id="stopButton" text="Stop Server" />

@@ -1,6 +1,6 @@
-package com.example.progetto_shit.Client;
+package com.example.progetto_shit.Main;
 
-import com.example.progetto_shit.Server.MessageStorage;
+import com.example.progetto_shit.Model.MessageStorage;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;

@@ -1,4 +1,4 @@
-package com.example.progetto_shit.Server;
+package com.example.progetto_shit.Controller;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextInputDialog;

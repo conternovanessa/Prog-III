@@ -1,4 +1,4 @@
-package com.example.progetto_shit.Client;
+package com.example.progetto_shit.Controller;
 
 import javafx.fxml.FXML;
 

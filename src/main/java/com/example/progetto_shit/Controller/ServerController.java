@@ -1,6 +1,5 @@
-package com.example.progetto_shit.Server;
+package com.example.progetto_shit.Controller;
 
-import com.example.progetto_shit.Client.EmailClientManager;
 import javafx.scene.control.Label;
 
 import java.io.IOException;

@@ -1,5 +1,6 @@
-package com.example.progetto_shit.Client;
+package com.example.progetto_shit.Model;
 
+import com.example.progetto_shit.Controller.ClientController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
