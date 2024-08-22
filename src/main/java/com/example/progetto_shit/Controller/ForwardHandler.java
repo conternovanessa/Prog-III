@@ -11,7 +11,7 @@ public class ForwardHandler {
         this.clientAddress = clientAddress;
     }
 
-    public void forwardEmail() {
+    public void forwardEmail(String selectedEmail) {
         // Mostra una finestra di dialogo per inserire l'indirizzo del destinatario
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle("Inoltra Email");

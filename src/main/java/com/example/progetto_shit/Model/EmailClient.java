@@ -17,15 +17,22 @@ public class EmailClient extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("client_view.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/progetto_shit/View/client_view.fxml"));
         Parent root = loader.load();
 
+        // Passa l'indirizzo del server al controller del client
         ClientController controller = loader.getController();
-        controller.initialize(serverAddress); // Passa l'indirizzo del server al controller
+        controller.initialize(serverAddress);
 
         primaryStage.setTitle("Email Client");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
+    }
+
+    public static void launchClient(String serverAddress) throws Exception {
+        // Passa l'indirizzo del server come argomento alla classe EmailClient
+        EmailClient client = new EmailClient(serverAddress);
+        client.start(new Stage()); // Questo metodo avvia l'applicazione, ma potrebbe non essere ideale per avviare più finestre
     }
 
     public static void main(String[] args) {

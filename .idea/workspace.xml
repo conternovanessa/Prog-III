@@ -4,24 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0a55273f-6121-464b-90af-ee02c84e2271" name="Changes" comment="cambiata porta ora è 55555">
+    <list default="true" id="0a55273f-6121-464b-90af-ee02c84e2271" name="Changes" comment="MVC ti prego finiscila">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Client/ClientApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Main/ClientApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Client/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Controller/ClientController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Client/EmailClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Model/EmailClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Client/EmailClientManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Model/EmailClientManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Server/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Controller/ClientHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Server/ForwardHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Controller/ForwardHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Server/MessageStorage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Model/MessageStorage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Server/NewMailHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Controller/NewMailHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Server/ReceivedMailsHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Controller/ReceivedMailsHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Server/ReplyHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Controller/ReplyHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Main/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Server/ServerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Controller/ServerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/View/client_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/progetto_shit/View/client_view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/View/server_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/progetto_shit/View/server_view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/progetto_shit/hello-view.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Controller/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Controller/ClientController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Controller/ForwardHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Controller/ForwardHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Controller/ServerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Controller/ServerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Main/ClientApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Main/ClientApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Main/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Main/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Model/EmailClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Model/EmailClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/progetto_shit/View/client_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/progetto_shit/View/client_view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/progetto_shit/View/server_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/progetto_shit/View/server_view.fxml" afterDir="false" />
     </list>
     <list id="2a984c38-6216-49d8-a960-c6a7a45f6a10" name="Changes by dfabi" comment="" />
     <list id="ebb9a364-f635-43a0-bdfa-ac7671005713" name="Changes by user" comment="" />
@@ -72,6 +64,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.ClientApp.executor": "Run",
     "Application.Server.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "rispettiamo-MVC",
@@ -121,7 +114,7 @@
       <workItem from="1723988840291" duration="6706000" />
       <workItem from="1724056140403" duration="5293000" />
       <workItem from="1724143100279" duration="1517000" />
-      <workItem from="1724312622537" duration="1797000" />
+      <workItem from="1724312622537" duration="4110000" />
     </task>
     <task id="LOCAL-00002" summary="ora funzionano molte cose bisogna solo mettere le mail da quache parte (creazione  nuovo file letto poi da un package?)">
       <option name="closed" value="true" />
@@ -171,7 +164,15 @@
       <option name="project" value="LOCAL" />
       <updated>1724143976016</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="MVC ti prego finiscila">
+      <option name="closed" value="true" />
+      <created>1724314654686</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1724314654687</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -198,6 +199,7 @@
     <MESSAGE value="ciao adesso carica su un file txt" />
     <MESSAGE value="ora funziona la lettura, l'invio e i package. domani faremo il resto gg compari" />
     <MESSAGE value="cambiata porta ora è 55555" />
-    <option name="LAST_COMMIT_MESSAGE" value="cambiata porta ora è 55555" />
+    <MESSAGE value="MVC ti prego finiscila" />
+    <option name="LAST_COMMIT_MESSAGE" value="MVC ti prego finiscila" />
   </component>
 </project>

@@ -1,20 +1,19 @@
 package com.example.progetto_shit.Main;
 
-import com.example.progetto_shit.Model.MessageStorage;
+import com.example.progetto_shit.Controller.ClientController;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
-import java.util.List;
 
 public class ClientApp extends Application {
 
     private String clientAddress;
-    private TextArea emailArea;
+
+    public ClientApp() {
+        // Necessario per Application.launch()
+    }
 
     public ClientApp(String clientAddress) {
         this.clientAddress = clientAddress;
@@ -22,42 +21,34 @@ public class ClientApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        primaryStage.setTitle("Client Mail Viewer - " + clientAddress);
+        try {
+            // Carica il file FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/progetto_shit/View/client_view.fxml"));
+            Parent root = loader.load();
 
-        VBox layout = new VBox(10);
-        Label clientLabel = new Label("Client: " + clientAddress);
-        emailArea = new TextArea();
-        emailArea.setEditable(false);  // Impedisce la modifica del testo
-        Button refreshButton = new Button("Aggiorna");
+            // Ottieni il controller e passa l'indirizzo del client
+            ClientController controller = loader.getController();
+            controller.initialize(clientAddress);
 
-        refreshButton.setOnAction(event -> displayReceivedMails());
+            primaryStage.setTitle("Client Mail Viewer - " + clientAddress);
+            primaryStage.setScene(new Scene(root));
+            primaryStage.show();
 
-        layout.getChildren().addAll(clientLabel, emailArea, refreshButton);
-
-        Scene scene = new Scene(layout, 400, 300);
-        primaryStage.setScene(scene);
-        primaryStage.show();
-
-        // Mostra i messaggi all'avvio
-        displayReceivedMails();
-    }
-
-    private void displayReceivedMails() {
-        // Recupera i messaggi dal MessageStorage
-        List<String> emails = MessageStorage.getMessagesForRecipient(clientAddress);
-
-        if (emails.isEmpty()) {
-            emailArea.setText("Non ci sono email per " + clientAddress);
-        } else {
-            StringBuilder emailContent = new StringBuilder();
-            for (String email : emails) {
-                emailContent.append(email).append("\n\n");
-            }
-            emailArea.setText(emailContent.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
+    public static void launchClient(String clientAddress) {
+        // Lancia l'app JavaFX e passa l'indirizzo del client come parametro
+        Application.launch(ClientApp.class, clientAddress);
+    }
+
     public static void main(String[] args) {
-        launch(args);
+        if (args.length > 0) {
+            launchClient(args[0]);
+        } else {
+            System.out.println("Client address not provided.");
+        }
     }
 }
