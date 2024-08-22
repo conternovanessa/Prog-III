@@ -8,7 +8,7 @@
 
 <VBox xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.1"
       fx:controller="com.example.progetto_shit.Controller.ClientController"
-      spacing="10.0" padding="10.0">
+      spacing="10.0">
     <!-- Label per visualizzare l'indirizzo del server -->
     <Label fx:id="serverAddressLabel" text="Server Address: "/>
 
@@ -16,7 +16,7 @@
     <TextArea fx:id="emailContentArea" editable="false" wrapText="true" prefHeight="200.0" prefWidth="400.0"/>
 
     <!-- Box per i pulsanti di azione -->
-    <VBox fx:id="buttonBox" spacing="10.0" padding="10.0">
+    <VBox fx:id="buttonBox" spacing="10.0">
         <!-- Pulsanti per varie azioni -->
         <Button text="Nuova Mail" onAction="#handleSendEmail"/>
         <Button text="Aggiorna" onAction="#handleRefreshEmails"/>

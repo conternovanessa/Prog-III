@@ -38,8 +38,18 @@ public class ClientController {
     private String serverAddress;
 
     public void initialize() {
-        // Questo metodo viene chiamato dopo che l'FXML è stato caricato
+        if (serverAddress != null) {
+            serverAddressLabel.setText("Server Address: " + serverAddress);
+        }
     }
+
+    public void setServerAddress(String serverAddress) {
+        this.serverAddress = serverAddress;
+        if (serverAddressLabel != null) {
+            serverAddressLabel.setText("Server Address: " + serverAddress);
+        }
+    }
+
 
     public void initialize(String serverAddress) {
         this.serverAddress = serverAddress;

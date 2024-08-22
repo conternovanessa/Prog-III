@@ -28,7 +28,7 @@ public class ClientApp extends Application {
 
             // Ottieni il controller e passa l'indirizzo del client
             ClientController controller = loader.getController();
-            controller.initialize(clientAddress);
+            controller.setServerAddress(clientAddress);
 
             primaryStage.setTitle("Client Mail Viewer - " + clientAddress);
             primaryStage.setScene(new Scene(root));
@@ -50,4 +50,5 @@ public class ClientApp extends Application {
             System.out.println("Client address not provided.");
         }
     }
+
 }
