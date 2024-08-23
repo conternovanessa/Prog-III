@@ -8,3 +8,4 @@ Cose da fare:
   - [ ]rispondere a più mail
 - [ ] rimuovere 1 o più messaggi
 - [ ] permettere di chiudere il server con il tasto STOPSERVER
+- [ ] sistemare il file.txt con mail e oggetto
