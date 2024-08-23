@@ -6,5 +6,5 @@ Cose da fare:
 - [ ] far funzionare il forward
 - [ ] permettere di selezionare più mail da rispondere
   - [ ]rispondere a più mail
-- [ ]rimuovere 1 o più messaggi
-- [ ]permettere di chiudere il server con il tasto STOPSERVER
+- [ ] rimuovere 1 o più messaggi
+- [ ] permettere di chiudere il server con il tasto STOPSERVER
