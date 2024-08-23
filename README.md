@@ -1,6 +1,6 @@
 Cose da fare:
-- [ ] togliere la prima interfaccia di selezione deve aprire subito la interfaccia con i tre client
-- [ ] far funzionare il reply
+- [ ] togliere la prima interfaccia di selezione deve aprire subito la interfaccia con i tre client  (vane)
+- [ ] far funzionare il reply ( fil )
   - [ ] reply mittente
   - [ ] reply-all mittente e destinatario
 - [ ] far funzionare il forward
@@ -8,4 +8,4 @@ Cose da fare:
   - [ ]rispondere a più mail
 - [ ] rimuovere 1 o più messaggi
 - [ ] permettere di chiudere il server con il tasto STOPSERVER
-- [ ] sistemare il file.txt con mail e oggetto
+- [ ] sistemare il file.txt con mail e oggetto  ( feb )
