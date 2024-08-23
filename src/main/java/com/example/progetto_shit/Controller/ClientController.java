@@ -1,8 +1,9 @@
 package com.example.progetto_shit.Controller;
 
-import com.example.progetto_shit.Model.MessageStorage;
+import com.example.progetto_shit.Model.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -17,7 +18,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClientController {
+public class ClientController implements EmailObserver {
 
     @FXML
     private Label statusLabel;
@@ -28,19 +29,23 @@ public class ClientController {
     @FXML
     private TextArea emailContentArea;
 
+    @FXML
+    private Label serverAddressLabel;
+
     private List<String> clientList = new ArrayList<>();
     private String selectedClient;
     private String selectedEmail;
     private ServerController serverController;
-    @FXML
-    private Label serverAddressLabel;
-
     private String serverAddress;
 
+    private static final String FILE_PATH = "src/main/java/com/example/progetto_shit/email.txt";
+
+    @FXML
     public void initialize() {
         if (serverAddress != null) {
             serverAddressLabel.setText("Server Address: " + serverAddress);
         }
+        loadClientsFromFile(FILE_PATH);
     }
 
     public void setServerAddress(String serverAddress) {
@@ -54,40 +59,66 @@ public class ClientController {
         this.serverController = serverController;
     }
 
-    public void connectToServer() {
-        System.out.println("Connecting to server...");
-    }
-
-    public void updateUI(String data) {
-        emailContentArea.setText(data);
+    @FXML
+    private void handleBack() {
+        System.out.println("Going back...");
+        loadClientsFromFile(FILE_PATH);
     }
 
     @FXML
-    private void handleSendEmail() {
+    private void handleNewMail() {
+        System.out.println("Creating a new mail...");
         NewMailHandler newMailHandler = new NewMailHandler(selectedClient);
-        newMailHandler.start(new Stage());
+        newMailHandler.createNewMail();
+    }
 
-        // Aggiorna l'interfaccia dopo l'invio
+    @FXML
+    private void handleReceivedMails() {
+        System.out.println("Showing received emails...");
         updateClientInterface();
+    }
+
+    @FXML
+    private void handleReply() {
+        System.out.println("Replying to the email...");
+        if (selectedEmail != null) {
+            String[] emailLines = selectedEmail.split("\n", 3);
+            String sender = emailLines.length > 0 ? emailLines[0].replace("From: ", "") : "Unknown Sender";
+
+            ReplyHandler replyHandler = new ReplyHandler(sender, selectedClient);
+            replyHandler.replyToEmail();
+        } else {
+            showAlert("Selection Missing", "Please select an email to reply to.");
+        }
+    }
+
+    @FXML
+    private void handleForward() {
+        System.out.println("Forwarding the email...");
+        if (selectedEmail != null) {
+            ForwardHandler forwardHandler = new ForwardHandler(selectedClient);
+            forwardHandler.forwardEmail(selectedEmail);
+        } else {
+            showAlert("Selection Missing", "Please select an email to forward.");
+        }
     }
 
     @FXML
     private void handleRefreshEmails() {
         System.out.println("Refreshing emails...");
-        updateClientInterface();
+        List<String> receivedMails = getReceivedMailsForClient(selectedClient);
+        if (!receivedMails.isEmpty()) {
+            showEmailDetailView(receivedMails.get(0));
+        }
+        updateEmailList(receivedMails);
     }
 
-    public void loadClientsFromFile(String filePath) {
+    private void loadClientsFromFile(String filePath) {
         buttonBox.getChildren().clear();
-
         Button stopButton = new Button("Stop Server");
         buttonBox.getChildren().addAll(statusLabel, stopButton);
 
-        stopButton.setOnAction(event -> {
-            if (serverController != null) {
-                serverController.stopServer(); // Usa l'istanza di ServerController
-            }
-        });
+        stopButton.setOnAction(event -> ServerController.stopServer(statusLabel));
 
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
@@ -103,7 +134,6 @@ public class ClientController {
 
                 buttonBox.getChildren().add(clientButton);
             }
-
         } catch (IOException e) {
             System.err.println("Error reading the specified file: " + e.getMessage());
         }
@@ -111,26 +141,10 @@ public class ClientController {
 
     private void updateClientInterface() {
         buttonBox.getChildren().clear();
-
         VBox emailBox = new VBox(10);
-
-        // Utilizza ReceivedMailsHandler per caricare le email per il client selezionato
-        ReceivedMailsHandler receivedMailsHandler = new ReceivedMailsHandler(selectedClient);
-        String receivedMails = receivedMailsHandler.getReceivedMails();
-
-        System.out.println("Received Mails: " + receivedMails);
-
-        // Divide le email lette per la presenza di due linee vuote
-        String[] emails = receivedMails.split("\n\n");
-
-        if (emails.length == 0 || (emails.length == 1 && emails[0].equals("Nessun messaggio ricevuto."))) {
-            System.out.println("No emails to display.");
-            return;
-        }
-
-        for (String email : emails) {
-            String[] emailLines = email.split("\n");
-
+        List<String> receivedMails = getReceivedMailsForClient(selectedClient);
+        for (String email : receivedMails) {
+            String[] emailLines = email.split("\n", 3);
             if (emailLines.length >= 2) {
                 String sender = emailLines[0].replace("From: ", "");
                 String subject = emailLines[1].replace("Subject: ", "");
@@ -152,15 +166,7 @@ public class ClientController {
 
         VBox contentBox = new VBox(10);
         contentBox.getChildren().addAll(emailScrollPane, createActionButtons());
-
         buttonBox.getChildren().add(contentBox);
-    }
-
-
-    private List<String> getReceivedMailsForClient(String client) {
-        List<String> messages = MessageStorage.getMessagesForRecipient(client);
-        System.out.println("Loaded messages for client " + client + ": " + messages);
-        return messages;
     }
 
     private void showEmailDetailView(String email) {
@@ -169,49 +175,87 @@ public class ClientController {
         String subject = emailLines.length > 1 ? emailLines[1].replace("Subject: ", "") : "No Subject";
         String body = emailLines.length > 2 ? emailLines[2] : "No Content";
 
-        emailContentArea.setText("From: " + sender + "\nSubject: " + subject + "\n\n" + body);
+        Stage emailDetailStage = new Stage();
+        emailDetailStage.setTitle("Email Details");
+
+        Label senderLabel = new Label("From: " + sender);
+        Label subjectLabel = new Label("Subject: " + subject);
+        TextArea bodyArea = new TextArea(body);
+        bodyArea.setWrapText(true);
+        bodyArea.setEditable(false);
+
+        Button replyButton = new Button("Reply");
+        replyButton.setOnAction(event -> handleReply());
+        Button forwardButton = new Button("Forward");
+        forwardButton.setOnAction(event -> handleForward());
+
+        VBox detailBox = new VBox(10, senderLabel, subjectLabel, bodyArea, replyButton, forwardButton);
+        detailBox.setPrefSize(400, 300);
+
+        Scene detailScene = new Scene(detailBox);
+        emailDetailStage.setScene(detailScene);
+        emailDetailStage.show();
     }
 
     private VBox createActionButtons() {
-        Button replyButton = new Button("Reply");
-        Button forwardButton = new Button("Forward");
+        Button newMailButton = new Button("New Mail");
+        Button receivedMailsButton = new Button("Refresh");
+        Button backButton = new Button("Back");
 
-        replyButton.setOnAction(event -> handleReply());
-        forwardButton.setOnAction(event -> handleForward());
+        newMailButton.setOnAction(event -> handleNewMail());
+        receivedMailsButton.setOnAction(event -> handleReceivedMails());
+        backButton.setOnAction(event -> handleBack());
 
-        VBox actionButtons = new VBox(10);
-        actionButtons.getChildren().addAll(replyButton, forwardButton);
-
-        return actionButtons;
+        VBox buttonBox = new VBox(10);
+        buttonBox.getChildren().addAll(newMailButton, receivedMailsButton, backButton);
+        return buttonBox;
     }
 
-    @FXML
-    private void handleReply() {
-        if (selectedEmail == null) {
-            showErrorAlert("No email selected", "Please select an email to reply to.");
-            return;
+    private List<String> getReceivedMailsForClient(String client) {
+        return MessageStorage.getMessagesForRecipient(client);
+    }
+
+    private void updateEmailList(List<String> receivedMails) {
+        VBox emailBox = new VBox(10);
+        for (String email : receivedMails) {
+            String[] emailLines = email.split("\n", 3);
+
+            if (emailLines.length >= 2) {
+                String sender = emailLines[0].replace("From: ", "");
+                String subject = emailLines[1].replace("Subject: ", "");
+                String buttonText = sender + " - " + subject;
+
+                Button emailButton = new Button(buttonText);
+                emailButton.setOnAction(event -> {
+                    selectedEmail = email;
+                    showEmailDetailView(email);
+                });
+
+                emailBox.getChildren().add(emailButton);
+            }
         }
-        System.out.println("Replying to email: " + selectedEmail);
-    }
 
-    @FXML
-    private void handleForward() {
-        if (selectedEmail == null) {
-            showErrorAlert("No email selected", "Please select an email to forward.");
-            return;
+        ScrollPane emailScrollPane = (ScrollPane) buttonBox.lookup(".scroll-pane");
+        if (emailScrollPane == null) {
+            emailScrollPane = new ScrollPane(emailBox);
+            emailScrollPane.setFitToWidth(true);
+            emailScrollPane.setPrefHeight(200);
+            buttonBox.getChildren().add(emailScrollPane);
+        } else {
+            emailScrollPane.setContent(emailBox);
         }
-        System.out.println("Forwarding email: " + selectedEmail);
     }
 
-    private void showErrorAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
+    @Override
+    public void update(List<String> emails) {
+        updateEmailList(emails);
+    }
+
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
-    }
-
-    public void handleBack(ActionEvent actionEvent) {
-        // Implementazione mancante
     }
 }
