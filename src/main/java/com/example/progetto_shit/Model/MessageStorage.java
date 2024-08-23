@@ -15,7 +15,7 @@ public class MessageStorage {
         }
     }
 
-    public static void saveMessage(String sender, String recipient, String subject, String body) {
+    public static void saveMessage(String sender, String recipient, String subject, String body, boolean isReply) {
         ensureDirectoryExists();
 
         String clientDirPath = BASE_DIR + recipient;
@@ -24,17 +24,29 @@ public class MessageStorage {
             clientDir.mkdirs();
         }
 
+        // Sostituisci caratteri non validi nell'indirizzo email del mittente e nell'oggetto
+        String sanitizedSender = sender.replaceAll("[^a-zA-Z0-9@.-]", "_");
         String sanitizedSubject = subject.replaceAll("[^a-zA-Z0-9.-]", "_");
-        String fileName = sanitizedSubject + ".txt";
+
+        // Usa l'indirizzo email del mittente e l'oggetto per creare il nome del file
+        String fileName = sanitizedSender + "_" + sanitizedSubject + ".txt";
         String filePath = clientDirPath + "/" + fileName;
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
-            writer.write("From: " + sender);  // Scrive il mittente come prima riga
-            writer.newLine();
-            writer.write("Subject: " + subject);
-            writer.newLine();
-            writer.write(body);  // Scrive il corpo del messaggio
-            writer.newLine();
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
+            if (isReply) {
+                writer.newLine();
+                writer.write("Reply from: " + sender);
+                writer.newLine();
+                writer.write(body);
+                writer.newLine();
+            } else {
+                writer.write("From: " + sender);
+                writer.newLine();
+                writer.write("Subject: " + subject);
+                writer.newLine();
+                writer.write(body);
+                writer.newLine();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -46,7 +58,7 @@ public class MessageStorage {
         File clientDir = new File(clientDirPath);
 
         if (!clientDir.exists() || !clientDir.isDirectory()) {
-            return messages; // Nessun messaggio se la directory non esiste
+            return messages;
         }
 
         File[] emailFiles = clientDir.listFiles((dir, name) -> name.endsWith(".txt"));
