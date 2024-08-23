@@ -16,23 +16,34 @@ public class ReceivedMailsHandler {
 
     public String getReceivedMails() {
         StringBuilder emails = new StringBuilder();
-        String filePath = BASE_DIR + clientAddress + ".txt";
-        File file = new File(filePath);
+        String clientDirPath = BASE_DIR + clientAddress;
+        File clientDir = new File(clientDirPath);
 
-        if (!file.exists()) {
+        // Verifica che la directory esista
+        if (!clientDir.exists() || !clientDir.isDirectory()) {
+            System.out.println("Directory not found: " + clientDirPath);
             return "Nessun messaggio ricevuto.";
         }
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            String line;
-            int count = 1;
-            while ((line = reader.readLine()) != null) {
-                emails.append(count).append(". ").append(line).append("\n");
-                count++;
+        // Leggi tutti i file nella directory del client
+        File[] emailFiles = clientDir.listFiles((dir, name) -> name.endsWith(".txt"));
+        if (emailFiles == null || emailFiles.length == 0) {
+            System.out.println("No email files found in directory: " + clientDirPath);
+            return "Nessun messaggio ricevuto.";
+        }
+
+        for (File emailFile : emailFiles) {
+            System.out.println("Reading email file: " + emailFile.getName());
+            try (BufferedReader reader = new BufferedReader(new FileReader(emailFile))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    emails.append(line).append("\n");
+                }
+                emails.append("\n"); // Aggiungi una linea vuota per separare le email
+            } catch (IOException e) {
+                e.printStackTrace();
+                return "Errore durante la lettura dei messaggi.";
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-            return "Errore durante la lettura dei messaggi.";
         }
 
         return emails.toString();

@@ -8,30 +8,24 @@ public class MessageStorage {
 
     private static final String BASE_DIR = "messages/";
 
-    // Metodo per assicurarsi che la directory esista
     private static void ensureDirectoryExists() {
         File directory = new File(BASE_DIR);
         if (!directory.exists()) {
-            directory.mkdirs(); // Crea la directory, inclusi eventuali genitori mancanti
+            directory.mkdirs();
         }
     }
 
-    // Salva un messaggio per un destinatario specifico
     public static void saveMessage(String sender, String recipient, String subject, String body) {
-        ensureDirectoryExists(); // Assicurati che la directory principale esista
+        ensureDirectoryExists();
 
-        // Crea una directory per il destinatario se non esiste
         String clientDirPath = BASE_DIR + recipient;
         File clientDir = new File(clientDirPath);
         if (!clientDir.exists()) {
             clientDir.mkdirs();
         }
 
-        // Sanitizza il nome del file per rimuovere caratteri non validi
         String sanitizedSubject = subject.replaceAll("[^a-zA-Z0-9.-]", "_");
-
-        // Genera un nome file basato sul destinatario e l'oggetto della mail
-        String fileName = recipient + "_" + sanitizedSubject + ".txt";
+        String fileName = sanitizedSubject + ".txt";
         String filePath = clientDirPath + "/" + fileName;
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
@@ -39,15 +33,13 @@ public class MessageStorage {
             writer.newLine();
             writer.write("Subject: " + subject);
             writer.newLine();
-            writer.write("Body: " + body);
+            writer.write(body);  // Scrive il corpo del messaggio
             writer.newLine();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-
-    // Restituisce la lista di messaggi per un destinatario specifico
     public static List<String> getMessagesForRecipient(String recipient) {
         List<String> messages = new ArrayList<>();
         String clientDirPath = BASE_DIR + recipient;
@@ -57,7 +49,6 @@ public class MessageStorage {
             return messages; // Nessun messaggio se la directory non esiste
         }
 
-        // Leggi tutti i file nella directory del client
         File[] emailFiles = clientDir.listFiles((dir, name) -> name.endsWith(".txt"));
         if (emailFiles != null) {
             for (File emailFile : emailFiles) {

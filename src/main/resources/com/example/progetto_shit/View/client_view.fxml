@@ -20,8 +20,6 @@
         <!-- Pulsanti per varie azioni -->
         <Button text="Nuova Mail" onAction="#handleSendEmail"/>
         <Button text="Aggiorna" onAction="#handleRefreshEmails"/>
-        <Button text="Inoltra" onAction="#handleForward"/>
-        <Button text="Rispondi" onAction="#handleReply"/>
         <Button text="Torna Indietro" onAction="#handleBack"/>
     </VBox>
 </VBox>

@@ -1,5 +1,6 @@
 package com.example.progetto_shit.Controller;
 
+import com.example.progetto_shit.Model.MessageStorage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -9,7 +10,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.scene.Scene;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -50,12 +50,6 @@ public class ClientController {
         }
     }
 
-
-    public void initialize(String serverAddress) {
-        this.serverAddress = serverAddress;
-        serverAddressLabel.setText("Server Address: " + serverAddress);
-    }
-
     public void setServerController(ServerController serverController) {
         this.serverController = serverController;
     }
@@ -70,7 +64,11 @@ public class ClientController {
 
     @FXML
     private void handleSendEmail() {
-        System.out.println("Sending email...");
+        NewMailHandler newMailHandler = new NewMailHandler(selectedClient);
+        newMailHandler.start(new Stage());
+
+        // Aggiorna l'interfaccia dopo l'invio
+        updateClientInterface();
     }
 
     @FXML
@@ -115,9 +113,23 @@ public class ClientController {
         buttonBox.getChildren().clear();
 
         VBox emailBox = new VBox(10);
-        List<String> receivedMails = getReceivedMailsForClient(selectedClient);
-        for (String email : receivedMails) {
-            String[] emailLines = email.split("\n", 3);
+
+        // Utilizza ReceivedMailsHandler per caricare le email per il client selezionato
+        ReceivedMailsHandler receivedMailsHandler = new ReceivedMailsHandler(selectedClient);
+        String receivedMails = receivedMailsHandler.getReceivedMails();
+
+        System.out.println("Received Mails: " + receivedMails);
+
+        // Divide le email lette per la presenza di due linee vuote
+        String[] emails = receivedMails.split("\n\n");
+
+        if (emails.length == 0 || (emails.length == 1 && emails[0].equals("Nessun messaggio ricevuto."))) {
+            System.out.println("No emails to display.");
+            return;
+        }
+
+        for (String email : emails) {
+            String[] emailLines = email.split("\n");
 
             if (emailLines.length >= 2) {
                 String sender = emailLines[0].replace("From: ", "");
@@ -144,11 +156,11 @@ public class ClientController {
         buttonBox.getChildren().add(contentBox);
     }
 
+
     private List<String> getReceivedMailsForClient(String client) {
-        List<String> emails = new ArrayList<>();
-        emails.add("From: example1@example.com\nSubject: Hello World\nThis is a test email.");
-        emails.add("From: example2@example.com\nSubject: Another Email\nHere is some more content.");
-        return emails;
+        List<String> messages = MessageStorage.getMessagesForRecipient(client);
+        System.out.println("Loaded messages for client " + client + ": " + messages);
+        return messages;
     }
 
     private void showEmailDetailView(String email) {
@@ -157,21 +169,7 @@ public class ClientController {
         String subject = emailLines.length > 1 ? emailLines[1].replace("Subject: ", "") : "No Subject";
         String body = emailLines.length > 2 ? emailLines[2] : "No Content";
 
-        Stage emailDetailStage = new Stage();
-        emailDetailStage.setTitle("Email Details");
-
-        Label senderLabel = new Label("From: " + sender);
-        Label subjectLabel = new Label("Subject: " + subject);
-        TextArea bodyArea = new TextArea(body);
-        bodyArea.setWrapText(true);
-        bodyArea.setEditable(false);
-
-        VBox emailDetailBox = new VBox(10);
-        emailDetailBox.getChildren().addAll(senderLabel, subjectLabel, bodyArea);
-
-        Scene scene = new Scene(emailDetailBox, 300, 400);
-        emailDetailStage.setScene(scene);
-        emailDetailStage.show();
+        emailContentArea.setText("From: " + sender + "\nSubject: " + subject + "\n\n" + body);
     }
 
     private VBox createActionButtons() {
@@ -214,5 +212,6 @@ public class ClientController {
     }
 
     public void handleBack(ActionEvent actionEvent) {
+        // Implementazione mancante
     }
 }
