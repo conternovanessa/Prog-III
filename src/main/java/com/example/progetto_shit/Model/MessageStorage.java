@@ -24,22 +24,24 @@ public class MessageStorage {
             clientDir.mkdirs();
         }
 
-        // Sostituisci caratteri non validi nell'indirizzo email del mittente e nell'oggetto
+        // Sanitizzazione dei nomi per evitare caratteri non validi
         String sanitizedSender = sender.replaceAll("[^a-zA-Z0-9@.-]", "_");
         String sanitizedSubject = subject.replaceAll("[^a-zA-Z0-9.-]", "_");
 
-        // Usa l'indirizzo email del mittente e l'oggetto per creare il nome del file
+        // Nome del file che conterrà il messaggio
         String fileName = sanitizedSender + "_" + sanitizedSubject + ".txt";
         String filePath = clientDirPath + "/" + fileName;
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) { // `true` per appendere
             if (isReply) {
+                // Aggiunge la risposta al file esistente
                 writer.newLine();
                 writer.write("Reply from: " + sender);
                 writer.newLine();
                 writer.write(body);
                 writer.newLine();
             } else {
+                // Scrive un nuovo messaggio
                 writer.write("From: " + sender);
                 writer.newLine();
                 writer.write("Subject: " + subject);
@@ -51,6 +53,7 @@ public class MessageStorage {
             e.printStackTrace();
         }
     }
+
 
     public static List<String> getMessagesForRecipient(String recipient) {
         List<String> messages = new ArrayList<>();

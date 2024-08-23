@@ -1,5 +1,6 @@
 package com.example.progetto_shit.Controller;
 
+import com.example.progetto_shit.Model.MessageStorage;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextInputDialog;
 
@@ -7,10 +8,12 @@ public class ReplyHandler {
 
     private String senderAddress;
     private String clientAddress;
+    private String originalSubject;
 
-    public ReplyHandler(String senderAddress, String clientAddress) {
+    public ReplyHandler(String senderAddress, String clientAddress, String originalSubject) {
         this.senderAddress = senderAddress;
         this.clientAddress = clientAddress;
+        this.originalSubject = originalSubject;
     }
 
     public void replyToEmail() {
@@ -20,26 +23,34 @@ public class ReplyHandler {
         dialog.setHeaderText("Rispondi a: " + senderAddress);
         dialog.setContentText("Risposta:");
 
+        // Ottiene il testo della risposta dall'utente
         String reply = dialog.showAndWait().orElse("");
 
         if (!reply.isEmpty()) {
             // Simulazione di invio della risposta
-            // Qui si potrebbe aggiungere il codice per inviare l'email tramite un sistema di gestione email
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Rispondi Email");
             alert.setHeaderText(null);
             alert.setContentText("Risposta inviata a: " + senderAddress + "\nContenuto: " + reply);
             alert.showAndWait();
 
-            // Qui si potrebbe chiamare un metodo che effettivamente invia l'email
-            sendReply(senderAddress, clientAddress, reply);
+            // Salva la risposta sotto il messaggio originale
+            saveReply(senderAddress, clientAddress, originalSubject, reply);
         }
     }
 
-    private void sendReply(String senderAddress, String clientAddress, String replyContent) {
-        // Implementa la logica di invio della mail qui
-        // Ad esempio, potresti salvare la risposta in un database o inviarla tramite un server di posta
-        System.out.println("Inviando la risposta a " + senderAddress + " da " + clientAddress);
+    private void saveReply(String senderAddress, String recipientAddress, String originalSubject, String replyContent) {
+        // Crea l'oggetto della risposta
+        String subject = "Re: " + originalSubject;
+
+        // Salva il messaggio di risposta nel file esistente
+        // L'opzione `true` indica che si sta aggiungendo al file esistente
+        MessageStorage.saveMessage(senderAddress, recipientAddress, subject, replyContent, true); // Risposta
+        MessageStorage.saveMessage(recipientAddress, senderAddress, subject, replyContent, true); // Risposta
+
+        // Log per debug
+        System.out.println("Risposta inviata da " + senderAddress + " a " + recipientAddress);
+        System.out.println("Oggetto: " + subject);
         System.out.println("Contenuto: " + replyContent);
     }
 }

@@ -92,7 +92,7 @@ public class NewMailHandler extends Application {
                 }
 
                 // Invio l'email a MessageStorage includendo il mittente (dinamico)
-                MessageStorage.saveMessage(currentSender, recipient, subject, body);
+                MessageStorage.saveMessage(currentSender, recipient, subject, body,false);
             }
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);

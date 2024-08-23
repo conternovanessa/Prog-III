@@ -8,9 +8,12 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ServerController {
@@ -23,7 +26,8 @@ public class ServerController {
 
     private boolean serverRunning = false;
 
-    public void initializeServer(List<String> clientList) {
+    public void initializeServer() {
+        List<String> clientList = getClientListFromFile("client_list.txt");
         displayClients(clientList);
         startServer(clientList);
     }
@@ -59,7 +63,7 @@ public class ServerController {
 
     @FXML
     private void handleStartServer() {
-        startServer(getClientListFromUI());
+        initializeServer();
     }
 
     @FXML
@@ -76,16 +80,24 @@ public class ServerController {
         }
     }
 
-    private List<String> getClientListFromUI() {
-        return List.of("client1", "client2", "client3"); // Example data
+    private List<String> getClientListFromFile(String filePath) {
+        List<String> clientList = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                clientList.add(line.trim());
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading client list file: " + e.getMessage());
+        }
+        return clientList;
     }
 
     private void openClientInterface(String clientAddress) {
         Platform.runLater(() -> {
             try {
-                // Inizializza il ClientApp con l'indirizzo del client
-                ClientApp clientApp = new ClientApp(clientAddress);
-                clientApp.start(new Stage()); // Avvia il nuovo stage per il client
+                // Avvia l'applicazione client con l'indirizzo selezionato
+                ClientApp.launchClient(clientAddress);
             } catch (Exception e) {
                 e.printStackTrace();
             }

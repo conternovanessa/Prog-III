@@ -84,8 +84,9 @@ public class ClientController implements EmailObserver {
         if (selectedEmail != null) {
             String[] emailLines = selectedEmail.split("\n", 3);
             String sender = emailLines.length > 0 ? emailLines[0].replace("From: ", "") : "Unknown Sender";
+            String object = emailLines.length > 0 ? emailLines[0].replace("Subject: ", "") : "Unknown Sender";
 
-            ReplyHandler replyHandler = new ReplyHandler(sender, selectedClient);
+            ReplyHandler replyHandler = new ReplyHandler(sender, selectedClient, object);
             replyHandler.replyToEmail();
         } else {
             showAlert("Selection Missing", "Please select an email to reply to.");

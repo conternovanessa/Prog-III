@@ -9,14 +9,10 @@ import javafx.stage.Stage;
 
 public class ClientApp extends Application {
 
-    private String clientAddress;
+    private static String clientAddress;
 
-    public ClientApp() {
-        // Necessario per Application.launch()
-    }
-
-    public ClientApp(String clientAddress) {
-        this.clientAddress = clientAddress;
+    public static void setClientAddress(String address) {
+        clientAddress = address;
     }
 
     @Override
@@ -39,16 +35,12 @@ public class ClientApp extends Application {
         }
     }
 
-    public static void launchClient(String clientAddress) {
-        Application.launch(ClientApp.class, clientAddress);
+    public static void launchClient(String address) {
+        setClientAddress(address);
+        launch(); // Avvia l'applicazione senza argomenti
     }
 
     public static void main(String[] args) {
-        if (args.length > 0) {
-            launchClient(args[0]);
-        } else {
-            System.out.println("Client address not provided.");
-        }
+        launch(); // Avvia l'applicazione senza argomenti
     }
-
 }
