@@ -18,11 +18,10 @@ public class ClientApp extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            // Carica il file FXML
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/progetto_shit/View/client_view.fxml"));
             Parent root = loader.load();
 
-            // Ottieni il controller e passa l'indirizzo del client
+            // Passa l'indirizzo del client al controller
             ClientController controller = loader.getController();
             controller.setServerAddress(clientAddress);
 
@@ -35,12 +34,23 @@ public class ClientApp extends Application {
         }
     }
 
-    public static void launchClient(String address) {
+    public static void launchClient(Stage primaryStage, String address) {
         setClientAddress(address);
-        launch(); // Avvia l'applicazione senza argomenti
-    }
 
-    public static void main(String[] args) {
-        launch(); // Avvia l'applicazione senza argomenti
+        try {
+            FXMLLoader loader = new FXMLLoader(ClientApp.class.getResource("/com/example/progetto_shit/View/client_view.fxml"));
+            Parent root = loader.load();
+
+            // Passa l'indirizzo del client al controller
+            ClientController controller = loader.getController();
+            controller.setServerAddress(address);
+
+            primaryStage.setTitle("Client Mail Viewer - " + address);
+            primaryStage.setScene(new Scene(root));
+            primaryStage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

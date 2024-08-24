@@ -3,9 +3,18 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progetto_shit.Controller.ServerController">
-    <Label fx:id="statusLabel" text="Server Status"/>
-    <Button text="Start Server" onAction="#handleStartServer"/>
-    <Button text="Stop Server" onAction="#handleStopServer"/>
-    <VBox fx:id="clientListBox"/> <!-- Area per visualizzare i client -->
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progetto_shit.Controller.ServerController" spacing="10" alignment="CENTER">
+
+    <!-- Etichetta per lo stato del server -->
+    <Label fx:id="statusLabel" text="Server Status: Stopped" style="-fx-font-size: 16px; -fx-text-fill: blue;"/>
+
+    <!-- Pulsante per avviare il server -->
+    <Button text="Start Server" onAction="#handleStartServer" style="-fx-font-size: 14px;"/>
+
+    <!-- Pulsante per fermare il server -->
+    <Button text="Stop Server" onAction="#handleStopServer" style="-fx-font-size: 14px;"/>
+
+    <!-- VBox per visualizzare i client -->
+    <VBox fx:id="clientListBox" spacing="5" prefWidth="200" alignment="CENTER_LEFT"/>
+
 </VBox>

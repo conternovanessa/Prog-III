@@ -1,14 +1,10 @@
 package com.example.progetto_shit.Controller;
 
-import com.example.progetto_shit.Model.*;
-import javafx.event.ActionEvent;
+import com.example.progetto_shit.Model.EmailObserver;
+import com.example.progetto_shit.Model.MessageStorage;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -45,7 +41,11 @@ public class ClientController implements EmailObserver {
         if (serverAddress != null) {
             serverAddressLabel.setText("Server Address: " + serverAddress);
         }
-        loadClientsFromFile(FILE_PATH);
+
+        // Assicurati che ci sia un client selezionato prima di chiamare updateClientInterface()
+        if (selectedClient != null) {
+            updateClientInterface();
+        }
     }
 
     public void setServerAddress(String serverAddress) {
@@ -62,7 +62,7 @@ public class ClientController implements EmailObserver {
     @FXML
     private void handleBack() {
         System.out.println("Going back...");
-        loadClientsFromFile(FILE_PATH);
+        updateClientInterface();
     }
 
     @FXML
@@ -84,7 +84,7 @@ public class ClientController implements EmailObserver {
         if (selectedEmail != null) {
             String[] emailLines = selectedEmail.split("\n", 3);
             String sender = emailLines.length > 0 ? emailLines[0].replace("From: ", "") : "Unknown Sender";
-            String object = emailLines.length > 0 ? emailLines[0].replace("Subject: ", "") : "Unknown Sender";
+            String object = emailLines.length > 1 ? emailLines[1].replace("Subject: ", "") : "Unknown Subject";
 
             ReplyHandler replyHandler = new ReplyHandler(sender, selectedClient, object);
             replyHandler.replyToEmail();
@@ -119,7 +119,11 @@ public class ClientController implements EmailObserver {
         Button stopButton = new Button("Stop Server");
         buttonBox.getChildren().addAll(statusLabel, stopButton);
 
-        stopButton.setOnAction(event -> ServerController.stopServer(statusLabel));
+        stopButton.setOnAction(event -> {
+            if (serverController != null) {
+                serverController.stopServer();
+            }
+        });
 
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
