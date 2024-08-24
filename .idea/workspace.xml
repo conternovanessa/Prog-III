@@ -4,22 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0a55273f-6121-464b-90af-ee02c84e2271" name="Changes" comment="apre il client correttamente bisogna solo aggiustare i pulsanti">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Controller/EmailController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Main/EmailApp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/progetto_shit/View/email_view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages/fabiodelia@progetto.com/filippoditto@progetto.com_Re__From__filippoditto_progetto.com.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages/filippoditto@progetto.com/fabiodelia@progetto.com_Re__From__filippoditto_progetto.com.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Controller/ServerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Controller/ServerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Model/MessageStorage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Model/MessageStorage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/progetto_shit/View/client_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/progetto_shit/View/client_view.fxml" afterDir="false" />
-    </list>
-    <list id="379e8b2a-a188-47b8-9b6c-2a7c3120c88e" name="Changes by dfabi" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Controller/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Controller/ClientController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Main/ClientApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Main/ClientApp.java" afterDir="false" />
-    </list>
-    <list id="a50615b1-c209-4a7a-86e0-cda0f46af614" name="Changes by user" comment="" />
+    <list default="true" id="0a55273f-6121-464b-90af-ee02c84e2271" name="Changes" comment="ora compaiono le mail" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -65,26 +50,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.ClientApp.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Server.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;rispettiamo-MVC&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;CodeWithMe&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.ClientApp.executor": "Run",
+    "Application.Server.executor": "Debug",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "rispettiamo-MVC",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "CodeWithMe",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\vanes\IdeaProjects\Prog-III\src\main\resources\com\example\progetto_shit\View" />
@@ -120,7 +105,7 @@
       <workItem from="1724312622537" duration="5690000" />
       <workItem from="1724321252968" duration="938000" />
       <workItem from="1724399353160" duration="2926000" />
-      <workItem from="1724484952336" duration="18075000" />
+      <workItem from="1724484952336" duration="18401000" />
     </task>
     <task id="LOCAL-00002" summary="ora funzionano molte cose bisogna solo mettere le mail da quache parte (creazione  nuovo file letto poi da un package?)">
       <option name="closed" value="true" />
@@ -266,7 +251,23 @@
       <option name="project" value="LOCAL" />
       <updated>1724503413059</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="ora compaiono le mail">
+      <option name="closed" value="true" />
+      <created>1724507415862</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1724507415862</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Changes by filippo">
+      <option name="closed" value="true" />
+      <created>1724507529258</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1724507529258</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -297,11 +298,13 @@
     <MESSAGE value="worka un po'" />
     <MESSAGE value="worka fino a quando non schiacci il client" />
     <MESSAGE value="ma sta cazzo di doppia interfaccia la possiamo levare? porca miseria ladra" />
-    <MESSAGE value="Changes by user" />
-    <MESSAGE value="Changes by dfabi" />
     <MESSAGE value="adesso apre direttamente il client" />
     <MESSAGE value="apre il client correttamente bisogna solo aggiustare i pulsanti" />
-    <option name="LAST_COMMIT_MESSAGE" value="apre il client correttamente bisogna solo aggiustare i pulsanti" />
+    <MESSAGE value="Changes by dfabi" />
+    <MESSAGE value="ora compaiono le mail" />
+    <MESSAGE value="Changes by user" />
+    <MESSAGE value="Changes by filippo" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changes by filippo" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
