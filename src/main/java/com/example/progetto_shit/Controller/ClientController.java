@@ -1,7 +1,9 @@
 package com.example.progetto_shit.Controller;
 
+import com.example.progetto_shit.Main.Server;
 import com.example.progetto_shit.Model.EmailObserver;
 import com.example.progetto_shit.Model.MessageStorage;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -13,14 +15,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 public class ClientController implements EmailObserver {
 
     @FXML
     private Label statusLabel;
-
-    @FXML
-    private VBox buttonBox;
 
     @FXML
     private TextArea emailContentArea;
@@ -28,10 +26,24 @@ public class ClientController implements EmailObserver {
     @FXML
     private Label serverAddressLabel;
 
+    @FXML
+    private Button newMailButton;
+
+    @FXML
+    private Button receivedMailsButton;
+
+    @FXML
+    private Button backButton;
+
+    @FXML
+    private ScrollPane emailScrollPane;
+
+    @FXML
+    private VBox emailBox;
+
     private List<String> clientList = new ArrayList<>();
     private String selectedClient;
     private String selectedEmail;
-    private ServerController serverController;
     private String serverAddress;
 
     private static final String FILE_PATH = "src/main/java/com/example/progetto_shit/email.txt";
@@ -42,9 +54,10 @@ public class ClientController implements EmailObserver {
             serverAddressLabel.setText("Server Address: " + serverAddress);
         }
 
-        // Assicurati che ci sia un client selezionato prima di chiamare updateClientInterface()
         if (selectedClient != null) {
-            updateClientInterface();
+            updateClientInterface();  // Mostra la lista delle email per il client selezionato
+        } else {
+            loadClientsFromFile(FILE_PATH);  // Mostra la lista dei clienti
         }
     }
 
@@ -55,14 +68,18 @@ public class ClientController implements EmailObserver {
         }
     }
 
-    public void setServerController(ServerController serverController) {
-        this.serverController = serverController;
-    }
-
     @FXML
     private void handleBack() {
-        System.out.println("Going back...");
-        updateClientInterface();
+        Platform.runLater(() -> {
+            // Chiude la finestra del client
+            Stage clientStage = (Stage) backButton.getScene().getWindow();
+            clientStage.close();
+
+            // Riapre la finestra del server
+            Stage serverStage = new Stage();
+            Server server = new Server();
+            server.start(serverStage);  // Rilancia il server
+        });
     }
 
     @FXML
@@ -115,16 +132,6 @@ public class ClientController implements EmailObserver {
     }
 
     private void loadClientsFromFile(String filePath) {
-        buttonBox.getChildren().clear();
-        Button stopButton = new Button("Stop Server");
-        buttonBox.getChildren().addAll(statusLabel, stopButton);
-
-        stopButton.setOnAction(event -> {
-            if (serverController != null) {
-                serverController.stopServer();
-            }
-        });
-
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -137,7 +144,7 @@ public class ClientController implements EmailObserver {
                     updateClientInterface();
                 });
 
-                buttonBox.getChildren().add(clientButton);
+                emailBox.getChildren().add(clientButton);
             }
         } catch (IOException e) {
             System.err.println("Error reading the specified file: " + e.getMessage());
@@ -145,8 +152,8 @@ public class ClientController implements EmailObserver {
     }
 
     private void updateClientInterface() {
-        buttonBox.getChildren().clear();
-        VBox emailBox = new VBox(10);
+        emailBox.getChildren().clear();
+
         List<String> receivedMails = getReceivedMailsForClient(selectedClient);
         for (String email : receivedMails) {
             String[] emailLines = email.split("\n", 3);
@@ -165,13 +172,7 @@ public class ClientController implements EmailObserver {
             }
         }
 
-        ScrollPane emailScrollPane = new ScrollPane(emailBox);
-        emailScrollPane.setFitToWidth(true);
-        emailScrollPane.setPrefHeight(200);
-
-        VBox contentBox = new VBox(10);
-        contentBox.getChildren().addAll(emailScrollPane, createActionButtons());
-        buttonBox.getChildren().add(contentBox);
+        emailScrollPane.setContent(emailBox);
     }
 
     private void showEmailDetailView(String email) {
@@ -195,36 +196,18 @@ public class ClientController implements EmailObserver {
         forwardButton.setOnAction(event -> handleForward());
 
         VBox detailBox = new VBox(10, senderLabel, subjectLabel, bodyArea, replyButton, forwardButton);
-        detailBox.setPrefSize(400, 300);
-
-        Scene detailScene = new Scene(detailBox);
-        emailDetailStage.setScene(detailScene);
+        emailDetailStage.setScene(new Scene(detailBox, 400, 300));
         emailDetailStage.show();
-    }
-
-    private VBox createActionButtons() {
-        Button newMailButton = new Button("New Mail");
-        Button receivedMailsButton = new Button("Refresh");
-        Button backButton = new Button("Back");
-
-        newMailButton.setOnAction(event -> handleNewMail());
-        receivedMailsButton.setOnAction(event -> handleReceivedMails());
-        backButton.setOnAction(event -> handleBack());
-
-        VBox buttonBox = new VBox(10);
-        buttonBox.getChildren().addAll(newMailButton, receivedMailsButton, backButton);
-        return buttonBox;
     }
 
     private List<String> getReceivedMailsForClient(String client) {
         return MessageStorage.getMessagesForRecipient(client);
     }
 
-    private void updateEmailList(List<String> receivedMails) {
-        VBox emailBox = new VBox(10);
-        for (String email : receivedMails) {
+    private void updateEmailList(List<String> emails) {
+        emailBox.getChildren().clear();
+        for (String email : emails) {
             String[] emailLines = email.split("\n", 3);
-
             if (emailLines.length >= 2) {
                 String sender = emailLines[0].replace("From: ", "");
                 String subject = emailLines[1].replace("Subject: ", "");
@@ -238,16 +221,6 @@ public class ClientController implements EmailObserver {
 
                 emailBox.getChildren().add(emailButton);
             }
-        }
-
-        ScrollPane emailScrollPane = (ScrollPane) buttonBox.lookup(".scroll-pane");
-        if (emailScrollPane == null) {
-            emailScrollPane = new ScrollPane(emailBox);
-            emailScrollPane.setFitToWidth(true);
-            emailScrollPane.setPrefHeight(200);
-            buttonBox.getChildren().add(emailScrollPane);
-        } else {
-            emailScrollPane.setContent(emailBox);
         }
     }
 

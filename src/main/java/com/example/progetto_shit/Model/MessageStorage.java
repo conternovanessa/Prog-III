@@ -61,12 +61,14 @@ public class MessageStorage {
         File clientDir = new File(clientDirPath);
 
         if (!clientDir.exists() || !clientDir.isDirectory()) {
+            System.out.println("Directory not found: " + clientDirPath);
             return messages;
         }
 
         File[] emailFiles = clientDir.listFiles((dir, name) -> name.endsWith(".txt"));
         if (emailFiles != null) {
             for (File emailFile : emailFiles) {
+                System.out.println("Reading file: " + emailFile.getPath());
                 try (BufferedReader reader = new BufferedReader(new FileReader(emailFile))) {
                     StringBuilder message = new StringBuilder();
                     String line;
@@ -78,8 +80,11 @@ public class MessageStorage {
                     e.printStackTrace();
                 }
             }
+        } else {
+            System.out.println("No email files found in directory: " + clientDirPath);
         }
 
         return messages;
     }
+
 }

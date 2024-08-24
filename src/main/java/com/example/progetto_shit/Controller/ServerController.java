@@ -8,12 +8,13 @@ import javafx.scene.layout.VBox;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
-import java.io.ObjectOutputStream;
 import java.io.ObjectInputStream;
 
 public class ServerController {
@@ -24,6 +25,12 @@ public class ServerController {
     @FXML
     private VBox clientListBox;
 
+    @FXML
+    private Button startButton;
+
+    @FXML
+    private Button stopButton;
+
     private boolean serverRunning = false;
     private ServerSocket serverSocket;
     private List<Socket> clientSockets; // Memorizza i socket dei client
@@ -32,11 +39,8 @@ public class ServerController {
     public void initialize() {
         statusLabel.setText("Server Status: Stopped");
         clientSockets = new ArrayList<>();
-    }
-
-    public void initializeServer(List<String> clientList) {
-        displayClients(clientList);
-        startServer();
+        // Carica i client da un file al momento dell'inizializzazione
+        loadClientsFromFile("src/main/java/com/example/progetto_shit/email.txt");
     }
 
     @FXML
@@ -49,7 +53,7 @@ public class ServerController {
         stopServer();
     }
 
-    public void startServer() {
+    private void startServer() {
         if (!serverRunning) {
             serverRunning = true;
             statusLabel.setText("Server Status: Running");
@@ -84,7 +88,7 @@ public class ServerController {
         }
     }
 
-    public void stopServer() {
+    private void stopServer() {
         if (serverRunning) {
             serverRunning = false;
             statusLabel.setText("Server Status: Stopped");
@@ -103,21 +107,34 @@ public class ServerController {
         }
     }
 
-    private void displayClients(List<String> clientList) {
-        clientListBox.getChildren().clear();
-
-        for (String client : clientList) {
-            Button clientButton = new Button(client);
-            clientButton.setOnAction(event -> handleClientSelection(client));
-            clientListBox.getChildren().add(clientButton);
+    private void loadClientsFromFile(String filePath) {
+        System.out.println("Loading clients from file: " + filePath); // Debugging
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            clientListBox.getChildren().clear(); // Pulisce i pulsanti esistenti
+            while ((line = br.readLine()) != null) {
+                String client = line.trim();
+                if (!client.isEmpty()) {
+                    System.out.println("Adding client: " + client); // Debugging
+                    Button clientButton = new Button("Connect to " + client);
+                    clientButton.setOnAction(event -> handleClientSelection(client));
+                    clientListBox.getChildren().add(clientButton);
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading the specified file: " + e.getMessage());
         }
     }
+
 
     private void handleClientSelection(String client) {
         Platform.runLater(() -> {
             // Avvia il client in una nuova finestra JavaFX
             Stage primaryStage = new Stage();
             ClientApp.launchClient(primaryStage, client);
+
+            Stage serverStage = (Stage) statusLabel.getScene().getWindow();
+            serverStage.close();
         });
     }
 }

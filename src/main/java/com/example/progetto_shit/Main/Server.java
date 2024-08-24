@@ -32,7 +32,7 @@ public class Server extends Application {
 
             // Passa i dati necessari al controller
             loadClientsFromFile(FILE_PATH);
-            controller.initializeServer(clientList); // Metodo da implementare nel controller
+            controller.initialize(); // Metodo da implementare nel controller
 
             // Imposta la scena e mostra lo stage
             Scene scene = new Scene(root);
