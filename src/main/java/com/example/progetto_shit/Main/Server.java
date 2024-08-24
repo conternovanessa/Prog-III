@@ -30,9 +30,12 @@ public class Server extends Application {
             // Ottieni l'istanza del ServerController associato al file FXML
             ServerController controller = loader.getController();
 
-            // Passa i dati necessari al controller
+            // Passa il riferimento al primaryStage al controller
+            controller.setPrimaryStage(primaryStage);
+
+            // Carica i client dal file e passali al controller
             loadClientsFromFile(FILE_PATH);
-            controller.initialize(); // Metodo da implementare nel controller
+            controller.setClientList(clientList);
 
             // Imposta la scena e mostra lo stage
             Scene scene = new Scene(root);

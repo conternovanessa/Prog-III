@@ -1,6 +1,5 @@
 package com.example.progetto_shit.Controller;
 
-import com.example.progetto_shit.Main.Server;
 import com.example.progetto_shit.Model.EmailObserver;
 import com.example.progetto_shit.Model.MessageStorage;
 import javafx.application.Platform;
@@ -9,12 +8,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 public class ClientController implements EmailObserver {
 
     @FXML
@@ -46,6 +48,8 @@ public class ClientController implements EmailObserver {
     private String selectedEmail;
     private String serverAddress;
 
+    private Stage primaryStage;
+
     private static final String FILE_PATH = "src/main/java/com/example/progetto_shit/email.txt";
 
     @FXML
@@ -68,17 +72,31 @@ public class ClientController implements EmailObserver {
         }
     }
 
+    public void setPrimaryStage(Stage stage) {
+        this.primaryStage = stage;
+    }
+
     @FXML
     private void handleBack() {
         Platform.runLater(() -> {
-            // Chiude la finestra del client
-            Stage clientStage = (Stage) backButton.getScene().getWindow();
-            clientStage.close();
+            if (primaryStage != null) {
+                try {
+                    // Carica la vista di selezione dei client
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/progetto_shit/View/server_view.fxml"));
+                    Parent serverView = loader.load();
 
-            // Riapre la finestra del server
-            Stage serverStage = new Stage();
-            Server server = new Server();
-            server.start(serverStage);  // Rilancia il server
+                    // Ottieni il controller del Server e passa i dati necessari
+                    ServerController serverController = loader.getController();
+                    serverController.setClientList(clientList); // Passa la lista dei client
+
+                    // Imposta la scena del ServerView e mostra lo Stage
+                    Scene serverScene = new Scene(serverView);
+                    primaryStage.setScene(serverScene);
+                    primaryStage.setTitle("Mail Server");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         });
     }
 

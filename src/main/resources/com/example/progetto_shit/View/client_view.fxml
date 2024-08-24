@@ -5,9 +5,6 @@
 <?import javafx.scene.text.Text?>
 
 <VBox xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx/17" fx:controller="com.example.progetto_shit.Controller.ClientController">
-    <!-- Sezione per il contenuto dell'email selezionata -->
-    <TextArea fx:id="emailContentArea" editable="false" wrapText="true" prefHeight="200" />
-
     <!-- Sezione per visualizzare le email -->
     <ScrollPane fx:id="emailScrollPane" fitToWidth="true" prefHeight="200">
         <VBox fx:id="emailBox" spacing="10" />

@@ -1,8 +1,10 @@
 package com.example.progetto_shit.Controller;
 
-import com.example.progetto_shit.Main.ClientApp;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
@@ -26,13 +28,11 @@ public class ServerController {
     @FXML
     private Button stopButton;
 
-    @FXML
-    private VBox clientListBox;  // Contenitore per i pulsanti dei client
-
     private boolean serverRunning = false;
     private ServerSocket serverSocket;
     private List<Socket> clientSockets; // Memorizza i socket dei client
     private Stage primaryStage;
+    private List<String> clientList; // Lista dei client
 
     @FXML
     public void initialize() {
@@ -43,17 +43,19 @@ public class ServerController {
     @FXML
     private void handleStartServer() {
         startServer();
-        // Mostra i client disponibili sulla stessa finestra
-        displayClientList();
+        Platform.runLater(() -> {
+            // Avvia l'applicazione client direttamente
+            openClientInterface("defaultClientAddress@example.com"); // Imposta un indirizzo client predefinito o modificabile
+        });
     }
 
     @FXML
     private void handleStopServer() {
         stopServer();
-        // Chiudi l'interfaccia
         Platform.runLater(() -> {
-            Stage stage = (Stage) stopButton.getScene().getWindow();
-            stage.close();
+            if (primaryStage != null) {
+                primaryStage.close();
+            }
         });
     }
 
@@ -67,7 +69,6 @@ public class ServerController {
                     serverSocket = new ServerSocket(55555);
                     while (isServerRunning()) {
                         Socket clientSocket = serverSocket.accept();
-
                         synchronized (clientSockets) {
                             clientSockets.add(clientSocket);
                         }
@@ -120,42 +121,30 @@ public class ServerController {
         return serverRunning;
     }
 
-    private void displayClientList() {
-        // Simuliamo una lista di client per la dimostrazione
-        List<String> clients = getClientListFromFile("email.txt");
-
-        clientListBox.getChildren().clear(); // Pulisci eventuali elementi esistenti
-        for (String client : clients) {
-            Button clientButton = new Button("Connect to " + client);
-            clientButton.setOnAction(event -> openClientInterface(client));
-            clientListBox.getChildren().add(clientButton);
-        }
-    }
-
     private void openClientInterface(String clientAddress) {
         Platform.runLater(() -> {
             try {
-                // Avvia l'interfaccia client nella stessa finestra
-                ClientApp.launchClient(primaryStage, clientAddress);
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/progetto_shit/View/client_view.fxml"));
+                Parent clientView = loader.load();
+
+                ClientController clientController = loader.getController();
+                clientController.setServerAddress(clientAddress);
+
+                if (primaryStage != null) {
+                    primaryStage.setScene(new Scene(clientView));
+                    primaryStage.setTitle("Client Mail Viewer - " + clientAddress);
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
         });
     }
 
-    public List<String> getClientListFromFile(String file) {
-        List<String> clients = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                System.out.println("Email trovata: " + line);
-                clients.add(line); // Aggiungi l'email alla lista
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println("File " + file + " non trovato: " + e.getMessage());
-        } catch (IOException e) {
-            System.out.println("Errore durante la lettura del file: " + e.getMessage());
-        }
-        return clients;
+    public void setPrimaryStage(Stage stage) {
+        this.primaryStage = stage;
+    }
+
+    public void setClientList(List<String> clients) {
+        this.clientList = clients;
     }
 }

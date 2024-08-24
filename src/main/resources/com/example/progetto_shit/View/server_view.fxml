@@ -9,10 +9,9 @@
     <Label fx:id="statusLabel" text="Server Status: Stopped" style="-fx-font-size: 16px; -fx-text-fill: blue;"/>
 
     <!-- Pulsante per avviare il server -->
-    <Button text="Start Server" onAction="#handleStartServer" style="-fx-font-size: 14px;"/>
+    <Button fx:id="startButton" text="Start Server" onAction="#handleStartServer" style="-fx-font-size: 14px;"/>
 
     <!-- Pulsante per fermare il server -->
-    <Button text="Stop Server" onAction="#handleStopServer" style="-fx-font-size: 14px;"/>
-
+    <Button fx:id="stopButton" text="Stop Server" onAction="#handleStopServer" style="-fx-font-size: 14px;"/>
 
 </VBox>
