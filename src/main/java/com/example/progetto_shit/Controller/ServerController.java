@@ -4,12 +4,9 @@ import com.example.progetto_shit.Main.ClientApp;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
-import javafx.scene.layout.VBox;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -21,9 +18,6 @@ public class ServerController {
 
     @FXML
     private Label statusLabel;
-
-    @FXML
-    private VBox clientListBox;
 
     @FXML
     private Button startButton;
@@ -39,13 +33,16 @@ public class ServerController {
     public void initialize() {
         statusLabel.setText("Server Status: Stopped");
         clientSockets = new ArrayList<>();
-        // Carica i client da un file al momento dell'inizializzazione
-        loadClientsFromFile("src/main/java/com/example/progetto_shit/email.txt");
     }
 
     @FXML
     private void handleStartServer() {
         startServer();
+        // Avvia direttamente il client senza visualizzare i pulsanti dei client
+        Platform.runLater(() -> {
+            Stage primaryStage = new Stage();
+            ClientApp.launchClient(primaryStage, "default_client"); // Passa un valore di default o necessario
+        });
     }
 
     @FXML
@@ -105,36 +102,5 @@ public class ServerController {
                 System.err.println("Error closing the server socket: " + e.getMessage());
             }
         }
-    }
-
-    private void loadClientsFromFile(String filePath) {
-        System.out.println("Loading clients from file: " + filePath); // Debugging
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-            String line;
-            clientListBox.getChildren().clear(); // Pulisce i pulsanti esistenti
-            while ((line = br.readLine()) != null) {
-                String client = line.trim();
-                if (!client.isEmpty()) {
-                    System.out.println("Adding client: " + client); // Debugging
-                    Button clientButton = new Button("Connect to " + client);
-                    clientButton.setOnAction(event -> handleClientSelection(client));
-                    clientListBox.getChildren().add(clientButton);
-                }
-            }
-        } catch (IOException e) {
-            System.err.println("Error reading the specified file: " + e.getMessage());
-        }
-    }
-
-
-    private void handleClientSelection(String client) {
-        Platform.runLater(() -> {
-            // Avvia il client in una nuova finestra JavaFX
-            Stage primaryStage = new Stage();
-            ClientApp.launchClient(primaryStage, client);
-
-            Stage serverStage = (Stage) statusLabel.getScene().getWindow();
-            serverStage.close();
-        });
     }
 }
