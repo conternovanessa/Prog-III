@@ -14,7 +14,5 @@
     <!-- Pulsante per fermare il server -->
     <Button text="Stop Server" onAction="#handleStopServer" style="-fx-font-size: 14px;"/>
 
-    <!-- VBox per visualizzare i client -->
-    <VBox fx:id="clientListBox" spacing="5" prefWidth="200" alignment="CENTER_LEFT"/>
 
 </VBox>
