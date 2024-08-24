@@ -45,7 +45,7 @@ public class ServerController {
         startServer();
         Platform.runLater(() -> {
             // Avvia l'applicazione client direttamente
-            openClientInterface("defaultClientAddress@example.com"); // Imposta un indirizzo client predefinito o modificabile
+            openClientInterface("selezionare il client di dominio @progetto.com"); // Imposta un indirizzo client predefinito o modificabile
         });
     }
 
