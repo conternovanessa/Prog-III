@@ -1,15 +1,13 @@
 package com.example.progetto_shit.Controller;
 
-import com.example.progetto_shit.Model.EmailObserver;
-import com.example.progetto_shit.Model.MessageStorage;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -17,38 +15,19 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClientController implements EmailObserver {
-
-    @FXML
-    private Label statusLabel;
-
-    @FXML
-    private TextArea emailContentArea;
+public class ClientController {
+    private Stage primaryStage;
 
     @FXML
     private Label serverAddressLabel;
 
-    @FXML
-    private Button newMailButton;
-
-    @FXML
-    private Button receivedMailsButton;
-
-    @FXML
-    private Button backButton;
-
-    @FXML
-    private ScrollPane emailScrollPane;
+    private String selectedClient;
 
     @FXML
     private VBox emailBox;
 
     private List<String> clientList = new ArrayList<>();
-    private String selectedClient;
-    private String selectedEmail;
     private String serverAddress;
-
-    private Stage primaryStage;
 
     private static final String FILE_PATH = "src/main/java/com/example/progetto_shit/email.txt";
 
@@ -58,11 +37,7 @@ public class ClientController implements EmailObserver {
             serverAddressLabel.setText("Server Address: " + serverAddress);
         }
 
-        if (selectedClient != null) {
-            updateClientInterface();  // Mostra la lista delle email per il client selezionato
-        } else {
-            loadClientsFromFile(FILE_PATH);  // Mostra la lista dei clienti
-        }
+        loadClientsFromFile(FILE_PATH);
     }
 
     public void setServerAddress(String serverAddress) {
@@ -76,79 +51,6 @@ public class ClientController implements EmailObserver {
         this.primaryStage = stage;
     }
 
-    @FXML
-    private void handleBack() {
-        Platform.runLater(() -> {
-            if (primaryStage != null) {
-                try {
-                    // Carica la vista di selezione dei client
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/progetto_shit/View/server_view.fxml"));
-                    Parent serverView = loader.load();
-
-                    // Ottieni il controller del Server e passa i dati necessari
-                    ServerController serverController = loader.getController();
-                    serverController.setClientList(clientList); // Passa la lista dei client
-
-                    // Imposta la scena del ServerView e mostra lo Stage
-                    Scene serverScene = new Scene(serverView);
-                    primaryStage.setScene(serverScene);
-                    primaryStage.setTitle("Mail Server");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-
-    @FXML
-    private void handleNewMail() {
-        System.out.println("Creating a new mail...");
-        NewMailHandler newMailHandler = new NewMailHandler(selectedClient);
-        newMailHandler.createNewMail();
-    }
-
-    @FXML
-    private void handleReceivedMails() {
-        System.out.println("Showing received emails...");
-        updateClientInterface();
-    }
-
-    @FXML
-    private void handleReply() {
-        System.out.println("Replying to the email...");
-        if (selectedEmail != null) {
-            String[] emailLines = selectedEmail.split("\n", 3);
-            String sender = emailLines.length > 0 ? emailLines[0].replace("From: ", "") : "Unknown Sender";
-            String object = emailLines.length > 1 ? emailLines[1].replace("Subject: ", "") : "Unknown Subject";
-
-            ReplyHandler replyHandler = new ReplyHandler(sender, selectedClient, object);
-            replyHandler.replyToEmail();
-        } else {
-            showAlert("Selection Missing", "Please select an email to reply to.");
-        }
-    }
-
-    @FXML
-    private void handleForward() {
-        System.out.println("Forwarding the email...");
-        if (selectedEmail != null) {
-            ForwardHandler forwardHandler = new ForwardHandler(selectedClient);
-            forwardHandler.forwardEmail(selectedEmail);
-        } else {
-            showAlert("Selection Missing", "Please select an email to forward.");
-        }
-    }
-
-    @FXML
-    private void handleRefreshEmails() {
-        System.out.println("Refreshing emails...");
-        List<String> receivedMails = getReceivedMailsForClient(selectedClient);
-        if (!receivedMails.isEmpty()) {
-            showEmailDetailView(receivedMails.get(0));
-        }
-        updateEmailList(receivedMails);
-    }
-
     private void loadClientsFromFile(String filePath) {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
@@ -158,8 +60,8 @@ public class ClientController implements EmailObserver {
 
                 Button clientButton = new Button("Connect to " + client);
                 clientButton.setOnAction(event -> {
-                    selectedClient = client;
-                    updateClientInterface();
+                    selectedClient = client;  // Imposta il client selezionato
+                    openEmailController();    // Apre il controller email
                 });
 
                 emailBox.getChildren().add(clientButton);
@@ -169,89 +71,30 @@ public class ClientController implements EmailObserver {
         }
     }
 
-    private void updateClientInterface() {
-        emailBox.getChildren().clear();
-
-        List<String> receivedMails = getReceivedMailsForClient(selectedClient);
-        for (String email : receivedMails) {
-            String[] emailLines = email.split("\n", 3);
-            if (emailLines.length >= 2) {
-                String sender = emailLines[0].replace("From: ", "");
-                String subject = emailLines[1].replace("Subject: ", "");
-                String buttonText = sender + " - " + subject;
-
-                Button emailButton = new Button(buttonText);
-                emailButton.setOnAction(event -> {
-                    selectedEmail = email;
-                    showEmailDetailView(email);
-                });
-
-                emailBox.getChildren().add(emailButton);
-            }
+    @FXML
+    private void openEmailController() {
+        if (primaryStage == null) {
+            System.err.println("primaryStage is null. Please set it before opening the EmailController.");
+            return;
         }
 
-        emailScrollPane.setContent(emailBox);
-    }
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/progetto_shit/View/email_view.fxml"));
+            Parent root = loader.load();
 
-    private void showEmailDetailView(String email) {
-        String[] emailLines = email.split("\n", 3);
-        String sender = emailLines.length > 0 ? emailLines[0].replace("From: ", "") : "Unknown Sender";
-        String subject = emailLines.length > 1 ? emailLines[1].replace("Subject: ", "") : "No Subject";
-        String body = emailLines.length > 2 ? emailLines[2] : "No Content";
+            // Ottieni il controller dell'EmailController
+            EmailController emailController = loader.getController();
 
-        Stage emailDetailStage = new Stage();
-        emailDetailStage.setTitle("Email Details");
+            // Passa il client selezionato e il primaryStage all'EmailController
+            emailController.setClient(selectedClient);
+            emailController.setPrimaryStage(primaryStage);
 
-        Label senderLabel = new Label("From: " + sender);
-        Label subjectLabel = new Label("Subject: " + subject);
-        TextArea bodyArea = new TextArea(body);
-        bodyArea.setWrapText(true);
-        bodyArea.setEditable(false);
-
-        Button replyButton = new Button("Reply");
-        replyButton.setOnAction(event -> handleReply());
-        Button forwardButton = new Button("Forward");
-        forwardButton.setOnAction(event -> handleForward());
-
-        VBox detailBox = new VBox(10, senderLabel, subjectLabel, bodyArea, replyButton, forwardButton);
-        emailDetailStage.setScene(new Scene(detailBox, 400, 300));
-        emailDetailStage.show();
-    }
-
-    private List<String> getReceivedMailsForClient(String client) {
-        return MessageStorage.getMessagesForRecipient(client);
-    }
-
-    private void updateEmailList(List<String> emails) {
-        emailBox.getChildren().clear();
-        for (String email : emails) {
-            String[] emailLines = email.split("\n", 3);
-            if (emailLines.length >= 2) {
-                String sender = emailLines[0].replace("From: ", "");
-                String subject = emailLines[1].replace("Subject: ", "");
-                String buttonText = sender + " - " + subject;
-
-                Button emailButton = new Button(buttonText);
-                emailButton.setOnAction(event -> {
-                    selectedEmail = email;
-                    showEmailDetailView(email);
-                });
-
-                emailBox.getChildren().add(emailButton);
-            }
+            // Imposta la nuova scena
+            Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+            primaryStage.setTitle("Email Viewer");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-    }
-
-    @Override
-    public void update(List<String> emails) {
-        updateEmailList(emails);
-    }
-
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
     }
 }

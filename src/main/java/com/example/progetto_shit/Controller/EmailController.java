@@ -34,22 +34,12 @@ public class EmailController implements EmailObserver {
     private String client;
     private Stage primaryStage;
 
-    @FXML
-    public void initialize() {
-        // Metodo chiamato automaticamente durante l'inizializzazione del FXML
-        if (client != null && !client.isEmpty()) {
-            loadEmails(); // Carica le email all'avvio
-        }
-    }
-
     public void setClient(String client) {
         this.client = client;
-        clientLabel.setText("Emails for: " + client);
-
-        // Carica le email quando viene impostato il client
-        if (client != null && !client.isEmpty()) {
-            loadEmails();
+        if (clientLabel != null) {
+            clientLabel.setText("Emails for: " + client);
         }
+        loadEmails();
     }
 
     public void setPrimaryStage(Stage stage) {
@@ -58,49 +48,42 @@ public class EmailController implements EmailObserver {
 
     @FXML
     private void handleBack() {
-        if (primaryStage != null) {
-            try {
-                // Carica la vista del client
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/progetto_shit/View/client_view.fxml"));
-                Parent clientView = loader.load();
+        Platform.runLater(() -> {
+            if (primaryStage != null) {
+                try {
+                    // Carica la vista del client
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/progetto_shit/View/client_view.fxml"));
+                    Parent clientView = loader.load();
 
-                // Ottieni il controller della vista client
-                ClientController clientController = loader.getController();
-                clientController.setPrimaryStage(primaryStage);
+                    // Ottieni il controller della vista client
+                    ClientController clientController = loader.getController();
+                    clientController.setPrimaryStage(primaryStage);
 
-                // Crea una nuova scena e imposta il contenuto della finestra principale
-                Scene clientScene = new Scene(clientView);
-                primaryStage.setScene(clientScene);
-                primaryStage.setTitle("Client Selection");
+                    // Crea una nuova scena e imposta il contenuto della finestra principale
+                    Scene clientScene = new Scene(clientView);
+                    primaryStage.setScene(clientScene);
+                    primaryStage.setTitle("Client Selection");
 
-                // Mostra la finestra principale
-                primaryStage.show();
-            } catch (IOException e) {
-                e.printStackTrace();
-                showAlert("Error", "Failed to load the client view.");
+                    // Mostra la finestra principale
+                    primaryStage.show();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    showAlert("Error", "Failed to load the client view.");
+                }
+            } else {
+                showAlert("Error", "Primary stage is not set.");
             }
-        } else {
-            showAlert("Error", "Primary stage is not set.");
-        }
+        });
     }
 
     @FXML
     private void handleNewMail() {
         // Implementa l'apertura della finestra per creare una nuova email
-        if (client != null && !client.isEmpty()) {
-            NewMailHandler newMailHandler = new NewMailHandler(client);
-            newMailHandler.createNewMail(); // Assicurati che questo metodo esista
-        } else {
-            showAlert("Client Missing", "No client selected.");
-        }
+        NewMailHandler newMailHandler = new NewMailHandler(client);
+        newMailHandler.createNewMail(); // Assicurati che questo metodo esista
     }
 
     private void loadEmails() {
-        if (client == null || client.isEmpty()) {
-            showAlert("Client Missing", "No client selected.");
-            return;
-        }
-
         List<String> emails = MessageStorage.getMessagesForRecipient(client);
 
         Platform.runLater(() -> {
