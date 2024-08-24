@@ -4,16 +4,11 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Text?>
 
-<VBox xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx/17" fx:controller="com.example.progetto_shit.Controller.ClientController">
-    <!-- Sezione per visualizzare le email -->
-    <ScrollPane fx:id="emailScrollPane" fitToWidth="true" prefHeight="200">
+<VBox xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx/17" fx:controller="com.example.progetto_shit.Controller.ClientController" spacing="10" alignment="CENTER">
+    <Label fx:id="serverAddressLabel" text="Server Address:" />
+
+    <!-- Sezione per visualizzare la lista dei client -->
+    <ScrollPane fitToWidth="true" prefHeight="200">
         <VBox fx:id="emailBox" spacing="10" />
     </ScrollPane>
-
-    <!-- Sezione per visualizzare i bottoni di azione -->
-    <VBox fx:id="buttonBox" spacing="10"> <!-- Aggiunto l'ID buttonBox -->
-        <Button fx:id="newMailButton" text="New Mail" onAction="#handleNewMail" />
-        <Button fx:id="receivedMailsButton" text="Refresh" onAction="#handleReceivedMails" />
-        <Button fx:id="backButton" text="Back" onAction="#handleBack" />
-    </VBox>
 </VBox>

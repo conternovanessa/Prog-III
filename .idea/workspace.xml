@@ -4,14 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0a55273f-6121-464b-90af-ee02c84e2271" name="Changes" comment="adesso apre direttamente il client">
+    <list default="true" id="0a55273f-6121-464b-90af-ee02c84e2271" name="Changes" comment="apre il client correttamente bisogna solo aggiustare i pulsanti">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Controller/EmailController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Main/EmailApp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/progetto_shit/View/email_view.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Controller/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Controller/ClientController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/messages/fabiodelia@progetto.com/filippoditto@progetto.com_Re__From__filippoditto_progetto.com.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/messages/filippoditto@progetto.com/fabiodelia@progetto.com_Re__From__filippoditto_progetto.com.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Controller/ServerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Controller/ServerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Main/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Main/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Model/MessageStorage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Model/MessageStorage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/progetto_shit/View/client_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/progetto_shit/View/client_view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/progetto_shit/View/server_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/progetto_shit/View/server_view.fxml" afterDir="false" />
     </list>
+    <list id="379e8b2a-a188-47b8-9b6c-2a7c3120c88e" name="Changes by dfabi" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Controller/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Controller/ClientController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Main/ClientApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Main/ClientApp.java" afterDir="false" />
+    </list>
+    <list id="a50615b1-c209-4a7a-86e0-cda0f46af614" name="Changes by user" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,9 +28,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="FxmlFile" />
-        <option value="Class" />
         <option value="Exception" />
+        <option value="Class" />
+        <option value="FxmlFile" />
       </list>
     </option>
   </component>
@@ -112,7 +120,7 @@
       <workItem from="1724312622537" duration="5690000" />
       <workItem from="1724321252968" duration="938000" />
       <workItem from="1724399353160" duration="2926000" />
-      <workItem from="1724484952336" duration="14093000" />
+      <workItem from="1724484952336" duration="18075000" />
     </task>
     <task id="LOCAL-00002" summary="ora funzionano molte cose bisogna solo mettere le mail da quache parte (creazione  nuovo file letto poi da un package?)">
       <option name="closed" value="true" />
@@ -242,7 +250,23 @@
       <option name="project" value="LOCAL" />
       <updated>1724496913069</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="apre il client correttamente bisogna solo aggiustare i pulsanti">
+      <option name="closed" value="true" />
+      <created>1724503320213</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1724503320213</updated>
+    </task>
+    <task id="LOCAL-00019" summary="apre il client correttamente bisogna solo aggiustare i pulsanti">
+      <option name="closed" value="true" />
+      <created>1724503413059</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1724503413059</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -276,7 +300,8 @@
     <MESSAGE value="Changes by user" />
     <MESSAGE value="Changes by dfabi" />
     <MESSAGE value="adesso apre direttamente il client" />
-    <option name="LAST_COMMIT_MESSAGE" value="adesso apre direttamente il client" />
+    <MESSAGE value="apre il client correttamente bisogna solo aggiustare i pulsanti" />
+    <option name="LAST_COMMIT_MESSAGE" value="apre il client correttamente bisogna solo aggiustare i pulsanti" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

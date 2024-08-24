@@ -122,22 +122,19 @@ public class ServerController {
     }
 
     private void openClientInterface(String clientAddress) {
-        Platform.runLater(() -> {
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/progetto_shit/View/client_view.fxml"));
-                Parent clientView = loader.load();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/progetto_shit/View/client_view.fxml"));
+            Parent root = loader.load();
 
-                ClientController clientController = loader.getController();
-                clientController.setServerAddress(clientAddress);
+            ClientController clientController = loader.getController();
+            clientController.setPrimaryStage(primaryStage); // Passa il riferimento del primaryStage
 
-                if (primaryStage != null) {
-                    primaryStage.setScene(new Scene(clientView));
-                    primaryStage.setTitle("Client Mail Viewer - " + clientAddress);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
+            Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+            primaryStage.setTitle("Client View");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void setPrimaryStage(Stage stage) {
