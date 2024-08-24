@@ -4,16 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0a55273f-6121-464b-90af-ee02c84e2271" name="Changes" comment="worka fino a quando non schiacci il client">
+    <list default="true" id="0a55273f-6121-464b-90af-ee02c84e2271" name="Changes" comment="adesso apre direttamente il client">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Controller/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Controller/ClientController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Controller/ServerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Controller/ServerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Main/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Main/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Model/MessageStorage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Model/MessageStorage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/progetto_shit/View/client_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/progetto_shit/View/client_view.fxml" afterDir="false" />
     </list>
     <list id="2a984c38-6216-49d8-a960-c6a7a45f6a10" name="Changes by dfabi" comment="Changes by dfabi" />
-    <list id="ebb9a364-f635-43a0-bdfa-ac7671005713" name="Changes by user" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -114,7 +109,7 @@
       <workItem from="1724312622537" duration="5690000" />
       <workItem from="1724321252968" duration="938000" />
       <workItem from="1724399353160" duration="2926000" />
-      <workItem from="1724484952336" duration="7607000" />
+      <workItem from="1724484952336" duration="10841000" />
     </task>
     <task id="LOCAL-00002" summary="ora funzionano molte cose bisogna solo mettere le mail da quache parte (creazione  nuovo file letto poi da un package?)">
       <option name="closed" value="true" />
@@ -212,7 +207,31 @@
       <option name="project" value="LOCAL" />
       <updated>1724489507163</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="ma sta cazzo di doppia interfaccia la possiamo levare? porca miseria ladra">
+      <option name="closed" value="true" />
+      <created>1724493930795</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1724493930795</updated>
+    </task>
+    <task id="LOCAL-00015" summary="adesso apre direttamente il client">
+      <option name="closed" value="true" />
+      <created>1724494379594</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1724494379594</updated>
+    </task>
+    <task id="LOCAL-00016" summary="adesso apre direttamente il client">
+      <option name="closed" value="true" />
+      <created>1724494398325</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1724494398325</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -239,11 +258,14 @@
     <MESSAGE value="ciao adesso carica su un file txt" />
     <MESSAGE value="ora funziona la lettura, l'invio e i package. domani faremo il resto gg compari" />
     <MESSAGE value="cambiata porta ora è 55555" />
-    <MESSAGE value="Changes by dfabi" />
     <MESSAGE value="MVC ti prego finiscila" />
     <MESSAGE value="worka un po'" />
     <MESSAGE value="worka fino a quando non schiacci il client" />
-    <option name="LAST_COMMIT_MESSAGE" value="worka fino a quando non schiacci il client" />
+    <MESSAGE value="ma sta cazzo di doppia interfaccia la possiamo levare? porca miseria ladra" />
+    <MESSAGE value="Changes by user" />
+    <MESSAGE value="adesso apre direttamente il client" />
+    <MESSAGE value="Changes by dfabi" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changes by dfabi" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
