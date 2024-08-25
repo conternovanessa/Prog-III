@@ -2,7 +2,6 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Text?>
 
 <VBox xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx/17" fx:controller="com.example.progetto_shit.Controller.ClientController" spacing="10" alignment="CENTER">
     <Label fx:id="serverAddressLabel" text="Server Address:" />
@@ -11,4 +10,7 @@
     <ScrollPane fitToWidth="true" prefHeight="200">
         <VBox fx:id="emailBox" spacing="10" />
     </ScrollPane>
+
+    <!-- Pulsante Back -->
+    <Button fx:id="backButton" text="Back" onAction="#handleBack"/>
 </VBox>

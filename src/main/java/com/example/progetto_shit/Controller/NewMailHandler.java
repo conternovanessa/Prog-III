@@ -14,6 +14,8 @@ import javafx.stage.Stage;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.example.progetto_shit.Main.ClientApp.clientAddress;
+
 public class NewMailHandler extends Application {
 
     // Lista dei destinatari validi
@@ -92,7 +94,8 @@ public class NewMailHandler extends Application {
                 }
 
                 // Invio l'email a MessageStorage includendo il mittente (dinamico)
-                MessageStorage.saveMessage(currentSender, recipient, subject, body,false);
+
+                MessageStorage.saveMessage(clientAddress, currentSender, recipient, subject, false);
             }
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);

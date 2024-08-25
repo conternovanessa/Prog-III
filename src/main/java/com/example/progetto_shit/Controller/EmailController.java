@@ -26,6 +26,9 @@ public class EmailController implements EmailObserver {
     private Button backButton;
 
     @FXML
+    private Button refreshButton;
+
+    @FXML
     private ScrollPane emailScrollPane;
 
     @FXML
@@ -51,20 +54,15 @@ public class EmailController implements EmailObserver {
         Platform.runLater(() -> {
             if (primaryStage != null) {
                 try {
-                    // Carica la vista del client
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/progetto_shit/View/client_view.fxml"));
                     Parent clientView = loader.load();
-
-                    // Ottieni il controller della vista client
                     ClientController clientController = loader.getController();
                     clientController.setPrimaryStage(primaryStage);
 
-                    // Crea una nuova scena e imposta il contenuto della finestra principale
                     Scene clientScene = new Scene(clientView);
                     primaryStage.setScene(clientScene);
                     primaryStage.setTitle("Client Selection");
 
-                    // Mostra la finestra principale
                     primaryStage.show();
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -78,9 +76,13 @@ public class EmailController implements EmailObserver {
 
     @FXML
     private void handleNewMail() {
-        // Implementa l'apertura della finestra per creare una nuova email
         NewMailHandler newMailHandler = new NewMailHandler(client);
-        newMailHandler.createNewMail(); // Assicurati che questo metodo esista
+        newMailHandler.createNewMail();
+    }
+
+    @FXML
+    private void handleRefresh() {
+        loadEmails(); // Ricarica le email dal MessageStorage
     }
 
     private void loadEmails() {
@@ -137,8 +139,8 @@ public class EmailController implements EmailObserver {
             String sender = emailLines.length > 0 ? emailLines[0].replace("From: ", "") : "Unknown Sender";
             String subject = emailLines.length > 1 ? emailLines[1].replace("Subject: ", "") : "Unknown Subject";
 
-            ReplyHandler replyHandler = new ReplyHandler(sender, client, subject);
-            replyHandler.replyToEmail(); // Assicurati che questo metodo esista
+            ReplyHandler replyHandler = new ReplyHandler(sender, client, subject, this::loadEmails);
+            replyHandler.replyToEmail();
         } else {
             showAlert("Selection Missing", "Please select an email to reply to.");
         }
@@ -147,7 +149,7 @@ public class EmailController implements EmailObserver {
     private void handleForward(String email) {
         if (email != null) {
             ForwardHandler forwardHandler = new ForwardHandler(client);
-            forwardHandler.forwardEmail(email); // Assicurati che questo metodo esista
+            forwardHandler.forwardEmail(email);
         } else {
             showAlert("Selection Missing", "Please select an email to forward.");
         }
@@ -163,6 +165,6 @@ public class EmailController implements EmailObserver {
 
     @Override
     public void update(List<String> emails) {
-        loadEmails(); // Aggiorna la vista con le nuove email
+        loadEmails();
     }
 }

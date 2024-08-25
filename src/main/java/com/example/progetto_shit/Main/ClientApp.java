@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 
 public class ClientApp extends Application {
 
-    private static String clientAddress;
+    public static String clientAddress;
 
     public static void setClientAddress(String address) {
         clientAddress = address;

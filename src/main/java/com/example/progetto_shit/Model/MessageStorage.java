@@ -96,4 +96,18 @@ public class MessageStorage {
             readLock.unlock(); // Rilascio del ReadLock
         }
     }
+
+    private static void appendTo(String filePath, String sender, String replyContent) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
+            writer.newLine();
+            writer.write("Reply from: " + sender);
+            writer.newLine();
+            writer.write(replyContent);
+            writer.newLine();
+            writer.write("-----------------------------------");
+            writer.newLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -97,4 +97,31 @@ public class ClientController {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    private void handleBack() {
+        if (primaryStage == null) {
+            System.err.println("primaryStage is null. Please set it before opening the previous view.");
+            return;
+        }
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/progetto_shit/View/server_view.fxml"));
+            Parent root = loader.load();
+
+            // Ottieni il controller della vista del server (se necessario)
+            ServerController serverController = loader.getController();
+            if (serverController != null) {
+                serverController.setPrimaryStage(primaryStage);  // Passa il primaryStage, se necessario
+            }
+
+            // Imposta la nuova scena
+            Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+            primaryStage.setTitle("Server Selection");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("Error loading the server view: " + e.getMessage());
+        }
+    }
 }

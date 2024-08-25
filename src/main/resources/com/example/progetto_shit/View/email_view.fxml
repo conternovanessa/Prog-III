@@ -8,10 +8,11 @@
     <!-- Label che visualizza l'indirizzo email selezionato -->
     <Label fx:id="clientLabel" layoutX="20.0" layoutY="20.0" text="Emails for: [Client Name]" prefWidth="560.0" />
 
-    <!-- Sezione per i pulsanti "Torna Indietro" e "Nuova Mail" -->
+    <!-- Sezione per i pulsanti "Torna Indietro", "Nuova Mail" e "Refresh" -->
     <HBox layoutX="20.0" layoutY="50.0" spacing="10">
         <Button fx:id="backButton" text="←" onAction="#handleBack" />
         <Button fx:id="newMailButton" text="+" onAction="#handleNewMail" />
+        <Button fx:id="refreshButton" text="⟳" onAction="#handleRefresh" />
     </HBox>
 
     <!-- Sezione per visualizzare la lista delle email ricevute -->
