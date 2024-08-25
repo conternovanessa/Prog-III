@@ -22,10 +22,6 @@ public class MessageStorage {
     }
 
     public static void saveMessage(String sender, String recipient, String subject, String body, boolean isReply) {
-        if (sender == null || recipient == null || subject == null || body == null) {
-            throw new IllegalArgumentException("Parameters cannot be null");
-        }
-
         writeLock.lock(); // Acquisizione del WriteLock
         try {
             String clientDirPath = BASE_DIR + recipient;
@@ -63,6 +59,7 @@ public class MessageStorage {
             writeLock.unlock(); // Rilascio del WriteLock
         }
     }
+
 
 
     public static List<String> getMessagesForRecipient(String recipient) {
