@@ -47,7 +47,6 @@ public class NewMailHandler extends Application {
         dialog.initModality(Modality.APPLICATION_MODAL);
         dialog.setTitle("Nuova Email");
 
-        // Usa un TextArea per inserire più destinatari separati da virgole
         TextArea recipientArea = new TextArea();
         recipientArea.setPromptText("Inserisci gli indirizzi email dei destinatari separati da virgola");
 
@@ -94,8 +93,7 @@ public class NewMailHandler extends Application {
                 }
 
                 // Invio l'email a MessageStorage includendo il mittente (dinamico)
-
-                MessageStorage.saveMessage(clientAddress, currentSender, recipient, subject, false);
+                MessageStorage.saveMessage(currentSender, recipient, subject, body, false);
             }
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -113,4 +111,5 @@ public class NewMailHandler extends Application {
         dialog.setScene(dialogScene);
         dialog.showAndWait();
     }
+
 }
