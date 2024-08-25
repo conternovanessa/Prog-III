@@ -35,32 +35,42 @@ public class MessageStorage {
             String fileName = sanitizedSender + "_" + sanitizedSubject + ".txt";
             String filePath = clientDirPath + "/" + fileName;
 
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
-                if (isReply) {
-                    // Aggiunge la risposta al file esistente
-                    writer.newLine();
-                    writer.write("Reply from: " + sender);
-                    writer.newLine();
-                    writer.write(body);
-                    writer.newLine();
-                } else {
-                    // Scrive un nuovo messaggio
+            if (isReply) {
+                // Appende la risposta al file esistente e aggiunge il messaggio originale
+                appendTo(filePath, sender, body);
+            } else {
+                // Scrive un nuovo messaggio
+                try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
                     writer.write("From: " + sender);
                     writer.newLine();
                     writer.write("Subject: " + subject);
                     writer.newLine();
                     writer.write(body);
                     writer.newLine();
+                    writer.write("-----------------------------------");
+                    writer.newLine();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
             }
         } finally {
             writeLock.unlock(); // Rilascio del WriteLock
         }
     }
 
-
+    private static void appendTo(String filePath, String sender, String replyContent) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
+            writer.newLine();
+            writer.write("Reply from: " + sender);
+            writer.newLine();
+            writer.write(replyContent);
+            writer.newLine();
+            writer.write("-----------------------------------");
+            writer.newLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static List<String> getMessagesForRecipient(String recipient) {
         readLock.lock(); // Acquisizione del ReadLock
@@ -96,20 +106,6 @@ public class MessageStorage {
             return messages;
         } finally {
             readLock.unlock(); // Rilascio del ReadLock
-        }
-    }
-
-    private static void appendTo(String filePath, String sender, String replyContent) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
-            writer.newLine();
-            writer.write("Reply from: " + sender);
-            writer.newLine();
-            writer.write(replyContent);
-            writer.newLine();
-            writer.write("-----------------------------------");
-            writer.newLine();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 }

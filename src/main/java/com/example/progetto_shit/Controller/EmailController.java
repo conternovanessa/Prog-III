@@ -108,6 +108,7 @@ public class EmailController implements EmailObserver {
         });
     }
 
+
     private void showEmailDetailView(String email) {
         String[] emailLines = email.split("\n", 3);
         String sender = emailLines.length > 0 ? emailLines[0].replace("From: ", "") : "Unknown Sender";
