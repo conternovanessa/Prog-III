@@ -23,6 +23,9 @@ public class Server extends Application {
         try {
             primaryStage.setTitle("Mail Server");
 
+            primaryStage.setWidth(600);  // Larghezza della finestra
+            primaryStage.setHeight(400); // Altezza della finestra
+
             // Carica il file FXML e ottieni la root della scena
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/progetto_shit/View/server_view.fxml"));
             Parent root = loader.load();

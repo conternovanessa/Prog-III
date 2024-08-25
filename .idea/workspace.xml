@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0a55273f-6121-464b-90af-ee02c84e2271" name="Changes" comment="ora compaiono le mail" />
+    <list default="true" id="0a55273f-6121-464b-90af-ee02c84e2271" name="Changes" comment="ora girano quasi tutte da aggiungere solo qualche asto le cose per il reply e per il forward" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -105,7 +105,7 @@
       <workItem from="1724312622537" duration="5690000" />
       <workItem from="1724321252968" duration="938000" />
       <workItem from="1724399353160" duration="2926000" />
-      <workItem from="1724484952336" duration="18401000" />
+      <workItem from="1724484952336" duration="18593000" />
     </task>
     <task id="LOCAL-00002" summary="ora funzionano molte cose bisogna solo mettere le mail da quache parte (creazione  nuovo file letto poi da un package?)">
       <option name="closed" value="true" />
@@ -267,7 +267,15 @@
       <option name="project" value="LOCAL" />
       <updated>1724507529258</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="ora girano quasi tutte da aggiungere solo qualche asto le cose per il reply e per il forward">
+      <option name="closed" value="true" />
+      <created>1724507711781</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1724507711781</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -304,7 +312,8 @@
     <MESSAGE value="ora compaiono le mail" />
     <MESSAGE value="Changes by user" />
     <MESSAGE value="Changes by filippo" />
-    <option name="LAST_COMMIT_MESSAGE" value="Changes by filippo" />
+    <MESSAGE value="ora girano quasi tutte da aggiungere solo qualche asto le cose per il reply e per il forward" />
+    <option name="LAST_COMMIT_MESSAGE" value="ora girano quasi tutte da aggiungere solo qualche asto le cose per il reply e per il forward" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

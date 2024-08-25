@@ -38,6 +38,10 @@ public class ClientApp extends Application {
         setClientAddress(address);
 
         try {
+            primaryStage.setWidth(600);  // Larghezza della finestra
+            primaryStage.setHeight(400); // Altezza della finestra
+
+
             FXMLLoader loader = new FXMLLoader(ClientApp.class.getResource("/com/example/progetto_shit/View/client_view.fxml"));
             Parent root = loader.load();
 
