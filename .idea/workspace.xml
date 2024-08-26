@@ -4,11 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0a55273f-6121-464b-90af-ee02c84e2271" name="Changes" comment="versone con invio mail funzionante">
+    <list default="true" id="0a55273f-6121-464b-90af-ee02c84e2271" name="Changes" comment="comparsa dell'avvenuto invio">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/aggiorna.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/nuova.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/torna_indietro.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Controller/EmailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Controller/EmailController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Controller/ReplyHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Controller/ReplyHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Model/MessageStorage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Model/MessageStorage.java" afterDir="false" />
     </list>
     <list id="a8ad7faa-41cc-4c1c-9762-43259e5d044c" name="Changes by dfabi" comment="" />
     <list id="e8c31100-440d-4de3-9108-d18ebe2ff760" name="Changes by user" comment="" />
@@ -81,6 +82,9 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\vanes\IdeaProjects\Prog-III\src\main\resources" />
+      <recent name="C:\Users\vanes\IdeaProjects\Prog-III\src\main\resources\images" />
+      <recent name="C:\Users\vanes\IdeaProjects\Prog-III\src\main\resources\com\example\progetto_shit\View\images" />
       <recent name="C:\Users\vanes\IdeaProjects\Prog-III\src\main\resources\com\example\progetto_shit\View" />
     </key>
   </component>
@@ -116,6 +120,7 @@
       <workItem from="1724399353160" duration="2926000" />
       <workItem from="1724484952336" duration="18593000" />
       <workItem from="1724570093845" duration="4268000" />
+      <workItem from="1724656833115" duration="1728000" />
     </task>
     <task id="LOCAL-00002" summary="ora funzionano molte cose bisogna solo mettere le mail da quache parte (creazione  nuovo file letto poi da un package?)">
       <option name="closed" value="true" />

@@ -108,7 +108,6 @@ public class EmailController implements EmailObserver {
         });
     }
 
-
     private void showEmailDetailView(String email) {
         String[] emailLines = email.split("\n", 3);
         String sender = emailLines.length > 0 ? emailLines[0].replace("From: ", "") : "Unknown Sender";
@@ -129,7 +128,11 @@ public class EmailController implements EmailObserver {
         Button forwardButton = new Button("Forward");
         forwardButton.setOnAction(event -> handleForward(email));
 
-        VBox detailBox = new VBox(10, senderLabel, subjectLabel, bodyArea, replyButton, forwardButton);
+        // Aggiungi il pulsante "Elimina"
+        Button deleteButton = new Button("Delete");
+        deleteButton.setOnAction(event -> handleDelete(email));
+
+        VBox detailBox = new VBox(10, senderLabel, subjectLabel, bodyArea, replyButton, forwardButton, deleteButton);
         emailDetailStage.setScene(new Scene(detailBox, 400, 300));
         emailDetailStage.show();
     }
@@ -153,6 +156,27 @@ public class EmailController implements EmailObserver {
             forwardHandler.forwardEmail(email);
         } else {
             showAlert("Selection Missing", "Please select an email to forward.");
+        }
+    }
+
+    private void handleDelete(String email) {
+        if (email != null) {
+            String[] emailLines = email.split("\n", 3);
+            String sender = emailLines.length > 0 ? emailLines[0].replace("From: ", "") : null;
+            String subject = emailLines.length > 1 ? emailLines[1].replace("Subject: ", "") : null;
+
+            if (sender != null && subject != null) {
+                boolean success = MessageStorage.deleteMessage(client, sender, subject);
+                if (success) {
+                    loadEmails(); // Ricarica la lista delle email
+                } else {
+                    showAlert("Error", "Failed to delete the email.");
+                }
+            } else {
+                showAlert("Error", "Invalid email format.");
+            }
+        } else {
+            showAlert("Selection Missing", "Please select an email to delete.");
         }
     }
 

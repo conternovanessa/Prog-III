@@ -79,33 +79,52 @@ public class MessageStorage {
             String clientDirPath = BASE_DIR + recipient;
             File clientDir = new File(clientDirPath);
 
-            if (!clientDir.exists() || !clientDir.isDirectory()) {
-                System.out.println("Directory not found: " + clientDirPath);
-                return messages;
-            }
+            if (clientDir.exists() && clientDir.isDirectory()) {
+                File[] messageFiles = clientDir.listFiles((dir, name) -> name.endsWith(".txt"));
 
-            File[] emailFiles = clientDir.listFiles((dir, name) -> name.endsWith(".txt"));
-            if (emailFiles != null) {
-                for (File emailFile : emailFiles) {
-                    System.out.println("Reading file: " + emailFile.getPath());
-                    try (BufferedReader reader = new BufferedReader(new FileReader(emailFile))) {
-                        StringBuilder message = new StringBuilder();
-                        String line;
-                        while ((line = reader.readLine()) != null) {
-                            message.append(line).append("\n");
+                if (messageFiles != null) {
+                    for (File file : messageFiles) {
+                        StringBuilder emailContent = new StringBuilder();
+                        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+                            String line;
+                            while ((line = reader.readLine()) != null) {
+                                emailContent.append(line).append("\n");
+                            }
+                            messages.add(emailContent.toString());
+                        } catch (IOException e) {
+                            e.printStackTrace();
                         }
-                        messages.add(message.toString());
-                    } catch (IOException e) {
-                        e.printStackTrace();
                     }
                 }
-            } else {
-                System.out.println("No email files found in directory: " + clientDirPath);
             }
 
             return messages;
         } finally {
             readLock.unlock(); // Rilascio del ReadLock
+        }
+    }
+
+    public static boolean deleteMessage(String recipient, String sender, String subject) {
+        writeLock.lock(); // Acquisizione del WriteLock
+        try {
+            String clientDirPath = BASE_DIR + recipient;
+
+            // Sanitizza i nomi
+            String sanitizedSender = sender.replaceAll("[^a-zA-Z0-9@.-]", "_");
+            String sanitizedSubject = subject.replaceAll("[^a-zA-Z0-9.-]", "_");
+
+            // Costruisci il percorso del file
+            String fileName = sanitizedSender + "_" + sanitizedSubject + ".txt";
+            File emailFile = new File(clientDirPath, fileName);
+
+            if (emailFile.exists()) {
+                return emailFile.delete();
+            } else {
+                System.out.println("Email file not found: " + emailFile.getPath());
+                return false;
+            }
+        } finally {
+            writeLock.unlock(); // Rilascio del WriteLock
         }
     }
 }
