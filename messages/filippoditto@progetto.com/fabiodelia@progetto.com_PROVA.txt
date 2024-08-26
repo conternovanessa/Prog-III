@@ -1,4 +1,5 @@
 From: fabiodelia@progetto.com
+To: filippoditto@progetto.com
 Subject: PROVA
-Email da Fabio a Filippo.
+Body: Email da Fabio.
 -----------------------------------

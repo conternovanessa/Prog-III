@@ -1,102 +1,101 @@
 package com.example.progetto_shit.Controller;
 
 import com.example.progetto_shit.Model.MessageStorage;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class ReplyHandler {
 
-    private String senderAddress;
-    private String clientAddress;
-    private String originalSubject;
-    private Runnable onReplySaved;
-    private Stage primaryStage; // Reference to the primary stage
+    // Lista dei destinatari validi
+    private static final List<String> VALID_RECIPIENTS = Arrays.asList(
+            "fabiodelia@progetto.com",
+            "filippoditto@progetto.com",
+            "vanessaconterno@progetto.com"
+    );
 
-    public ReplyHandler(String senderAddress, String clientAddress, String originalSubject, Runnable onReplySaved) {
-        this.senderAddress = senderAddress;
+    private String clientAddress; // Email del mittente
+    private String originalSender; // Email del mittente dell'email a cui si risponde
+    private String originalSubject; // Oggetto dell'email a cui si risponde
+
+    public ReplyHandler(String clientAddress, String originalSender, String originalSubject) {
         this.clientAddress = clientAddress;
+        this.originalSender = originalSender;
         this.originalSubject = originalSubject;
-        this.onReplySaved = onReplySaved;
-        this.primaryStage = primaryStage;
     }
 
     public void replyToEmail() {
-        // Create a new stage for the reply dialog
-        Stage replyStage = new Stage();
-        replyStage.initModality(Modality.APPLICATION_MODAL);
-        replyStage.initOwner(primaryStage); // Set the owner of the dialog
+        Stage dialog = new Stage();
+        dialog.initModality(Modality.APPLICATION_MODAL);
+        dialog.setTitle("Rispondi Email");
 
-        replyStage.setTitle("Reply Email");
-
-        // Create and configure the UI elements
-        TextField subjectField = new TextField("RE: " + originalSubject);
-        subjectField.setPromptText("Subject");
+        TextField subjectField = new TextField();
+        subjectField.setPromptText("Oggetto");
+        subjectField.setText("Re: " + originalSubject);
 
         TextArea bodyArea = new TextArea();
-        bodyArea.setPromptText("Reply Body");
+        bodyArea.setPromptText("Corpo");
         bodyArea.setPrefRowCount(5);
 
-        Button sendButton = new Button("Send");
-        Button cancelButton = new Button("Cancel");
-
         VBox vbox = new VBox(10,
-                new Label("To: " + senderAddress),
-                new Label("Subject:"), subjectField,
-                new Label("Body:"), bodyArea,
-                sendButton, cancelButton);
+                new javafx.scene.control.Label("Oggetto:"), subjectField,
+                new javafx.scene.control.Label("Corpo:"), bodyArea);
 
-        // Configure the send button action
+        javafx.scene.control.Button sendButton = new javafx.scene.control.Button("Invia");
+        javafx.scene.control.Button cancelButton = new javafx.scene.control.Button("Annulla");
+
         sendButton.setOnAction(e -> {
             String subject = subjectField.getText();
             String body = bodyArea.getText();
 
-            if (body.isEmpty()) {
+            if (subject.isEmpty() || body.isEmpty()) {
                 Alert errorAlert = new Alert(Alert.AlertType.ERROR);
-                errorAlert.setTitle("Error");
-                errorAlert.setHeaderText("Reply Body Missing");
-                errorAlert.setContentText("Please enter a reply body.");
+                errorAlert.setTitle("Errore");
+                errorAlert.setHeaderText("Dettagli mancanti");
+                errorAlert.setContentText("Per favore, compila tutti i campi.");
                 errorAlert.showAndWait();
                 return;
             }
 
-            // Save the message
-            MessageStorage.saveMessage(
-                    clientAddress, // The sender of the reply (original recipient)
-                    senderAddress, // The recipient of the reply (original sender)
-                    subject, // Subject for the reply
-                    body, // The reply content
-                    true // Indicates this is a reply
-            );
-
-            // Notify the controller to update the UI
-            if (onReplySaved != null) {
-                onReplySaved.run();
+            // Controlla se il mittente della risposta è un destinatario valido
+            if (!VALID_RECIPIENTS.contains(originalSender)) {
+                Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+                errorAlert.setTitle("Errore");
+                errorAlert.setHeaderText("Indirizzo email non valido");
+                errorAlert.setContentText("Il mittente dell'email a cui si sta rispondendo non è valido.");
+                errorAlert.showAndWait();
+                return;
             }
 
-            // Close the dialog
-            replyStage.close();
+            // Rispondi all'email salvandola tramite MessageStorage
+            MessageStorage.saveMessage(
+                    clientAddress,     // Mittente dell'email
+                    Arrays.asList(originalSender), // Lista dei destinatari (solo il mittente originale)
+                    subject,           // Oggetto dell'email
+                    body,              // Corpo dell'email
+                    true               // È una risposta
+            );
 
-            // Show confirmation alert
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Reply Sent");
+            alert.setTitle("Risposta Email");
             alert.setHeaderText(null);
-            alert.setContentText("Reply sent to: " + senderAddress + "\nSubject: " + subject + "\nBody: " + body);
+            alert.setContentText("Email inviata da: " + clientAddress + "\nA: " + originalSender + "\nOggetto: " + subject);
             alert.showAndWait();
+            dialog.close();
         });
 
-        // Configure the cancel button action
-        cancelButton.setOnAction(e -> replyStage.close());
+        cancelButton.setOnAction(e -> dialog.close());
 
-        // Set up the scene and stage
-        Scene scene = new Scene(vbox, 400, 300);
-        replyStage.setScene(scene);
-        replyStage.showAndWait();
+        vbox.getChildren().addAll(sendButton, cancelButton);
+        Scene dialogScene = new Scene(vbox, 400, 300);
+        dialog.setScene(dialogScene);
+        dialog.showAndWait();
     }
 }

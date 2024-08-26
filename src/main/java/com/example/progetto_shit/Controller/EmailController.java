@@ -12,6 +12,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 public class EmailController implements EmailObserver {
@@ -91,8 +92,9 @@ public class EmailController implements EmailObserver {
         Platform.runLater(() -> {
             emailBox.getChildren().clear();
             for (String email : emails) {
-                String[] emailLines = email.split("\n", 3);
-                if (emailLines.length >= 2) {
+                // Cambia il delimitatore e il formato se necessario
+                String[] emailLines = email.split("\n", 4);
+                if (emailLines.length >= 3) {
                     String sender = emailLines[0].replace("From: ", "");
                     String subject = emailLines[1].replace("Subject: ", "");
                     String buttonText = sender + " - " + subject;
@@ -109,15 +111,18 @@ public class EmailController implements EmailObserver {
     }
 
     private void showEmailDetailView(String email) {
-        String[] emailLines = email.split("\n", 3);
+        // Modifica la separazione del corpo dell'email se necessario
+        String[] emailLines = email.split("\n", 4);
         String sender = emailLines.length > 0 ? emailLines[0].replace("From: ", "") : "Unknown Sender";
-        String subject = emailLines.length > 1 ? emailLines[1].replace("Subject: ", "") : "No Subject";
-        String body = emailLines.length > 2 ? emailLines[2] : "No Content";
+        String receiver = emailLines.length > 1 ? emailLines[1].replace("To: ", "") : "Unknown Receiver";
+        String subject = emailLines.length > 2 ? emailLines[2].replace("Subject: ", "") : "No Subject";
+        String body = emailLines.length > 3 ? emailLines[3].replace ("Body: ", "") : "No Body";
 
         Stage emailDetailStage = new Stage();
         emailDetailStage.setTitle("Email Details");
 
         Label senderLabel = new Label("From: " + sender);
+        Label receiverLabel = new Label("To: " + receiver);
         Label subjectLabel = new Label("Subject: " + subject);
         TextArea bodyArea = new TextArea(body);
         bodyArea.setWrapText(true);
@@ -127,12 +132,10 @@ public class EmailController implements EmailObserver {
         replyButton.setOnAction(event -> handleReply(email));
         Button forwardButton = new Button("Forward");
         forwardButton.setOnAction(event -> handleForward(email));
-
-        // Aggiungi il pulsante "Elimina"
         Button deleteButton = new Button("Delete");
         deleteButton.setOnAction(event -> handleDelete(email));
 
-        VBox detailBox = new VBox(10, senderLabel, subjectLabel, bodyArea, replyButton, forwardButton, deleteButton);
+        VBox detailBox = new VBox(10, senderLabel, receiverLabel, subjectLabel, bodyArea, replyButton, forwardButton, deleteButton);
         emailDetailStage.setScene(new Scene(detailBox, 400, 300));
         emailDetailStage.show();
     }
@@ -143,7 +146,7 @@ public class EmailController implements EmailObserver {
             String sender = emailLines.length > 0 ? emailLines[0].replace("From: ", "") : "Unknown Sender";
             String subject = emailLines.length > 1 ? emailLines[1].replace("Subject: ", "") : "Unknown Subject";
 
-            ReplyHandler replyHandler = new ReplyHandler(sender, client, subject, this::loadEmails);
+            ReplyHandler replyHandler = new ReplyHandler(sender, client, subject);
             replyHandler.replyToEmail();
         } else {
             showAlert("Selection Missing", "Please select an email to reply to.");

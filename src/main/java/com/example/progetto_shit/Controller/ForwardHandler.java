@@ -5,12 +5,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ForwardHandler {
 
@@ -55,15 +57,15 @@ public class ForwardHandler {
                 new javafx.scene.control.Label("Oggetto:"), subjectField,
                 new javafx.scene.control.Label("Corpo:"), bodyArea);
 
-        javafx.scene.control.Button sendButton = new javafx.scene.control.Button("Invia");
-        javafx.scene.control.Button cancelButton = new javafx.scene.control.Button("Annulla");
+        Button sendButton = new Button("Invia");
+        Button cancelButton = new Button("Annulla");
 
         sendButton.setOnAction(e -> {
-            String recipients = recipientArea.getText();
+            String recipientsText = recipientArea.getText();
             String subject = subjectField.getText();
             String body = bodyArea.getText();
 
-            if (recipients.isEmpty() || subject.isEmpty() || body.isEmpty()) {
+            if (recipientsText.isEmpty() || subject.isEmpty() || body.isEmpty()) {
                 Alert errorAlert = new Alert(Alert.AlertType.ERROR);
                 errorAlert.setTitle("Errore");
                 errorAlert.setHeaderText("Dettagli mancanti");
@@ -73,9 +75,11 @@ public class ForwardHandler {
             }
 
             // Dividi i destinatari usando la virgola come separatore e rimuovi eventuali spazi
-            String[] recipientArray = recipients.split(",");
-            for (String recipient : recipientArray) {
-                recipient = recipient.trim(); // Rimuove gli spazi in eccesso
+            List<String> recipientList = Arrays.stream(recipientsText.split(","))
+                    .map(String::trim)
+                    .collect(Collectors.toList());
+
+            for (String recipient : recipientList) {
                 if (!VALID_RECIPIENTS.contains(recipient)) {
                     Alert errorAlert = new Alert(Alert.AlertType.ERROR);
                     errorAlert.setTitle("Errore");
@@ -84,18 +88,15 @@ public class ForwardHandler {
                     errorAlert.showAndWait();
                     return;
                 }
-
-                // Genera il nome del file basato sull'email del destinatario e l'oggetto
-                String fileName = recipient + "." + subject.replaceAll("\\s+", "_") + ".mail";
-
-                // Inoltra l'email salvandola tramite MessageStorage
-                MessageStorage.saveMessage(clientAddress, recipient, subject, body, false);
             }
+
+            // Inoltra l'email salvandola tramite MessageStorage
+            MessageStorage.saveMessage(clientAddress, recipientList, subject, body, false);
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Inoltra Email");
             alert.setHeaderText(null);
-            alert.setContentText("Email inoltrata da: " + clientAddress + "\nA: " + recipients + "\nOggetto: " + subject);
+            alert.setContentText("Email inoltrata da: " + clientAddress + "\nA: " + String.join(", ", recipientList) + "\nOggetto: " + subject);
             alert.showAndWait();
             dialog.close();
         });

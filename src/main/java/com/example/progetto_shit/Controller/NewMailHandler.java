@@ -7,12 +7,14 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.example.progetto_shit.Main.ClientApp.clientAddress;
 
@@ -62,15 +64,15 @@ public class NewMailHandler extends Application {
                 new Label("Oggetto:"), subjectField,
                 new Label("Corpo:"), bodyArea);
 
-        javafx.scene.control.Button sendButton = new javafx.scene.control.Button("Invia");
-        javafx.scene.control.Button cancelButton = new javafx.scene.control.Button("Annulla");
+        Button sendButton = new Button("Invia");
+        Button cancelButton = new Button("Annulla");
 
         sendButton.setOnAction(e -> {
-            String recipients = recipientArea.getText();
+            String recipientsText = recipientArea.getText();
             String subject = subjectField.getText();
             String body = bodyArea.getText();
 
-            if (recipients.isEmpty() || subject.isEmpty() || body.isEmpty()) {
+            if (recipientsText.isEmpty() || subject.isEmpty() || body.isEmpty()) {
                 Alert errorAlert = new Alert(Alert.AlertType.ERROR);
                 errorAlert.setTitle("Errore");
                 errorAlert.setHeaderText("Dettagli mancanti");
@@ -80,9 +82,11 @@ public class NewMailHandler extends Application {
             }
 
             // Dividi i destinatari usando la virgola come separatore e rimuovi eventuali spazi
-            String[] recipientArray = recipients.split(",");
-            for (String recipient : recipientArray) {
-                recipient = recipient.trim(); // Rimuove gli spazi in eccesso
+            List<String> recipientList = Arrays.stream(recipientsText.split(","))
+                    .map(String::trim)
+                    .collect(Collectors.toList());
+
+            for (String recipient : recipientList) {
                 if (!VALID_RECIPIENTS.contains(recipient)) {
                     Alert errorAlert = new Alert(Alert.AlertType.ERROR);
                     errorAlert.setTitle("Errore");
@@ -91,15 +95,15 @@ public class NewMailHandler extends Application {
                     errorAlert.showAndWait();
                     return;
                 }
-
-                // Invio l'email a MessageStorage includendo il mittente (dinamico)
-                MessageStorage.saveMessage(currentSender, recipient, subject, body, false);
             }
+
+            // Invio l'email a MessageStorage includendo la lista dei destinatari
+            MessageStorage.saveMessage(currentSender, recipientList, subject, body, false);
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Nuova Mail");
             alert.setHeaderText(null);
-            alert.setContentText("Mail inviata da: " + currentSender + "\nA: " + recipients + "\nOggetto: " + subject + "\nCorpo: " + body);
+            alert.setContentText("Mail inviata da: " + currentSender + "\nA: " + String.join(", ", recipientList) + "\nOggetto: " + subject + "\nCorpo: " + body);
             alert.showAndWait();
             dialog.close();
         });

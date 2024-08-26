@@ -21,10 +21,17 @@ public class MessageStorage {
         }
     }
 
-    public static void saveMessage(String sender, String recipient, String subject, String body, boolean isReply) {
+    public static void saveMessage(String sender, List<String> recipients, String subject, String body, boolean isReply) {
         writeLock.lock(); // Acquisizione del WriteLock
         try {
-            String clientDirPath = BASE_DIR + recipient;
+            // Controlla se ci sono destinatari
+            if (recipients.isEmpty()) {
+                throw new IllegalArgumentException("La lista dei destinatari non può essere vuota.");
+            }
+
+            // Utilizza il primo destinatario per determinare la directory
+            String primaryRecipient = recipients.get(0);
+            String clientDirPath = BASE_DIR + primaryRecipient;
             ensureDirectoryExists(clientDirPath);
 
             // Sanitizzazione dei nomi per evitare caratteri non validi
@@ -36,16 +43,40 @@ public class MessageStorage {
             String filePath = clientDirPath + "/" + fileName;
 
             if (isReply) {
-                // Appende la risposta al file esistente e aggiunge il messaggio originale
-                appendTo(filePath, sender, body);
+                // Crea un nuovo file per la risposta
+                try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+                    // Recupera il contenuto dell'email originale
+                    String originalEmailContent = getOriginalEmailContent(primaryRecipient, sanitizedSender, sanitizedSubject);
+
+                    // Scrive il contenuto dell'email originale
+                    if (originalEmailContent != null) {
+                        writer.write(originalEmailContent);
+                        writer.newLine();
+                    }
+
+                    // Aggiunge il messaggio di risposta
+                    writer.write("Reply from: " + sender);
+                    writer.newLine();
+                    writer.write(body);
+                    writer.newLine();
+                    writer.write("-----------------------------------");
+                    writer.newLine();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             } else {
                 // Scrive un nuovo messaggio
                 try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
                     writer.write("From: " + sender);
                     writer.newLine();
+
+                    // Aggiunge i destinatari nel campo "To:"
+                    writer.write("To: " + String.join(", ", recipients));
+                    writer.newLine();
+
                     writer.write("Subject: " + subject);
                     writer.newLine();
-                    writer.write(body);
+                    writer.write("Body: " + body);
                     writer.newLine();
                     writer.write("-----------------------------------");
                     writer.newLine();
@@ -58,17 +89,38 @@ public class MessageStorage {
         }
     }
 
-    private static void appendTo(String filePath, String sender, String replyContent) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
-            writer.newLine();
-            writer.write("Reply from: " + sender);
-            writer.newLine();
-            writer.write(replyContent);
-            writer.newLine();
-            writer.write("-----------------------------------");
-            writer.newLine();
-        } catch (IOException e) {
-            e.printStackTrace();
+    private static String getOriginalEmailContent(String recipient, String sender, String subject) {
+        readLock.lock(); // Acquisizione del ReadLock
+        try {
+            String clientDirPath = BASE_DIR + recipient;
+            File clientDir = new File(clientDirPath);
+
+            if (clientDir.exists() && clientDir.isDirectory()) {
+                File[] messageFiles = clientDir.listFiles((dir, name) -> name.endsWith(".txt"));
+
+                if (messageFiles != null) {
+                    for (File file : messageFiles) {
+                        // Controlla se il file corrisponde al mittente e all'oggetto specificato
+                        String fileName = file.getName();
+                        String sanitizedSubject = subject.replaceAll("[^a-zA-Z0-9.-]", "_");
+                        if (fileName.contains(sanitizedSubject) && fileName.startsWith(sender.replaceAll("[^a-zA-Z0-9@.-]", "_"))) {
+                            StringBuilder emailContent = new StringBuilder();
+                            try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+                                String line;
+                                while ((line = reader.readLine()) != null) {
+                                    emailContent.append(line).append("\n");
+                                }
+                                return emailContent.toString();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }
+            }
+            return null;
+        } finally {
+            readLock.unlock(); // Rilascio del ReadLock
         }
     }
 
