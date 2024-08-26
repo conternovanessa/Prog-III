@@ -57,6 +57,10 @@ public class MessageStorage {
                     // Aggiunge il messaggio di risposta
                     writer.write("Reply from: " + sender);
                     writer.newLine();
+                    writer.write("To: " + primaryRecipient); // Aggiunge il destinatario della risposta
+                    writer.newLine();
+                    writer.write("Subject: " + subject);
+                    writer.newLine();
                     writer.write(body);
                     writer.newLine();
                     writer.write("-----------------------------------");
@@ -89,7 +93,7 @@ public class MessageStorage {
         }
     }
 
-    private static String getOriginalEmailContent(String recipient, String sender, String subject) {
+    public static String getOriginalEmailContent(String recipient, String sender, String subject) {
         readLock.lock(); // Acquisizione del ReadLock
         try {
             String clientDirPath = BASE_DIR + recipient;

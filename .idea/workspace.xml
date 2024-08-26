@@ -4,16 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0a55273f-6121-464b-90af-ee02c84e2271" name="Changes" comment="comparsa dell'avvenuto invio">
+    <list default="true" id="0a55273f-6121-464b-90af-ee02c84e2271" name="Changes" comment="buongiorno vi è il tasto delete che funge con i TO">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/progetto_shit/View/images/Aggiorna.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/progetto_shit/View/images/Elimina.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/progetto_shit/View/images/Inoltra.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/progetto_shit/View/images/NuovaMail.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/progetto_shit/View/images/Rispondi.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/progetto_shit/View/images/TornaIndietro.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages/fabiodelia@progetto.com/vanessaconterno@progetto.com_PROVA.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Controller/EmailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Controller/EmailController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Controller/ForwardHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Controller/ForwardHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Controller/ReplyHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Controller/ReplyHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/progetto_shit/View/client_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/progetto_shit/View/client_view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/progetto_shit/View/email_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/progetto_shit/View/email_view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/images/aggiorna.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/images/nuova.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/images/torna_indietro.jpg" beforeDir="false" />
+    </list>
+    <list id="a8ad7faa-41cc-4c1c-9762-43259e5d044c" name="Changes by dfabi" comment="Changes by dfabi">
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Model/MessageStorage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Model/MessageStorage.java" afterDir="false" />
     </list>
-    <list id="a8ad7faa-41cc-4c1c-9762-43259e5d044c" name="Changes by dfabi" comment="" />
-    <list id="e8c31100-440d-4de3-9108-d18ebe2ff760" name="Changes by user" comment="" />
+    <list id="e8c31100-440d-4de3-9108-d18ebe2ff760" name="Changes by user" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Controller/ReplyHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Controller/ReplyHandler.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -83,9 +94,10 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\vanes\IdeaProjects\Prog-III\src\main\resources" />
-      <recent name="C:\Users\vanes\IdeaProjects\Prog-III\src\main\resources\images" />
       <recent name="C:\Users\vanes\IdeaProjects\Prog-III\src\main\resources\com\example\progetto_shit\View\images" />
+      <recent name="C:\Users\vanes\IdeaProjects\Prog-III\src\main\resources\com\example\progetto_shit\images" />
+      <recent name="C:\Users\vanes\IdeaProjects\Prog-III\src\main\resources\images" />
+      <recent name="C:\Users\vanes\IdeaProjects\Prog-III\src\main\resources" />
       <recent name="C:\Users\vanes\IdeaProjects\Prog-III\src\main\resources\com\example\progetto_shit\View" />
     </key>
   </component>
@@ -315,7 +327,15 @@
       <option name="project" value="LOCAL" />
       <updated>1724577267726</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="buongiorno vi è il tasto delete che funge con i TO">
+      <option name="closed" value="true" />
+      <created>1724663353602</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1724663353602</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -354,9 +374,10 @@
     <MESSAGE value="ora girano quasi tutte da aggiungere solo qualche asto le cose per il reply e per il forward" />
     <MESSAGE value="settato in modo che ogni finestra sia della medesima dimensione" />
     <MESSAGE value="settate le mail di prova" />
-    <MESSAGE value="Changes by dfabi" />
     <MESSAGE value="versone con invio mail funzionante" />
-    <option name="LAST_COMMIT_MESSAGE" value="versone con invio mail funzionante" />
+    <MESSAGE value="buongiorno vi è il tasto delete che funge con i TO" />
+    <MESSAGE value="Changes by dfabi" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changes by dfabi" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

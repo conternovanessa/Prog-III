@@ -3,32 +3,27 @@ package com.example.progetto_shit.Controller;
 import com.example.progetto_shit.Model.MessageStorage;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.Collections;
 
 public class ReplyHandler {
 
-    // Lista dei destinatari validi
-    private static final List<String> VALID_RECIPIENTS = Arrays.asList(
-            "fabiodelia@progetto.com",
-            "filippoditto@progetto.com",
-            "vanessaconterno@progetto.com"
-    );
+    private String clientAddress; // Email del client che risponde
+    private String originalSender; // Email del mittente dell'email originale
+    private String originalSubject; // Oggetto dell'email originale
+    private String originalBody; // Corpo dell'email originale
 
-    private String clientAddress; // Email del mittente
-    private String originalSender; // Email del mittente dell'email a cui si risponde
-    private String originalSubject; // Oggetto dell'email a cui si risponde
-
-    public ReplyHandler(String clientAddress, String originalSender, String originalSubject) {
+    public ReplyHandler(String clientAddress, String originalSender, String originalSubject, String originalBody) {
         this.clientAddress = clientAddress;
         this.originalSender = originalSender;
         this.originalSubject = originalSubject;
+        this.originalBody = originalBody;
     }
 
     public void replyToEmail() {
@@ -43,13 +38,14 @@ public class ReplyHandler {
         TextArea bodyArea = new TextArea();
         bodyArea.setPromptText("Corpo");
         bodyArea.setPrefRowCount(5);
+        bodyArea.setText("=== Messaggio Originale ===\n" + originalBody + "\n\n");
 
         VBox vbox = new VBox(10,
                 new javafx.scene.control.Label("Oggetto:"), subjectField,
                 new javafx.scene.control.Label("Corpo:"), bodyArea);
 
-        javafx.scene.control.Button sendButton = new javafx.scene.control.Button("Invia");
-        javafx.scene.control.Button cancelButton = new javafx.scene.control.Button("Annulla");
+        Button sendButton = new Button("Invia");
+        Button cancelButton = new Button("Annulla");
 
         sendButton.setOnAction(e -> {
             String subject = subjectField.getText();
@@ -64,31 +60,30 @@ public class ReplyHandler {
                 return;
             }
 
-            // Controlla se il mittente della risposta è un destinatario valido
-            if (!VALID_RECIPIENTS.contains(originalSender)) {
+            // Salva la risposta invertendo mittente e destinatario
+            try {
+                MessageStorage.saveMessage(
+                        clientAddress, // Mittente della risposta
+                        Collections.singletonList(originalSender), // Il destinatario è il mittente originale
+                        subject, // Oggetto della risposta
+                        body, // Corpo della risposta
+                        true // Indica che è una risposta
+                );
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Risposta Email");
+                alert.setHeaderText(null);
+                alert.setContentText("Email inviata da: " + clientAddress + "\nA: " + originalSender + "\nOggetto: " + subject);
+                alert.showAndWait();
+                dialog.close();
+
+            } catch (Exception ex) {
                 Alert errorAlert = new Alert(Alert.AlertType.ERROR);
                 errorAlert.setTitle("Errore");
-                errorAlert.setHeaderText("Indirizzo email non valido");
-                errorAlert.setContentText("Il mittente dell'email a cui si sta rispondendo non è valido.");
+                errorAlert.setHeaderText("Errore di Salvataggio");
+                errorAlert.setContentText("Non è stato possibile salvare la risposta. Errore: " + ex.getMessage());
                 errorAlert.showAndWait();
-                return;
             }
-
-            // Rispondi all'email salvandola tramite MessageStorage
-            MessageStorage.saveMessage(
-                    clientAddress,     // Mittente dell'email
-                    Arrays.asList(originalSender), // Lista dei destinatari (solo il mittente originale)
-                    subject,           // Oggetto dell'email
-                    body,              // Corpo dell'email
-                    true               // È una risposta
-            );
-
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Risposta Email");
-            alert.setHeaderText(null);
-            alert.setContentText("Email inviata da: " + clientAddress + "\nA: " + originalSender + "\nOggetto: " + subject);
-            alert.showAndWait();
-            dialog.close();
         });
 
         cancelButton.setOnAction(e -> dialog.close());

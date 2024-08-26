@@ -145,13 +145,16 @@ public class EmailController implements EmailObserver {
             String[] emailLines = email.split("\n", 3);
             String sender = emailLines.length > 0 ? emailLines[0].replace("From: ", "") : "Unknown Sender";
             String subject = emailLines.length > 1 ? emailLines[1].replace("Subject: ", "") : "Unknown Subject";
+            String body = emailLines.length > 2 ? emailLines[2] : "No Content";
 
-            ReplyHandler replyHandler = new ReplyHandler(sender, client, subject);
+            // Passa anche il corpo dell'email originale al ReplyHandler
+            ReplyHandler replyHandler = new ReplyHandler(client, sender, subject, body);
             replyHandler.replyToEmail();
         } else {
             showAlert("Selection Missing", "Please select an email to reply to.");
         }
     }
+
 
     private void handleForward(String email) {
         if (email != null) {
