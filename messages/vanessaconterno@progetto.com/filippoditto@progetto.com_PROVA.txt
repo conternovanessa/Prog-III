@@ -4,3 +4,10 @@ Subject: PROVA
 Body: Email da filippo.
 
 -----------------------------------
+From: filippoditto@progetto.com
+To: vanessaconterno@progetto.com
+Subject: PROVA
+Body: Email da Fabio.
+
+Hola
+-----------------------------------

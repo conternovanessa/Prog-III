@@ -2,86 +2,94 @@ package com.example.progetto_shit.Controller;
 
 import com.example.progetto_shit.Model.MessageStorage;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import java.util.Collections;
-
+import java.util.Arrays;
+import java.util.List;
 public class ReplyHandler {
+    private String clientAddress;
+    private String originalSender;
+    private String originalReceivers;
+    private String originalSubject;
+    private String originalBody;
 
-    private String clientAddress; // Email del client che risponde
-    private String originalSender; // Email del mittente dell'email originale
-    private String originalSubject; // Oggetto dell'email originale
-    private String originalBody; // Corpo dell'email originale
+    public ReplyHandler(String clientAddress, String originalSender, String originalSubject, String originalBody, List<String> recipients) {
+        this(clientAddress, originalSender, "", originalSubject, originalBody);
+    }
 
-    public ReplyHandler(String clientAddress, String originalSender, String originalSubject, String originalBody) {
+    public ReplyHandler(String clientAddress, String originalSender, String originalReceivers, String originalSubject, String originalBody) {
         this.clientAddress = clientAddress;
         this.originalSender = originalSender;
+        this.originalReceivers = originalReceivers;
         this.originalSubject = originalSubject;
         this.originalBody = originalBody;
     }
 
-    public void replyToEmail() {
+    public void replyToEmail(boolean replyAll) {
         Stage dialog = new Stage();
         dialog.initModality(Modality.APPLICATION_MODAL);
-        dialog.setTitle("Rispondi Email");
+        dialog.setTitle(replyAll ? "Reply All" : "Reply");
+
+        TextField toField = new TextField();
+        toField.setPromptText("To");
+        toField.setText(replyAll ? originalSender + ", " + originalReceivers : originalSender);
 
         TextField subjectField = new TextField();
-        subjectField.setPromptText("Oggetto");
+        subjectField.setPromptText("Subject");
         subjectField.setText("Re: " + originalSubject);
 
         TextArea bodyArea = new TextArea();
-        bodyArea.setPromptText("Corpo");
-        bodyArea.setPrefRowCount(5);
-        bodyArea.setText("=== Messaggio Originale ===\n" + originalBody + "\n\n");
+        bodyArea.setPromptText("Body");
+        bodyArea.setPrefRowCount(10);
+        bodyArea.setText("\n\n----- Original Message -----\n" + originalBody);
 
         VBox vbox = new VBox(10,
-                new javafx.scene.control.Label("Oggetto:"), subjectField,
-                new javafx.scene.control.Label("Corpo:"), bodyArea);
+                new Label("To:"), toField,
+                new Label("Subject:"), subjectField,
+                new Label("Body:"), bodyArea);
 
-        Button sendButton = new Button("Invia");
-        Button cancelButton = new Button("Annulla");
+        Button sendButton = new Button("Send");
+        Button cancelButton = new Button("Cancel");
 
         sendButton.setOnAction(e -> {
+            String to = toField.getText();
             String subject = subjectField.getText();
             String body = bodyArea.getText();
 
-            if (subject.isEmpty() || body.isEmpty()) {
+            if (to.isEmpty() || subject.isEmpty() || body.isEmpty()) {
                 Alert errorAlert = new Alert(Alert.AlertType.ERROR);
-                errorAlert.setTitle("Errore");
-                errorAlert.setHeaderText("Dettagli mancanti");
-                errorAlert.setContentText("Per favore, compila tutti i campi.");
+                errorAlert.setTitle("Error");
+                errorAlert.setHeaderText("Missing Details");
+                errorAlert.setContentText("Please fill in all fields.");
                 errorAlert.showAndWait();
                 return;
             }
 
-            // Salva la risposta invertendo mittente e destinatario
             try {
+                List<String> recipients = Arrays.asList(to.split(",\\s*"));
                 MessageStorage.saveMessage(
-                        clientAddress, // Mittente della risposta
-                        Collections.singletonList(originalSender), // Il destinatario è il mittente originale
-                        subject, // Oggetto della risposta
-                        body, // Corpo della risposta
-                        true // Indica che è una risposta
+                        clientAddress,
+                        recipients,
+                        subject,
+                        body,
+                        true
                 );
 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Risposta Email");
+                alert.setTitle("Email Sent");
                 alert.setHeaderText(null);
-                alert.setContentText("Email inviata da: " + clientAddress + "\nA: " + originalSender + "\nOggetto: " + subject);
+                alert.setContentText("Email sent from: " + clientAddress + "\nTo: " + to + "\nSubject: " + subject);
                 alert.showAndWait();
                 dialog.close();
 
             } catch (Exception ex) {
                 Alert errorAlert = new Alert(Alert.AlertType.ERROR);
-                errorAlert.setTitle("Errore");
-                errorAlert.setHeaderText("Errore di Salvataggio");
-                errorAlert.setContentText("Non è stato possibile salvare la risposta. Errore: " + ex.getMessage());
+                errorAlert.setTitle("Error");
+                errorAlert.setHeaderText("Save Error");
+                errorAlert.setContentText("Could not save the reply. Error: " + ex.getMessage());
                 errorAlert.showAndWait();
             }
         });
@@ -89,8 +97,9 @@ public class ReplyHandler {
         cancelButton.setOnAction(e -> dialog.close());
 
         vbox.getChildren().addAll(sendButton, cancelButton);
-        Scene dialogScene = new Scene(vbox, 400, 300);
+        Scene dialogScene = new Scene(vbox, 400, 400);
         dialog.setScene(dialogScene);
         dialog.showAndWait();
     }
+
 }

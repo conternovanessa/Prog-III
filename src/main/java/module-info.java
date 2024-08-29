@@ -10,6 +10,7 @@ module com.example.progetto_shit {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
+    requires java.logging;
 
     // Esporta i pacchetti principali del progetto
     exports com.example.progetto_shit.Model;
