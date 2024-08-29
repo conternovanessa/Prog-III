@@ -16,14 +16,13 @@ import java.util.stream.Collectors;
 
 public class ForwardHandler {
 
-    // Lista dei destinatari validi
     private static final List<String> VALID_RECIPIENTS = Arrays.asList(
             "fabiodelia@progetto.com",
             "filippoditto@progetto.com",
             "vanessaconterno@progetto.com"
     );
 
-    private String clientAddress;  // Email del mittente
+    private String clientAddress;
 
     public ForwardHandler(String clientAddress) {
         this.clientAddress = clientAddress;
@@ -34,23 +33,36 @@ public class ForwardHandler {
         dialog.initModality(Modality.APPLICATION_MODAL);
         dialog.setTitle("Inoltra Email");
 
-        // Usa un TextArea per inserire più destinatari separati da virgole
         TextArea recipientArea = new TextArea();
         recipientArea.setPromptText("Inserisci gli indirizzi email dei destinatari separati da virgola");
 
         TextField subjectField = new TextField();
         subjectField.setPromptText("Oggetto");
-        // Setta il soggetto al valore del soggetto dell'email originale
-        String[] emailLines = selectedEmail.split("\n", 3);
-        String originalSubject = emailLines.length > 1 ? emailLines[1].replace("Subject: ", "") : "No Subject";
-        subjectField.setText("Fwd: " + originalSubject);
 
         TextArea bodyArea = new TextArea();
         bodyArea.setPromptText("Corpo");
         bodyArea.setPrefRowCount(5);
-        // Prepopola il corpo con l'email originale
-        String originalBody = emailLines.length > 2 ? emailLines[2] : "No Content";
-        bodyArea.setText("\n\nInoltro dell'email originale:\n" + originalBody);
+
+        // Ottieni le righe dell'email originale
+        String[] emailLines = selectedEmail.split("\n");
+
+        // Estrai il soggetto dell'email
+        String originalSubject = Arrays.stream(emailLines)
+                .filter(line -> line.startsWith("Subject: "))
+                .findFirst()
+                .map(line -> line.replace("Subject: ", ""))
+                .orElse("No Subject");
+
+        subjectField.setText(originalSubject);
+
+        // Trova la linea che contiene il "Body:"
+        String originalBody = Arrays.stream(emailLines)
+                .filter(line -> line.startsWith("Body: "))
+                .map(line -> line.replace("Body: ", ""))
+                .findFirst()
+                .orElse("");  // Se non trova "Body:", imposta il corpo come vuoto
+
+        bodyArea.setText(originalBody.trim());
 
         VBox vbox = new VBox(10,
                 new javafx.scene.control.Label("Destinatari:"), recipientArea,
@@ -74,7 +86,6 @@ public class ForwardHandler {
                 return;
             }
 
-            // Dividi i destinatari usando la virgola come separatore e rimuovi eventuali spazi
             List<String> recipientList = Arrays.stream(recipientsText.split(","))
                     .map(String::trim)
                     .collect(Collectors.toList());
@@ -90,7 +101,6 @@ public class ForwardHandler {
                 }
             }
 
-            // Inoltra l'email salvandola tramite MessageStorage
             MessageStorage.saveMessage(clientAddress, recipientList, subject, body, false);
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
