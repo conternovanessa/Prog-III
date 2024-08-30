@@ -31,7 +31,6 @@ public class MessageStorage {
             if (recipients.isEmpty()) {
                 throw new IllegalArgumentException("La lista dei destinatari non può essere vuota.");
             }
-
             for (String recipient : recipients) {
                 String clientDirPath = BASE_DIR + recipient;
                 ensureDirectoryExists(clientDirPath);
@@ -45,7 +44,6 @@ public class MessageStorage {
                 try (BufferedWriter writer = Files.newBufferedWriter(filePath, StandardOpenOption.CREATE, StandardOpenOption.APPEND)) {
                     if (isReply) {
                         String originalEmailContent = getOriginalEmailContent(recipient, sanitizedSender, sanitizedSubject);
-
                         if (originalEmailContent != null) {
                             writer.write(originalEmailContent);
                             writer.newLine();
@@ -184,6 +182,7 @@ public class MessageStorage {
     public static boolean deleteMessage(String recipient, String sender, String subject) {
         writeLock.lock(); // Acquisizione del WriteLock
         try {
+            // Costruisci il percorso della directory del destinatario
             String clientDirPath = BASE_DIR + recipient;
             File clientDir = new File(clientDirPath);
 
@@ -193,8 +192,12 @@ public class MessageStorage {
                 return false;
             }
 
+            // Sanitize file names
             String sanitizedSender = sanitizeFileName(sender);
-            String sanitizedSubject = sanitizeFileName(subject.trim());
+            String sanitizedSubject = sanitizeFileName(subject);
+
+            // Costruisci il nome del file da cercare
+            String expectedFileName = sanitizedSender + "_" + sanitizedSubject + ".txt";
 
             // Elenco tutti i file nella directory
             File[] messageFiles = clientDir.listFiles((dir, name) -> name.endsWith(".txt"));
@@ -206,9 +209,6 @@ public class MessageStorage {
 
                     // Stampa i nomi dei file trovati per il debug
                     System.out.println("Found file: " + fileName);
-
-                    // Crea il nome del file da cercare
-                    String expectedFileName = sanitizedSender + "_" + sanitizedSubject + ".txt";
 
                     // Controlla se il nome del file corrisponde al formato atteso
                     if (fileName.equals(expectedFileName)) {
@@ -242,6 +242,7 @@ public class MessageStorage {
             writeLock.unlock(); // Rilascio del WriteLock
         }
     }
+
 
     private static String sanitizeFileName(String name) {
         return name.trim().replaceAll("[^a-zA-Z0-9@._-]", "_");

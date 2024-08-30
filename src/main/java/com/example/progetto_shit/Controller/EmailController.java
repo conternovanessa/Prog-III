@@ -96,7 +96,7 @@ public class EmailController implements EmailObserver {
                 String[] emailLines = email.split("\n", 4);
                 if (emailLines.length >= 3) {
                     String sender = emailLines[0].replace("From: ", "");
-                    String subject = emailLines[1].replace("Subject: ", "");
+                    String subject = emailLines[2].replace("Subject: ", "");
                     String buttonText = sender + " - " + subject;
 
                     Button emailButton = new Button(buttonText);
@@ -251,18 +251,24 @@ public class EmailController implements EmailObserver {
 
     private void handleDelete(String email) {
         if (email != null) {
-            String[] emailLines = email.split("\n", 3);
-            String sender = emailLines.length > 0 ? emailLines[0].replace("From: ", "").trim() : null;
-            String subject = emailLines.length > 1 ? emailLines[1].replace("Subject: ", "").trim() : null;
+            // Analizza il contenuto dell'email per estrarre le informazioni necessarie
+            String[] emailLines = email.split("\n", 4); // Limita a 4 per gestire la possibilità di più righe di intestazione
 
+            // Estrai il mittente e l'oggetto dal contenuto dell'email
+            String sender = emailLines.length > 0 ? emailLines[0].replace("From: ", "").trim() : null;
+            String subject = emailLines.length > 2 ? emailLines[2].replace("Subject: ", "").trim() : null;
+
+            // Debugging
             System.out.println("Attempting to delete email:");
             System.out.println("Client: " + client);
             System.out.println("Sender: " + sender);
             System.out.println("Subject: " + subject);
 
             if (sender != null && subject != null) {
-                // Recupera i destinatari dall'email originale per ricostruire il nome del file
+                // Chiama il metodo di eliminazione con i parametri corretti
                 boolean success = MessageStorage.deleteMessage(client, sender, subject);
+
+                // Debugging
                 System.out.println("Delete operation result: " + success);
 
                 if (success) {
@@ -281,6 +287,8 @@ public class EmailController implements EmailObserver {
             showAlert("Selection Missing", "Please select an email to delete.");
         }
     }
+
+
 
 
     private void showAlert(String title, String message) {
