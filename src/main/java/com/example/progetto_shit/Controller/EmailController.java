@@ -1,11 +1,11 @@
 package com.example.progetto_shit.Controller;
 
+import com.example.progetto_shit.Main.EmailDetailApplication;
 import com.example.progetto_shit.Model.EmailObserver;
 import com.example.progetto_shit.Model.MessageStorage;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -13,8 +13,8 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
+
 public class EmailController implements EmailObserver {
 
     @FXML
@@ -37,9 +37,6 @@ public class EmailController implements EmailObserver {
 
     private String client;
     private Stage primaryStage;
-
-    // Variabile di istanza per tenere traccia dello stage della finestra dei dettagli dell'email
-    private Stage emailDetailStage;
 
     public void setClient(String client) {
         this.client = client;
@@ -113,194 +110,15 @@ public class EmailController implements EmailObserver {
     }
 
     private void showEmailDetailView(String email) {
-        if (isReplyEmail(email)) {
-            showReplyEmailDetailView(email);
-        } else {
-            String[] emailLines = email.split("\n", 4);
-            String sender = emailLines.length > 0 ? emailLines[0].replace("From: ", "") : "Unknown Sender";
-            String receiver = emailLines.length > 1 ? emailLines[1].replace("To: ", "") : "Unknown Receiver";
-            String subject = emailLines.length > 2 ? emailLines[2].replace("Subject: ", "") : "No Subject";
-
-            String fullEmailContent = MessageStorage.readReply(client, sender, subject);
-
-            emailDetailStage = new Stage(); // Crea un nuovo Stage per i dettagli
-            displayEmailContent(sender, receiver, subject, fullEmailContent, emailDetailStage);
-        }
-    }
-
-    private void showReplyEmailDetailView(String email) {
-        String[] emailLines = email.split("\n", 4);
-        String sender = emailLines.length > 1 ? emailLines[1].replace("Reply from: ", "") : "Unknown Sender";
-        String receiver = emailLines.length > 2 ? emailLines[2].replace("To: ", "") : "Unknown Receiver";
-        String subject = emailLines.length > 3 ? emailLines[3].replace("Subject: ", "") : "No Subject";
-
-        String fullEmailContent = MessageStorage.readReply(client, sender, subject);
-
-        emailDetailStage = new Stage(); // Crea un nuovo Stage per i dettagli
-        displayEmailContent(sender, receiver, subject, fullEmailContent, emailDetailStage);
-    }
-
-    private void displayEmailContent(String sender, String receiver, String subject, String fullEmailContent, Stage emailDetailStage) {
-        System.out.println("Full Email Content: " + fullEmailContent); // Debugging
-
-        String[] emailParts = fullEmailContent.split("\n-----------------------------------\n");
-        if (emailParts.length > 0) {
-            String latestEmail = emailParts[emailParts.length - 1];
-            String[] latestEmailLines = latestEmail.split("\n");
-            StringBuilder bodyBuilder = new StringBuilder();
-            boolean bodyStarted = false;
-
-            for (String line : latestEmailLines) {
-                if (bodyStarted) {
-                    bodyBuilder.append(line).append("\n");
-                } else if (line.startsWith("Body:")) {
-                    bodyStarted = true;
-                    // Rimuovi il prefisso "Body:" e aggiungi il resto della linea
-                    bodyBuilder.append(line.substring(5).trim()).append("\n");
-                }
+        Platform.runLater(() -> {
+            EmailDetailApplication detailApp = new EmailDetailApplication(email, client);
+            try {
+                detailApp.start(new Stage());
+            } catch (Exception e) {
+                e.printStackTrace();
+                showAlert("Error", "Failed to load email detail view.");
             }
-
-            String body = bodyBuilder.toString().trim();
-
-            // Se il corpo è vuoto, potrebbe essere un'email senza il prefisso "Body:"
-            if (body.isEmpty()) {
-                body = String.join("\n", latestEmailLines);
-            }
-
-            if (emailParts.length > 1) {
-                body += "\n\n----- Original Message -----\n" + String.join("\n", Arrays.copyOfRange(emailParts, 0, emailParts.length - 1));
-            }
-
-            // Rimuovi eventuali "No Body" alla fine del messaggio
-            body = body.replaceAll("(?m)^No Body$", "").trim();
-
-            // Assegna lo stage passato
-            this.emailDetailStage = emailDetailStage;
-
-            Stage emailDetail = new Stage();
-            emailDetail.setTitle("Email Details");
-
-            Label senderLabel = new Label("From: " + sender);
-            senderLabel.setPadding(new Insets(10));
-            senderLabel.setStyle("-fx-font-weight: bold;");
-
-            Label receiverLabel = new Label("To: " + receiver);
-            receiverLabel.setPadding(new Insets(10));
-
-            Label subjectLabel = new Label("Subject: " + subject);
-            subjectLabel.setPadding(new Insets(10));
-
-            Label bodyLabel = new Label(body);
-            bodyLabel.setWrapText(true);
-            bodyLabel.setPadding(new Insets(10));
-            bodyLabel.setStyle("-fx-background-color: #f0f0f0;");
-
-            Button replyButton = new Button("Reply");
-            Button replyAllButton = new Button("Reply All");
-            Button forwardButton = new Button("Forward");
-            Button deleteButton = new Button("Delete");
-
-            VBox buttonsBox = new VBox(10, replyButton, replyAllButton, forwardButton, deleteButton);
-            buttonsBox.setPadding(new Insets(10));
-
-            replyButton.setOnAction(event -> handleReply(fullEmailContent, false));
-            replyAllButton.setOnAction(event -> handleReply(fullEmailContent, true));
-            forwardButton.setOnAction(event -> handleForward(fullEmailContent));
-            deleteButton.setOnAction(event -> handleDelete(fullEmailContent));
-
-            VBox detailBox = new VBox(10, senderLabel, receiverLabel, subjectLabel, bodyLabel, buttonsBox);
-            detailBox.setPadding(new Insets(15));
-
-            ScrollPane scrollPane = new ScrollPane(detailBox);
-            scrollPane.setFitToWidth(true);
-
-            emailDetail.setScene(new Scene(scrollPane, 500, 400));
-            emailDetail.show();
-        } else {
-            showAlert("Error", "Email content could not be parsed.");
-        }
-    }
-
-    private boolean isReplyEmail(String email) {
-        return email.contains("Reply from:");
-    }
-
-    private void handleReply(String email, boolean replyAll) {
-        if (email != null) {
-            String[] emailParts = email.split("\n-----------------------------------\n");
-            String latestEmail = emailParts[emailParts.length - 1];
-
-            String[] emailLines = latestEmail.split("\n", 4);
-            String sender = emailLines.length > 0 ? emailLines[0].replace("From: ", "") : "Unknown Sender";
-            String receiver = emailLines.length > 1 ? emailLines[1].replace("To: ", "") : "Unknown Receiver";
-            String subject = emailLines.length > 2 ? emailLines[2].replace("Subject: ", "") : "No Subject";
-            String body = emailLines.length > 3 ? emailLines[3].replace("Body: ", "") : "No Body";
-
-            if (emailParts.length > 1) {
-                body += "\n\n----- Original Message -----\n" + String.join("\n", Arrays.copyOfRange(emailParts, 0, emailParts.length - 1));
-            }
-
-            List<String> recipients = Arrays.asList(receiver.split(", "));
-
-            ReplyHandler replyHandler = new ReplyHandler(client, sender, subject, body, recipients);
-            replyHandler.replyToEmail(replyAll);
-        } else {
-            showAlert("Selection Missing", "Please select an email to reply to.");
-        }
-    }
-
-    private void handleForward(String email) {
-        if (email != null) {
-            ForwardHandler forwardHandler = new ForwardHandler(client);
-            forwardHandler.forwardEmail(email);
-        } else {
-            showAlert("Selection Missing", "Please select an email to forward.");
-        }
-    }
-
-    private void handleDelete(String email) {
-        if (email != null) {
-            // Analizza il contenuto dell'email per estrarre le informazioni necessarie
-            String[] emailLines = email.split("\n", 4); // Limita a 4 per gestire la possibilità di più righe di intestazione
-
-            // Estrai il mittente e l'oggetto dal contenuto dell'email
-            String sender = emailLines.length > 0 ? emailLines[0].replace("From: ", "").trim() : null;
-            String subject = emailLines.length > 2 ? emailLines[2].replace("Subject: ", "").trim() : null;
-
-            // Debugging
-            System.out.println("Attempting to delete email:");
-            System.out.println("Client: " + client);
-            System.out.println("Sender: " + sender);
-            System.out.println("Subject: " + subject);
-
-            if (sender != null && subject != null) {
-                // Chiama il metodo di eliminazione con i parametri corretti
-                boolean success = MessageStorage.deleteMessage(client, sender, subject);
-
-                // Debugging
-                System.out.println("Delete operation result: " + success);
-
-                if (success) {
-                    System.out.println("Email deleted successfully.");
-                    loadEmails(); // Ricarica la lista delle email
-
-                    // Chiudi la finestra dei dettagli dell'email se aperta
-                    if (emailDetailStage != null) {
-                        emailDetailStage.close();
-                        emailDetailStage = null; // Reset per evitare chiusure multiple
-                    }
-                } else {
-                    System.out.println("Failed to delete the email.");
-                    showAlert("Error", "Failed to delete the email. Check console for more details.");
-                }
-            } else {
-                System.out.println("Invalid email format. Sender or subject is null.");
-                showAlert("Error", "Invalid email format.");
-            }
-        } else {
-            System.out.println("No email selected for deletion.");
-            showAlert("Selection Missing", "Please select an email to delete.");
-        }
+        });
     }
 
     private void showAlert(String title, String message) {

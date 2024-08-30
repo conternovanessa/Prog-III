@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.progetto_shit.Controller.EmailDetailController"
+      spacing="10" alignment="CENTER" style="-fx-padding: 20;">
+
+    <Label fx:id="senderLabel" style="-fx-font-weight: bold;"/>
+    <Label fx:id="receiverLabel"/>
+    <Label fx:id="subjectLabel" style="-fx-font-weight: bold;"/>
+
+    <TextArea fx:id="bodyTextArea" wrapText="true" editable="false" VBox.vgrow="ALWAYS"/>
+
+    <HBox spacing="10" alignment="CENTER">
+        <Button fx:id="replyButton" text="Reply" onAction="#handleReply"/>
+        <Button fx:id="replyAllButton" text="Reply All" onAction="#handleReplyAll"/>
+        <Button fx:id="forwardButton" text="Forward" onAction="#handleForward"/>
+        <Button fx:id="deleteButton" text="Delete" onAction="#handleDelete"/>
+        <Button fx:id="backButton" text="Back" onAction="#handleBack"/>
+    </HBox>
+
+</VBox>
