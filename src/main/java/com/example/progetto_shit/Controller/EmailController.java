@@ -15,7 +15,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-
 public class EmailController implements EmailObserver {
 
     @FXML
@@ -38,6 +37,9 @@ public class EmailController implements EmailObserver {
 
     private String client;
     private Stage primaryStage;
+
+    // Variabile di istanza per tenere traccia dello stage della finestra dei dettagli dell'email
+    private Stage emailDetailStage;
 
     public void setClient(String client) {
         this.client = client;
@@ -120,7 +122,9 @@ public class EmailController implements EmailObserver {
             String subject = emailLines.length > 2 ? emailLines[2].replace("Subject: ", "") : "No Subject";
 
             String fullEmailContent = MessageStorage.readReply(client, sender, subject);
-            displayEmailContent(sender, receiver, subject, fullEmailContent);
+
+            emailDetailStage = new Stage(); // Crea un nuovo Stage per i dettagli
+            displayEmailContent(sender, receiver, subject, fullEmailContent, emailDetailStage);
         }
     }
 
@@ -131,10 +135,12 @@ public class EmailController implements EmailObserver {
         String subject = emailLines.length > 3 ? emailLines[3].replace("Subject: ", "") : "No Subject";
 
         String fullEmailContent = MessageStorage.readReply(client, sender, subject);
-        displayEmailContent(sender, receiver, subject, fullEmailContent);
+
+        emailDetailStage = new Stage(); // Crea un nuovo Stage per i dettagli
+        displayEmailContent(sender, receiver, subject, fullEmailContent, emailDetailStage);
     }
 
-    private void displayEmailContent(String sender, String receiver, String subject, String fullEmailContent) {
+    private void displayEmailContent(String sender, String receiver, String subject, String fullEmailContent, Stage emailDetailStage) {
         System.out.println("Full Email Content: " + fullEmailContent); // Debugging
 
         String[] emailParts = fullEmailContent.split("\n-----------------------------------\n");
@@ -168,8 +174,11 @@ public class EmailController implements EmailObserver {
             // Rimuovi eventuali "No Body" alla fine del messaggio
             body = body.replaceAll("(?m)^No Body$", "").trim();
 
-            Stage emailDetailStage = new Stage();
-            emailDetailStage.setTitle("Email Details");
+            // Assegna lo stage passato
+            this.emailDetailStage = emailDetailStage;
+
+            Stage emailDetail = new Stage();
+            emailDetail.setTitle("Email Details");
 
             Label senderLabel = new Label("From: " + sender);
             senderLabel.setPadding(new Insets(10));
@@ -205,8 +214,8 @@ public class EmailController implements EmailObserver {
             ScrollPane scrollPane = new ScrollPane(detailBox);
             scrollPane.setFitToWidth(true);
 
-            emailDetailStage.setScene(new Scene(scrollPane, 500, 400));
-            emailDetailStage.show();
+            emailDetail.setScene(new Scene(scrollPane, 500, 400));
+            emailDetail.show();
         } else {
             showAlert("Error", "Email content could not be parsed.");
         }
@@ -274,6 +283,12 @@ public class EmailController implements EmailObserver {
                 if (success) {
                     System.out.println("Email deleted successfully.");
                     loadEmails(); // Ricarica la lista delle email
+
+                    // Chiudi la finestra dei dettagli dell'email se aperta
+                    if (emailDetailStage != null) {
+                        emailDetailStage.close();
+                        emailDetailStage = null; // Reset per evitare chiusure multiple
+                    }
                 } else {
                     System.out.println("Failed to delete the email.");
                     showAlert("Error", "Failed to delete the email. Check console for more details.");
@@ -287,9 +302,6 @@ public class EmailController implements EmailObserver {
             showAlert("Selection Missing", "Please select an email to delete.");
         }
     }
-
-
-
 
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.WARNING);

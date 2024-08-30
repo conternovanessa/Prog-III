@@ -43,7 +43,7 @@ public class MessageStorage {
 
                 try (BufferedWriter writer = Files.newBufferedWriter(filePath, StandardOpenOption.CREATE, StandardOpenOption.APPEND)) {
                     if (isReply) {
-                        writer.write("Reply from: " + sender);
+                        writer.write("From: " + sender);
                         writer.newLine();
                         writer.write("To: " + recipient);
                         writer.newLine();

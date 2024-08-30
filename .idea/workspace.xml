@@ -4,11 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0a55273f-6121-464b-90af-ee02c84e2271" name="Changes" comment="VAFFANCULO REPLY">
+    <list default="true" id="0a55273f-6121-464b-90af-ee02c84e2271" name="Changes" comment="tasto delete per le mail normali funziona">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages/fabiodelia@progetto.com/vanessaconterno@progetto.com_PROVA.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages/filippoditto@progetto.com/fabiodelia@progetto.com_PROVA.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages/vanessaconterno@progetto.com/filippoditto@progetto.com_PROVA.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Controller/EmailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Controller/EmailController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Model/MessageStorage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Model/MessageStorage.java" afterDir="false" />
     </list>
@@ -142,7 +139,7 @@
       <workItem from="1724484952336" duration="18593000" />
       <workItem from="1724570093845" duration="4268000" />
       <workItem from="1724656833115" duration="1728000" />
-      <workItem from="1725011472030" duration="3429000" />
+      <workItem from="1725011472030" duration="7721000" />
     </task>
     <task id="LOCAL-00002" summary="ora funzionano molte cose bisogna solo mettere le mail da quache parte (creazione  nuovo file letto poi da un package?)">
       <option name="closed" value="true" />
@@ -360,7 +357,31 @@
       <option name="project" value="LOCAL" />
       <updated>1724947261157</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="Il reply vbiene visualizzato correttamente, bisogna cambiare ciò che compare nel bottone, il reply all, il delete e aggiungere un tasto back">
+      <option name="closed" value="true" />
+      <created>1725018666115</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1725018666115</updated>
+    </task>
+    <task id="LOCAL-00030" summary="tasto delete per le mail normali funziona">
+      <option name="closed" value="true" />
+      <created>1725019487962</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1725019487962</updated>
+    </task>
+    <task id="LOCAL-00031" summary="tasto delete per le mail normali funziona">
+      <option name="closed" value="true" />
+      <created>1725021006781</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1725021006781</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -378,8 +399,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="emailForward nuovo e qualche acciacco di client Server client" />
-    <MESSAGE value="ciao ho fatto tutto da capo per avere l'MVC del cazzo" />
     <MESSAGE value="ora funzionano molte cose bisogna solo mettere le mail da quache parte (creazione  nuovo file letto poi da un package?)" />
     <MESSAGE value="aiuto arrivano i messaggi adesso" />
     <MESSAGE value="commit momentaneo" />
@@ -403,7 +422,9 @@
     <MESSAGE value="Changes by dfabi" />
     <MESSAGE value="Changes by dfabi Forward working" />
     <MESSAGE value="VAFFANCULO REPLY" />
-    <option name="LAST_COMMIT_MESSAGE" value="VAFFANCULO REPLY" />
+    <MESSAGE value="Il reply vbiene visualizzato correttamente, bisogna cambiare ciò che compare nel bottone, il reply all, il delete e aggiungere un tasto back" />
+    <MESSAGE value="tasto delete per le mail normali funziona" />
+    <option name="LAST_COMMIT_MESSAGE" value="tasto delete per le mail normali funziona" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
