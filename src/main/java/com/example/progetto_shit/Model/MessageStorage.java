@@ -43,11 +43,6 @@ public class MessageStorage {
 
                 try (BufferedWriter writer = Files.newBufferedWriter(filePath, StandardOpenOption.CREATE, StandardOpenOption.APPEND)) {
                     if (isReply) {
-                        String originalEmailContent = getOriginalEmailContent(recipient, sanitizedSender, sanitizedSubject);
-                        if (originalEmailContent != null) {
-                            writer.write(originalEmailContent);
-                            writer.newLine();
-                        }
                         writer.write("Reply from: " + sender);
                         writer.newLine();
                         writer.write("To: " + recipient);
@@ -56,6 +51,12 @@ public class MessageStorage {
                         writer.newLine();
                         writer.write("Body: " + body);
                         writer.newLine();
+
+                        String originalEmailContent = getOriginalEmailContent(recipient, sanitizedSender, sanitizedSubject);
+                        if (originalEmailContent != null) {
+                            writer.write(originalEmailContent);
+                            writer.newLine();
+                        }
                     } else {
                         writer.write("From: " + sender);
                         writer.newLine();
