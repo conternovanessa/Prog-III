@@ -120,84 +120,59 @@ public class EmailController implements EmailObserver {
             String subject = emailLines.length > 2 ? emailLines[2].replace("Subject: ", "") : "No Subject";
 
             String fullEmailContent = MessageStorage.readReply(client, sender, subject);
-            System.out.println("Full Email Content: " + fullEmailContent); // Debugging
-
-            String[] emailParts = fullEmailContent.split("\n-----------------------------------\n");
-            if (emailParts.length > 0) {
-                String latestEmail = emailParts[emailParts.length - 1];
-                String[] latestEmailLines = latestEmail.split("\n", 4);
-                String body = latestEmailLines.length > 3 ? latestEmailLines[3].replace("Body: ", "") : "No Body";
-
-                if (emailParts.length > 1) {
-                    body += "\n\n----- Original Message -----\n" + String.join("\n", Arrays.copyOfRange(emailParts, 0, emailParts.length - 1));
-                }
-
-                Stage emailDetailStage = new Stage();
-                emailDetailStage.setTitle("Email Details");
-
-                Label senderLabel = new Label("From: " + sender);
-                senderLabel.setPadding(new Insets(10)); // Padding around label
-                senderLabel.setStyle("-fx-font-weight: bold;");
-
-                Label receiverLabel = new Label("To: " + receiver);
-                receiverLabel.setPadding(new Insets(10));
-
-                Label subjectLabel = new Label("Subject: " + subject);
-                subjectLabel.setPadding(new Insets(10));
-
-                Label bodyLabel = new Label("Body: " +body);
-                bodyLabel.setWrapText(true);
-                bodyLabel.setPadding(new Insets(10));
-                bodyLabel.setStyle("-fx-background-color: #f0f0f0;"); // Background color to distinguish body
-
-                Button replyButton = new Button("Reply");
-                Button replyAllButton = new Button("Reply All");
-                Button forwardButton = new Button("Forward");
-                Button deleteButton = new Button("Delete");
-
-                VBox buttonsBox = new VBox(10, replyButton, replyAllButton, forwardButton, deleteButton);
-                buttonsBox.setPadding(new Insets(10)); // Padding around buttons box
-
-                replyButton.setOnAction(event -> handleReply(fullEmailContent, false));
-                replyAllButton.setOnAction(event -> handleReply(fullEmailContent, true));
-                forwardButton.setOnAction(event -> handleForward(fullEmailContent));
-                deleteButton.setOnAction(event -> handleDelete(email));
-
-                VBox detailBox = new VBox(10, senderLabel, receiverLabel, subjectLabel, bodyLabel, buttonsBox);
-                detailBox.setPadding(new Insets(15)); // Padding around detail box
-
-                emailDetailStage.setScene(new Scene(detailBox, 500, 400));
-                emailDetailStage.show();
-            } else {
-                showAlert("Error", "Email content could not be parsed.");
-            }
+            displayEmailContent(sender, receiver, subject, fullEmailContent);
         }
     }
 
     private void showReplyEmailDetailView(String email) {
         String[] emailLines = email.split("\n", 4);
-        String sender = emailLines.length > 1 ? emailLines[1].replace("Reply from ", "") : "Unknown Sender";
+        String sender = emailLines.length > 1 ? emailLines[1].replace("Reply from: ", "") : "Unknown Sender";
         String receiver = emailLines.length > 2 ? emailLines[2].replace("To: ", "") : "Unknown Receiver";
         String subject = emailLines.length > 3 ? emailLines[3].replace("Subject: ", "") : "No Subject";
 
         String fullEmailContent = MessageStorage.readReply(client, sender, subject);
+        displayEmailContent(sender, receiver, subject, fullEmailContent);
+    }
+
+    private void displayEmailContent(String sender, String receiver, String subject, String fullEmailContent) {
         System.out.println("Full Email Content: " + fullEmailContent); // Debugging
 
-        String[] emailParts = fullEmailContent.split("-----------------------------------");
+        String[] emailParts = fullEmailContent.split("\n-----------------------------------\n");
         if (emailParts.length > 0) {
             String latestEmail = emailParts[emailParts.length - 1];
-            String[] latestEmailLines = latestEmail.split("\n", 4);
-            String body = latestEmailLines.length > 3 ? latestEmailLines[3].replace("Body: ", "") : "No Body";
+            String[] latestEmailLines = latestEmail.split("\n");
+            StringBuilder bodyBuilder = new StringBuilder();
+            boolean bodyStarted = false;
+
+            for (String line : latestEmailLines) {
+                if (bodyStarted) {
+                    bodyBuilder.append(line).append("\n");
+                } else if (line.startsWith("Body:")) {
+                    bodyStarted = true;
+                    // Rimuovi il prefisso "Body:" e aggiungi il resto della linea
+                    bodyBuilder.append(line.substring(5).trim()).append("\n");
+                }
+            }
+
+            String body = bodyBuilder.toString().trim();
+
+            // Se il corpo è vuoto, potrebbe essere un'email senza il prefisso "Body:"
+            if (body.isEmpty()) {
+                body = String.join("\n", latestEmailLines);
+            }
 
             if (emailParts.length > 1) {
                 body += "\n\n----- Original Message -----\n" + String.join("\n", Arrays.copyOfRange(emailParts, 0, emailParts.length - 1));
             }
 
-            Stage replyDetailStage = new Stage();
-            replyDetailStage.setTitle("Reply Email Details");
+            // Rimuovi eventuali "No Body" alla fine del messaggio
+            body = body.replaceAll("(?m)^No Body$", "").trim();
 
-            Label senderLabel = new Label("" + sender);
-            senderLabel.setPadding(new Insets(10)); // Padding around label
+            Stage emailDetailStage = new Stage();
+            emailDetailStage.setTitle("Email Details");
+
+            Label senderLabel = new Label("From: " + sender);
+            senderLabel.setPadding(new Insets(10));
             senderLabel.setStyle("-fx-font-weight: bold;");
 
             Label receiverLabel = new Label("To: " + receiver);
@@ -206,37 +181,39 @@ public class EmailController implements EmailObserver {
             Label subjectLabel = new Label("Subject: " + subject);
             subjectLabel.setPadding(new Insets(10));
 
-            Label bodyLabel = new Label("Body: " + body);
+            Label bodyLabel = new Label(body);
             bodyLabel.setWrapText(true);
             bodyLabel.setPadding(new Insets(10));
-            bodyLabel.setStyle("-fx-background-color: #f0f0f0;"); // Background color to distinguish body
+            bodyLabel.setStyle("-fx-background-color: #f0f0f0;");
 
-            Button replyButton = new Button("Reply Again");
+            Button replyButton = new Button("Reply");
             Button replyAllButton = new Button("Reply All");
             Button forwardButton = new Button("Forward");
             Button deleteButton = new Button("Delete");
 
             VBox buttonsBox = new VBox(10, replyButton, replyAllButton, forwardButton, deleteButton);
-            buttonsBox.setPadding(new Insets(10)); // Padding around buttons box
+            buttonsBox.setPadding(new Insets(10));
 
             replyButton.setOnAction(event -> handleReply(fullEmailContent, false));
             replyAllButton.setOnAction(event -> handleReply(fullEmailContent, true));
             forwardButton.setOnAction(event -> handleForward(fullEmailContent));
-            deleteButton.setOnAction(event -> handleDelete(email));
+            deleteButton.setOnAction(event -> handleDelete(fullEmailContent));
 
             VBox detailBox = new VBox(10, senderLabel, receiverLabel, subjectLabel, bodyLabel, buttonsBox);
-            detailBox.setPadding(new Insets(15)); // Padding around detail box
+            detailBox.setPadding(new Insets(15));
 
-            replyDetailStage.setScene(new Scene(detailBox, 500, 400));
-            replyDetailStage.show();
+            ScrollPane scrollPane = new ScrollPane(detailBox);
+            scrollPane.setFitToWidth(true);
+
+            emailDetailStage.setScene(new Scene(scrollPane, 500, 400));
+            emailDetailStage.show();
         } else {
-            showAlert("Error", "Reply email content could not be parsed.");
+            showAlert("Error", "Email content could not be parsed.");
         }
     }
 
-
     private boolean isReplyEmail(String email) {
-        return email.contains("Re:") || email.contains("Reply from:");
+        return email.contains("Reply from:");
     }
 
     private void handleReply(String email, boolean replyAll) {

@@ -1,0 +1,5 @@
+From: fabiodelia@progetto.com
+To: filippoditto@progetto.com, vanessaconterno@progetto.com
+Subject: New Mail 1
+Body: Prima Mail inviata dal Cleint di Fabio agli altri due client.
+-----------------------------------

@@ -32,51 +32,53 @@ public class MessageStorage {
                 throw new IllegalArgumentException("La lista dei destinatari non può essere vuota.");
             }
 
-            String primaryRecipient = recipients.get(0);
-            String clientDirPath = BASE_DIR + primaryRecipient;
-            ensureDirectoryExists(clientDirPath);
+            for (String recipient : recipients) {
+                String clientDirPath = BASE_DIR + recipient;
+                ensureDirectoryExists(clientDirPath);
 
-            String sanitizedSender = sanitizeFileName(sender);
-            String sanitizedSubject = sanitizeFileName(subject);
+                String sanitizedSender = sanitizeFileName(sender);
+                String sanitizedSubject = sanitizeFileName(subject);
 
-            String fileName = sanitizedSender + "_" + sanitizedSubject + ".txt";
-            Path filePath = Paths.get(clientDirPath, fileName);
+                String fileName = sanitizedSender + "_" + sanitizedSubject + ".txt";
+                Path filePath = Paths.get(clientDirPath, fileName);
 
-            try (BufferedWriter writer = Files.newBufferedWriter(filePath, StandardOpenOption.CREATE, StandardOpenOption.APPEND)) {
-                if (isReply) {
-                    String originalEmailContent = getOriginalEmailContent(primaryRecipient, sanitizedSender, sanitizedSubject);
+                try (BufferedWriter writer = Files.newBufferedWriter(filePath, StandardOpenOption.CREATE, StandardOpenOption.APPEND)) {
+                    if (isReply) {
+                        String originalEmailContent = getOriginalEmailContent(recipient, sanitizedSender, sanitizedSubject);
 
-                    if (originalEmailContent != null) {
-                        writer.write(originalEmailContent);
+                        if (originalEmailContent != null) {
+                            writer.write(originalEmailContent);
+                            writer.newLine();
+                        }
+                        writer.write("Reply from: " + sender);
+                        writer.newLine();
+                        writer.write("To: " + recipient);
+                        writer.newLine();
+                        writer.write("Subject: " + subject);
+                        writer.newLine();
+                        writer.write("Body: " + body);
+                        writer.newLine();
+                    } else {
+                        writer.write("From: " + sender);
+                        writer.newLine();
+                        writer.write("To: " + String.join(", ", recipients));
+                        writer.newLine();
+                        writer.write("Subject: " + subject);
+                        writer.newLine();
+                        writer.write("Body: " + body);
                         writer.newLine();
                     }
-                    writer.write("Reply from: " + sender);
+                    writer.write("-----------------------------------");
                     writer.newLine();
-                    writer.write("To: " + primaryRecipient);
-                    writer.newLine();
-                    writer.write("Subject: " + subject);
-                    writer.newLine();
-                    writer.write("Body: " + body);
-                    writer.newLine();
-                } else {
-                    writer.write("From: " + sender);
-                    writer.newLine();
-                    writer.write("To: " + String.join(", ", recipients));
-                    writer.newLine();
-                    writer.write("Subject: " + subject);
-                    writer.newLine();
-                    writer.write("Body: " + body);
-                    writer.newLine();
+                } catch (IOException e) {
+                    System.out.println("Error writing to file: " + filePath + " " + e.getMessage());
                 }
-                writer.write("-----------------------------------");
-                writer.newLine();
-            } catch (IOException e) {
-                System.out.println("Error writing to file: " + filePath + " " + e.getMessage());
             }
         } finally {
             writeLock.unlock();
         }
     }
+
 
     public static String readReply(String recipient, String sender, String subject) {
         readLock.lock();
@@ -88,8 +90,9 @@ public class MessageStorage {
             Path filePath = Paths.get(clientDirPath, sanitizedSender + "_" + sanitizedSubject + ".txt");
 
             if (!Files.exists(filePath)) {
-                System.out.println("File does not exist: " + filePath.toString());
-                return "File not found.";
+                // Cambia questo per un messaggio più descrittivo o logga solo un avviso
+                System.out.println("Warning: File does not exist: " + filePath.toString());
+                return ""; // Restituisci una stringa vuota invece di "File not found"
             }
 
             StringBuilder emailContent = new StringBuilder();
@@ -99,8 +102,9 @@ public class MessageStorage {
                     emailContent.append(line).append("\n");
                 }
             } catch (IOException e) {
+                // Gestisci l'errore in modo più dettagliato
                 System.out.println("Error reading file: " + filePath + " " + e.getMessage());
-                return "Error reading email: " + e.getMessage();
+                return "Error reading email content.";
             }
 
             return emailContent.toString();
@@ -108,6 +112,7 @@ public class MessageStorage {
             readLock.unlock();
         }
     }
+
 
     public static String getOriginalEmailContent(String recipient, String sender, String subject) {
         readLock.lock();

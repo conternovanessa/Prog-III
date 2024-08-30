@@ -4,15 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0a55273f-6121-464b-90af-ee02c84e2271" name="Changes" comment="">
+    <list default="true" id="0a55273f-6121-464b-90af-ee02c84e2271" name="Changes" comment="VAFFANCULO REPLY">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages/fabiodelia@progetto.com/vanessaconterno@progetto.com_Re__To__fabiodelia_progetto.com.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages/vanessaconterno@progetto.com/fabiodelia@progetto.com_Re__To__fabiodelia_progetto.com.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages/vanessaconterno@progetto.com/filippoditto@progetto.com_PROVA.txt" beforeDir="false" afterPath="$PROJECT_DIR$/messages/vanessaconterno@progetto.com/filippoditto@progetto.com_PROVA.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/messages/fabiodelia@progetto.com/vanessaconterno@progetto.com_PROVA.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/messages/filippoditto@progetto.com/fabiodelia@progetto.com_PROVA.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/messages/vanessaconterno@progetto.com/filippoditto@progetto.com_PROVA.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Controller/EmailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Controller/EmailController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Controller/ReplyHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Controller/ReplyHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Model/MessageStorage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Model/MessageStorage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
     </list>
     <list id="e8c31100-440d-4de3-9108-d18ebe2ff760" name="Changes by user" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -144,6 +142,7 @@
       <workItem from="1724484952336" duration="18593000" />
       <workItem from="1724570093845" duration="4268000" />
       <workItem from="1724656833115" duration="1728000" />
+      <workItem from="1725011472030" duration="3429000" />
     </task>
     <task id="LOCAL-00002" summary="ora funzionano molte cose bisogna solo mettere le mail da quache parte (creazione  nuovo file letto poi da un package?)">
       <option name="closed" value="true" />
@@ -353,7 +352,15 @@
       <option name="project" value="LOCAL" />
       <updated>1724946070374</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="VAFFANCULO REPLY">
+      <option name="closed" value="true" />
+      <created>1724947261157</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1724947261157</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -371,7 +378,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fuk u" />
     <MESSAGE value="emailForward nuovo e qualche acciacco di client Server client" />
     <MESSAGE value="ciao ho fatto tutto da capo per avere l'MVC del cazzo" />
     <MESSAGE value="ora funzionano molte cose bisogna solo mettere le mail da quache parte (creazione  nuovo file letto poi da un package?)" />
@@ -396,7 +402,8 @@
     <MESSAGE value="buongiorno vi è il tasto delete che funge con i TO" />
     <MESSAGE value="Changes by dfabi" />
     <MESSAGE value="Changes by dfabi Forward working" />
-    <option name="LAST_COMMIT_MESSAGE" value="Changes by dfabi Forward working" />
+    <MESSAGE value="VAFFANCULO REPLY" />
+    <option name="LAST_COMMIT_MESSAGE" value="VAFFANCULO REPLY" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

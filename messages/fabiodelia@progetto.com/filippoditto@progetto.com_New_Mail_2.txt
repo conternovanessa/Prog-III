@@ -1,0 +1,5 @@
+From: filippoditto@progetto.com
+To: fabiodelia@progetto.com, vanessaconterno@progetto.com
+Subject: New Mail 2
+Body: Mail inviata dal client di Filippo agli altri due.
+-----------------------------------
