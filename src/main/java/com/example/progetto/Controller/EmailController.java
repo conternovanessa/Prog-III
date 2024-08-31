@@ -102,8 +102,8 @@ public class EmailController implements EmailObserver {
                     Button emailButton = new Button(buttonText);
                     emailButton.setOnAction(event -> showEmailDetailView(email));
 
-                    // Verifica se l'email è stata letta o meno
-                    if (email.contains("READ")) {
+                    // Usa il nuovo metodo isRead per determinare se l'email è stata letta
+                    if (MessageStorage.isRead(email)) {
                         emailButton.setStyle("-fx-background-color: lightgray;");
                     } else {
                         emailButton.setStyle("-fx-background-color: lightblue; -fx-text-fill: black;");

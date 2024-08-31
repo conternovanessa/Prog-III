@@ -84,8 +84,7 @@ public class ReplyHandler {
                         from,
                         recipients,
                         subject,
-                        body,
-                        true
+                        body
                 );
 
                 showInfoAlert("Email Sent", "Email sent from: " + from + "\nTo: " + to + "\nSubject: " + subject);

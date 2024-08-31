@@ -101,7 +101,7 @@ public class ForwardHandler {
                 }
             }
 
-            MessageStorage.saveMessage(clientAddress, recipientList, subject, body, false);
+            MessageStorage.saveMessage(clientAddress, recipientList, subject, body);
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Inoltra Email");

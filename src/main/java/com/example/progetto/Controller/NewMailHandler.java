@@ -96,7 +96,7 @@ public class NewMailHandler extends Application {
             }
 
             // Invio l'email a MessageStorage includendo la lista dei destinatari
-            MessageStorage.saveMessage(currentSender, recipientList, subject, body, false);
+            MessageStorage.saveMessage(currentSender, recipientList, subject, body);
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Nuova Mail");
