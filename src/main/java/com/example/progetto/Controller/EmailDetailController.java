@@ -53,11 +53,12 @@ public class EmailDetailController {
 
     public void setEmailContent(String email) {
         this.fullEmailContent = email;
-        String[] emailLines = email.split("\n", 4);
-        String sender = emailLines.length > 0 ? emailLines[0].replace("From: ", "") : "Unknown Sender";
-        String receiver = emailLines.length > 1 ? emailLines[1].replace("To: ", "") : "Unknown Receiver";
-        String subject = emailLines.length > 2 ? emailLines[2].replace("Subject: ", "") : "No Subject";
-        String body = emailLines.length > 3 ? emailLines[3] : "";
+        String[] emailLines = email.split("\n", 5);
+        // Skip the date line (index 0)
+        String sender = emailLines.length > 1 ? emailLines[1].replace("From: ", "") : "Unknown Sender";
+        String receiver = emailLines.length > 2 ? emailLines[2].replace("To: ", "") : "Unknown Receiver";
+        String subject = emailLines.length > 3 ? emailLines[3].replace("Subject: ", "") : "No Subject";
+        String body = emailLines.length > 4 ? emailLines[4].replace("Body: ", "") : "";
 
         senderLabel.setText("From: " + sender);
         receiverLabel.setText("To: " + receiver);
@@ -76,11 +77,12 @@ public class EmailDetailController {
     }
 
     private void handleReplyOrReplyAll(boolean replyAll) {
-        String[] emailLines = fullEmailContent.split("\n", 4);
-        String sender = emailLines.length > 0 ? emailLines[0].replace("From: ", "") : "Unknown Sender";
-        String receiver = emailLines.length > 1 ? emailLines[1].replace("To: ", "") : "Unknown Receiver";
-        String subject = emailLines.length > 2 ? emailLines[2].replace("Subject: ", "") : "No Subject";
-        String body = emailLines.length > 3 ? emailLines[3] : "";
+        String[] emailLines = fullEmailContent.split("\n", 5);
+        // Skip the date line (index 0)
+        String sender = emailLines.length > 1 ? emailLines[1].replace("From: ", "") : "Unknown Sender";
+        String receiver = emailLines.length > 2 ? emailLines[2].replace("To: ", "") : "Unknown Receiver";
+        String subject = emailLines.length > 3 ? emailLines[3].replace("Subject: ", "") : "No Subject";
+        String body = emailLines.length > 4 ? emailLines[4].replace("Body: ", "") : "";
 
         List<String> recipients = Arrays.asList(receiver.split(", "));
 
@@ -98,9 +100,10 @@ public class EmailDetailController {
 
     @FXML
     private void handleDelete() {
-        String[] emailLines = fullEmailContent.split("\n", 4);
-        String sender = emailLines.length > 0 ? emailLines[0].replace("From: ", "") : "Unknown Sender";
-        String subject = emailLines.length > 2 ? emailLines[2].replace("Subject: ", "") : "No Subject";
+        String[] emailLines = fullEmailContent.split("\n", 5);
+        // Skip the date line (index 0)
+        String sender = emailLines.length > 1 ? emailLines[1].replace("From: ", "") : "Unknown Sender";
+        String subject = emailLines.length > 3 ? emailLines[3].replace("Subject: ", "") : "No Subject";
 
         boolean success = MessageStorage.deleteMessage(client, sender, subject);
         if (success) {

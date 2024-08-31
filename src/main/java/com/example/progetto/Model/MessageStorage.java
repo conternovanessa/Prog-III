@@ -2,6 +2,8 @@ package com.example.progetto.Model;
 
 import java.io.*;
 import java.nio.file.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.locks.Lock;
@@ -31,6 +33,11 @@ public class MessageStorage {
             if (recipients.isEmpty()) {
                 throw new IllegalArgumentException("La lista dei destinatari non può essere vuota.");
             }
+
+            // Ottieni la data e l'ora corrente
+            LocalDateTime now = LocalDateTime.now();
+            String formattedDateTime = now.format(DateTimeFormatter.ofPattern("dd-MM-yyyy_HH-mm-ss"));
+
             for (String recipient : recipients) {
                 String clientDirPath = BASE_DIR + recipient;
                 ensureDirectoryExists(clientDirPath);
@@ -38,35 +45,22 @@ public class MessageStorage {
                 String sanitizedSender = sanitizeFileName(sender);
                 String sanitizedSubject = sanitizeFileName(subject);
 
-                String fileName = sanitizedSender + "_" + sanitizedSubject + ".txt";
+                // Il nome del file ora include la data e l'ora di invio, mittente e oggetto
+                String fileName = formattedDateTime + "_" + sanitizedSender + "_" + sanitizedSubject + ".txt";
                 Path filePath = Paths.get(clientDirPath, fileName);
 
                 try (BufferedWriter writer = Files.newBufferedWriter(filePath, StandardOpenOption.CREATE, StandardOpenOption.APPEND)) {
-                    if (isReply) {
-                        writer.write("From: " + sender);
-                        writer.newLine();
-                        writer.write("To: " + recipient);
-                        writer.newLine();
-                        writer.write("Subject: " + subject);
-                        writer.newLine();
-                        writer.write("Body: " + body);
-                        writer.newLine();
-
-                        String originalEmailContent = getOriginalEmailContent(recipient, sanitizedSender, sanitizedSubject);
-                        if (originalEmailContent != null) {
-                            writer.write(originalEmailContent);
-                            writer.newLine();
-                        }
-                    } else {
-                        writer.write("From: " + sender);
-                        writer.newLine();
-                        writer.write("To: " + String.join(", ", recipients));
-                        writer.newLine();
-                        writer.write("Subject: " + subject);
-                        writer.newLine();
-                        writer.write("Body: " + body);
-                        writer.newLine();
-                    }
+                    // Scrivi la data e l'ora di invio all'inizio del file
+                    writer.write("Date: " + formattedDateTime.replace('_', ' '));
+                    writer.newLine();
+                    writer.write("From: " + sender);
+                    writer.newLine();
+                    writer.write("To: " + String.join(", ", recipients));
+                    writer.newLine();
+                    writer.write("Subject: " + subject);
+                    writer.newLine();
+                    writer.write("Body: " + body);
+                    writer.newLine();
                     writer.write("-----------------------------------");
                     writer.newLine();
                 } catch (IOException e) {
@@ -92,7 +86,7 @@ public class MessageStorage {
                     String sanitizedSubject = sanitizeFileName(subject);
                     for (File file : messageFiles) {
                         String fileName = file.getName();
-                        if (fileName.contains(sanitizedSubject) && fileName.startsWith(sanitizedSender)) {
+                        if (fileName.contains(sanitizedSubject) && fileName.contains(sanitizedSender)) {
                             StringBuilder emailContent = new StringBuilder();
                             try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
                                 String line;
@@ -146,7 +140,7 @@ public class MessageStorage {
     }
 
     public static void markAsRead(String recipient, String sender, String subject) {
-        writeLock.lock(); // Acquire write lock to modify the file
+        writeLock.lock();
         try {
             String clientDirPath = BASE_DIR + recipient;
             File clientDir = new File(clientDirPath);
@@ -156,18 +150,14 @@ public class MessageStorage {
                 return;
             }
 
-            // Sanitize file names
             String sanitizedSender = sanitizeFileName(sender);
             String sanitizedSubject = sanitizeFileName(subject);
 
-            // Build expected file name
-            String expectedFileName = sanitizedSender + "_" + sanitizedSubject + ".txt";
-            File[] messageFiles = clientDir.listFiles((dir, name) -> name.equals(expectedFileName));
+            File[] messageFiles = clientDir.listFiles((dir, name) -> name.contains(sanitizedSender) && name.contains(sanitizedSubject));
 
             if (messageFiles != null && messageFiles.length > 0) {
-                File file = messageFiles[0]; // Assuming there's only one file with this name
+                File file = messageFiles[0];
 
-                // Read the existing content
                 StringBuilder emailContent = new StringBuilder();
                 try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
                     String line;
@@ -176,13 +166,10 @@ public class MessageStorage {
                     }
                 }
 
-                // Check if it's already marked as read
                 if (!emailContent.toString().contains("READ")) {
-                    // Append "READ" marker
                     emailContent.append("READ\n");
                     emailContent.append("-----------------------------------\n");
 
-                    // Write the updated content back to the file
                     try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
                         writer.write(emailContent.toString());
                     }
@@ -194,49 +181,34 @@ public class MessageStorage {
             System.out.println("Exception occurred while marking email as read: " + e.getMessage());
             e.printStackTrace();
         } finally {
-            writeLock.unlock(); // Release write lock
+            writeLock.unlock();
         }
     }
 
     public static boolean deleteMessage(String recipient, String sender, String subject) {
-        writeLock.lock(); // Acquisizione del WriteLock
+        writeLock.lock();
         try {
-            // Costruisci il percorso della directory del destinatario
             String clientDirPath = BASE_DIR + recipient;
             File clientDir = new File(clientDirPath);
 
-            // Verifica se la directory del destinatario esiste e se è una directory
             if (!clientDir.exists() || !clientDir.isDirectory()) {
                 System.out.println("Directory not found or is not a directory: " + clientDirPath);
                 return false;
             }
 
-            // Sanitize file names
             String sanitizedSender = sanitizeFileName(sender);
             String sanitizedSubject = sanitizeFileName(subject);
 
-            // Costruisci il nome del file da cercare
-            String expectedFileName = sanitizedSender + "_" + sanitizedSubject + ".txt";
-
-            // Elenco tutti i file nella directory
-            File[] messageFiles = clientDir.listFiles((dir, name) -> name.endsWith(".txt"));
+            File[] messageFiles = clientDir.listFiles((dir, name) -> name.contains(sanitizedSender) && name.contains(sanitizedSubject));
 
             if (messageFiles != null) {
                 boolean fileDeleted = false;
                 for (File file : messageFiles) {
                     String fileName = file.getName();
-
-                    // Stampa i nomi dei file trovati per il debug
-                    System.out.println("Found file: " + fileName);
-
-                    // Controlla se il nome del file corrisponde al formato atteso
-                    if (fileName.equals(expectedFileName)) {
-                        System.out.println("Attempting to delete file: " + file.getAbsolutePath());
-
+                    if (fileName.contains(sanitizedSender) && fileName.contains(sanitizedSubject)) {
                         if (file.delete()) {
-                            System.out.println("File deleted successfully.");
                             fileDeleted = true;
-                            break; // Esci dal ciclo dopo aver trovato e eliminato il file
+                            break;
                         } else {
                             System.out.println("Failed to delete file: " + file.getAbsolutePath());
                             return false;
@@ -247,8 +219,6 @@ public class MessageStorage {
                     System.out.println("No matching file found to delete for sender: " + sender + " and subject: " + subject);
                 }
                 return fileDeleted;
-            } else {
-                System.out.println("No .txt files found in directory: " + clientDirPath);
             }
 
             return false;
@@ -258,7 +228,7 @@ public class MessageStorage {
             e.printStackTrace();
             return false;
         } finally {
-            writeLock.unlock(); // Rilascio del WriteLock
+            writeLock.unlock();
         }
     }
 

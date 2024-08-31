@@ -92,11 +92,12 @@ public class EmailController implements EmailObserver {
         Platform.runLater(() -> {
             emailBox.getChildren().clear();
             for (String email : emails) {
-                String[] emailLines = email.split("\n", 4);
-                if (emailLines.length >= 3) {
-                    String sender = emailLines[0].replace("From: ", "");
-                    String subject = emailLines[2].replace("Subject: ", "");
-                    String buttonText = sender + " - " + subject;
+                String[] emailLines = email.split("\n", 5);
+                if (emailLines.length >= 4) {
+                    String date = emailLines[0].replace("Date: ", "");
+                    String sender = emailLines[1].replace("From: ", "");
+                    String subject = emailLines[3].replace("Subject: ", "");
+                    String buttonText = date + " - " + sender + " - " + subject;
 
                     Button emailButton = new Button(buttonText);
                     emailButton.setOnAction(event -> showEmailDetailView(email));
