@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.geometry.Insets?>
 
 <VBox xmlns:fx="http://javafx.com/fxml"
@@ -15,11 +16,41 @@
     <TextArea fx:id="bodyTextArea" wrapText="true" editable="false" VBox.vgrow="ALWAYS"/>
 
     <HBox spacing="10" alignment="CENTER">
-        <Button fx:id="replyButton" text="Reply" onAction="#handleReply"/>
-        <Button fx:id="replyAllButton" text="Reply All" onAction="#handleReplyAll"/>
-        <Button fx:id="forwardButton" text="Forward" onAction="#handleForward"/>
-        <Button fx:id="deleteButton" text="Delete" onAction="#handleDelete"/>
-        <Button fx:id="backButton" text="Back" onAction="#handleBack"/>
+        <Button fx:id="replyButton" onAction="#handleReply">
+            <graphic>
+                <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
+                    <Image url="@../images/Rispondi.png"/>
+                </ImageView>
+            </graphic>
+        </Button>
+        <Button fx:id="replyAllButton" onAction="#handleReplyAll">
+            <graphic>
+                <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
+                    <Image url="@../images/Rispondi.png"/>
+                </ImageView>
+            </graphic>
+        </Button>
+        <Button fx:id="forwardButton" onAction="#handleForward">
+            <graphic>
+                <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
+                    <Image url="@../images/Inoltra.png"/>
+                </ImageView>
+            </graphic>
+        </Button>
+        <Button fx:id="deleteButton" onAction="#handleDelete">
+            <graphic>
+                <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
+                    <Image url="@../images/Elimina.png"/>
+                </ImageView>
+            </graphic>
+        </Button>
+        <Button fx:id="backButton" onAction="#handleBack">
+            <graphic>
+                <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
+                    <Image url="@../images/TornaIndietro.png"/>
+                </ImageView>
+            </graphic>
+        </Button>
     </HBox>
 
 </VBox>
