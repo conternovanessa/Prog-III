@@ -198,7 +198,6 @@ public class MessageStorage {
         }
     }
 
-
     public static boolean deleteMessage(String recipient, String sender, String subject) {
         writeLock.lock(); // Acquisizione del WriteLock
         try {
