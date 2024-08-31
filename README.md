@@ -1,11 +1,4 @@
 Cose da fare:
-- [ ] togliere la prima interfaccia di selezione deve aprire subito la interfaccia con i tre client  (vane)
-- [ ] far funzionare il reply ( fil )
-  - [ ] reply mittente
-  - [ ] reply-all mittente e destinatario
-- [ ] far funzionare il forward
-- [ ] permettere di selezionare più mail da rispondere
-  - [ ]rispondere a più mail
-- [ ] rimuovere 1 o più messaggi
-- [ ] permettere di chiudere il server con il tasto STOPSERVER
-- [ ] sistemare il file.txt con mail e oggetto  ( feb )
+- [ ] aggiungere la data alla mail sia nel file.txt che nel nome
+- [ ] quando fa il delete deve controllare email_oggetto_data
+- [ ] si deve fare in modo che quando arrivi una nuova mail compaia qualcosa (colore diverso) in modo da seganre quelle aperte da quelle nuove
