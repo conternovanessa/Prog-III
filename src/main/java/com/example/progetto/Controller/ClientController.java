@@ -29,7 +29,7 @@ public class ClientController {
     private List<String> clientList = new ArrayList<>();
     private String serverAddress;
 
-    private static final String FILE_PATH = "src/main/java/com/example/progetto_shit/email.txt";
+    private static final String FILE_PATH = "src/main/java/com/example/progetto/email.txt";
 
     @FXML
     public void initialize() {

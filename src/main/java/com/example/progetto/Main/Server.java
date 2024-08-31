@@ -16,7 +16,7 @@ import java.util.List;
 public class Server extends Application {
 
     private List<String> clientList = new ArrayList<>();
-    private static final String FILE_PATH = "src/main/java/com/example/progetto_shit/email.txt";
+    private static final String FILE_PATH = "src/main/java/com/example/progetto/email.txt";
 
     @Override
     public void start(Stage primaryStage) {
