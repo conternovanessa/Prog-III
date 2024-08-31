@@ -101,6 +101,13 @@ public class EmailController implements EmailObserver {
                     Button emailButton = new Button(buttonText);
                     emailButton.setOnAction(event -> showEmailDetailView(email));
 
+                    // Verifica se l'email è stata letta o meno
+                    if (email.contains("READ")) {
+                        emailButton.setStyle("-fx-background-color: lightgray;");
+                    } else {
+                        emailButton.setStyle("-fx-background-color: lightblue; -fx-text-fill: black;");
+                    }
+
                     emailBox.getChildren().add(emailButton);
                 }
             }
@@ -111,12 +118,25 @@ public class EmailController implements EmailObserver {
 
     private void showEmailDetailView(String email) {
         Platform.runLater(() -> {
-            EmailDetailApplication detailApp = new EmailDetailApplication(email, client);
-            try {
-                detailApp.start(new Stage());
-            } catch (Exception e) {
-                e.printStackTrace();
-                showAlert("Error", "Failed to load email detail view.");
+            // Extract sender and subject for marking the email as read
+            String[] emailLines = email.split("\n", 4);
+            if (emailLines.length >= 3) {
+                String sender = emailLines[0].replace("From: ", "");
+                String subject = emailLines[2].replace("Subject: ", "");
+
+                // Mark the email as read
+                MessageStorage.markAsRead(client, sender, subject);
+
+                EmailDetailApplication detailApp = new EmailDetailApplication(email, client);
+                try {
+                    detailApp.start(new Stage());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    showAlert("Error", "Failed to load email detail view.");
+                }
+
+                // Reload emails to update the UI
+                loadEmails();
             }
         });
     }

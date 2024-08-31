@@ -78,41 +78,6 @@ public class MessageStorage {
         }
     }
 
-
-    public static String readReply(String recipient, String sender, String subject) {
-        readLock.lock();
-        try {
-            String clientDirPath = BASE_DIR + recipient;
-            String sanitizedSender = sanitizeFileName(sender);
-            String sanitizedSubject = sanitizeFileName(subject);
-
-            Path filePath = Paths.get(clientDirPath, sanitizedSender + "_" + sanitizedSubject + ".txt");
-
-            if (!Files.exists(filePath)) {
-                // Cambia questo per un messaggio più descrittivo o logga solo un avviso
-                System.out.println("Warning: File does not exist: " + filePath.toString());
-                return ""; // Restituisci una stringa vuota invece di "File not found"
-            }
-
-            StringBuilder emailContent = new StringBuilder();
-            try (BufferedReader reader = Files.newBufferedReader(filePath)) {
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    emailContent.append(line).append("\n");
-                }
-            } catch (IOException e) {
-                // Gestisci l'errore in modo più dettagliato
-                System.out.println("Error reading file: " + filePath + " " + e.getMessage());
-                return "Error reading email content.";
-            }
-
-            return emailContent.toString();
-        } finally {
-            readLock.unlock();
-        }
-    }
-
-
     public static String getOriginalEmailContent(String recipient, String sender, String subject) {
         readLock.lock();
         try {
@@ -180,6 +145,60 @@ public class MessageStorage {
         }
     }
 
+    public static void markAsRead(String recipient, String sender, String subject) {
+        writeLock.lock(); // Acquire write lock to modify the file
+        try {
+            String clientDirPath = BASE_DIR + recipient;
+            File clientDir = new File(clientDirPath);
+
+            if (!clientDir.exists() || !clientDir.isDirectory()) {
+                System.out.println("Directory not found or is not a directory: " + clientDirPath);
+                return;
+            }
+
+            // Sanitize file names
+            String sanitizedSender = sanitizeFileName(sender);
+            String sanitizedSubject = sanitizeFileName(subject);
+
+            // Build expected file name
+            String expectedFileName = sanitizedSender + "_" + sanitizedSubject + ".txt";
+            File[] messageFiles = clientDir.listFiles((dir, name) -> name.equals(expectedFileName));
+
+            if (messageFiles != null && messageFiles.length > 0) {
+                File file = messageFiles[0]; // Assuming there's only one file with this name
+
+                // Read the existing content
+                StringBuilder emailContent = new StringBuilder();
+                try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        emailContent.append(line).append("\n");
+                    }
+                }
+
+                // Check if it's already marked as read
+                if (!emailContent.toString().contains("READ")) {
+                    // Append "READ" marker
+                    emailContent.append("READ\n");
+                    emailContent.append("-----------------------------------\n");
+
+                    // Write the updated content back to the file
+                    try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+                        writer.write(emailContent.toString());
+                    }
+                }
+            } else {
+                System.out.println("No matching file found to mark as read for sender: " + sender + " and subject: " + subject);
+            }
+        } catch (IOException e) {
+            System.out.println("Exception occurred while marking email as read: " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            writeLock.unlock(); // Release write lock
+        }
+    }
+
+
     public static boolean deleteMessage(String recipient, String sender, String subject) {
         writeLock.lock(); // Acquisizione del WriteLock
         try {
@@ -243,7 +262,6 @@ public class MessageStorage {
             writeLock.unlock(); // Rilascio del WriteLock
         }
     }
-
 
     private static String sanitizeFileName(String name) {
         return name.trim().replaceAll("[^a-zA-Z0-9@._-]", "_");

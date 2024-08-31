@@ -4,16 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0a55273f-6121-464b-90af-ee02c84e2271" name="Changes" comment="non era stato aggiornato il percorso per le email.txt">
+    <list default="true" id="0a55273f-6121-464b-90af-ee02c84e2271" name="Changes" comment="finito?">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/progetto/View/email_detail_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/progetto/View/email_detail_view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/progetto/View/email_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/progetto/View/email_view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/progetto/images/Aggiorna.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/progetto/images/Elimina.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/progetto/images/Inoltra.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/progetto/images/NuovaMail.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/progetto/images/Rispondi.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/progetto/images/TornaIndietro.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto/Controller/EmailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto/Controller/EmailController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto/Model/MessageStorage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto/Model/MessageStorage.java" afterDir="false" />
     </list>
     <list id="e8c31100-440d-4de3-9108-d18ebe2ff760" name="Changes by user" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -147,7 +141,7 @@
       <workItem from="1724656833115" duration="1728000" />
       <workItem from="1725011472030" duration="7721000" />
       <workItem from="1725028429715" duration="986000" />
-      <workItem from="1725089917204" duration="4404000" />
+      <workItem from="1725089917204" duration="6174000" />
     </task>
     <task id="LOCAL-00002" summary="ora funzionano molte cose bisogna solo mettere le mail da quache parte (creazione  nuovo file letto poi da un package?)">
       <option name="closed" value="true" />
@@ -429,7 +423,15 @@
       <option name="project" value="LOCAL" />
       <updated>1725091235131</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="finito?">
+      <option name="closed" value="true" />
+      <created>1725094590535</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1725094590535</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -447,7 +449,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="ora funziona la lettura, l'invio e i package. domani faremo il resto gg compari" />
     <MESSAGE value="cambiata porta ora è 55555" />
     <MESSAGE value="MVC ti prego finiscila" />
     <MESSAGE value="worka un po'" />
@@ -472,7 +473,8 @@
     <MESSAGE value="ma funzioni che davvero????" />
     <MESSAGE value="ho tolto il nome non bello della pagina" />
     <MESSAGE value="non era stato aggiornato il percorso per le email.txt" />
-    <option name="LAST_COMMIT_MESSAGE" value="non era stato aggiornato il percorso per le email.txt" />
+    <MESSAGE value="finito?" />
+    <option name="LAST_COMMIT_MESSAGE" value="finito?" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

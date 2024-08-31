@@ -3,3 +3,5 @@ To: fabiodelia@progetto.com, filippoditto@progetto.com
 Subject: New Mail 3
 Body: Mail dal client di Vanessa agli altri due.
 -----------------------------------
+READ
+-----------------------------------
