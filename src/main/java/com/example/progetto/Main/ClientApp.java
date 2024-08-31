@@ -1,6 +1,6 @@
-package com.example.progetto_shit.Main;
+package com.example.progetto.Main;
 
-import com.example.progetto_shit.Controller.ClientController;
+import com.example.progetto.Controller.ClientController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,7 +18,7 @@ public class ClientApp extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/progetto_shit/View/client_view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/progetto/View/client_view.fxml"));
             Parent root = loader.load();
 
             // Passa l'indirizzo del client al controller
@@ -42,7 +42,7 @@ public class ClientApp extends Application {
             primaryStage.setHeight(400); // Altezza della finestra
 
 
-            FXMLLoader loader = new FXMLLoader(ClientApp.class.getResource("/com/example/progetto_shit/View/client_view.fxml"));
+            FXMLLoader loader = new FXMLLoader(ClientApp.class.getResource("/com/example/progetto/View/client_view.fxml"));
             Parent root = loader.load();
 
             // Passa l'indirizzo del client al controller

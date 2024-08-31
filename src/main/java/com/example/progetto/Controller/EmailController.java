@@ -1,8 +1,8 @@
-package com.example.progetto_shit.Controller;
+package com.example.progetto.Controller;
 
-import com.example.progetto_shit.Main.EmailDetailApplication;
-import com.example.progetto_shit.Model.EmailObserver;
-import com.example.progetto_shit.Model.MessageStorage;
+import com.example.progetto.Main.EmailDetailApplication;
+import com.example.progetto.Model.EmailObserver;
+import com.example.progetto.Model.MessageStorage;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -55,7 +55,7 @@ public class EmailController implements EmailObserver {
         Platform.runLater(() -> {
             if (primaryStage != null) {
                 try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/progetto_shit/View/client_view.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/progetto/View/client_view.fxml"));
                     Parent clientView = loader.load();
                     ClientController clientController = loader.getController();
                     clientController.setPrimaryStage(primaryStage);

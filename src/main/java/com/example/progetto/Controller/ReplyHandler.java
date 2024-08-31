@@ -1,6 +1,6 @@
-package com.example.progetto_shit.Controller;
+package com.example.progetto.Controller;
 
-import com.example.progetto_shit.Model.MessageStorage;
+import com.example.progetto.Model.MessageStorage;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;

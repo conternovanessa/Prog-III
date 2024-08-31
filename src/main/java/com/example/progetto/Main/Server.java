@@ -1,6 +1,6 @@
-package com.example.progetto_shit.Main;
+package com.example.progetto.Main;
 
-import com.example.progetto_shit.Controller.ServerController;
+import com.example.progetto.Controller.ServerController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -27,7 +27,7 @@ public class Server extends Application {
             primaryStage.setHeight(400); // Altezza della finestra
 
             // Carica il file FXML e ottieni la root della scena
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/progetto_shit/View/server_view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/progetto/View/server_view.fxml"));
             Parent root = loader.load();
 
             // Ottieni l'istanza del ServerController associato al file FXML

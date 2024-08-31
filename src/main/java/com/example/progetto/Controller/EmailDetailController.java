@@ -1,6 +1,6 @@
-package com.example.progetto_shit.Controller;
+package com.example.progetto.Controller;
 
-import com.example.progetto_shit.Model.MessageStorage;
+import com.example.progetto.Model.MessageStorage;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;

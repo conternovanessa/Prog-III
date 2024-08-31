@@ -1,5 +1,5 @@
 
-package com.example.progetto_shit.Model;
+package com.example.progetto.Model;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

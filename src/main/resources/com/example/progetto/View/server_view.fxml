@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progetto_shit.Controller.ServerController" spacing="10" alignment="CENTER">
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progetto.Controller.ServerController" spacing="10" alignment="CENTER">
 
     <!-- Etichetta per lo stato del server -->
     <Label fx:id="statusLabel" text="Server Status: Stopped" style="-fx-font-size: 16px; -fx-text-fill: blue;"/>

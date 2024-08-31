@@ -1,4 +1,4 @@
-module com.example.progetto_shit {
+module com.example.progetto {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
@@ -13,12 +13,12 @@ module com.example.progetto_shit {
     requires java.logging;
 
     // Esporta i pacchetti principali del progetto
-    exports com.example.progetto_shit.Model;
-    exports com.example.progetto_shit.Controller;
-    exports com.example.progetto_shit.Main;
+    exports com.example.progetto.Model;
+    exports com.example.progetto.Controller;
+    exports com.example.progetto.Main;
 
     // Apre i pacchetti per riflessione a javafx.fxml
-    opens com.example.progetto_shit.Model to javafx.fxml;
-    opens com.example.progetto_shit.Controller to javafx.fxml;
-    opens com.example.progetto_shit.Main to javafx.fxml;
+    opens com.example.progetto.Model to javafx.fxml;
+    opens com.example.progetto.Controller to javafx.fxml;
+    opens com.example.progetto.Main to javafx.fxml;
 }

@@ -1,4 +1,4 @@
-package com.example.progetto_shit.Controller;
+package com.example.progetto.Controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -79,7 +79,7 @@ public class ClientController {
         }
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/progetto_shit/View/email_view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/progetto/View/email_view.fxml"));
             Parent root = loader.load();
 
             // Ottieni il controller dell'EmailController
@@ -106,7 +106,7 @@ public class ClientController {
         }
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/progetto_shit/View/server_view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/progetto/View/server_view.fxml"));
             Parent root = loader.load();
 
             // Ottieni il controller della vista del server (se necessario)

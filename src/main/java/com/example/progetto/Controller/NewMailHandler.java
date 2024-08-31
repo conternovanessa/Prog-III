@@ -1,6 +1,6 @@
-package com.example.progetto_shit.Controller;
+package com.example.progetto.Controller;
 
-import com.example.progetto_shit.Model.MessageStorage;
+import com.example.progetto.Model.MessageStorage;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -15,8 +15,6 @@ import javafx.stage.Stage;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static com.example.progetto_shit.Main.ClientApp.clientAddress;
 
 public class NewMailHandler extends Application {
 

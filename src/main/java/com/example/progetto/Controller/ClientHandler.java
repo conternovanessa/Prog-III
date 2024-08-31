@@ -1,6 +1,6 @@
-package com.example.progetto_shit.Controller;
+package com.example.progetto.Controller;
 
-import com.example.progetto_shit.Model.EmailClientManager;
+import com.example.progetto.Model.EmailClientManager;
 
 import java.io.*;
 import java.net.Socket;

@@ -4,13 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0a55273f-6121-464b-90af-ee02c84e2271" name="Changes" comment="delete funzionante">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Main/EmailDetailApplication.java" afterDir="false" />
+    <list default="true" id="0a55273f-6121-464b-90af-ee02c84e2271" name="Changes" comment="ma funzioni che davvero????">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Controller/EmailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Controller/EmailController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Controller/ReadController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Controller/EmailDetailController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto_shit/Main/ReadApp.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/progetto_shit/View/read_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/progetto_shit/View/email_detail_view.fxml" afterDir="false" />
     </list>
     <list id="e8c31100-440d-4de3-9108-d18ebe2ff760" name="Changes by user" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -143,7 +138,7 @@
       <workItem from="1724570093845" duration="4268000" />
       <workItem from="1724656833115" duration="1728000" />
       <workItem from="1725011472030" duration="7721000" />
-      <workItem from="1725028429715" duration="629000" />
+      <workItem from="1725028429715" duration="986000" />
     </task>
     <task id="LOCAL-00002" summary="ora funzionano molte cose bisogna solo mettere le mail da quache parte (creazione  nuovo file letto poi da un package?)">
       <option name="closed" value="true" />
@@ -393,7 +388,15 @@
       <option name="project" value="LOCAL" />
       <updated>1725025635815</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="ma funzioni che davvero????">
+      <option name="closed" value="true" />
+      <created>1725029350077</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1725029350077</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -411,7 +414,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="aiuto arrivano i messaggi adesso" />
     <MESSAGE value="commit momentaneo" />
     <MESSAGE value="ciao adesso carica su un file txt" />
     <MESSAGE value="ora funziona la lettura, l'invio e i package. domani faremo il resto gg compari" />
@@ -436,7 +438,8 @@
     <MESSAGE value="Il reply vbiene visualizzato correttamente, bisogna cambiare ciò che compare nel bottone, il reply all, il delete e aggiungere un tasto back" />
     <MESSAGE value="tasto delete per le mail normali funziona" />
     <MESSAGE value="delete funzionante" />
-    <option name="LAST_COMMIT_MESSAGE" value="delete funzionante" />
+    <MESSAGE value="ma funzioni che davvero????" />
+    <option name="LAST_COMMIT_MESSAGE" value="ma funzioni che davvero????" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

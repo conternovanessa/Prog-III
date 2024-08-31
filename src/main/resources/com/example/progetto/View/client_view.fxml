@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx/17" fx:controller="com.example.progetto_shit.Controller.ClientController" spacing="10" alignment="CENTER">
+<VBox xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx/17" fx:controller="com.example.progetto.Controller.ClientController" spacing="10" alignment="CENTER">
     <Label fx:id="serverAddressLabel" text="Server Address:" />
 
     <!-- Sezione per visualizzare la lista dei client -->

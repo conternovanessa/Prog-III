@@ -1,4 +1,4 @@
-package com.example.progetto_shit.Controller;
+package com.example.progetto.Controller;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -7,7 +7,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.*;
@@ -123,7 +122,7 @@ public class ServerController {
 
     private void openClientInterface(String clientAddress) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/progetto_shit/View/client_view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/progetto/View/client_view.fxml"));
             Parent root = loader.load();
 
             ClientController clientController = loader.getController();

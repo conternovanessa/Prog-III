@@ -1,6 +1,6 @@
-package com.example.progetto_shit.Main;
+package com.example.progetto.Main;
 
-import com.example.progetto_shit.Controller.EmailDetailController;
+import com.example.progetto.Controller.EmailDetailController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -26,7 +26,7 @@ public class EmailDetailApplication extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/progetto_shit/View/email_detail_view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/progetto/View/email_detail_view.fxml"));
             Parent root = loader.load();
 
             EmailDetailController controller = loader.getController();
