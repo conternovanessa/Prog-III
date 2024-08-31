@@ -2,12 +2,19 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.image.*?>
 <?import javafx.geometry.Insets?>
 
 <VBox xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.example.progetto.Controller.EmailDetailController"
       spacing="10" alignment="CENTER" style="-fx-padding: 20;">
+
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Button fx:id="backButton" text="←" onAction="#handleBack">
+            <tooltip>
+                <Tooltip text="Torna indietro"/>
+            </tooltip>
+        </Button>
+    </HBox>
 
     <Label fx:id="senderLabel" style="-fx-font-weight: bold;"/>
     <Label fx:id="receiverLabel"/>
@@ -16,40 +23,25 @@
     <TextArea fx:id="bodyTextArea" wrapText="true" editable="false" VBox.vgrow="ALWAYS"/>
 
     <HBox spacing="10" alignment="CENTER">
-        <Button fx:id="replyButton" onAction="#handleReply">
-            <graphic>
-                <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
-                    <Image url="@../images/Rispondi.png"/>
-                </ImageView>
-            </graphic>
+        <Button fx:id="replyButton" text="↩" onAction="#handleReply">
+            <tooltip>
+                <Tooltip text="Rispondi"/>
+            </tooltip>
         </Button>
-        <Button fx:id="replyAllButton" onAction="#handleReplyAll">
-            <graphic>
-                <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
-                    <Image url="@../images/Rispondi.png"/>
-                </ImageView>
-            </graphic>
+        <Button fx:id="replyAllButton" text="⇇" onAction="#handleReplyAll">
+            <tooltip>
+                <Tooltip text="Rispondi a tutti"/>
+            </tooltip>
         </Button>
-        <Button fx:id="forwardButton" onAction="#handleForward">
-            <graphic>
-                <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
-                    <Image url="@../images/Inoltra.png"/>
-                </ImageView>
-            </graphic>
+        <Button fx:id="forwardButton" text="↪" onAction="#handleForward">
+            <tooltip>
+                <Tooltip text="Inoltra"/>
+            </tooltip>
         </Button>
-        <Button fx:id="deleteButton" onAction="#handleDelete">
-            <graphic>
-                <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
-                    <Image url="@../images/Elimina.png"/>
-                </ImageView>
-            </graphic>
-        </Button>
-        <Button fx:id="backButton" onAction="#handleBack">
-            <graphic>
-                <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
-                    <Image url="@../images/TornaIndietro.png"/>
-                </ImageView>
-            </graphic>
+        <Button fx:id="deleteButton" text="✖" onAction="#handleDelete">
+            <tooltip>
+                <Tooltip text="Elimina"/>
+            </tooltip>
         </Button>
     </HBox>
 

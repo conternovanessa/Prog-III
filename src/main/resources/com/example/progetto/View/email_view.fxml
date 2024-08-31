@@ -12,26 +12,20 @@
 
     <!-- Sezione per i pulsanti "Torna Indietro", "Nuova Mail" e "Refresh" -->
     <HBox layoutX="20.0" layoutY="50.0" spacing="10">
-        <Button fx:id="backButton" onAction="#handleBack">
-            <graphic>
-                <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
-                    <Image url="@../images/TornaIndietro.png"/>
-                </ImageView>
-            </graphic>
+        <Button fx:id="backButton" text="←" onAction="#handleBack">
+            <tooltip>
+                <Tooltip text="Torna Indietro"/>
+            </tooltip>
         </Button>
-        <Button fx:id="newMailButton" onAction="#handleNewMail">
-            <graphic>
-                <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
-                    <Image url="@../images/NuovaMail.png"/>
-                </ImageView>
-            </graphic>
+        <Button fx:id="newMailButton" text="+" onAction="#handleNewMail">
+            <tooltip>
+                <Tooltip text="Nuova Mail"/>
+            </tooltip>
         </Button>
-        <Button fx:id="refreshButton" onAction="#handleRefresh">
-            <graphic>
-                <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
-                    <Image url="@../images/Aggiorna.png"/>
-                </ImageView>
-            </graphic>
+        <Button fx:id="refreshButton" text="⟳" onAction="#handleRefresh">
+            <tooltip>
+                <Tooltip text="Aggiorna"/>
+            </tooltip>
         </Button>
     </HBox>
 
