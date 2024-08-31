@@ -2,11 +2,10 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.geometry.Insets?>
 
 <VBox xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.example.progetto.Controller.EmailDetailController"
-      spacing="10" alignment="CENTER" style="-fx-padding: 20;">
+      spacing="10" alignment="CENTER">
 
     <HBox spacing="10" alignment="CENTER_LEFT">
         <Button fx:id="backButton" text="←" onAction="#handleBack">
@@ -23,22 +22,22 @@
     <TextArea fx:id="bodyTextArea" wrapText="true" editable="false" VBox.vgrow="ALWAYS"/>
 
     <HBox spacing="10" alignment="CENTER">
-        <Button fx:id="replyButton" text="↩" onAction="#handleReply">
+        <Button fx:id="replyButton" text="↩" onAction="#handleReply" style="-fx-background-color: #65c0dd; -fx-text-fill: black;">
             <tooltip>
                 <Tooltip text="Rispondi"/>
             </tooltip>
         </Button>
-        <Button fx:id="replyAllButton" text="⇇" onAction="#handleReplyAll">
+        <Button fx:id="replyAllButton" text="⇇" onAction="#handleReplyAll" style="-fx-background-color: #78eac2; -fx-text-fill: black;">
             <tooltip>
                 <Tooltip text="Rispondi a tutti"/>
             </tooltip>
         </Button>
-        <Button fx:id="forwardButton" text="↪" onAction="#handleForward">
+        <Button fx:id="forwardButton" text="↪" onAction="#handleForward" style="-fx-background-color: #9f3ada; -fx-text-fill: black;">
             <tooltip>
                 <Tooltip text="Inoltra"/>
             </tooltip>
         </Button>
-        <Button fx:id="deleteButton" text="✖" onAction="#handleDelete">
+        <Button fx:id="deleteButton" text="✖" onAction="#handleDelete" style="-fx-background-color: #ff0000; -fx-text-fill: black;">
             <tooltip>
                 <Tooltip text="Elimina"/>
             </tooltip>

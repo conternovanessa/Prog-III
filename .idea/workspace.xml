@@ -4,19 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0a55273f-6121-464b-90af-ee02c84e2271" name="Changes" comment="finito?">
+    <list default="true" id="0a55273f-6121-464b-90af-ee02c84e2271" name="Changes" comment="Sto porca miseria di colore adesso funge">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages/fabiodelia@progetto.com/31-08-2024 13-20-33_filippoditto@progetto.com_dai.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages/fabiodelia@progetto.com/31-08-2024 13-29-42_filippoditto@progetto.com_Re__data_e_ora.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages/fabiodelia@progetto.com/31-08-2024 13-30-00_fabiodelia@progetto.com_Re__Re__data_e_ora.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages/fabiodelia@progetto.com/31-08-2024_12-49-37_filippoditto@progetto.com_potrei_essere_mongolo.txt" beforeDir="false" afterPath="$PROJECT_DIR$/messages/fabiodelia@progetto.com/31-08-2024_12-49-37_filippoditto@progetto.com_potrei_essere_mongolo.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages/filippoditto@progetto.com/31-08-2024 13-30-00_fabiodelia@progetto.com_Re__Re__data_e_ora.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages/filippoditto@progetto.com/31-08-2024 13-30-55_fabiodelia@progetto.com_Re__potrei_essere_mongolo.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages/filippoditto@progetto.com/31-08-2024_12-48-21_fabiodelia@progetto.com_data_e_ora.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages/vanessaconterno@progetto.com/31-08-2024 13-30-55_fabiodelia@progetto.com_Re__potrei_essere_mongolo.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages/vanessaconterno@progetto.com/31-08-2024 13-31-57_filippoditto@progetto.com_data_e_ora.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto/Controller/EmailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto/Controller/EmailController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto/Model/MessageStorage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto/Model/MessageStorage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/messages/fabiodelia@progetto.com/31-08-2024 14-21-39_filippoditto@progetto.com_CIAO.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/progetto/View/client_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/progetto/View/client_view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/progetto/View/email_detail_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/progetto/View/email_detail_view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/progetto/View/email_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/progetto/View/email_view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/progetto/View/server_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/progetto/View/server_view.fxml" afterDir="false" />
     </list>
     <list id="e8c31100-440d-4de3-9108-d18ebe2ff760" name="Changes by user" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -442,7 +437,15 @@
       <option name="project" value="LOCAL" />
       <updated>1725094590535</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="Sto porca miseria di colore adesso funge">
+      <option name="closed" value="true" />
+      <created>1725106929000</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1725106929000</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -460,7 +463,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="cambiata porta ora è 55555" />
     <MESSAGE value="MVC ti prego finiscila" />
     <MESSAGE value="worka un po'" />
     <MESSAGE value="worka fino a quando non schiacci il client" />
@@ -485,7 +487,8 @@
     <MESSAGE value="ho tolto il nome non bello della pagina" />
     <MESSAGE value="non era stato aggiornato il percorso per le email.txt" />
     <MESSAGE value="finito?" />
-    <option name="LAST_COMMIT_MESSAGE" value="finito?" />
+    <MESSAGE value="Sto porca miseria di colore adesso funge" />
+    <option name="LAST_COMMIT_MESSAGE" value="Sto porca miseria di colore adesso funge" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
