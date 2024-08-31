@@ -76,36 +76,57 @@ public class MessageStorage {
         }
     }
 
-    public static void markAsRead(String recipient, String sender, String subject) {
+    public static boolean markAsRead(String recipient, String sender, String subject) {
         writeLock.lock();
         try {
             Path clientDir = Paths.get(BASE_DIR, recipient);
             if (!Files.exists(clientDir) || !Files.isDirectory(clientDir)) {
                 System.err.println("Directory not found or is not a directory: " + clientDir);
-                return;
+                return false;
             }
 
             String sanitizedSender = sanitizeFileName(sender);
             String sanitizedSubject = sanitizeFileName(subject);
 
+            System.out.println("Searching for email file:");
+            System.out.println("Directory: " + clientDir);
+            System.out.println("Sender: " + sanitizedSender);
+            System.out.println("Subject: " + sanitizedSubject);
+
             try (DirectoryStream<Path> stream = Files.newDirectoryStream(clientDir,
                     path -> path.getFileName().toString().contains(sanitizedSender) &&
                             path.getFileName().toString().contains(sanitizedSubject))) {
                 for (Path file : stream) {
+                    System.out.println("Found matching file: " + file.getFileName());
                     List<String> lines = Files.readAllLines(file);
                     if (!lines.contains("READ")) {
                         lines.add("READ");
                         Files.write(file, lines);
-                        break;
+                        System.out.println("Added READ marker to file");
+                        return true;
+                    } else {
+                        System.out.println("File already contains READ marker");
+                        return true;
                     }
                 }
+                System.out.println("No matching file found");
             } catch (IOException e) {
                 System.err.println("Error marking email as read: " + e.getMessage());
             }
+            return false;
         } finally {
             writeLock.unlock();
         }
     }
+
+    public static boolean isRead(String emailContent) {
+        boolean read = emailContent.contains("READ");
+        System.out.println("Checking if email is read: " + read);
+        System.out.println("Email content (first 100 chars): " + emailContent.substring(0, Math.min(emailContent.length(), 100)));
+        return read;
+    }
+
+
 
     public static boolean deleteMessage(String recipient, String sender, String subject) {
         writeLock.lock();
@@ -164,9 +185,5 @@ public class MessageStorage {
 
     private static String sanitizeFileName(String name) {
         return name.trim().replaceAll("[^a-zA-Z0-9@._-]", "_");
-    }
-
-    public static boolean isRead(String emailContent) {
-        return emailContent.contains("READ");
     }
 }

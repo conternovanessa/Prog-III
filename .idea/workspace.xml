@@ -6,10 +6,16 @@
   <component name="ChangeListManager">
     <list default="true" id="0a55273f-6121-464b-90af-ee02c84e2271" name="Changes" comment="finito?">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/messages/fabiodelia@progetto.com/31-08-2024 13-20-33_filippoditto@progetto.com_dai.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/messages/fabiodelia@progetto.com/31-08-2024 13-29-42_filippoditto@progetto.com_Re__data_e_ora.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/messages/fabiodelia@progetto.com/31-08-2024 13-30-00_fabiodelia@progetto.com_Re__Re__data_e_ora.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/messages/fabiodelia@progetto.com/31-08-2024_12-49-37_filippoditto@progetto.com_potrei_essere_mongolo.txt" beforeDir="false" afterPath="$PROJECT_DIR$/messages/fabiodelia@progetto.com/31-08-2024_12-49-37_filippoditto@progetto.com_potrei_essere_mongolo.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/messages/filippoditto@progetto.com/31-08-2024 13-30-00_fabiodelia@progetto.com_Re__Re__data_e_ora.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/messages/filippoditto@progetto.com/31-08-2024 13-30-55_fabiodelia@progetto.com_Re__potrei_essere_mongolo.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/messages/filippoditto@progetto.com/31-08-2024_12-48-21_fabiodelia@progetto.com_data_e_ora.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/messages/vanessaconterno@progetto.com/31-08-2024 13-30-55_fabiodelia@progetto.com_Re__potrei_essere_mongolo.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/messages/vanessaconterno@progetto.com/31-08-2024 13-31-57_filippoditto@progetto.com_data_e_ora.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto/Controller/EmailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto/Controller/EmailController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto/Controller/ForwardHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto/Controller/ForwardHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto/Controller/NewMailHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto/Controller/NewMailHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto/Controller/ReplyHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto/Controller/ReplyHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto/Model/MessageStorage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto/Model/MessageStorage.java" afterDir="false" />
     </list>
     <list id="e8c31100-440d-4de3-9108-d18ebe2ff760" name="Changes by user" comment="" />
@@ -59,28 +65,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;Application.ClientApp.executor&quot;: &quot;Run&quot;,
-    &quot;Application.NewMailHandler.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Server.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Read-App&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;CodeWithMe&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Application.ClientApp.executor": "Run",
+    "Application.NewMailHandler.executor": "Run",
+    "Application.Server.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "Read-App",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "CodeWithMe",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\vanes\IdeaProjects\Prog-III\src\main\resources\com\example\progetto\images" />

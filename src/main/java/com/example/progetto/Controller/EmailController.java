@@ -102,11 +102,16 @@ public class EmailController implements EmailObserver {
                     Button emailButton = new Button(buttonText);
                     emailButton.setOnAction(event -> showEmailDetailView(email));
 
-                    // Usa il nuovo metodo isRead per determinare se l'email è stata letta
-                    if (MessageStorage.isRead(email)) {
-                        emailButton.setStyle("-fx-background-color: lightgray;");
+                    boolean isRead = MessageStorage.isRead(email);
+                    System.out.println("Email read status: " + isRead);
+                    System.out.println("Button text: " + buttonText);
+
+                    if (isRead) {
+                        emailButton.setStyle("-fx-background-color: lightgreen;");
+                        System.out.println("Setting button color to lightgray");
                     } else {
-                        emailButton.setStyle("-fx-background-color: lightblue; -fx-text-fill: black;");
+                        emailButton.setStyle("-fx-background-color: khaki ; -fx-text-fill: black;");
+                        System.out.println("Setting button color to lightblue");
                     }
 
                     emailBox.getChildren().add(emailButton);
@@ -117,16 +122,25 @@ public class EmailController implements EmailObserver {
         });
     }
 
+
     private void showEmailDetailView(String email) {
         Platform.runLater(() -> {
-            // Extract sender and subject for marking the email as read
-            String[] emailLines = email.split("\n", 4);
-            if (emailLines.length >= 3) {
-                String sender = emailLines[0].replace("From: ", "");
-                String subject = emailLines[2].replace("Subject: ", "");
+            String[] emailLines = email.split("\n", 5);  // Aumentato a 5 per includere la riga "Body:"
+            if (emailLines.length >= 5) {
+                String date = emailLines[0].replace("Date: ", "");
+                String sender = emailLines[1].replace("From: ", "");
+                String recipient = emailLines[2].replace("To: ", "");
+                String subject = emailLines[3].replace("Subject: ", "");
+
+                System.out.println("Marking email as read:");
+                System.out.println("Date: " + date);
+                System.out.println("From: " + sender);
+                System.out.println("To: " + recipient);
+                System.out.println("Subject: " + subject);
 
                 // Mark the email as read
-                MessageStorage.markAsRead(client, sender, subject);
+                boolean marked = MessageStorage.markAsRead(client, sender, subject);
+                System.out.println("Email marked as read: " + marked);
 
                 EmailDetailApplication detailApp = new EmailDetailApplication(email, client);
                 try {
@@ -138,9 +152,12 @@ public class EmailController implements EmailObserver {
 
                 // Reload emails to update the UI
                 loadEmails();
+            } else {
+                System.out.println("Invalid email format. Lines: " + emailLines.length);
             }
         });
     }
+
 
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
