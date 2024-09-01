@@ -1,0 +1,6 @@
+Date: 01-09-2024 09:51:45
+From: vanessaconterno@progetto.com
+To: filippoditto@progetto.com
+Subject: Email da vanessa a Filippo.
+Body: Email di prova per destinatario singolo.
+-----------------------------------

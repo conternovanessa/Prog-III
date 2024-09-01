@@ -1,7 +1,8 @@
-module com.example.progetto_shit {
+module com.example.progetto {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
+    requires javafx.graphics;
 
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
@@ -10,10 +11,15 @@ module com.example.progetto_shit {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
+    requires java.logging;
 
-    opens com.example.progetto_shit to javafx.fxml;
-    exports com.example.progetto_shit.Server;
-    opens com.example.progetto_shit.Server to javafx.fxml;
-    exports com.example.progetto_shit.Client;
-    opens com.example.progetto_shit.Client to javafx.fxml;
+    // Esporta i pacchetti principali del progetto
+    exports com.example.progetto.Model;
+    exports com.example.progetto.Controller;
+    exports com.example.progetto.Main;
+
+    // Apre i pacchetti per riflessione a javafx.fxml
+    opens com.example.progetto.Model to javafx.fxml;
+    opens com.example.progetto.Controller to javafx.fxml;
+    opens com.example.progetto.Main to javafx.fxml;
 }

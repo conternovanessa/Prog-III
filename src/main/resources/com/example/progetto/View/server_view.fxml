@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progetto.Controller.ServerController"
+      spacing="10" alignment="CENTER">
+
+    <!-- Etichetta per lo stato del server -->
+    <Label fx:id="statusLabel" text="Server Status: Stopped" style="-fx-font-size: 16px; -fx-text-fill: blue;"/>
+
+    <!-- Pulsante per avviare il server -->
+    <Button fx:id="startButton" text="Start Server" onAction="#handleStartServer" style="-fx-font-size: 14px;"/>
+
+    <!-- Pulsante per fermare il server -->
+    <Button fx:id="stopButton" text="Stop Server" onAction="#handleStopServer" style="-fx-font-size: 14px;"/>
+
+</VBox>

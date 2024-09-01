@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx/17"
+            fx:controller="com.example.progetto.Controller.EmailController"
+            prefHeight="400.0" prefWidth="600.0">
+
+    <!-- Label che visualizza l'indirizzo email selezionato -->
+    <Label fx:id="clientLabel" layoutX="20.0" layoutY="20.0" text="Emails for: [Client Name]" prefWidth="560.0" />
+
+    <!-- Sezione per i pulsanti "Torna Indietro", "Nuova Mail" e "Refresh" -->
+    <HBox layoutX="20.0" layoutY="50.0" spacing="10">
+        <Button fx:id="backButton" text="←" onAction="#handleBack">
+            <tooltip>
+                <Tooltip text="Torna Indietro"/>
+            </tooltip>
+        </Button>
+        <Button fx:id="newMailButton" text="+" onAction="#handleNewMail">
+            <tooltip>
+                <Tooltip text="Nuova Mail"/>
+            </tooltip>
+        </Button>
+        <Button fx:id="refreshButton" text="⟳" onAction="#handleRefresh">
+            <tooltip>
+                <Tooltip text="Aggiorna"/>
+            </tooltip>
+        </Button>
+    </HBox>
+
+    <!-- Sezione per visualizzare la lista delle email ricevute -->
+    <ScrollPane fx:id="emailScrollPane" layoutX="20.0" layoutY="90.0" prefWidth="500" prefHeight="200">
+        <VBox fx:id="emailBox" spacing="10" />
+    </ScrollPane>
+
+</AnchorPane>

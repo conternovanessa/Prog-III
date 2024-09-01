@@ -4,26 +4,471 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0a55273f-6121-464b-90af-ee02c84e2271" name="Changes" comment="fuk u">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/Prog-III.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="0a55273f-6121-464b-90af-ee02c84e2271" name="Changes" comment="Sto cazzo di REplyAll ha deciso che bastavano 3 ricghe invece che 15">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/messages/fabiodelia@progetto.com/31-08-2024 14-03-23_filippoditto@progetto.com_COaps.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/messages/fabiodelia@progetto.com/31-08-2024_12-49-37_filippoditto@progetto.com_potrei_essere_mongolo.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/messages/filippoditto@progetto.com/01-09-2024 08-38-34_fabiodelia@progetto.com_Re__COaps.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/messages/filippoditto@progetto.com/31-08-2024 13-55-10_fabiodelia@progetto.com_PER_FAVORE.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/messages/filippoditto@progetto.com/31-08-2024_12-53-51_fabiodelia@progetto.com_Prova.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/messages/vanessaconterno@progetto.com/31-08-2024_12-49-37_filippoditto@progetto.com_potrei_essere_mongolo.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto/Controller/ForwardHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto/Controller/ForwardHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/progetto/View/email_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/progetto/View/email_view.fxml" afterDir="false" />
     </list>
+    <list id="e8c31100-440d-4de3-9108-d18ebe2ff760" name="Changes by user" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable"
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Exception" />
+        <option value="Class" />
+        <option value="FxmlFile" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="Server-Client" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;conternovanessa&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/conternovanessa/Prog-III/",
+    "accountId": "d24558fd-777a-4128-b7fc-0f0c30dcd9f0"
   }
 }]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="2kpmLJyReEzHifbv02UqULTXYaC" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;Application.ClientApp.executor&quot;: &quot;Run&quot;,
+    &quot;Application.NewMailHandler.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Server.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Read-App&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;CodeWithMe&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\vanes\IdeaProjects\Prog-III\src\main\resources\com\example\progetto\images" />
+      <recent name="C:\Users\vanes\IdeaProjects\Prog-III\src\main\resources\com\example\progetto_shit\View\images" />
+      <recent name="C:\Users\vanes\IdeaProjects\Prog-III\src\main\resources\com\example\progetto_shit\images" />
+      <recent name="C:\Users\vanes\IdeaProjects\Prog-III\src\main\resources\images" />
+      <recent name="C:\Users\vanes\IdeaProjects\Prog-III\src\main\resources" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.progetto.Main.Server" />
+      <module name="Progetto_shit" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.progetto.Main.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Server" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-b114ca120d71-intellij.indexing.shared.core-IU-242.21829.142" />
+        <option value="bundled-js-predefined-d6986cc7102b-7c0b70fcd90d-JavaScript-IU-242.21829.142" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
+    <task id="LOCAL-00001" summary="ciao ho fatto tutto da capo per avere l'MVC del cazzo">
+      <option name="closed" value="true" />
+      <created>1723887240520</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1723887240520</updated>
+    </task>
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0a55273f-6121-464b-90af-ee02c84e2271" name="Changes" comment="" />
+      <created>1723988838683</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1723988838683</updated>
+      <workItem from="1723988840291" duration="6706000" />
+      <workItem from="1724056140403" duration="5293000" />
+      <workItem from="1724143100279" duration="1517000" />
+      <workItem from="1724312622537" duration="5690000" />
+      <workItem from="1724321252968" duration="938000" />
+      <workItem from="1724399353160" duration="2926000" />
+      <workItem from="1724484952336" duration="18593000" />
+      <workItem from="1724570093845" duration="4268000" />
+      <workItem from="1724656833115" duration="1728000" />
+      <workItem from="1725011472030" duration="7721000" />
+      <workItem from="1725028429715" duration="986000" />
+      <workItem from="1725089917204" duration="6174000" />
+      <workItem from="1725099513041" duration="1906000" />
+      <workItem from="1725172481961" duration="4392000" />
+    </task>
+    <task id="LOCAL-00002" summary="ora funzionano molte cose bisogna solo mettere le mail da quache parte (creazione  nuovo file letto poi da un package?)">
+      <option name="closed" value="true" />
+      <created>1723990810427</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1723990810427</updated>
+    </task>
+    <task id="LOCAL-00003" summary="aiuto arrivano i messaggi adesso">
+      <option name="closed" value="true" />
+      <created>1723993088008</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1723993088008</updated>
+    </task>
+    <task id="LOCAL-00004" summary="commit momentaneo">
+      <option name="closed" value="true" />
+      <created>1723995536078</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1723995536078</updated>
+    </task>
+    <task id="LOCAL-00005" summary="ciao adesso carica su un file txt">
+      <option name="closed" value="true" />
+      <created>1724056997145</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1724056997145</updated>
+    </task>
+    <task id="LOCAL-00006" summary="ora funziona la lettura, l'invio e i package. domani faremo il resto gg compari">
+      <option name="closed" value="true" />
+      <created>1724061458930</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1724061458930</updated>
+    </task>
+    <task id="LOCAL-00007" summary="cambiata porta ora è 55555">
+      <option name="closed" value="true" />
+      <created>1724143976016</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1724143976016</updated>
+    </task>
+    <task id="LOCAL-00008" summary="MVC ti prego finiscila">
+      <option name="closed" value="true" />
+      <created>1724314654686</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1724314654687</updated>
+    </task>
+    <task id="LOCAL-00009" summary="MVC ti prego finiscila">
+      <option name="closed" value="true" />
+      <created>1724316880734</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1724316880734</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Changes by dfabi">
+      <option name="closed" value="true" />
+      <created>1724318353992</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1724318353992</updated>
+    </task>
+    <task id="LOCAL-00011" summary="MVC ti prego finiscila">
+      <option name="closed" value="true" />
+      <created>1724322135502</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1724322135502</updated>
+    </task>
+    <task id="LOCAL-00012" summary="worka un po'">
+      <option name="closed" value="true" />
+      <created>1724411141880</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1724411141880</updated>
+    </task>
+    <task id="LOCAL-00013" summary="worka fino a quando non schiacci il client">
+      <option name="closed" value="true" />
+      <created>1724489507163</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1724489507163</updated>
+    </task>
+    <task id="LOCAL-00014" summary="ma sta cazzo di doppia interfaccia la possiamo levare? porca miseria ladra">
+      <option name="closed" value="true" />
+      <created>1724493930795</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1724493930795</updated>
+    </task>
+    <task id="LOCAL-00015" summary="adesso apre direttamente il client">
+      <option name="closed" value="true" />
+      <created>1724494379594</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1724494379594</updated>
+    </task>
+    <task id="LOCAL-00016" summary="adesso apre direttamente il client">
+      <option name="closed" value="true" />
+      <created>1724494398325</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1724494398325</updated>
+    </task>
+    <task id="LOCAL-00017" summary="adesso apre direttamente il client">
+      <option name="closed" value="true" />
+      <created>1724496913069</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1724496913069</updated>
+    </task>
+    <task id="LOCAL-00018" summary="apre il client correttamente bisogna solo aggiustare i pulsanti">
+      <option name="closed" value="true" />
+      <created>1724503320213</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1724503320213</updated>
+    </task>
+    <task id="LOCAL-00019" summary="apre il client correttamente bisogna solo aggiustare i pulsanti">
+      <option name="closed" value="true" />
+      <created>1724503413059</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1724503413059</updated>
+    </task>
+    <task id="LOCAL-00020" summary="ora compaiono le mail">
+      <option name="closed" value="true" />
+      <created>1724507415862</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1724507415862</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Changes by filippo">
+      <option name="closed" value="true" />
+      <created>1724507529258</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1724507529258</updated>
+    </task>
+    <task id="LOCAL-00022" summary="ora girano quasi tutte da aggiungere solo qualche asto le cose per il reply e per il forward">
+      <option name="closed" value="true" />
+      <created>1724507711781</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1724507711781</updated>
+    </task>
+    <task id="LOCAL-00023" summary="settato in modo che ogni finestra sia della medesima dimensione">
+      <option name="closed" value="true" />
+      <created>1724570361593</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1724570361593</updated>
+    </task>
+    <task id="LOCAL-00024" summary="settate le mail di prova">
+      <option name="closed" value="true" />
+      <created>1724572570083</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1724572570083</updated>
+    </task>
+    <task id="LOCAL-00025" summary="versone con invio mail funzionante">
+      <option name="closed" value="true" />
+      <created>1724577267725</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1724577267726</updated>
+    </task>
+    <task id="LOCAL-00026" summary="buongiorno vi è il tasto delete che funge con i TO">
+      <option name="closed" value="true" />
+      <created>1724663353602</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1724663353602</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Changes by dfabi Forward working">
+      <option name="closed" value="true" />
+      <created>1724946070374</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1724946070374</updated>
+    </task>
+    <task id="LOCAL-00028" summary="VAFFANCULO REPLY">
+      <option name="closed" value="true" />
+      <created>1724947261157</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1724947261157</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Il reply vbiene visualizzato correttamente, bisogna cambiare ciò che compare nel bottone, il reply all, il delete e aggiungere un tasto back">
+      <option name="closed" value="true" />
+      <created>1725018666115</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1725018666115</updated>
+    </task>
+    <task id="LOCAL-00030" summary="tasto delete per le mail normali funziona">
+      <option name="closed" value="true" />
+      <created>1725019487962</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1725019487962</updated>
+    </task>
+    <task id="LOCAL-00031" summary="tasto delete per le mail normali funziona">
+      <option name="closed" value="true" />
+      <created>1725021006781</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1725021006781</updated>
+    </task>
+    <task id="LOCAL-00032" summary="delete funzionante">
+      <option name="closed" value="true" />
+      <created>1725025635815</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1725025635815</updated>
+    </task>
+    <task id="LOCAL-00033" summary="ma funzioni che davvero????">
+      <option name="closed" value="true" />
+      <created>1725029350077</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1725029350077</updated>
+    </task>
+    <task id="LOCAL-00034" summary="ho tolto il nome non bello della pagina">
+      <option name="closed" value="true" />
+      <created>1725090272271</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1725090272271</updated>
+    </task>
+    <task id="LOCAL-00035" summary="non era stato aggiornato il percorso per le email.txt">
+      <option name="closed" value="true" />
+      <created>1725090876725</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1725090876725</updated>
+    </task>
+    <task id="LOCAL-00036" summary="non era stato aggiornato il percorso per le email.txt">
+      <option name="closed" value="true" />
+      <created>1725091235131</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1725091235131</updated>
+    </task>
+    <task id="LOCAL-00037" summary="finito?">
+      <option name="closed" value="true" />
+      <created>1725094590535</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1725094590535</updated>
+    </task>
+    <task id="LOCAL-00038" summary="Sto porca miseria di colore adesso funge">
+      <option name="closed" value="true" />
+      <created>1725106929000</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1725106929000</updated>
+    </task>
+    <task id="LOCAL-00039" summary="YEY">
+      <option name="closed" value="true" />
+      <created>1725108599825</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1725108599825</updated>
+    </task>
+    <task id="LOCAL-00040" summary="Sto cazzo di REplyAll ha deciso che bastavano 3 ricghe invece che 15">
+      <option name="closed" value="true" />
+      <created>1725176606470</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1725176606470</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -37,7 +482,35 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fuk u" />
-    <option name="LAST_COMMIT_MESSAGE" value="fuk u" />
+    <MESSAGE value="worka fino a quando non schiacci il client" />
+    <MESSAGE value="ma sta cazzo di doppia interfaccia la possiamo levare? porca miseria ladra" />
+    <MESSAGE value="adesso apre direttamente il client" />
+    <MESSAGE value="apre il client correttamente bisogna solo aggiustare i pulsanti" />
+    <MESSAGE value="ora compaiono le mail" />
+    <MESSAGE value="Changes by user" />
+    <MESSAGE value="Changes by filippo" />
+    <MESSAGE value="ora girano quasi tutte da aggiungere solo qualche asto le cose per il reply e per il forward" />
+    <MESSAGE value="settato in modo che ogni finestra sia della medesima dimensione" />
+    <MESSAGE value="settate le mail di prova" />
+    <MESSAGE value="versone con invio mail funzionante" />
+    <MESSAGE value="buongiorno vi è il tasto delete che funge con i TO" />
+    <MESSAGE value="Changes by dfabi" />
+    <MESSAGE value="Changes by dfabi Forward working" />
+    <MESSAGE value="VAFFANCULO REPLY" />
+    <MESSAGE value="Il reply vbiene visualizzato correttamente, bisogna cambiare ciò che compare nel bottone, il reply all, il delete e aggiungere un tasto back" />
+    <MESSAGE value="tasto delete per le mail normali funziona" />
+    <MESSAGE value="delete funzionante" />
+    <MESSAGE value="ma funzioni che davvero????" />
+    <MESSAGE value="ho tolto il nome non bello della pagina" />
+    <MESSAGE value="non era stato aggiornato il percorso per le email.txt" />
+    <MESSAGE value="finito?" />
+    <MESSAGE value="Sto porca miseria di colore adesso funge" />
+    <MESSAGE value="YEY" />
+    <MESSAGE value="Sto cazzo di REplyAll ha deciso che bastavano 3 ricghe invece che 15" />
+    <option name="LAST_COMMIT_MESSAGE" value="Sto cazzo di REplyAll ha deciso che bastavano 3 ricghe invece che 15" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
