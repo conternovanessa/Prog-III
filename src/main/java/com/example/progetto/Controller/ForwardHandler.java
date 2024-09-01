@@ -53,7 +53,7 @@ public class ForwardHandler {
                 .map(line -> line.replace("Subject: ", ""))
                 .orElse("No Subject");
 
-        subjectField.setText(originalSubject);
+        subjectField.setText("Fwd: " + originalSubject);
 
         // Trova la linea che contiene il "Body:"
         String originalBody = Arrays.stream(emailLines)

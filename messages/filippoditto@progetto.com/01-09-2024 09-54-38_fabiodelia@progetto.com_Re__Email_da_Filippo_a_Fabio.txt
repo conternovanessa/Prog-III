@@ -1,10 +1,9 @@
-Date: 01-09-2024 08:38:34
+Date: 01-09-2024 09:54:38
 From: fabiodelia@progetto.com
 To: filippoditto@progetto.com
-Subject: Re: COaps
-Body: ewo 3è
+Subject: Re: Email da Filippo a Fabio
+Body: Email di prova a destinatario singolo.
 -----------------------------------
-
-Cioa
+Risposta da Fabio a Filippo
 -----------------------------------
 READ

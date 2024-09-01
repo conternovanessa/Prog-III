@@ -1,0 +1,6 @@
+Date: 01-09-2024 09:47:01
+From: fabiodelia@progetto.com
+To: vanessaconterno@progetto.com
+Subject: Email da Fabio a Vanessa.
+Body: Email di prova a destinatario singolo.
+-----------------------------------

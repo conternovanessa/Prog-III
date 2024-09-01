@@ -30,7 +30,7 @@
     </HBox>
 
     <!-- Sezione per visualizzare la lista delle email ricevute -->
-    <ScrollPane fx:id="emailScrollPane" layoutX="20.0" layoutY="90.0" prefWidth="500" fitToHeight="true">
+    <ScrollPane fx:id="emailScrollPane" layoutX="20.0" layoutY="90.0" prefWidth="500" prefHeight="200">
         <VBox fx:id="emailBox" spacing="10" />
     </ScrollPane>
 
