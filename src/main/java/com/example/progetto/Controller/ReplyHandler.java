@@ -56,7 +56,10 @@ public class ReplyHandler {
         TextArea bodyArea = new TextArea();
         bodyArea.setPromptText("Body");
         bodyArea.setPrefRowCount(10);
-        bodyArea.setText("\n\n----- Original Message -----\n" + originalBody);
+
+        // Remove "READ" from the original body before setting it in the reply
+        String cleanedBody = originalBody.replace("READ", "").trim();
+        bodyArea.setText(cleanedBody);
 
         VBox vbox = new VBox(10,
                 new Label("From:"), fromField,

@@ -7,8 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class EmailDetailController {
 
@@ -77,16 +76,33 @@ public class EmailDetailController {
     }
 
     private void handleReplyOrReplyAll(boolean replyAll) {
+        // Dividi l'email in righe e estrai mittente, destinatari, oggetto e corpo
         String[] emailLines = fullEmailContent.split("\n", 5);
-        // Skip the date line (index 0)
-        String sender = emailLines.length > 1 ? emailLines[1].replace("From: ", "") : "Unknown Sender";
-        String receiver = emailLines.length > 2 ? emailLines[2].replace("To: ", "") : "Unknown Receiver";
-        String subject = emailLines.length > 3 ? emailLines[3].replace("Subject: ", "") : "No Subject";
-        String body = emailLines.length > 4 ? emailLines[4].replace("Body: ", "") : "";
+        String sender = emailLines.length > 1 ? emailLines[1].replace("From: ", "").trim().toLowerCase() : "unknown.sender@example.com";
+        String receiver = emailLines.length > 2 ? emailLines[2].replace("To: ", "").trim().toLowerCase() : "unknown.receiver@example.com";
+        String subject = emailLines.length > 3 ? emailLines[3].replace("Subject: ", "").trim() : "No Subject";
+        String body = emailLines.length > 4 ? emailLines[4].replace("Body: ", "").trim() : "";
 
-        List<String> recipients = Arrays.asList(receiver.split(", "));
+        // Utilizza un Set per evitare duplicati
+        Set<String> recipients = new LinkedHashSet<>();
 
-        ReplyHandler replyHandler = new ReplyHandler(client, sender, subject, body, recipients);
+        if (replyAll) {
+            // Suddividi i destinatari separati da virgola
+            String[] allReceivers = receiver.split(",");
+            for (String recipient : allReceivers) {
+                String trimmedRecipient = recipient.trim().toLowerCase();
+                // Aggiungi solo le email che non sono quella del mittente (client)
+                if (!trimmedRecipient.equals(client)) {
+                    recipients.add(trimmedRecipient);
+                }
+            }
+        } else {
+            // Per una semplice risposta, rispondi solo al mittente
+            recipients.add(sender);
+        }
+
+        // Crea un ReplyHandler con i destinatari senza duplicati
+        ReplyHandler replyHandler = new ReplyHandler(client, sender, subject, body, new ArrayList<>(recipients));
         replyHandler.replyToEmail(replyAll);
         stage.close();
     }

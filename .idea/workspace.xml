@@ -4,14 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0a55273f-6121-464b-90af-ee02c84e2271" name="Changes" comment="Sto porca miseria di colore adesso funge">
+    <list default="true" id="0a55273f-6121-464b-90af-ee02c84e2271" name="Changes" comment="YEY">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages/fabiodelia@progetto.com/31-08-2024 14-21-39_filippoditto@progetto.com_CIAO.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/progetto/View/client_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/progetto/View/client_view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/progetto/View/email_detail_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/progetto/View/email_detail_view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/progetto/View/email_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/progetto/View/email_view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/progetto/View/server_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/progetto/View/server_view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto/Controller/EmailDetailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto/Controller/EmailDetailController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto/Controller/ReplyHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto/Controller/ReplyHandler.java" afterDir="false" />
     </list>
     <list id="e8c31100-440d-4de3-9108-d18ebe2ff760" name="Changes by user" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -43,12 +39,12 @@
     &quot;assignee&quot;: &quot;conternovanessa&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/conternovanessa/Prog-III&quot;,
-    &quot;accountId&quot;: &quot;b86f0b45-02bb-4439-856c-3cd7de2e31c1&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/conternovanessa/Prog-III/",
+    "accountId": "d24558fd-777a-4128-b7fc-0f0c30dcd9f0"
   }
-}</component>
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
 }</component>
@@ -60,28 +56,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "Application.ClientApp.executor": "Run",
-    "Application.NewMailHandler.executor": "Run",
-    "Application.Server.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Read-App",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "CodeWithMe",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;Application.ClientApp.executor&quot;: &quot;Run&quot;,
+    &quot;Application.NewMailHandler.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Server.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Read-App&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;CodeWithMe&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\vanes\IdeaProjects\Prog-III\src\main\resources\com\example\progetto\images" />
@@ -114,8 +110,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.18034.62" />
-        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.18034.62" />
+        <option value="bundled-jdk-9823dce3aa75-b114ca120d71-intellij.indexing.shared.core-IU-242.21829.142" />
+        <option value="bundled-js-predefined-d6986cc7102b-7c0b70fcd90d-JavaScript-IU-242.21829.142" />
       </set>
     </attachedChunks>
   </component>
@@ -148,6 +144,7 @@
       <workItem from="1725028429715" duration="986000" />
       <workItem from="1725089917204" duration="6174000" />
       <workItem from="1725099513041" duration="1906000" />
+      <workItem from="1725172481961" duration="3361000" />
     </task>
     <task id="LOCAL-00002" summary="ora funzionano molte cose bisogna solo mettere le mail da quache parte (creazione  nuovo file letto poi da un package?)">
       <option name="closed" value="true" />
@@ -445,7 +442,15 @@
       <option name="project" value="LOCAL" />
       <updated>1725106929000</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="YEY">
+      <option name="closed" value="true" />
+      <created>1725108599825</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1725108599825</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -463,7 +468,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="MVC ti prego finiscila" />
     <MESSAGE value="worka un po'" />
     <MESSAGE value="worka fino a quando non schiacci il client" />
     <MESSAGE value="ma sta cazzo di doppia interfaccia la possiamo levare? porca miseria ladra" />
@@ -488,7 +492,8 @@
     <MESSAGE value="non era stato aggiornato il percorso per le email.txt" />
     <MESSAGE value="finito?" />
     <MESSAGE value="Sto porca miseria di colore adesso funge" />
-    <option name="LAST_COMMIT_MESSAGE" value="Sto porca miseria di colore adesso funge" />
+    <MESSAGE value="YEY" />
+    <option name="LAST_COMMIT_MESSAGE" value="YEY" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
