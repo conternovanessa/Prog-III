@@ -4,3 +4,4 @@ To: fabiodelia@progetto.com, vanessaconterno@progetto.com
 Subject: Email multi-destinatario
 Body: Email di prova a più destinatari.
 -----------------------------------
+READ

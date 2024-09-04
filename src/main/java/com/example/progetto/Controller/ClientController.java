@@ -73,11 +73,6 @@ public class ClientController {
 
     @FXML
     private void openEmailController() {
-        if (primaryStage == null) {
-            System.err.println("primaryStage is null. Please set it before opening the EmailController.");
-            return;
-        }
-
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/progetto/View/email_view.fxml"));
             Parent root = loader.load();
@@ -85,18 +80,24 @@ public class ClientController {
             // Ottieni il controller dell'EmailController
             EmailController emailController = loader.getController();
 
-            // Passa il client selezionato e il primaryStage all'EmailController
+            // Passa il client selezionato al nuovo controller
             emailController.setClient(selectedClient);
-            emailController.setPrimaryStage(primaryStage);
 
-            // Imposta la nuova scena
+            // Crea una nuova finestra (Stage) per il client
+            Stage clientStage = new Stage();
+            emailController.setPrimaryStage(clientStage);
+
             Scene scene = new Scene(root);
-            primaryStage.setScene(scene);
-            primaryStage.setTitle("Email Viewer");
+            clientStage.setScene(scene);
+            clientStage.setTitle("Email Viewer for " + selectedClient);
+            clientStage.show(); // Mostra la nuova finestra
+
+            // La finestra principale di ClientController rimane aperta
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 
     @FXML
     private void handleBack() {

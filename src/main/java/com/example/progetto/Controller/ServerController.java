@@ -1,5 +1,6 @@
 package com.example.progetto.Controller;
 
+import com.example.progetto.Controller.ClientController;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,12 +10,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.BrokenBarrierException;
+import java.util.concurrent.CyclicBarrier;
 
 public class ServerController {
 
@@ -32,19 +36,24 @@ public class ServerController {
     private List<Socket> clientSockets; // Memorizza i socket dei client
     private Stage primaryStage;
     private List<String> clientList; // Lista dei client
+    private CyclicBarrier barrier;
 
     @FXML
     public void initialize() {
         statusLabel.setText("Server Status: Stopped");
         clientSockets = Collections.synchronizedList(new ArrayList<>());
+        // Supponiamo di voler sincronizzare 3 client
+        barrier = new CyclicBarrier(3, () -> System.out.println("Tutti i client sono pronti, ora possono connettersi!"));
     }
 
     @FXML
     private void handleStartServer() {
         startServer();
         Platform.runLater(() -> {
-            // Avvia l'applicazione client direttamente
-            openClientInterface("selezionare il client di dominio @progetto.com"); // Imposta un indirizzo client predefinito o modificabile
+            // Avvia l'applicazione client direttamente per ogni client nella lista
+            for (String clientAddress : clientList) {
+                new Thread(() -> openClientInterface(clientAddress)).start();
+            }
         });
     }
 
@@ -122,16 +131,24 @@ public class ServerController {
 
     private void openClientInterface(String clientAddress) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/progetto/View/client_view.fxml"));
-            Parent root = loader.load();
+            barrier.await(); // Sincronizza l'apertura dei client
+            Platform.runLater(() -> {
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/progetto/View/client_view.fxml"));
+                    Parent root = loader.load();
 
-            ClientController clientController = loader.getController();
-            clientController.setPrimaryStage(primaryStage); // Passa il riferimento del primaryStage
+                    ClientController clientController = loader.getController();
+                    clientController.setPrimaryStage(primaryStage); // Passa il riferimento del primaryStage
 
-            Scene scene = new Scene(root);
-            primaryStage.setScene(scene);
-            primaryStage.setTitle("Client View");
-        } catch (IOException e) {
+                    Scene scene = new Scene(root);
+                    primaryStage.setScene(scene);
+                    primaryStage.setTitle("Client View Ready");
+                    primaryStage.show(); // Mostra la finestra del client
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+        } catch (InterruptedException | BrokenBarrierException e) {
             e.printStackTrace();
         }
     }

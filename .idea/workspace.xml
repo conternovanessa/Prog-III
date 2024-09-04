@@ -4,16 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0a55273f-6121-464b-90af-ee02c84e2271" name="Changes" comment="Sto cazzo di REplyAll ha deciso che bastavano 3 ricghe invece che 15">
+    <list default="true" id="0a55273f-6121-464b-90af-ee02c84e2271" name="Changes" comment="Gira!!">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages/fabiodelia@progetto.com/31-08-2024 14-03-23_filippoditto@progetto.com_COaps.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages/fabiodelia@progetto.com/31-08-2024_12-49-37_filippoditto@progetto.com_potrei_essere_mongolo.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages/filippoditto@progetto.com/01-09-2024 08-38-34_fabiodelia@progetto.com_Re__COaps.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages/filippoditto@progetto.com/31-08-2024 13-55-10_fabiodelia@progetto.com_PER_FAVORE.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages/filippoditto@progetto.com/31-08-2024_12-53-51_fabiodelia@progetto.com_Prova.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages/vanessaconterno@progetto.com/31-08-2024_12-49-37_filippoditto@progetto.com_potrei_essere_mongolo.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto/Controller/ForwardHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto/Controller/ForwardHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/progetto/View/email_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/progetto/View/email_view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/messages/fabiodelia@progetto.com/01-09-2024 09-50-34_vanessaconterno@progetto.com_Email_multi-destinatario_da_Vanessa..txt" beforeDir="false" afterPath="$PROJECT_DIR$/messages/fabiodelia@progetto.com/01-09-2024 09-50-34_vanessaconterno@progetto.com_Email_multi-destinatario_da_Vanessa..txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/messages/fabiodelia@progetto.com/01-09-2024 09-52-10_vanessaconterno@progetto.com_Email_da_Vanessa_a_Fabio.txt" beforeDir="false" afterPath="$PROJECT_DIR$/messages/fabiodelia@progetto.com/01-09-2024 09-52-10_vanessaconterno@progetto.com_Email_da_Vanessa_a_Fabio.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/messages/filippoditto@progetto.com/01-09-2024 09-45-45_fabiodelia@progetto.com_Email_multi-destinatario.txt" beforeDir="false" afterPath="$PROJECT_DIR$/messages/filippoditto@progetto.com/01-09-2024 09-45-45_fabiodelia@progetto.com_Email_multi-destinatario.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/messages/filippoditto@progetto.com/01-09-2024 09-50-34_vanessaconterno@progetto.com_Email_multi-destinatario_da_Vanessa..txt" beforeDir="false" afterPath="$PROJECT_DIR$/messages/filippoditto@progetto.com/01-09-2024 09-50-34_vanessaconterno@progetto.com_Email_multi-destinatario_da_Vanessa..txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/messages/vanessaconterno@progetto.com/01-09-2024 09-45-45_fabiodelia@progetto.com_Email_multi-destinatario.txt" beforeDir="false" afterPath="$PROJECT_DIR$/messages/vanessaconterno@progetto.com/01-09-2024 09-45-45_fabiodelia@progetto.com_Email_multi-destinatario.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/messages/vanessaconterno@progetto.com/01-09-2024 09-47-01_fabiodelia@progetto.com_Email_da_Fabio_a_Vanessa..txt" beforeDir="false" afterPath="$PROJECT_DIR$/messages/vanessaconterno@progetto.com/01-09-2024 09-47-01_fabiodelia@progetto.com_Email_da_Fabio_a_Vanessa..txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/messages/vanessaconterno@progetto.com/01-09-2024 09-47-48_filippoditto@progetto.com_Email_multi-destinatario.txt" beforeDir="false" afterPath="$PROJECT_DIR$/messages/vanessaconterno@progetto.com/01-09-2024 09-47-48_filippoditto@progetto.com_Email_multi-destinatario.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto/Controller/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto/Controller/ClientController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto/Controller/ServerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto/Controller/ServerController.java" afterDir="false" />
     </list>
     <list id="e8c31100-440d-4de3-9108-d18ebe2ff760" name="Changes by user" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -45,12 +46,12 @@
     &quot;assignee&quot;: &quot;conternovanessa&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/conternovanessa/Prog-III/",
-    "accountId": "d24558fd-777a-4128-b7fc-0f0c30dcd9f0"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/conternovanessa/Prog-III/&quot;,
+    &quot;accountId&quot;: &quot;d24558fd-777a-4128-b7fc-0f0c30dcd9f0&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
 }</component>
@@ -150,7 +151,11 @@
       <workItem from="1725028429715" duration="986000" />
       <workItem from="1725089917204" duration="6174000" />
       <workItem from="1725099513041" duration="1906000" />
-      <workItem from="1725172481961" duration="4392000" />
+      <workItem from="1725172481961" duration="5483000" />
+      <workItem from="1725180449220" duration="43000" />
+      <workItem from="1725186270600" duration="132000" />
+      <workItem from="1725186420978" duration="2000" />
+      <workItem from="1725455288900" duration="2707000" />
     </task>
     <task id="LOCAL-00002" summary="ora funzionano molte cose bisogna solo mettere le mail da quache parte (creazione  nuovo file letto poi da un package?)">
       <option name="closed" value="true" />
@@ -464,7 +469,15 @@
       <option name="project" value="LOCAL" />
       <updated>1725176606470</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="Gira!!">
+      <option name="closed" value="true" />
+      <created>1725177758039</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1725177758039</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -482,7 +495,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="worka fino a quando non schiacci il client" />
     <MESSAGE value="ma sta cazzo di doppia interfaccia la possiamo levare? porca miseria ladra" />
     <MESSAGE value="adesso apre direttamente il client" />
     <MESSAGE value="apre il client correttamente bisogna solo aggiustare i pulsanti" />
@@ -507,7 +519,8 @@
     <MESSAGE value="Sto porca miseria di colore adesso funge" />
     <MESSAGE value="YEY" />
     <MESSAGE value="Sto cazzo di REplyAll ha deciso che bastavano 3 ricghe invece che 15" />
-    <option name="LAST_COMMIT_MESSAGE" value="Sto cazzo di REplyAll ha deciso che bastavano 3 ricghe invece che 15" />
+    <MESSAGE value="Gira!!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Gira!!" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
