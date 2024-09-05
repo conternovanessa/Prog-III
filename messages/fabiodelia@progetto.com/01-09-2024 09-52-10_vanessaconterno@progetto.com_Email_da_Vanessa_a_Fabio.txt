@@ -4,3 +4,4 @@ To: fabiodelia@progetto.com
 Subject: Email da Vanessa a Fabio
 Body: Email di prova a destinatario singolo.
 -----------------------------------
+READ

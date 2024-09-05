@@ -4,3 +4,4 @@ To: vanessaconterno@progetto.com
 Subject: Email da Fabio a Vanessa.
 Body: Email di prova a destinatario singolo.
 -----------------------------------
+READ

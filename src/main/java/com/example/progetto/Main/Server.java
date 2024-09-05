@@ -22,25 +22,18 @@ public class Server extends Application {
     public void start(Stage primaryStage) {
         try {
             primaryStage.setTitle("Mail Server");
+            primaryStage.setWidth(600);
+            primaryStage.setHeight(400);
 
-            primaryStage.setWidth(600);  // Larghezza della finestra
-            primaryStage.setHeight(400); // Altezza della finestra
-
-            // Carica il file FXML e ottieni la root della scena
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/progetto/View/server_view.fxml"));
             Parent root = loader.load();
 
-            // Ottieni l'istanza del ServerController associato al file FXML
             ServerController controller = loader.getController();
-
-            // Passa il riferimento al primaryStage al controller
             controller.setPrimaryStage(primaryStage);
 
-            // Carica i client dal file e passali al controller
             loadClientsFromFile(FILE_PATH);
-            controller.setClientList(clientList);
+            controller.initializeServer(clientList);
 
-            // Imposta la scena e mostra lo stage
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
             primaryStage.show();
@@ -50,7 +43,6 @@ public class Server extends Application {
         }
     }
 
-    // Metodo per caricare i client da file
     private void loadClientsFromFile(String filePath) {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
