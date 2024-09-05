@@ -1,6 +1,5 @@
 package com.example.progetto.Controller;
 
-import com.example.progetto.Controller.ClientController;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,97 +9,55 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.net.ServerSocket;
-import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
 
 public class ServerController {
 
     @FXML
     private Label statusLabel;
-
     @FXML
     private Button startButton;
-
     @FXML
     private Button stopButton;
 
     private boolean serverRunning = false;
-    private ServerSocket serverSocket;
-    private List<Socket> clientSockets; // Memorizza i socket dei client
+    private List<String> clientList = new ArrayList<>();
+    private List<Stage> emailStages = new ArrayList<>();
     private Stage primaryStage;
-    private List<String> clientList; // Lista dei client
     private CyclicBarrier barrier;
+
+    private static final String CLIENT_FILE_PATH = "src/main/java/com/example/progetto/email.txt";
 
     @FXML
     public void initialize() {
         statusLabel.setText("Server Status: Stopped");
-        clientSockets = Collections.synchronizedList(new ArrayList<>());
-        // Supponiamo di voler sincronizzare 3 client
-        barrier = new CyclicBarrier(3, () -> System.out.println("Tutti i client sono pronti, ora possono connettersi!"));
+        loadClientsFromFile(CLIENT_FILE_PATH);
+        barrier = new CyclicBarrier(clientList.size(), () -> System.out.println("Tutti i client sono pronti, ora possono connettersi!"));
     }
 
     @FXML
     private void handleStartServer() {
         startServer();
-        Platform.runLater(() -> {
-            // Avvia l'applicazione client direttamente per ogni client nella lista
-            for (String clientAddress : clientList) {
-                new Thread(() -> openClientInterface(clientAddress)).start();
-            }
-        });
+        Platform.runLater(this::openEmailControllers);
     }
 
     @FXML
     private void handleStopServer() {
         stopServer();
-        Platform.runLater(() -> {
-            if (primaryStage != null) {
-                primaryStage.close();
-            }
-        });
+        Platform.runLater(this::closeAllEmailWindows);
     }
 
     private synchronized void startServer() {
         if (!serverRunning) {
             serverRunning = true;
             statusLabel.setText("Server Status: Running");
-
-            new Thread(() -> {
-                try {
-                    serverSocket = new ServerSocket(55555);
-                    while (isServerRunning()) {
-                        Socket clientSocket = serverSocket.accept();
-                        synchronized (clientSockets) {
-                            clientSockets.add(clientSocket);
-                        }
-
-                        // Gestisci la connessione con il client in un nuovo thread
-                        new Thread(() -> handleClientConnection(clientSocket)).start();
-                    }
-                } catch (IOException e) {
-                    System.err.println("Error in server socket: " + e.getMessage());
-                }
-            }).start();
-        }
-    }
-
-    private void handleClientConnection(Socket clientSocket) {
-        try (ObjectInputStream inputStream = new ObjectInputStream(clientSocket.getInputStream())) {
-            while (isServerRunning()) {
-                // Leggi i dati dal client
-                Object data = inputStream.readObject();
-                // Gestisci i dati del client (es. aggiornare l'interfaccia del client)
-                // Aggiungi la logica per l'elaborazione dei dati qui
-            }
-        } catch (IOException | ClassNotFoundException e) {
-            System.err.println("Error handling client connection: " + e.getMessage());
+            // Qui puoi aggiungere la logica per avviare effettivamente il server
         }
     }
 
@@ -108,48 +65,62 @@ public class ServerController {
         if (serverRunning) {
             serverRunning = false;
             statusLabel.setText("Server Status: Stopped");
-            try {
-                if (serverSocket != null && !serverSocket.isClosed()) {
-                    serverSocket.close();
-                }
-                synchronized (clientSockets) {
-                    for (Socket socket : clientSockets) {
-                        if (!socket.isClosed()) {
-                            socket.close();
-                        }
-                    }
-                }
-            } catch (IOException e) {
-                System.err.println("Error closing the server socket: " + e.getMessage());
-            }
+            // Qui puoi aggiungere la logica per fermare effettivamente il server
         }
     }
 
-    private synchronized boolean isServerRunning() {
-        return serverRunning;
+    private void openEmailControllers() {
+        for (String client : clientList) {
+            openEmailController(client);
+        }
     }
 
-    private void openClientInterface(String clientAddress) {
+    private void openEmailController(String client) {
         try {
-            barrier.await(); // Sincronizza l'apertura dei client
-            Platform.runLater(() -> {
-                try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/progetto/View/client_view.fxml"));
-                    Parent root = loader.load();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/progetto/View/email_view.fxml"));
+            Parent root = loader.load();
 
-                    ClientController clientController = loader.getController();
-                    clientController.setPrimaryStage(primaryStage); // Passa il riferimento del primaryStage
+            EmailController emailController = loader.getController();
+            emailController.setClient(client);
 
-                    Scene scene = new Scene(root);
-                    primaryStage.setScene(scene);
-                    primaryStage.setTitle("Client View Ready");
-                    primaryStage.show(); // Mostra la finestra del client
-                } catch (IOException e) {
-                    e.printStackTrace();
+            Stage emailStage = new Stage();
+            emailController.setPrimaryStage(emailStage);
+            emailStages.add(emailStage);
+
+            Scene scene = new Scene(root);
+            emailStage.setScene(scene);
+            emailStage.setTitle("Email Viewer for " + client);
+            emailStage.show();
+
+            // Aggiungi un listener per gestire la chiusura della finestra
+            emailStage.setOnCloseRequest(event -> {
+                emailStages.remove(emailStage);
+                if (emailStages.isEmpty()) {
+                    primaryStage.show(); // Mostra la finestra del server quando tutte le finestre email sono chiuse
                 }
             });
-        } catch (InterruptedException | BrokenBarrierException e) {
+
+        } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void closeAllEmailWindows() {
+        for (Stage stage : emailStages) {
+            stage.close();
+        }
+        emailStages.clear();
+        primaryStage.show(); // Mostra la finestra del server
+    }
+
+    private synchronized void loadClientsFromFile(String filePath) {
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                clientList.add(line.trim());
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading the specified file: " + e.getMessage());
         }
     }
 
@@ -157,7 +128,13 @@ public class ServerController {
         this.primaryStage = stage;
     }
 
-    public void setClientList(List<String> clients) {
-        this.clientList = clients;
+    public void initializeServer(List<String> clientList) {
+        this.clientList = clientList;
+        barrier = new CyclicBarrier(clientList.size(), () -> System.out.println("Tutti i client sono pronti, ora possono connettersi!"));
+
+        // Se vuoi aprire automaticamente le finestre dei client all'avvio del server,
+        // puoi decommentare la riga seguente:
+        // Platform.runLater(this::openEmailControllers);
     }
+
 }

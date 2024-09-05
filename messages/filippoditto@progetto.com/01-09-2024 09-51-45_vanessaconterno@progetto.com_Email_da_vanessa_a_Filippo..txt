@@ -4,3 +4,4 @@ To: filippoditto@progetto.com
 Subject: Email da vanessa a Filippo.
 Body: Email di prova per destinatario singolo.
 -----------------------------------
+READ
