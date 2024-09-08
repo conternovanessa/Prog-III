@@ -22,7 +22,6 @@ public class EmailClientManager {
     public void sendMessageToServer(Object message) throws IOException {
         try (Socket socket = new Socket(serverAddress, serverPort);
              ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream())) {
-
             out.writeObject(message);
             out.flush();
         } catch (UnknownHostException e) {
@@ -33,7 +32,7 @@ public class EmailClientManager {
         }
     }
 
-    public void receiveMessages() {
+    /*public void receiveMessages() {
         new Thread(() -> {
             try (Socket socket = new Socket(serverAddress, serverPort);
                  ObjectInputStream in = new ObjectInputStream(socket.getInputStream())) {
@@ -46,5 +45,5 @@ public class EmailClientManager {
                 System.err.println("Error receiving messages from server: " + e.getMessage());
             }
         }).start();
-    }
+    }*/
 }

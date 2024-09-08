@@ -22,6 +22,7 @@ public class EmailController implements EmailObserver {
 
     private String client;
     private Stage primaryStage;
+    private ServerController serverController;
 
     public void setClient(String client) {
         this.client = client;
@@ -31,6 +32,11 @@ public class EmailController implements EmailObserver {
 
     public void setPrimaryStage(Stage stage) {
         this.primaryStage = stage;
+    }
+
+    public void setServerController(ServerController serverController) {
+        this.serverController = serverController;
+        System.out.println("ServerController set in EmailController");
     }
 
     private void updateClientLabel() {
@@ -45,7 +51,7 @@ public class EmailController implements EmailObserver {
     private void handleBack() {
         Platform.runLater(() -> {
             if (primaryStage != null) {
-                primaryStage.close(); // Chiude direttamente la finestra dell'email
+                primaryStage.close();
             }
         });
     }
@@ -53,7 +59,17 @@ public class EmailController implements EmailObserver {
     @FXML
     private void handleNewMail() {
         NewMailHandler newMailHandler = new NewMailHandler(client);
-        newMailHandler.createNewMail();
+        String newEmail;
+        newEmail = newMailHandler.createNewMail();
+        if (newEmail != null && !newEmail.isEmpty()) {
+            if (serverController != null) {
+                serverController.addNewEmail(newEmail);
+                System.out.println("New email created and notified to server: " + newEmail);
+            } else {
+                System.out.println("ServerController is null, cannot notify new email");
+            }
+            loadEmails();
+        }
     }
 
     @FXML
@@ -64,7 +80,6 @@ public class EmailController implements EmailObserver {
     private synchronized void loadEmails() {
         List<String> emails = MessageStorage.getMessagesForRecipient(client);
 
-        // Usa Platform.runLater per gestire l'aggiornamento della GUI sul thread JavaFX
         Platform.runLater(() -> {
             emailBox.getChildren().clear();
             for (String email : emails) {
@@ -73,7 +88,6 @@ public class EmailController implements EmailObserver {
             emailScrollPane.setContent(emailBox);
         });
     }
-
 
     private void addEmailButton(String email) {
         String[] emailLines = email.split("\n", 5);

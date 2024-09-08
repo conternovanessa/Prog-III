@@ -15,4 +15,8 @@
     <!-- Pulsante per fermare il server -->
     <Button fx:id="stopButton" text="Stop Server" onAction="#handleStopServer" style="-fx-font-size: 14px;"/>
 
+    <!-- Area di testo per visualizzare i client connessi -->
+    <TextArea fx:id="connectedClientsTextArea" editable="false" wrapText="true"
+              prefHeight="100" prefWidth="400" style="-fx-font-size: 12px;"/>
+
 </VBox>

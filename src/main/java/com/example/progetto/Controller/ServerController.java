@@ -1,36 +1,37 @@
 package com.example.progetto.Controller;
 
+import com.example.progetto.Model.EmailObservable;
+import com.example.progetto.Model.EmailObserver;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
-import java.util.concurrent.CyclicBarrier;
+import java.util.Set;
 
-public class ServerController {
+public class ServerController implements EmailObserver {
 
     @FXML
     private Label statusLabel;
+
     @FXML
-    private Button startButton;
-    @FXML
-    private Button stopButton;
+    private TextArea connectedClientsTextArea;
 
     private boolean serverRunning = false;
-    private List<String> clientList = new ArrayList<>();
+    private Set<String> clientSet = new HashSet<>();
     private List<Stage> emailStages = new ArrayList<>();
     private Stage primaryStage;
-    private CyclicBarrier barrier;
+    private EmailObservable emailObservable;
 
     private static final String CLIENT_FILE_PATH = "src/main/java/com/example/progetto/email.txt";
 
@@ -38,13 +39,17 @@ public class ServerController {
     public void initialize() {
         statusLabel.setText("Server Status: Stopped");
         loadClientsFromFile(CLIENT_FILE_PATH);
-        barrier = new CyclicBarrier(clientList.size(), () -> System.out.println("Tutti i client sono pronti, ora possono connettersi!"));
+        updateConnectedClientsDisplay();
+        emailObservable = new EmailObservable();
+        emailObservable.addObserver(this);
     }
 
     @FXML
     private void handleStartServer() {
-        startServer();
-        Platform.runLater(this::openEmailControllers);
+        if (!serverRunning) {
+            startServer();
+            Platform.runLater(this::openEmailControllers);
+        }
     }
 
     @FXML
@@ -54,24 +59,58 @@ public class ServerController {
     }
 
     private synchronized void startServer() {
-        if (!serverRunning) {
-            serverRunning = true;
-            statusLabel.setText("Server Status: Running");
-            // Qui puoi aggiungere la logica per avviare effettivamente il server
-        }
+        serverRunning = true;
+        statusLabel.setText("Server Status: Running");
+        updateConnectedClientsDisplay();
     }
 
     private synchronized void stopServer() {
-        if (serverRunning) {
-            serverRunning = false;
-            statusLabel.setText("Server Status: Stopped");
-            // Qui puoi aggiungere la logica per fermare effettivamente il server
+        serverRunning = false;
+        statusLabel.setText("Server Status: Stopped");
+        updateConnectedClientsDisplay();
+    }
+
+    @Override
+    public void update(List<String> emails) {
+        if (!emails.isEmpty()) {
+            String lastEmail = emails.get(emails.size() - 1);
+            String[] emailParts = lastEmail.split("\n");
+            if (emailParts.length > 2) {
+                String recipient = emailParts[2].replace("To: ", "");
+                Platform.runLater(() -> {
+                    updateConnectedClientsDisplay("New email received for " + recipient);
+                    System.out.println("New email notification: " + recipient);
+                });
+            }
         }
     }
 
+    private void updateConnectedClientsDisplay() {
+        updateConnectedClientsDisplay("");
+    }
+
+    private void updateConnectedClientsDisplay(String additionalInfo) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Connected Clients:\n");
+        if (serverRunning) {
+            for (String client : clientSet) {
+                sb.append(client).append("\n");
+            }
+        } else {
+            sb.append("No clients connected (Server is stopped)");
+        }
+        if (!additionalInfo.isEmpty()) {
+            sb.append("\n").append(additionalInfo);
+        }
+        connectedClientsTextArea.setText(sb.toString());
+        System.out.println("Updated display: " + sb.toString());
+    }
+
     private void openEmailControllers() {
-        for (String client : clientList) {
-            openEmailController(client);
+        for (String client : clientSet) {
+            if (emailStages.stream().noneMatch(stage -> stage.getTitle().contains(client))) {
+                openEmailController(client);
+            }
         }
     }
 
@@ -82,6 +121,7 @@ public class ServerController {
 
             EmailController emailController = loader.getController();
             emailController.setClient(client);
+            emailController.setServerController(this);
 
             Stage emailStage = new Stage();
             emailController.setPrimaryStage(emailStage);
@@ -92,11 +132,10 @@ public class ServerController {
             emailStage.setTitle("Email Viewer for " + client);
             emailStage.show();
 
-            // Aggiungi un listener per gestire la chiusura della finestra
             emailStage.setOnCloseRequest(event -> {
                 emailStages.remove(emailStage);
-                if (emailStages.isEmpty()) {
-                    primaryStage.show(); // Mostra la finestra del server quando tutte le finestre email sono chiuse
+                if (emailStages.isEmpty() && primaryStage != null) {
+                    primaryStage.show();
                 }
             });
 
@@ -110,14 +149,17 @@ public class ServerController {
             stage.close();
         }
         emailStages.clear();
-        primaryStage.show(); // Mostra la finestra del server
+        if (primaryStage != null) {
+            primaryStage.show();
+        }
     }
 
     private synchronized void loadClientsFromFile(String filePath) {
+        clientSet.clear();
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = br.readLine()) != null) {
-                clientList.add(line.trim());
+                clientSet.add(line.trim());
             }
         } catch (IOException e) {
             System.err.println("Error reading the specified file: " + e.getMessage());
@@ -128,13 +170,8 @@ public class ServerController {
         this.primaryStage = stage;
     }
 
-    public void initializeServer(List<String> clientList) {
-        this.clientList = clientList;
-        barrier = new CyclicBarrier(clientList.size(), () -> System.out.println("Tutti i client sono pronti, ora possono connettersi!"));
-
-        // Se vuoi aprire automaticamente le finestre dei client all'avvio del server,
-        // puoi decommentare la riga seguente:
-        // Platform.runLater(this::openEmailControllers);
+    public void addNewEmail(String email) {
+        emailObservable.addEmail(email);
+        System.out.println("New email added: " + email);
     }
-
 }

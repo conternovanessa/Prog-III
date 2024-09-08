@@ -32,7 +32,7 @@ public class Server extends Application {
             controller.setPrimaryStage(primaryStage);
 
             loadClientsFromFile(FILE_PATH);
-            controller.initializeServer(clientList);
+            controller.initialize();
 
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);

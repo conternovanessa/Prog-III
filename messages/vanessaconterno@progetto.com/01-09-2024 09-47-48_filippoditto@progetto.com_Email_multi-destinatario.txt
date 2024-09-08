@@ -1,7 +1,0 @@
-Date: 01-09-2024 09:47:48
-From: filippoditto@progetto.com
-To: fabiodelia@progetto.com, vanessaconterno@progetto.com
-Subject: Email multi-destinatario
-Body: Email di prova a più destinatari.
------------------------------------
-READ

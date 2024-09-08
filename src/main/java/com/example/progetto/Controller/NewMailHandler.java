@@ -42,7 +42,7 @@ public class NewMailHandler extends Application {
         createNewMail();
     }
 
-    public void createNewMail() {
+    public String createNewMail() {
         Stage dialog = new Stage();
         dialog.initModality(Modality.APPLICATION_MODAL);
         dialog.setTitle("Nuova Email");
@@ -112,6 +112,7 @@ public class NewMailHandler extends Application {
         Scene dialogScene = new Scene(vbox, 400, 300);
         dialog.setScene(dialogScene);
         dialog.showAndWait();
+        return null;
     }
 
 }

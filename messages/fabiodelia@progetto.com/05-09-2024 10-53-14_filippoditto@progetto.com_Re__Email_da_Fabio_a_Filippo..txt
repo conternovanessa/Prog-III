@@ -1,9 +1,0 @@
-Date: 05-09-2024 10:53:14
-From: filippoditto@progetto.com
-To: fabiodelia@progetto.com
-Subject: Re: Email da Fabio a Filippo.
-Body: Email di prova a destinatario singolo.
------------------------------------
-CIao fabio
------------------------------------
-READ

@@ -14,7 +14,7 @@ public class ReceivedMailsHandler {
         this.clientAddress = clientAddress;
     }
 
-    public String getReceivedMails() {
+    /*public String getReceivedMails() {
         StringBuilder emails = new StringBuilder();
         String clientDirPath = BASE_DIR + clientAddress;
         File clientDir = new File(clientDirPath);
@@ -47,5 +47,5 @@ public class ReceivedMailsHandler {
         }
 
         return emails.toString();
-    }
+    }*/
 }

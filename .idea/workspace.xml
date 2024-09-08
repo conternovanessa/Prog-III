@@ -4,16 +4,36 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0a55273f-6121-464b-90af-ee02c84e2271" name="Changes" comment="Synchrionized aggiunte">
+    <list default="true" id="0a55273f-6121-464b-90af-ee02c84e2271" name="Changes" comment="Ciao adesso funziona lo stop e start del server in maniera che non sia una socket permanente">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages/vanessaconterno@progetto.com/01-09-2024 09-48-41_filippoditto@progetto.com_Email_da_Filippo_a_Vanessa..txt" beforeDir="false" afterPath="$PROJECT_DIR$/messages/vanessaconterno@progetto.com/01-09-2024 09-48-41_filippoditto@progetto.com_Email_da_Filippo_a_Vanessa..txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto/Controller/ClientController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/messages/fabiodelia@progetto.com/01-09-2024 09-48-19_filippoditto@progetto.com_Email_da_Filippo_a_Fabio.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/messages/fabiodelia@progetto.com/01-09-2024 09-50-34_vanessaconterno@progetto.com_Email_multi-destinatario_da_Vanessa..txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/messages/fabiodelia@progetto.com/01-09-2024 09-52-10_vanessaconterno@progetto.com_Email_da_Vanessa_a_Fabio.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/messages/fabiodelia@progetto.com/01-09-2024 09-57-49_filippoditto@progetto.com_Re__Re__Email_da_Filippo_a_Fabio.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/messages/fabiodelia@progetto.com/04-09-2024 15-51-01_vanessaconterno@progetto.com_Re__Email_multi-destinatario.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/messages/fabiodelia@progetto.com/05-09-2024 10-53-14_filippoditto@progetto.com_Re__Email_da_Fabio_a_Filippo..txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/messages/fabiodelia@progetto.com/05-09-2024 10-53-43_filippoditto@progetto.com_Re__Email_multi-destinatario.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/messages/filippoditto@progetto.com/01-09-2024 09-46-28_fabiodelia@progetto.com_Email_da_Fabio_a_Filippo..txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/messages/filippoditto@progetto.com/01-09-2024 09-50-34_vanessaconterno@progetto.com_Email_multi-destinatario_da_Vanessa..txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/messages/filippoditto@progetto.com/01-09-2024 09-51-45_vanessaconterno@progetto.com_Email_da_vanessa_a_Filippo..txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/messages/filippoditto@progetto.com/01-09-2024 09-54-38_fabiodelia@progetto.com_Re__Email_da_Filippo_a_Fabio.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/messages/filippoditto@progetto.com/04-09-2024 15-50-35_fabiodelia@progetto.com_Re__Email_multi-destinatario.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/messages/filippoditto@progetto.com/04-09-2024 15-51-01_vanessaconterno@progetto.com_Re__Email_multi-destinatario.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/messages/vanessaconterno@progetto.com/01-09-2024 09-45-45_fabiodelia@progetto.com_Email_multi-destinatario.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/messages/vanessaconterno@progetto.com/01-09-2024 09-47-48_filippoditto@progetto.com_Email_multi-destinatario.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/messages/vanessaconterno@progetto.com/01-09-2024 09-48-41_filippoditto@progetto.com_Email_da_Filippo_a_Vanessa..txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/messages/vanessaconterno@progetto.com/01-09-2024 09-54-57_fabiodelia@progetto.com_Fwd__Email_da_Filippo_a_Fabio.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/messages/vanessaconterno@progetto.com/04-09-2024 15-42-07_fabiodelia@progetto.com_Oggettio.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/messages/vanessaconterno@progetto.com/05-09-2024 10-52-39_filippoditto@progetto.com_Re__Email_da_vanessa_a_Filippo..txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/messages/vanessaconterno@progetto.com/05-09-2024 10-53-27_fabiodelia@progetto.com_Fwd__Re__Email_da_Fabio_a_Filippo..txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/messages/vanessaconterno@progetto.com/05-09-2024 10-53-43_filippoditto@progetto.com_Re__Email_multi-destinatario.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto/Controller/EmailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto/Controller/EmailController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto/Controller/NewMailHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto/Controller/NewMailHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto/Controller/ReceivedMailsHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto/Controller/ReceivedMailsHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto/Controller/ServerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto/Controller/ServerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto/Main/ClientApp.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto/Main/EmailApp.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto/Main/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto/Main/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/progetto/View/client_view.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto/Model/EmailClientManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto/Model/EmailClientManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/progetto/View/server_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/progetto/View/server_view.fxml" afterDir="false" />
     </list>
     <list id="e8c31100-440d-4de3-9108-d18ebe2ff760" name="Changes by user" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -69,7 +89,7 @@
     &quot;Application.NewMailHandler.executor&quot;: &quot;Run&quot;,
     &quot;Application.Server.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Read-App&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -156,6 +176,7 @@
       <workItem from="1725186420978" duration="2000" />
       <workItem from="1725455288900" duration="2707000" />
       <workItem from="1725524990287" duration="1270000" />
+      <workItem from="1725817117360" duration="2580000" />
     </task>
     <task id="LOCAL-00002" summary="ora funzionano molte cose bisogna solo mettere le mail da quache parte (creazione  nuovo file letto poi da un package?)">
       <option name="closed" value="true" />
