@@ -2,7 +2,9 @@ package com.example.progetto.Controller;
 
 import com.example.progetto.Model.EmailClientManager;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.List;
 import java.util.logging.Logger;
@@ -10,7 +12,7 @@ import java.util.logging.Logger;
 public class ClientHandler extends Thread {
     private Socket clientSocket;
     private List<String> clientList;
-    private static final int SERVER_PORT = 55555; // Usa la stessa porta del server
+    private static final int SERVER_PORT = 55555;
     private static final Logger logger = Logger.getLogger(ClientHandler.class.getName());
 
     public ClientHandler(Socket socket, List<String> clients) {
@@ -39,16 +41,24 @@ public class ClientHandler extends Thread {
                 }
             }
 
-            logger.info("Nuova mail da " + sender + " a " + recipient);
+            logger.info("Nuova email ricevuta per il client: " + recipient + " da: " + sender);
 
             // Forwarding the email to the selected client
+            boolean emailForwarded = false;
             for (String client : clientList) {
                 if (client.equals(recipient)) {
                     EmailClientManager clientManager = new EmailClientManager("localhost", SERVER_PORT);
                     clientManager.sendMessageToServer(emailMessage);
-                    logger.info("Email inoltrata a: " + recipient);
+                    logger.info("Email inoltrata con successo al client: " + recipient);
+                    emailForwarded = true;
+                    break;
                 }
             }
+
+            if (!emailForwarded) {
+                logger.warning("Impossibile inoltrare l'email. Destinatario non trovato: " + recipient);
+            }
+
         } catch (IOException | ClassNotFoundException e) {
             logger.severe("Errore nella gestione del client: " + e.getMessage());
         }

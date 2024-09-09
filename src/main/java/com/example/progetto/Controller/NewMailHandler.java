@@ -3,29 +3,27 @@ package com.example.progetto.Controller;
 import com.example.progetto.Model.MessageStorage;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 public class NewMailHandler extends Application {
 
-    // Lista dei destinatari validi
+    private static final Logger logger = Logger.getLogger(NewMailHandler.class.getName());
+
     private static final List<String> VALID_RECIPIENTS = Arrays.asList(
             "fabiodelia@progetto.com",
             "filippoditto@progetto.com",
             "vanessaconterno@progetto.com"
     );
 
-    private String currentSender; // Email del mittente
+    private String currentSender;
 
     public NewMailHandler(String currentSender) {
         this.currentSender = currentSender;
@@ -71,38 +69,30 @@ public class NewMailHandler extends Application {
             String body = bodyArea.getText();
 
             if (recipientsText.isEmpty() || subject.isEmpty() || body.isEmpty()) {
-                Alert errorAlert = new Alert(Alert.AlertType.ERROR);
-                errorAlert.setTitle("Errore");
-                errorAlert.setHeaderText("Dettagli mancanti");
-                errorAlert.setContentText("Per favore, compila tutti i campi.");
-                errorAlert.showAndWait();
+                logger.warning("Tentativo di invio email con campi mancanti");
+                showErrorAlert("Dettagli mancanti", "Per favore, compila tutti i campi.");
                 return;
             }
 
-            // Dividi i destinatari usando la virgola come separatore e rimuovi eventuali spazi
             List<String> recipientList = Arrays.stream(recipientsText.split(","))
                     .map(String::trim)
                     .collect(Collectors.toList());
 
             for (String recipient : recipientList) {
                 if (!VALID_RECIPIENTS.contains(recipient)) {
-                    Alert errorAlert = new Alert(Alert.AlertType.ERROR);
-                    errorAlert.setTitle("Errore");
-                    errorAlert.setHeaderText("Indirizzo email non valido");
-                    errorAlert.setContentText("L'indirizzo email " + recipient + " non è valido.");
-                    errorAlert.showAndWait();
+                    logger.warning("Tentativo di invio email a indirizzo non valido: " + recipient);
+                    showErrorAlert("Indirizzo email non valido", "L'indirizzo email " + recipient + " non è valido.");
                     return;
                 }
             }
 
-            // Invio l'email a MessageStorage includendo la lista dei destinatari
             MessageStorage.saveMessage(currentSender, recipientList, subject, body);
 
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Nuova Mail");
-            alert.setHeaderText(null);
-            alert.setContentText("Mail inviata da: " + currentSender + "\nA: " + String.join(", ", recipientList) + "\nOggetto: " + subject + "\nCorpo: " + body);
-            alert.showAndWait();
+            // Log the creation of new email for each receiver
+            for (String receiver : recipientList) {
+                logger.info("Nuova mail per receiver: " + receiver);
+            }
+
             dialog.close();
         });
 
@@ -115,4 +105,11 @@ public class NewMailHandler extends Application {
         return null;
     }
 
+    private void showErrorAlert(String headerText, String contentText) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Errore");
+        alert.setHeaderText(headerText);
+        alert.setContentText(contentText);
+        alert.showAndWait();
+    }
 }

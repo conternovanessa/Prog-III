@@ -116,6 +116,8 @@ public class EmailController extends EmailObservable implements EmailObserver {
             for (String email : messages) {
                 addEmailButton(email);
             }
+            // Log the total number of emails after refresh
+            logger.info("Total emails for client " + client + ": " + messages.size());
         }
     }
 
@@ -189,7 +191,18 @@ public class EmailController extends EmailObservable implements EmailObserver {
 
     @Override
     public void update(List<String> emails) {
-        // Update the ObservableList with the new messages
-        emailList.setAll(emails);
+        Platform.runLater(() -> {
+            // Log the arrival of new emails
+            int newEmailCount = emails.size() - emailList.size();
+            if (newEmailCount > 0) {
+                logger.info(newEmailCount + " new email(s) received for client: " + client);
+            }
+
+            // Update the ObservableList with the new messages
+            emailList.setAll(emails);
+
+            // Refresh the UI
+            loadEmails();
+        });
     }
 }
