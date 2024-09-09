@@ -4,12 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0a55273f-6121-464b-90af-ee02c84e2271" name="Changes" comment="Ulteriore modifica per visione dei client collegati e non, modifica per il pattern Observer Observable sul server per visione e notifica del cambiamento, precisazione del collegamento Server -client necessità di nuove mail.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto/Model/EmailServer.java" afterDir="false" />
+    <list default="true" id="0a55273f-6121-464b-90af-ee02c84e2271" name="Changes" comment="collegamento Server-client">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto/Util/Logger.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto/Controller/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto/Controller/ClientHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto/Controller/EmailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto/Controller/EmailController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto/Main/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto/Main/Server.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto/Model/EmailClientManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto/Model/EmailClientManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto/Model/MessageStorage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto/Model/MessageStorage.java" afterDir="false" />
     </list>
     <list id="e8c31100-440d-4de3-9108-d18ebe2ff760" name="Changes by user" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -153,6 +154,7 @@
       <workItem from="1725455288900" duration="2707000" />
       <workItem from="1725524990287" duration="1270000" />
       <workItem from="1725817117360" duration="2738000" />
+      <workItem from="1725877792622" duration="4520000" />
     </task>
     <task id="LOCAL-00002" summary="ora funzionano molte cose bisogna solo mettere le mail da quache parte (creazione  nuovo file letto poi da un package?)">
       <option name="closed" value="true" />
@@ -482,7 +484,15 @@
       <option name="project" value="LOCAL" />
       <updated>1725824277744</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="collegamento Server-client">
+      <option name="closed" value="true" />
+      <created>1725876946286</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1725876946286</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -500,7 +510,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="adesso apre direttamente il client" />
     <MESSAGE value="apre il client correttamente bisogna solo aggiustare i pulsanti" />
     <MESSAGE value="ora compaiono le mail" />
     <MESSAGE value="Changes by user" />
@@ -525,7 +534,8 @@
     <MESSAGE value="Sto cazzo di REplyAll ha deciso che bastavano 3 ricghe invece che 15" />
     <MESSAGE value="Gira!!" />
     <MESSAGE value="Ulteriore modifica per visione dei client collegati e non, modifica per il pattern Observer Observable sul server per visione e notifica del cambiamento, precisazione del collegamento Server -client necessità di nuove mail." />
-    <option name="LAST_COMMIT_MESSAGE" value="Ulteriore modifica per visione dei client collegati e non, modifica per il pattern Observer Observable sul server per visione e notifica del cambiamento, precisazione del collegamento Server -client necessità di nuove mail." />
+    <MESSAGE value="collegamento Server-client" />
+    <option name="LAST_COMMIT_MESSAGE" value="collegamento Server-client" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -1,14 +1,19 @@
 package com.example.progetto.Model;
 
+import com.example.progetto.Util.Logger;
+
 import java.io.*;
 import java.nio.file.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class MessageStorage {
 
@@ -18,7 +23,10 @@ public class MessageStorage {
     private static final Lock writeLock = lock.writeLock();
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 
+    private static final ConcurrentHashMap<String, ObservableList<String>> messages = new ConcurrentHashMap<>();
+
     public static void saveMessage(String sender, List<String> recipients, String subject, String body) {
+        Logger.log("Saving message from " + sender + " to " + recipients);
         writeLock.lock();
         try {
             if (recipients.isEmpty()) {
@@ -42,8 +50,9 @@ public class MessageStorage {
                     writer.write(String.format("Subject: %s%n", subject));
                     writer.write(String.format("Body: %s%n", body));
                     writer.write("-----------------------------------\n");
+                    Logger.log("Message saved to file: " + filePath);
                 } catch (IOException e) {
-                    System.err.println("Error writing to file: " + filePath + " " + e.getMessage());
+                    Logger.log("Error writing to file: " + filePath + " " + e.getMessage());
                 }
             }
         } finally {
@@ -51,67 +60,53 @@ public class MessageStorage {
         }
     }
 
-    public static List<String> getMessagesForRecipient(String recipient) {
-        readLock.lock();
-        try {
-            List<String> messages = new ArrayList<>();
-            Path clientDir = Paths.get(BASE_DIR, recipient);
 
-            if (Files.exists(clientDir) && Files.isDirectory(clientDir)) {
-                try (DirectoryStream<Path> stream = Files.newDirectoryStream(clientDir, "*.txt")) {
-                    for (Path file : stream) {
-                        String emailContent = readEmailContentFromFile(file);
-                        if (emailContent != null) {
-                            messages.add(emailContent);
-                        }
-                    }
-                } catch (IOException e) {
-                    System.err.println("Error reading directory: " + clientDir + " " + e.getMessage());
-                }
-            }
+    public static synchronized void addMessage(String recipient, String message) {
+        Logger.log("Adding message for recipient: " + recipient);
+        ObservableList<String> recipientMessages = messages.computeIfAbsent(recipient, k -> FXCollections.observableArrayList());
+        recipientMessages.add(message);
+        Logger.log("Message added. Total messages for " + recipient + ": " + recipientMessages.size());
+    }
 
-            return messages;
-        } finally {
-            readLock.unlock();
-        }
+    public static ObservableList<String> getMessagesForRecipient(String recipient) {
+        Logger.log("Retrieving messages for recipient: " + recipient);
+        ObservableList<String> recipientMessages = messages.computeIfAbsent(recipient, k -> FXCollections.observableArrayList());
+        Logger.log("Retrieved " + recipientMessages.size() + " messages for " + recipient);
+        return recipientMessages;
     }
 
     public static boolean markAsRead(String recipient, String sender, String subject) {
+        Logger.log("Marking message as read for recipient: " + recipient + ", from: " + sender + ", subject: " + subject);
         writeLock.lock();
         try {
             Path clientDir = Paths.get(BASE_DIR, recipient);
             if (!Files.exists(clientDir) || !Files.isDirectory(clientDir)) {
-                System.err.println("Directory not found or is not a directory: " + clientDir);
+                Logger.log("Directory not found or is not a directory: " + clientDir);
                 return false;
             }
 
             String sanitizedSender = sanitizeFileName(sender);
             String sanitizedSubject = sanitizeFileName(subject);
 
-            System.out.println("Searching for email file:");
-            System.out.println("Directory: " + clientDir);
-            System.out.println("Sender: " + sanitizedSender);
-            System.out.println("Subject: " + sanitizedSubject);
-
             try (DirectoryStream<Path> stream = Files.newDirectoryStream(clientDir,
                     path -> path.getFileName().toString().contains(sanitizedSender) &&
                             path.getFileName().toString().contains(sanitizedSubject))) {
                 for (Path file : stream) {
-                    System.out.println("Found matching file: " + file.getFileName());
+                    Logger.log("Found matching file: " + file.getFileName());
                     List<String> lines = Files.readAllLines(file);
                     if (!lines.contains("READ")) {
                         lines.add("READ");
                         Files.write(file, lines);
-                        System.out.println("Added READ marker to file");
+                        Logger.log("Added READ marker to file: " + file.getFileName());
                         return true;
                     } else {
-                        System.out.println("File already contains READ marker");
+                        Logger.log("File already contains READ marker: " + file.getFileName());
                         return true;
                     }
                 }
-                System.out.println("No matching file found");
+                Logger.log("No matching file found for marking as read");
             } catch (IOException e) {
-                System.err.println("Error marking email as read: " + e.getMessage());
+                Logger.log("Error marking email as read: " + e.getMessage());
             }
             return false;
         } finally {
@@ -121,19 +116,18 @@ public class MessageStorage {
 
     public static boolean isRead(String emailContent) {
         boolean read = emailContent.contains("READ");
-        System.out.println("Checking if email is read: " + read);
-        System.out.println("Email content (first 100 chars): " + emailContent.substring(0, Math.min(emailContent.length(), 100)));
+        Logger.log("Checking if email is read: " + read);
+        Logger.log("Email content (first 100 chars): " + emailContent.substring(0, Math.min(emailContent.length(), 100)));
         return read;
     }
 
-
-
     public static boolean deleteMessage(String recipient, String sender, String subject) {
+        Logger.log("Attempting to delete message for recipient: " + recipient + ", from: " + sender + ", subject: " + subject);
         writeLock.lock();
         try {
             Path clientDir = Paths.get(BASE_DIR, recipient);
             if (!Files.exists(clientDir) || !Files.isDirectory(clientDir)) {
-                System.err.println("Directory not found or is not a directory: " + clientDir);
+                Logger.log("Directory not found or is not a directory: " + clientDir);
                 return false;
             }
 
@@ -145,12 +139,14 @@ public class MessageStorage {
                             path.getFileName().toString().contains(sanitizedSubject))) {
                 for (Path file : stream) {
                     Files.delete(file);
+                    Logger.log("Deleted file: " + file.getFileName());
                     return true;
                 }
             } catch (IOException e) {
-                System.err.println("Error deleting file: " + e.getMessage());
+                Logger.log("Error deleting file: " + e.getMessage());
             }
 
+            Logger.log("No matching file found for deletion");
             return false;
         } finally {
             writeLock.unlock();
@@ -159,9 +155,11 @@ public class MessageStorage {
 
     private static String readEmailContentFromFile(Path file) {
         try {
-            return new String(Files.readAllBytes(file));
+            String content = new String(Files.readAllBytes(file));
+            Logger.log("Read email content from file: " + file.getFileName());
+            return content;
         } catch (IOException e) {
-            System.err.println("Error reading file: " + file + " " + e.getMessage());
+            Logger.log("Error reading file: " + file + " " + e.getMessage());
             return null;
         }
     }
@@ -170,8 +168,10 @@ public class MessageStorage {
         File directory = new File(directoryPath);
         if (!directory.exists()) {
             boolean created = directory.mkdirs();
-            if (!created) {
-                System.err.println("Failed to create directory: " + directoryPath);
+            if (created) {
+                Logger.log("Created directory: " + directoryPath);
+            } else {
+                Logger.log("Failed to create directory: " + directoryPath);
             }
         }
     }
