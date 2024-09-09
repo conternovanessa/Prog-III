@@ -1,6 +1,7 @@
 package com.example.progetto.Main;
 
 import com.example.progetto.Controller.ServerController;
+import com.example.progetto.Model.EmailServer;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,6 +18,7 @@ public class Server extends Application {
 
     private List<String> clientList = new ArrayList<>();
     private static final String FILE_PATH = "src/main/java/com/example/progetto/email.txt";
+    private static final int SERVER_PORT = 55555; // Definisci la porta del server qui
 
     @Override
     public void start(Stage primaryStage) {
@@ -33,6 +35,9 @@ public class Server extends Application {
 
             loadClientsFromFile(FILE_PATH);
             controller.initialize();
+
+            // Avvia il server email in un thread separato
+            startEmailServer();
 
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
@@ -52,6 +57,15 @@ public class Server extends Application {
         } catch (IOException e) {
             System.err.println("Error reading the specified file: " + e.getMessage());
         }
+    }
+
+    private void startEmailServer() {
+        EmailServer emailServer = new EmailServer(SERVER_PORT, clientList);
+        Thread serverThread = new Thread(() -> {
+            emailServer.start();
+        });
+        serverThread.setDaemon(true);
+        serverThread.start();
     }
 
     public static void main(String[] args) {

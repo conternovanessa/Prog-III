@@ -9,6 +9,7 @@ import java.util.List;
 public class ClientHandler extends Thread {
     private Socket clientSocket;
     private List<String> clientList;
+    private static final int SERVER_PORT = 55555; // Usa la stessa porta del server
 
     public ClientHandler(Socket socket, List<String> clients) {
         this.clientSocket = socket;
@@ -27,7 +28,7 @@ public class ClientHandler extends Thread {
             // Forwarding the email to the selected client
             for (String client : clientList) {
                 if (client.equals(emailMessage.split(":")[0])) { // assuming email format as "recipient: message"
-                    EmailClientManager clientManager = new EmailClientManager("localhost", 12346); // New port for client connection
+                    EmailClientManager clientManager = new EmailClientManager("localhost", SERVER_PORT);
                     clientManager.sendMessageToServer(emailMessage);
                     System.out.println("Email forwarded to: " + client);
                 }

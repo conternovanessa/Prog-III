@@ -10,14 +10,20 @@ import java.net.UnknownHostException;
 // Import statements remain the same
 
 public class EmailClientManager {
+    private static final int DEFAULT_PORT = 55555; // Porta predefinita del server
 
     private String serverAddress;
     private int serverPort;
+
+    public EmailClientManager(String serverAddress) {
+        this(serverAddress, DEFAULT_PORT);
+    }
 
     public EmailClientManager(String serverAddress, int serverPort) {
         this.serverAddress = serverAddress;
         this.serverPort = serverPort;
     }
+
 
     public void sendMessageToServer(Object message) throws IOException {
         try (Socket socket = new Socket(serverAddress, serverPort);
@@ -32,7 +38,7 @@ public class EmailClientManager {
         }
     }
 
-    /*public void receiveMessages() {
+    public void receiveMessages() {
         new Thread(() -> {
             try (Socket socket = new Socket(serverAddress, serverPort);
                  ObjectInputStream in = new ObjectInputStream(socket.getInputStream())) {
@@ -45,5 +51,5 @@ public class EmailClientManager {
                 System.err.println("Error receiving messages from server: " + e.getMessage());
             }
         }).start();
-    }*/
+    }
 }

@@ -1,6 +1,7 @@
 package com.example.progetto.Controller;
 
 import com.example.progetto.Main.EmailDetailApplication;
+import com.example.progetto.Model.EmailClientManager;
 import com.example.progetto.Model.EmailObserver;
 import com.example.progetto.Model.MessageStorage;
 import javafx.application.Platform;
@@ -9,20 +10,29 @@ import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.List;
 
 public class EmailController implements EmailObserver {
 
     @FXML private Label clientLabel;
-    @FXML private Button newMailButton;
-    @FXML private Button backButton;
-    @FXML private Button refreshButton;
     @FXML private ScrollPane emailScrollPane;
     @FXML private VBox emailBox;
+    private EmailClientManager clientManager;
 
     private String client;
     private Stage primaryStage;
     private ServerController serverController;
+
+    public void initialize() {
+        clientManager = new EmailClientManager("localhost", 55555);
+        startMessageReceiver();
+    }
+
+    private void startMessageReceiver() {
+        clientManager.receiveMessages();
+    }
+
 
     public void setClient(String client) {
         this.client = client;
@@ -59,16 +69,16 @@ public class EmailController implements EmailObserver {
     @FXML
     private void handleNewMail() {
         NewMailHandler newMailHandler = new NewMailHandler(client);
-        String newEmail;
-        newEmail = newMailHandler.createNewMail();
+        String newEmail = newMailHandler.createNewMail();
         if (newEmail != null && !newEmail.isEmpty()) {
-            if (serverController != null) {
-                serverController.addNewEmail(newEmail);
-                System.out.println("New email created and notified to server: " + newEmail);
-            } else {
-                System.out.println("ServerController is null, cannot notify new email");
+            try {
+                clientManager.sendMessageToServer(newEmail);
+                System.out.println("New email sent to server: " + newEmail);
+                loadEmails();
+            } catch (IOException e) {
+                System.err.println("Error sending email: " + e.getMessage());
+                showAlert("Error", "Failed to send email.");
             }
-            loadEmails();
         }
     }
 
