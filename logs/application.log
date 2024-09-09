@@ -1,0 +1,136 @@
+set 09, 2024 3:57:16 PM com.example.progetto.Controller.ServerController initialize
+INFO: Server controller initialized
+set 09, 2024 3:57:18 PM com.example.progetto.Controller.ServerController startServer
+INFO: Server started
+set 09, 2024 3:57:19 PM com.example.progetto.Controller.EmailController setServerController
+INFO: ServerController set in EmailController : fabiodelia@progetto.com
+set 09, 2024 3:57:19 PM com.example.progetto.Controller.EmailController lambda$showEmailDetailView$4
+INFO: Email marked as read: true
+set 09, 2024 3:57:20 PM com.example.progetto.Controller.EmailDetailController handleDelete
+INFO: Email deleted successfully.
+set 09, 2024 3:57:21 PM com.example.progetto.Controller.EmailController lambda$showEmailDetailView$4
+INFO: Email marked as read: false
+set 09, 2024 3:57:22 PM com.example.progetto.Controller.EmailDetailController handleDelete
+WARNING: Failed to delete the email.fabiodelia@progetto.com
+set 09, 2024 3:57:23 PM com.example.progetto.Controller.EmailController lambda$showEmailDetailView$4
+INFO: Email marked as read: true
+set 09, 2024 3:57:24 PM com.example.progetto.Controller.EmailDetailController handleDelete
+INFO: Email deleted successfully.
+set 09, 2024 3:57:25 PM com.example.progetto.Controller.EmailController lambda$showEmailDetailView$4
+INFO: Email marked as read: true
+set 09, 2024 3:57:26 PM com.example.progetto.Controller.EmailDetailController handleDelete
+INFO: Email deleted successfully.
+set 09, 2024 3:57:26 PM com.example.progetto.Controller.EmailController lambda$showEmailDetailView$4
+INFO: Email marked as read: true
+set 09, 2024 3:57:27 PM com.example.progetto.Controller.EmailDetailController handleDelete
+INFO: Email deleted successfully.
+set 09, 2024 3:57:28 PM com.example.progetto.Controller.EmailController lambda$showEmailDetailView$4
+INFO: Email marked as read: false
+set 09, 2024 3:57:29 PM com.example.progetto.Controller.EmailDetailController handleDelete
+WARNING: Failed to delete the email.fabiodelia@progetto.com
+set 09, 2024 3:57:31 PM com.example.progetto.Controller.EmailController setServerController
+INFO: ServerController set in EmailController : filippoditto@progetto.com
+set 09, 2024 3:57:32 PM com.example.progetto.Controller.EmailController lambda$showEmailDetailView$4
+INFO: Email marked as read: true
+set 09, 2024 3:57:33 PM com.example.progetto.Controller.EmailDetailController handleDelete
+INFO: Email deleted successfully.
+set 09, 2024 3:57:34 PM com.example.progetto.Controller.EmailController lambda$showEmailDetailView$4
+INFO: Email marked as read: true
+set 09, 2024 3:57:35 PM com.example.progetto.Controller.EmailDetailController handleDelete
+INFO: Email deleted successfully.
+set 09, 2024 3:57:37 PM com.example.progetto.Controller.EmailController lambda$showEmailDetailView$4
+INFO: Email marked as read: false
+set 09, 2024 3:57:37 PM com.example.progetto.Controller.EmailDetailController handleDelete
+WARNING: Failed to delete the email.filippoditto@progetto.com
+set 09, 2024 3:57:38 PM com.example.progetto.Controller.EmailController lambda$showEmailDetailView$4
+INFO: Email marked as read: true
+set 09, 2024 3:57:39 PM com.example.progetto.Controller.EmailDetailController handleDelete
+INFO: Email deleted successfully.
+set 09, 2024 3:57:42 PM com.example.progetto.Controller.EmailController lambda$showEmailDetailView$4
+INFO: Email marked as read: true
+set 09, 2024 3:57:43 PM com.example.progetto.Controller.EmailDetailController handleDelete
+INFO: Email deleted successfully.
+set 09, 2024 3:57:45 PM com.example.progetto.Controller.EmailController lambda$showEmailDetailView$4
+INFO: Email marked as read: true
+set 09, 2024 3:57:46 PM com.example.progetto.Controller.EmailDetailController handleDelete
+INFO: Email deleted successfully.
+set 09, 2024 3:57:48 PM com.example.progetto.Controller.EmailController lambda$showEmailDetailView$4
+INFO: Email marked as read: true
+set 09, 2024 3:57:49 PM com.example.progetto.Controller.EmailDetailController handleDelete
+INFO: Email deleted successfully.
+set 09, 2024 3:57:50 PM com.example.progetto.Controller.EmailController lambda$showEmailDetailView$4
+INFO: Email marked as read: true
+set 09, 2024 3:57:51 PM com.example.progetto.Controller.EmailDetailController handleDelete
+INFO: Email deleted successfully.
+set 09, 2024 3:57:52 PM com.example.progetto.Controller.EmailController lambda$showEmailDetailView$4
+INFO: Email marked as read: true
+set 09, 2024 3:57:52 PM com.example.progetto.Controller.EmailDetailController handleDelete
+INFO: Email deleted successfully.
+set 09, 2024 3:57:54 PM com.example.progetto.Controller.EmailController lambda$showEmailDetailView$4
+INFO: Email marked as read: true
+set 09, 2024 3:57:55 PM com.example.progetto.Controller.EmailDetailController handleDelete
+INFO: Email deleted successfully.
+set 09, 2024 3:57:56 PM com.example.progetto.Controller.EmailController lambda$showEmailDetailView$4
+INFO: Email marked as read: true
+set 09, 2024 3:57:57 PM com.example.progetto.Controller.EmailDetailController handleDelete
+INFO: Email deleted successfully.
+set 09, 2024 3:57:57 PM com.example.progetto.Controller.EmailController lambda$showEmailDetailView$4
+INFO: Email marked as read: false
+set 09, 2024 3:57:58 PM com.example.progetto.Controller.EmailDetailController handleDelete
+WARNING: Failed to delete the email.filippoditto@progetto.com
+set 09, 2024 3:58:01 PM com.example.progetto.Controller.EmailController setServerController
+INFO: ServerController set in EmailController : vanessaconterno@progetto.com
+set 09, 2024 3:58:01 PM com.example.progetto.Controller.EmailController lambda$showEmailDetailView$4
+INFO: Email marked as read: true
+set 09, 2024 3:58:02 PM com.example.progetto.Controller.EmailDetailController handleDelete
+INFO: Email deleted successfully.
+set 09, 2024 3:58:04 PM com.example.progetto.Controller.EmailController lambda$showEmailDetailView$4
+INFO: Email marked as read: true
+set 09, 2024 3:58:05 PM com.example.progetto.Controller.EmailDetailController handleDelete
+INFO: Email deleted successfully.
+set 09, 2024 3:58:06 PM com.example.progetto.Controller.EmailController lambda$showEmailDetailView$4
+INFO: Email marked as read: true
+set 09, 2024 3:58:06 PM com.example.progetto.Controller.EmailDetailController handleDelete
+INFO: Email deleted successfully.
+set 09, 2024 3:58:08 PM com.example.progetto.Controller.EmailController lambda$showEmailDetailView$4
+INFO: Email marked as read: true
+set 09, 2024 3:58:08 PM com.example.progetto.Controller.EmailDetailController handleDelete
+INFO: Email deleted successfully.
+set 09, 2024 3:58:10 PM com.example.progetto.Controller.EmailController lambda$showEmailDetailView$4
+INFO: Email marked as read: true
+set 09, 2024 3:58:11 PM com.example.progetto.Controller.EmailDetailController handleDelete
+INFO: Email deleted successfully.
+set 09, 2024 3:58:12 PM com.example.progetto.Controller.EmailController lambda$showEmailDetailView$4
+INFO: Email marked as read: false
+set 09, 2024 3:58:13 PM com.example.progetto.Controller.EmailController lambda$showEmailDetailView$4
+INFO: Email marked as read: true
+set 09, 2024 3:58:14 PM com.example.progetto.Controller.EmailDetailController handleDelete
+INFO: Email deleted successfully.
+set 09, 2024 3:58:16 PM com.example.progetto.Controller.EmailController lambda$showEmailDetailView$4
+INFO: Email marked as read: true
+set 09, 2024 3:58:17 PM com.example.progetto.Controller.EmailDetailController handleDelete
+INFO: Email deleted successfully.
+set 09, 2024 3:58:18 PM com.example.progetto.Controller.EmailController lambda$showEmailDetailView$4
+INFO: Email marked as read: true
+set 09, 2024 3:58:19 PM com.example.progetto.Controller.EmailDetailController handleDelete
+INFO: Email deleted successfully.
+set 09, 2024 3:58:20 PM com.example.progetto.Controller.EmailController lambda$showEmailDetailView$4
+INFO: Email marked as read: true
+set 09, 2024 3:58:21 PM com.example.progetto.Controller.EmailDetailController handleDelete
+INFO: Email deleted successfully.
+set 09, 2024 3:58:22 PM com.example.progetto.Controller.EmailController lambda$showEmailDetailView$4
+INFO: Email marked as read: true
+set 09, 2024 3:58:23 PM com.example.progetto.Controller.EmailDetailController handleDelete
+INFO: Email deleted successfully.
+set 09, 2024 3:58:24 PM com.example.progetto.Controller.EmailController lambda$showEmailDetailView$4
+INFO: Email marked as read: true
+set 09, 2024 3:58:25 PM com.example.progetto.Controller.EmailDetailController handleDelete
+INFO: Email deleted successfully.
+set 09, 2024 3:58:26 PM com.example.progetto.Controller.EmailController lambda$showEmailDetailView$4
+INFO: Email marked as read: false
+set 09, 2024 3:58:27 PM com.example.progetto.Controller.EmailDetailController handleDelete
+WARNING: Failed to delete the email.vanessaconterno@progetto.com
+set 09, 2024 3:58:28 PM com.example.progetto.Controller.EmailController lambda$showEmailDetailView$4
+INFO: Email marked as read: true
+set 09, 2024 3:58:29 PM com.example.progetto.Controller.EmailDetailController handleDelete
+INFO: Email deleted successfully.

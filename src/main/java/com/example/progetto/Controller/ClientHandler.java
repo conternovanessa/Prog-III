@@ -5,11 +5,13 @@ import com.example.progetto.Model.EmailClientManager;
 import java.io.*;
 import java.net.Socket;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class ClientHandler extends Thread {
     private Socket clientSocket;
     private List<String> clientList;
     private static final int SERVER_PORT = 55555; // Usa la stessa porta del server
+    private static final Logger logger = Logger.getLogger(ClientHandler.class.getName());
 
     public ClientHandler(Socket socket, List<String> clients) {
         this.clientSocket = socket;
@@ -23,18 +25,32 @@ public class ClientHandler extends Thread {
 
             // Reading the email object from the client
             String emailMessage = (String) in.readObject();
-            System.out.println("Email received from client: " + emailMessage);
+
+            // Parsing the email message to extract sender and recipient
+            String[] emailParts = emailMessage.split("\n");
+            String sender = "Unknown";
+            String recipient = "Unknown";
+
+            for (String part : emailParts) {
+                if (part.startsWith("From: ")) {
+                    sender = part.substring(6).trim();
+                } else if (part.startsWith("To: ")) {
+                    recipient = part.substring(4).trim();
+                }
+            }
+
+            logger.info("Nuova mail da " + sender + " a " + recipient);
 
             // Forwarding the email to the selected client
             for (String client : clientList) {
-                if (client.equals(emailMessage.split(":")[0])) { // assuming email format as "recipient: message"
+                if (client.equals(recipient)) {
                     EmailClientManager clientManager = new EmailClientManager("localhost", SERVER_PORT);
                     clientManager.sendMessageToServer(emailMessage);
-                    System.out.println("Email forwarded to: " + client);
+                    logger.info("Email inoltrata a: " + recipient);
                 }
             }
         } catch (IOException | ClassNotFoundException e) {
-            System.err.println("Error handling client: " + e.getMessage());
+            logger.severe("Errore nella gestione del client: " + e.getMessage());
         }
     }
 }
