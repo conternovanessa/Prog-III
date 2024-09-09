@@ -61,9 +61,7 @@ public class Server extends Application {
 
     private void startEmailServer() {
         EmailServer emailServer = new EmailServer(SERVER_PORT, clientList);
-        Thread serverThread = new Thread(() -> {
-            emailServer.start();
-        });
+        Thread serverThread = new Thread(emailServer::start);
         serverThread.setDaemon(true);
         serverThread.start();
     }

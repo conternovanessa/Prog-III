@@ -4,17 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0a55273f-6121-464b-90af-ee02c84e2271" name="Changes" comment="FINE">
+    <list default="true" id="0a55273f-6121-464b-90af-ee02c84e2271" name="Changes" comment="Ultimo commit pre esame">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/application.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/application.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages/fabiodelia@progetto.com/09-09-2024 16-01-43_vanessaconterno@progetto.com_Multidestinatario.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages/fabiodelia@progetto.com/09-09-2024 16-02-00_filippoditto@progetto.com_Re__Multidestinatario.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages/filippoditto@progetto.com/09-09-2024 16-01-43_vanessaconterno@progetto.com_Multidestinatario.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages/filippoditto@progetto.com/09-09-2024 16-02-36_fabiodelia@progetto.com_Stop.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages/vanessaconterno@progetto.com/09-09-2024 16-02-00_filippoditto@progetto.com_Re__Multidestinatario.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto/Controller/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto/Controller/ClientHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto/Controller/EmailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto/Controller/EmailController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto/Controller/NewMailHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto/Controller/NewMailHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto/Controller/ServerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto/Controller/ServerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto/Model/EmailServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto/Model/EmailServer.java" afterDir="false" />
     </list>
     <list id="e8c31100-440d-4de3-9108-d18ebe2ff760" name="Changes by user" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -160,7 +153,8 @@
       <workItem from="1725817117360" duration="2738000" />
       <workItem from="1725877792622" duration="4520000" />
       <workItem from="1725909420430" duration="274000" />
-      <workItem from="1725909913728" duration="657000" />
+      <workItem from="1725909913728" duration="834000" />
+      <workItem from="1725917711432" duration="753000" />
     </task>
     <task id="LOCAL-00002" summary="ora funzionano molte cose bisogna solo mettere le mail da quache parte (creazione  nuovo file letto poi da un package?)">
       <option name="closed" value="true" />
@@ -506,7 +500,15 @@
       <option name="project" value="LOCAL" />
       <updated>1725890335888</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="Ultimo commit pre esame">
+      <option name="closed" value="true" />
+      <created>1725910748722</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1725910748722</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -524,7 +526,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="ora compaiono le mail" />
     <MESSAGE value="Changes by user" />
     <MESSAGE value="Changes by filippo" />
     <MESSAGE value="ora girano quasi tutte da aggiungere solo qualche asto le cose per il reply e per il forward" />
@@ -549,7 +550,8 @@
     <MESSAGE value="Ulteriore modifica per visione dei client collegati e non, modifica per il pattern Observer Observable sul server per visione e notifica del cambiamento, precisazione del collegamento Server -client necessità di nuove mail." />
     <MESSAGE value="collegamento Server-client" />
     <MESSAGE value="ve prego basta" />
-    <option name="LAST_COMMIT_MESSAGE" value="ve prego basta" />
+    <MESSAGE value="Ultimo commit pre esame" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ultimo commit pre esame" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

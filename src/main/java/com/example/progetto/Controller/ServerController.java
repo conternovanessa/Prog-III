@@ -2,6 +2,7 @@ package com.example.progetto.Controller;
 
 import com.example.progetto.Model.EmailObservable;
 import com.example.progetto.Model.EmailObserver;
+import com.example.progetto.Model.EmailServer;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -42,6 +43,7 @@ public class ServerController implements EmailObserver {
     private List<Stage> emailStages = new ArrayList<>();
     private Stage primaryStage;
     private EmailObservable emailObservable;
+    private EmailServer emailServer;
 
     private static final String CLIENT_FILE_PATH = "src/main/java/com/example/progetto/email.txt";
     private static Logger logger = Logger.getLogger(ServerController.class.getName());
@@ -54,6 +56,7 @@ public class ServerController implements EmailObserver {
         updateConnectedClientsDisplay();
         emailObservable = new EmailObservable();
         emailObservable.addObserver(this);
+        emailServer = new EmailServer(55555, new ArrayList<>(clientSet));
 
         logger.info("Server controller initialized");
     }
@@ -95,6 +98,9 @@ public class ServerController implements EmailObserver {
         statusLabel.setText("Server Status: Running");
         updateConnectedClientsDisplay();
 
+        // Avvia il server email
+        emailServer.start();
+
         logger.info("Server started");
     }
 
@@ -103,6 +109,9 @@ public class ServerController implements EmailObserver {
         statusLabel.setText("Server Status: Stopped");
         updateConnectedClientsDisplay();
         clientButtonsContainer.getChildren().clear();
+
+        // Ferma il server email
+        emailServer.stop();
 
         logger.info("Server stopped");
     }
