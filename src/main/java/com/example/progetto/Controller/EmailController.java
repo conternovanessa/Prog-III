@@ -2,9 +2,12 @@ package com.example.progetto.Controller;
 
 import com.example.progetto.Main.EmailDetailApplication;
 import com.example.progetto.Model.EmailClientManager;
+import com.example.progetto.Model.EmailObservable;
 import com.example.progetto.Model.EmailObserver;
 import com.example.progetto.Model.MessageStorage;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
@@ -12,11 +15,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.List;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class EmailController implements EmailObserver {
+public class EmailController extends EmailObservable implements EmailObserver {
 
     @FXML private Label clientLabel;
     @FXML private ScrollPane emailScrollPane;
@@ -26,6 +28,8 @@ public class EmailController implements EmailObserver {
     private String client;
     private Stage primaryStage;
     private ServerController serverController;
+    private ObservableList<String> emailList = FXCollections.observableArrayList();
+
 
     private static final Logger logger = Logger.getLogger(EmailController.class.getName());
 
@@ -37,13 +41,6 @@ public class EmailController implements EmailObserver {
 
     private void startMessageReceiver() {
         clientManager.receiveMessages();
-    }
-
-
-    public void setClient(String client) {
-        this.client = client;
-        updateClientLabel();
-        loadEmails();
     }
 
     public void setPrimaryStage(Stage stage) {
@@ -79,12 +76,12 @@ public class EmailController implements EmailObserver {
         String newEmail = newMailHandler.createNewMail();
 
         if (newEmail == null || newEmail.isEmpty()) {
-            logger.info("Nuova email creata con successo da : " + client);
+            logger.info("New email created successfully by: " + client);
 
             try {
                 clientManager.sendMessageToServer(newEmail);
 
-                // Estraiamo il destinatario dalla nuova email
+                // Extract the recipient from the new email
                 String[] emailLines = newEmail.split("\n");
                 String receiver = "unknown";
                 for (String line : emailLines) {
@@ -94,36 +91,32 @@ public class EmailController implements EmailObserver {
                     }
                 }
 
-                // Logghiamo il messaggio con il formato richiesto
-                logger.info(String.format("Nuova mail da %s a %s", client, receiver));
-
                 loadEmails();
             } catch (IOException e) {
-                logger.severe("Errore nell'invio dell'email: " + e.getMessage());
+                logger.severe("Error sending email: " + e.getMessage());
                 showAlert("Error", "Failed to send email.");
             }
         } else {
-            logger.severe("La creazione della nuova email è stata annullata o è fallita");
+            logger.severe("Creating new email was cancelled or failed");
         }
 
     }
-
 
     @FXML
     private void handleRefresh() {
         loadEmails();
     }
 
-    private synchronized void loadEmails() {
-        List<String> emails = MessageStorage.getMessagesForRecipient(client);
+    private final Object emailListLock = new Object();
 
-        Platform.runLater(() -> {
+    private void loadEmails() {
+        synchronized (emailListLock) {
             emailBox.getChildren().clear();
-            for (String email : emails) {
+            List<String> messages = MessageStorage.getMessagesForRecipient(client);
+            for (String email : messages) {
                 addEmailButton(email);
             }
-            emailScrollPane.setContent(emailBox);
-        });
+        }
     }
 
     private void addEmailButton(String email) {
@@ -142,6 +135,15 @@ public class EmailController implements EmailObserver {
 
             emailBox.getChildren().add(emailButton);
         }
+    }
+
+    public void setClient(String client) {
+        this.client = client;
+        updateClientLabel();
+        loadEmails();
+
+        // Add the EmailController as an observer of the email list
+        addObserver(this);
     }
 
     private void updateButtonStyle(Button button, boolean isRead) {
@@ -187,6 +189,7 @@ public class EmailController implements EmailObserver {
 
     @Override
     public void update(List<String> emails) {
-        loadEmails();
+        // Update the ObservableList with the new messages
+        emailList.setAll(emails);
     }
 }
