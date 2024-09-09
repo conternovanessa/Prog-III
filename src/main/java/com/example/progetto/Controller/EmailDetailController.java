@@ -9,6 +9,8 @@ import javafx.stage.Stage;
 
 import java.util.*;
 
+import java.util.logging.Logger;
+
 public class EmailDetailController {
 
     @FXML
@@ -23,24 +25,11 @@ public class EmailDetailController {
     @FXML
     private TextArea bodyTextArea;
 
-    @FXML
-    private Button replyButton;
-
-    @FXML
-    private Button replyAllButton;
-
-    @FXML
-    private Button forwardButton;
-
-    @FXML
-    private Button deleteButton;
-
-    @FXML
-    private Button backButton;
-
     private Stage stage;
     private String client;
     private String fullEmailContent;
+
+    private static final Logger logger = Logger.getLogger(EmailDetailController.class.getName());
 
     public void setStage(Stage stage) {
         this.stage = stage;
@@ -104,6 +93,7 @@ public class EmailDetailController {
         // Crea un ReplyHandler con i destinatari senza duplicati
         ReplyHandler replyHandler = new ReplyHandler(client, sender, subject, body, new ArrayList<>(recipients));
         replyHandler.replyToEmail(replyAll);
+        logger.info(replyAll ? "Reply All sent" : "Reply sent" + client);
         stage.close();
     }
 
@@ -111,6 +101,7 @@ public class EmailDetailController {
     private void handleForward() {
         ForwardHandler forwardHandler = new ForwardHandler(client);
         forwardHandler.forwardEmail(fullEmailContent);
+        logger.info("Email forwarded " + client);
         stage.close();
     }
 
@@ -123,9 +114,9 @@ public class EmailDetailController {
 
         boolean success = MessageStorage.deleteMessage(client, sender, subject);
         if (success) {
-            System.out.println("Email deleted successfully.");
+            logger.info("Email deleted successfully.");
         } else {
-            System.out.println("Failed to delete the email.");
+            logger.warning("Failed to delete the email." + client);
         }
         stage.close();
     }

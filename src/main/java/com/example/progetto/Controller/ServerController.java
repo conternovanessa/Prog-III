@@ -16,10 +16,17 @@ import javafx.stage.Stage;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Handler;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
 public class ServerController implements EmailObserver {
 
@@ -39,16 +46,37 @@ public class ServerController implements EmailObserver {
     private EmailObservable emailObservable;
 
     private static final String CLIENT_FILE_PATH = "src/main/java/com/example/progetto/email.txt";
+    private static Logger logger = Logger.getLogger(ServerController.class.getName());
 
     @FXML
     public void initialize() {
+        initializeLogger();
         statusLabel.setText("Server Status: Stopped");
         loadClientsFromFile(CLIENT_FILE_PATH);
         updateConnectedClientsDisplay();
         emailObservable = new EmailObservable();
         emailObservable.addObserver(this);
+
+        logger.info("Server controller initialized");
     }
 
+    private void initializeLogger() {
+        try {
+            LogManager.getLogManager().readConfiguration(
+                    ServerController.class.getResourceAsStream("/logging.properties"));
+
+            // Crea la cartella "logs" se non esiste già
+            Path logsDir = Paths.get(System.getProperty("user.dir"), "logs");
+            if (!Files.exists(logsDir)) {
+                Files.createDirectory(logsDir);
+            }
+        } catch (IOException e) {
+            System.err.println("Error loading logging configuration: " + e.getMessage());
+        }
+
+        // Imposta il logger per l'intero sistema
+        logger = Logger.getLogger("");
+    }
     @FXML
     private void handleStartServer() {
         if (!serverRunning) {
@@ -67,6 +95,8 @@ public class ServerController implements EmailObserver {
         serverRunning = true;
         statusLabel.setText("Server Status: Running");
         updateConnectedClientsDisplay();
+
+        logger.info("Server started");
     }
 
     private synchronized void stopServer() {
@@ -74,6 +104,8 @@ public class ServerController implements EmailObserver {
         statusLabel.setText("Server Status: Stopped");
         updateConnectedClientsDisplay();
         clientButtonsContainer.getChildren().clear();
+
+        logger.info("Server stopped");
     }
 
     private void createClientButtons() {

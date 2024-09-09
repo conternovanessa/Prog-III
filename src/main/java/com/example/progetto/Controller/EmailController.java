@@ -13,6 +13,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.List;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class EmailController implements EmailObserver {
 
     @FXML private Label clientLabel;
@@ -24,8 +27,11 @@ public class EmailController implements EmailObserver {
     private Stage primaryStage;
     private ServerController serverController;
 
+    private static final Logger logger = Logger.getLogger(EmailController.class.getName());
+
     public void initialize() {
         clientManager = new EmailClientManager("localhost", 55555);
+        logger.setLevel(Level.INFO);
         startMessageReceiver();
     }
 
@@ -46,7 +52,7 @@ public class EmailController implements EmailObserver {
 
     public void setServerController(ServerController serverController) {
         this.serverController = serverController;
-        System.out.println("ServerController set in EmailController");
+        logger.info("ServerController set in EmailController : " + client);
     }
 
     private void updateClientLabel() {
@@ -64,23 +70,44 @@ public class EmailController implements EmailObserver {
                 primaryStage.close();
             }
         });
+
     }
 
     @FXML
     private void handleNewMail() {
         NewMailHandler newMailHandler = new NewMailHandler(client);
         String newEmail = newMailHandler.createNewMail();
-        if (newEmail != null && !newEmail.isEmpty()) {
+
+        if (newEmail == null || newEmail.isEmpty()) {
+            logger.info("Nuova email creata con successo da : " + client);
+
             try {
                 clientManager.sendMessageToServer(newEmail);
-                System.out.println("New email sent to server: " + newEmail);
+
+                // Estraiamo il destinatario dalla nuova email
+                String[] emailLines = newEmail.split("\n");
+                String receiver = "unknown";
+                for (String line : emailLines) {
+                    if (line.startsWith("To: ")) {
+                        receiver = line.substring(4).trim();
+                        break;
+                    }
+                }
+
+                // Logghiamo il messaggio con il formato richiesto
+                logger.info(String.format("Nuova mail da %s a %s", client, receiver));
+
                 loadEmails();
             } catch (IOException e) {
-                System.err.println("Error sending email: " + e.getMessage());
+                logger.severe("Errore nell'invio dell'email: " + e.getMessage());
                 showAlert("Error", "Failed to send email.");
             }
+        } else {
+            logger.severe("La creazione della nuova email è stata annullata o è fallita");
         }
+
     }
+
 
     @FXML
     private void handleRefresh() {
@@ -133,7 +160,7 @@ public class EmailController implements EmailObserver {
                 String subject = emailLines[3].replace("Subject: ", "");
 
                 boolean marked = MessageStorage.markAsRead(client, sender, subject);
-                System.out.println("Email marked as read: " + marked);
+                logger.info("Email marked as read: " + marked);
 
                 EmailDetailApplication detailApp = new EmailDetailApplication(email, client);
                 try {
