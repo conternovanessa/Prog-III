@@ -15,8 +15,15 @@
     <!-- Pulsante per fermare il server -->
     <Button fx:id="stopButton" text="Stop Server" onAction="#handleStopServer" style="-fx-font-size: 14px;"/>
 
-    <!-- Area di testo per visualizzare i client connessi -->
-    <TextArea fx:id="connectedClientsTextArea" editable="false" wrapText="true"
-              prefHeight="100" prefWidth="400" style="-fx-font-size: 12px;"/>
+    <!-- HBox per contenere il TextArea e i pulsanti dei client -->
+    <HBox spacing="10" alignment="CENTER">
+        <!-- Area di testo per visualizzare i client connessi -->
+        <TextArea fx:id="connectedClientsTextArea" editable="false" prefWidth="300" prefHeight="200"/>
+
+        <!-- ScrollPane per i pulsanti dei client -->
+        <ScrollPane prefWidth="200" prefHeight="200">
+            <VBox fx:id="clientButtonsContainer" spacing="5" alignment="CENTER_LEFT" />
+        </ScrollPane>
+    </HBox>
 
 </VBox>

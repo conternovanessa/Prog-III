@@ -4,37 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0a55273f-6121-464b-90af-ee02c84e2271" name="Changes" comment="Ciao adesso funziona lo stop e start del server in maniera che non sia una socket permanente">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages/fabiodelia@progetto.com/01-09-2024 09-48-19_filippoditto@progetto.com_Email_da_Filippo_a_Fabio.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages/fabiodelia@progetto.com/01-09-2024 09-50-34_vanessaconterno@progetto.com_Email_multi-destinatario_da_Vanessa..txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages/fabiodelia@progetto.com/01-09-2024 09-52-10_vanessaconterno@progetto.com_Email_da_Vanessa_a_Fabio.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages/fabiodelia@progetto.com/01-09-2024 09-57-49_filippoditto@progetto.com_Re__Re__Email_da_Filippo_a_Fabio.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages/fabiodelia@progetto.com/04-09-2024 15-51-01_vanessaconterno@progetto.com_Re__Email_multi-destinatario.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages/fabiodelia@progetto.com/05-09-2024 10-53-14_filippoditto@progetto.com_Re__Email_da_Fabio_a_Filippo..txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages/fabiodelia@progetto.com/05-09-2024 10-53-43_filippoditto@progetto.com_Re__Email_multi-destinatario.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages/filippoditto@progetto.com/01-09-2024 09-46-28_fabiodelia@progetto.com_Email_da_Fabio_a_Filippo..txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages/filippoditto@progetto.com/01-09-2024 09-50-34_vanessaconterno@progetto.com_Email_multi-destinatario_da_Vanessa..txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages/filippoditto@progetto.com/01-09-2024 09-51-45_vanessaconterno@progetto.com_Email_da_vanessa_a_Filippo..txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages/filippoditto@progetto.com/01-09-2024 09-54-38_fabiodelia@progetto.com_Re__Email_da_Filippo_a_Fabio.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages/filippoditto@progetto.com/04-09-2024 15-50-35_fabiodelia@progetto.com_Re__Email_multi-destinatario.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages/filippoditto@progetto.com/04-09-2024 15-51-01_vanessaconterno@progetto.com_Re__Email_multi-destinatario.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages/vanessaconterno@progetto.com/01-09-2024 09-45-45_fabiodelia@progetto.com_Email_multi-destinatario.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages/vanessaconterno@progetto.com/01-09-2024 09-47-48_filippoditto@progetto.com_Email_multi-destinatario.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages/vanessaconterno@progetto.com/01-09-2024 09-48-41_filippoditto@progetto.com_Email_da_Filippo_a_Vanessa..txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages/vanessaconterno@progetto.com/01-09-2024 09-54-57_fabiodelia@progetto.com_Fwd__Email_da_Filippo_a_Fabio.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages/vanessaconterno@progetto.com/04-09-2024 15-42-07_fabiodelia@progetto.com_Oggettio.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages/vanessaconterno@progetto.com/05-09-2024 10-52-39_filippoditto@progetto.com_Re__Email_da_vanessa_a_Filippo..txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages/vanessaconterno@progetto.com/05-09-2024 10-53-27_fabiodelia@progetto.com_Fwd__Re__Email_da_Fabio_a_Filippo..txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages/vanessaconterno@progetto.com/05-09-2024 10-53-43_filippoditto@progetto.com_Re__Email_multi-destinatario.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto/Controller/EmailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto/Controller/EmailController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto/Controller/NewMailHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto/Controller/NewMailHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto/Controller/ReceivedMailsHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto/Controller/ReceivedMailsHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto/Controller/ServerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto/Controller/ServerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto/Main/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto/Main/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto/Model/EmailClientManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto/Model/EmailClientManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/progetto/View/server_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/progetto/View/server_view.fxml" afterDir="false" />
-    </list>
+    <list default="true" id="0a55273f-6121-464b-90af-ee02c84e2271" name="Changes" comment="Ulteriore modifica per visione dei client collegati e non, modifica per il pattern Observer Observable sul server per visione e notifica del cambiamento, precisazione del collegamento Server -client necessità di nuove mail." />
     <list id="e8c31100-440d-4de3-9108-d18ebe2ff760" name="Changes by user" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -176,7 +146,7 @@
       <workItem from="1725186420978" duration="2000" />
       <workItem from="1725455288900" duration="2707000" />
       <workItem from="1725524990287" duration="1270000" />
-      <workItem from="1725817117360" duration="2580000" />
+      <workItem from="1725817117360" duration="2738000" />
     </task>
     <task id="LOCAL-00002" summary="ora funzionano molte cose bisogna solo mettere le mail da quache parte (creazione  nuovo file letto poi da un package?)">
       <option name="closed" value="true" />
@@ -498,7 +468,15 @@
       <option name="project" value="LOCAL" />
       <updated>1725177758039</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="Ulteriore modifica per visione dei client collegati e non, modifica per il pattern Observer Observable sul server per visione e notifica del cambiamento, precisazione del collegamento Server -client necessità di nuove mail.">
+      <option name="closed" value="true" />
+      <created>1725824277744</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1725824277744</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -516,7 +494,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="ma sta cazzo di doppia interfaccia la possiamo levare? porca miseria ladra" />
     <MESSAGE value="adesso apre direttamente il client" />
     <MESSAGE value="apre il client correttamente bisogna solo aggiustare i pulsanti" />
     <MESSAGE value="ora compaiono le mail" />
@@ -541,7 +518,8 @@
     <MESSAGE value="YEY" />
     <MESSAGE value="Sto cazzo di REplyAll ha deciso che bastavano 3 ricghe invece che 15" />
     <MESSAGE value="Gira!!" />
-    <option name="LAST_COMMIT_MESSAGE" value="Gira!!" />
+    <MESSAGE value="Ulteriore modifica per visione dei client collegati e non, modifica per il pattern Observer Observable sul server per visione e notifica del cambiamento, precisazione del collegamento Server -client necessità di nuove mail." />
+    <option name="LAST_COMMIT_MESSAGE" value="Ulteriore modifica per visione dei client collegati e non, modifica per il pattern Observer Observable sul server per visione e notifica del cambiamento, precisazione del collegamento Server -client necessità di nuove mail." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

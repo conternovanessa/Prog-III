@@ -7,8 +7,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.BufferedReader;
@@ -26,6 +28,9 @@ public class ServerController implements EmailObserver {
 
     @FXML
     private TextArea connectedClientsTextArea;
+
+    @FXML
+    private VBox clientButtonsContainer;
 
     private boolean serverRunning = false;
     private Set<String> clientSet = new HashSet<>();
@@ -48,7 +53,7 @@ public class ServerController implements EmailObserver {
     private void handleStartServer() {
         if (!serverRunning) {
             startServer();
-            Platform.runLater(this::openEmailControllers);
+            Platform.runLater(this::createClientButtons);
         }
     }
 
@@ -68,6 +73,16 @@ public class ServerController implements EmailObserver {
         serverRunning = false;
         statusLabel.setText("Server Status: Stopped");
         updateConnectedClientsDisplay();
+        clientButtonsContainer.getChildren().clear();
+    }
+
+    private void createClientButtons() {
+        clientButtonsContainer.getChildren().clear();
+        for (String client : clientSet) {
+            Button clientButton = new Button(client);
+            clientButton.setOnAction(event -> openEmailController(client));
+            clientButtonsContainer.getChildren().add(clientButton);
+        }
     }
 
     @Override
@@ -104,14 +119,6 @@ public class ServerController implements EmailObserver {
         }
         connectedClientsTextArea.setText(sb.toString());
         System.out.println("Updated display: " + sb.toString());
-    }
-
-    private void openEmailControllers() {
-        for (String client : clientSet) {
-            if (emailStages.stream().noneMatch(stage -> stage.getTitle().contains(client))) {
-                openEmailController(client);
-            }
-        }
     }
 
     private void openEmailController(String client) {
