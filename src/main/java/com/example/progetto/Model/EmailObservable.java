@@ -1,4 +1,6 @@
+// EmailObservable class
 package com.example.progetto.Model;
+
 import java.util.ArrayList;
 import java.util.List;
 

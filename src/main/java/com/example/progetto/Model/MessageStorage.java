@@ -1,5 +1,8 @@
 package com.example.progetto.Model;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.io.*;
 import java.nio.file.*;
 import java.time.LocalDateTime;
@@ -51,10 +54,11 @@ public class MessageStorage {
         }
     }
 
-    public static List<String> getMessagesForRecipient(String recipient) {
+
+    public static ObservableList<String> getMessagesForRecipient(String recipient) {
         readLock.lock();
         try {
-            List<String> messages = new ArrayList<>();
+            ObservableList<String> messages = FXCollections.observableArrayList();
             Path clientDir = Paths.get(BASE_DIR, recipient);
 
             if (Files.exists(clientDir) && Files.isDirectory(clientDir)) {
