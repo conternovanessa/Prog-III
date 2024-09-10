@@ -1,30 +1,28 @@
-set 09, 2024 11:48:17 PM com.example.progetto.Controller.ServerController initialize
+set 10, 2024 9:17:51 AM com.example.progetto.Controller.ServerController initialize
 INFO: Server controller initialized
-set 09, 2024 11:48:17 PM com.example.progetto.Model.EmailServer start
+set 10, 2024 9:17:51 AM com.example.progetto.Model.EmailServer start
 INFO: Email server started on port 55555
-set 09, 2024 11:48:19 PM com.example.progetto.Model.EmailServer start
+set 10, 2024 9:17:53 AM com.example.progetto.Model.EmailServer start
 SEVERE: Error starting the server: Address already in use: bind
-set 09, 2024 11:48:19 PM com.example.progetto.Model.EmailServer stop
+set 10, 2024 9:17:53 AM com.example.progetto.Model.EmailServer stop
 INFO: Email server stopped
-set 09, 2024 11:48:19 PM com.example.progetto.Controller.ServerController startServer
+set 10, 2024 9:17:53 AM com.example.progetto.Controller.ServerController startServer
 INFO: Server started
-set 09, 2024 11:48:20 PM com.example.progetto.Controller.EmailController loadEmails
-INFO: Total emails for client fabiodelia@progetto.com: 0
-set 09, 2024 11:48:20 PM com.example.progetto.Controller.EmailController setServerController
+set 10, 2024 9:17:55 AM com.example.progetto.Controller.EmailController loadEmails
+INFO: Total emails for client fabiodelia@progetto.com: 1
+set 10, 2024 9:17:55 AM com.example.progetto.Controller.EmailController setServerController
 INFO: ServerController set in EmailController : fabiodelia@progetto.com
-set 09, 2024 11:48:24 PM com.example.progetto.Controller.EmailController loadEmails
-INFO: Total emails for client filippoditto@progetto.com: 0
-set 09, 2024 11:48:24 PM com.example.progetto.Controller.EmailController setServerController
+set 10, 2024 9:17:58 AM com.example.progetto.Controller.EmailController loadEmails
+INFO: Total emails for client filippoditto@progetto.com: 1
+set 10, 2024 9:17:58 AM com.example.progetto.Controller.EmailController setServerController
 INFO: ServerController set in EmailController : filippoditto@progetto.com
-set 09, 2024 11:48:26 PM com.example.progetto.Controller.EmailController loadEmails
+set 10, 2024 9:18:00 AM com.example.progetto.Controller.EmailController loadEmails
 INFO: Total emails for client vanessaconterno@progetto.com: 0
-set 09, 2024 11:48:26 PM com.example.progetto.Controller.EmailController setServerController
+set 10, 2024 9:18:00 AM com.example.progetto.Controller.EmailController setServerController
 INFO: ServerController set in EmailController : vanessaconterno@progetto.com
-set 09, 2024 11:48:58 PM com.example.progetto.Controller.EmailController handleNewMail
-INFO: New email created successfully by: vanessaconterno@progetto.com
-set 09, 2024 11:48:58 PM com.example.progetto.Controller.ClientHandler run
-SEVERE: Errore nella gestione del client: Connessione interrotta dal software del computer host
-set 09, 2024 11:48:59 PM com.example.progetto.Model.EmailServer stop
-INFO: Email server stopped
-set 09, 2024 11:48:59 PM com.example.progetto.Controller.ServerController stopServer
-INFO: Server stopped
+set 10, 2024 9:18:15 AM com.example.progetto.Controller.NewMailHandler lambda$createNewMail$0
+INFO: Nuova mail per receiver: vanessaconterno@progetto.com
+set 10, 2024 9:18:15 AM com.example.progetto.Controller.EmailController handleNewMail
+INFO: Creating new email was cancelled or failed
+set 10, 2024 9:18:19 AM com.example.progetto.Controller.EmailController loadEmails
+INFO: Total emails for client vanessaconterno@progetto.com: 1

@@ -75,7 +75,7 @@ public class EmailController extends EmailObservable implements EmailObserver {
         NewMailHandler newMailHandler = new NewMailHandler(client);
         String newEmail = newMailHandler.createNewMail();
 
-        if (newEmail == null || newEmail.isEmpty()) {
+        if (newEmail != null && !newEmail.isEmpty()) {
             logger.info("New email created successfully by: " + client);
 
             try {
@@ -90,15 +90,15 @@ public class EmailController extends EmailObservable implements EmailObserver {
                     }
                 }
 
+                logger.info("New mail for receiver: " + receiver);
                 loadEmails();
             } catch (IOException e) {
                 logger.severe("Error sending email: " + e.getMessage());
                 showAlert("Error", "Failed to send email.");
             }
         } else {
-            logger.severe("Creating new email was cancelled or failed");
+            logger.info("Creating new email was cancelled or failed");
         }
-
     }
 
     @FXML
