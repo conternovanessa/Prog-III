@@ -15,7 +15,6 @@ public class EmailDetailApplication extends Application {
     private String client;
 
     public EmailDetailApplication() {
-        // Default constructor
     }
 
     public EmailDetailApplication(String emailContent, String client) {
@@ -51,7 +50,6 @@ public class EmailDetailApplication extends Application {
         launch(args);
     }
 
-    // Metodi per impostare emailContent e client dopo la creazione dell'istanza
     public void setEmailContent(String emailContent) {
         this.emailContent = emailContent;
     }

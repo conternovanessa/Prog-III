@@ -66,7 +66,6 @@ public class ServerController implements EmailObserver {
             LogManager.getLogManager().readConfiguration(
                     ServerController.class.getResourceAsStream("/logging.properties"));
 
-            // Crea la cartella "logs" se non esiste già
             Path logsDir = Paths.get(System.getProperty("user.dir"), "logs");
             if (!Files.exists(logsDir)) {
                 Files.createDirectory(logsDir);
@@ -75,7 +74,6 @@ public class ServerController implements EmailObserver {
             System.err.println("Error loading logging configuration: " + e.getMessage());
         }
 
-        // Imposta il logger per l'intero sistema
         logger = Logger.getLogger("");
     }
 
@@ -98,7 +96,6 @@ public class ServerController implements EmailObserver {
         statusLabel.setText("Server Status: Running");
         updateConnectedClientsDisplay();
 
-        // Avvia il server email
         emailServer.start();
 
         logger.info("Server started");
@@ -110,7 +107,6 @@ public class ServerController implements EmailObserver {
         updateConnectedClientsDisplay();
         clientButtonsContainer.getChildren().clear();
 
-        // Ferma il server email
         emailServer.stop();
 
         logger.info("Server stopped");

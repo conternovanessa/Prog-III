@@ -7,11 +7,9 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-// Import statements remain the same
 
 public class EmailClientManager {
-    private static final int DEFAULT_PORT = 55555; // Porta predefinita del server
-
+    private static final int DEFAULT_PORT = 55555;
     private String serverAddress;
     private int serverPort;
 

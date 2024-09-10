@@ -25,10 +25,8 @@ public class ClientHandler extends Thread {
         try (ObjectInputStream in = new ObjectInputStream(clientSocket.getInputStream());
              ObjectOutputStream out = new ObjectOutputStream(clientSocket.getOutputStream())) {
 
-            // Reading the email object from the client
             String emailMessage = (String) in.readObject();
 
-            // Parsing the email message to extract sender and recipient
             String[] emailParts = emailMessage.split("\n");
             String sender = "Unknown";
             String recipient = "Unknown";
@@ -43,7 +41,6 @@ public class ClientHandler extends Thread {
 
             logger.info("Nuova email ricevuta per il client: " + recipient + " da: " + sender);
 
-            // Forwarding the email to the selected client
             boolean emailForwarded = false;
             for (String client : clientList) {
                 if (client.equals(recipient)) {

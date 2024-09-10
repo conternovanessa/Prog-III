@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0a55273f-6121-464b-90af-ee02c84e2271" name="Changes" comment="Ultimo commit pre esame">
+    <list default="true" id="0a55273f-6121-464b-90af-ee02c84e2271" name="Changes" comment="Ciao si è tardi ma mi sono accorta che la socket non chiudeva correttamente vi voglio bene comunque">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto/Controller/ServerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto/Controller/ServerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progetto/Model/EmailServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progetto/Model/EmailServer.java" afterDir="false" />
     </list>
     <list id="e8c31100-440d-4de3-9108-d18ebe2ff760" name="Changes by user" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -154,7 +152,8 @@
       <workItem from="1725877792622" duration="4520000" />
       <workItem from="1725909420430" duration="274000" />
       <workItem from="1725909913728" duration="834000" />
-      <workItem from="1725917711432" duration="753000" />
+      <workItem from="1725917711432" duration="867000" />
+      <workItem from="1725949968394" duration="330000" />
     </task>
     <task id="LOCAL-00002" summary="ora funzionano molte cose bisogna solo mettere le mail da quache parte (creazione  nuovo file letto poi da un package?)">
       <option name="closed" value="true" />
@@ -508,7 +507,15 @@
       <option name="project" value="LOCAL" />
       <updated>1725910748722</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="Ciao si è tardi ma mi sono accorta che la socket non chiudeva correttamente vi voglio bene comunque">
+      <option name="closed" value="true" />
+      <created>1725918579337</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1725918579337</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -526,7 +533,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Changes by user" />
     <MESSAGE value="Changes by filippo" />
     <MESSAGE value="ora girano quasi tutte da aggiungere solo qualche asto le cose per il reply e per il forward" />
     <MESSAGE value="settato in modo che ogni finestra sia della medesima dimensione" />
@@ -551,7 +557,8 @@
     <MESSAGE value="collegamento Server-client" />
     <MESSAGE value="ve prego basta" />
     <MESSAGE value="Ultimo commit pre esame" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ultimo commit pre esame" />
+    <MESSAGE value="Ciao si è tardi ma mi sono accorta che la socket non chiudeva correttamente vi voglio bene comunque" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ciao si è tardi ma mi sono accorta che la socket non chiudeva correttamente vi voglio bene comunque" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
