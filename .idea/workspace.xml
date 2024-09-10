@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0a55273f-6121-464b-90af-ee02c84e2271" name="Changes" comment="Ciao si è tardi ma mi sono accorta che la socket non chiudeva correttamente vi voglio bene comunque">
+    <list default="true" id="0a55273f-6121-464b-90af-ee02c84e2271" name="Changes" comment="tolto i commenti">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <list id="e8c31100-440d-4de3-9108-d18ebe2ff760" name="Changes by user" comment="" />
@@ -153,7 +153,7 @@
       <workItem from="1725909420430" duration="274000" />
       <workItem from="1725909913728" duration="834000" />
       <workItem from="1725917711432" duration="867000" />
-      <workItem from="1725949968394" duration="330000" />
+      <workItem from="1725949968394" duration="1261000" />
     </task>
     <task id="LOCAL-00002" summary="ora funzionano molte cose bisogna solo mettere le mail da quache parte (creazione  nuovo file letto poi da un package?)">
       <option name="closed" value="true" />
@@ -515,7 +515,15 @@
       <option name="project" value="LOCAL" />
       <updated>1725918579337</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="tolto i commenti">
+      <option name="closed" value="true" />
+      <created>1725950834790</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1725950834790</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -533,7 +541,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Changes by filippo" />
     <MESSAGE value="ora girano quasi tutte da aggiungere solo qualche asto le cose per il reply e per il forward" />
     <MESSAGE value="settato in modo che ogni finestra sia della medesima dimensione" />
     <MESSAGE value="settate le mail di prova" />
@@ -558,7 +565,8 @@
     <MESSAGE value="ve prego basta" />
     <MESSAGE value="Ultimo commit pre esame" />
     <MESSAGE value="Ciao si è tardi ma mi sono accorta che la socket non chiudeva correttamente vi voglio bene comunque" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ciao si è tardi ma mi sono accorta che la socket non chiudeva correttamente vi voglio bene comunque" />
+    <MESSAGE value="tolto i commenti" />
+    <option name="LAST_COMMIT_MESSAGE" value="tolto i commenti" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

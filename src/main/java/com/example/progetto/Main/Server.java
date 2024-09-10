@@ -18,7 +18,7 @@ public class Server extends Application {
 
     private List<String> clientList = new ArrayList<>();
     private static final String FILE_PATH = "src/main/java/com/example/progetto/email.txt";
-    private static final int SERVER_PORT = 55555; // Definisci la porta del server qui
+    private static final int SERVER_PORT = 55555;
 
     @Override
     public void start(Stage primaryStage) {
