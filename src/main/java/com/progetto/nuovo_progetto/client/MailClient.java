@@ -9,21 +9,16 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class MailClient extends Application {
-    private static String emailAddress;
+    private String emailAddress;
 
-    public MailClient() {
-        // Costruttore vuoto richiesto da JavaFX
-    }
-
-    public static void setEmailAddress(String email) {
-        emailAddress = email;
+    public MailClient(String emailAddress) {
+        this.emailAddress = emailAddress;
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/progetto/nuovo_progetto/client/view/ClientView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/progetto/nuovo_progetto/client/ClientView.fxml"));
         Parent root = loader.load();
-
         ClientController controller = loader.getController();
         ClientModel model = new ClientModel(emailAddress);
         controller.setModel(model);

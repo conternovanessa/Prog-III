@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main extends Application {
-
     private static final String EMAIL_FILE = "email.txt";
     private static List<String> emailAddresses = new ArrayList<>();
 
@@ -36,9 +35,8 @@ public class Main extends Application {
         // Avvia i client
         for (String email : emailAddresses) {
             Platform.runLater(() -> {
-                MailClient.setEmailAddress(email);
                 try {
-                    new MailClient().start(new Stage());
+                    new MailClient(email).start(new Stage());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

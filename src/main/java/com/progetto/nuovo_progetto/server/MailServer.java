@@ -20,7 +20,7 @@ public class MailServer extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/progetto/nuovo_progetto/server/view/ServerView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/progetto/nuovo_progetto/server/ServerView.fxml"));
         Parent root = loader.load();
         controller = loader.getController();
 
