@@ -10,4 +10,5 @@
   - [ ] gira un messaggio a uno o più destinatari
   - [ ] rimuove il messaggio della casella di posta
   - [ ] L'interfaccia mostra sempre la lista aggiornata dei messaggi in casella e quando arriva un messaggio notifica l'utente con una finestra di dialogo
+
 ATTENZIONE AD OGNI AZIONE CORRISPONDE L'APERTURA E LA CHIUSURA DELLA SOCKET DA PARTE DEL CLIENT, NEL MOMENTO IN CUI IL SERVER CHIUDE LA SOCKET CI DEV'ESSERE UN ALLERT.
