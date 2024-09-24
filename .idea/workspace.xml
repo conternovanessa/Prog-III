@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb475fbe-3fab-458f-b450-09d153db98cd" name="Changes" comment="manca totalmente il server" />
+    <list default="true" id="eb475fbe-3fab-458f-b450-09d153db98cd" name="Changes" comment="Forse così?" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -19,6 +19,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -27,12 +32,12 @@
     &quot;assignee&quot;: &quot;conternovanessa&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/conternovanessa/Prog-III&quot;,
-    &quot;accountId&quot;: &quot;d24558fd-777a-4128-b7fc-0f0c30dcd9f0&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/conternovanessa/Prog-III/",
+    "accountId": "d24558fd-777a-4128-b7fc-0f0c30dcd9f0"
   }
-}</component>
+}]]></component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -44,33 +49,39 @@
   &quot;associatedIndex&quot;: 6
 }</component>
   <component name="ProjectId" id="2mSsEwzYIatVHyFFYMiiDUFmyYv" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.MailClient.executor&quot;: &quot;Run&quot;,
-    &quot;Application.MailServer.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/vanes/IdeaProjects/Nuovo progetto&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.MailClient.executor": "Run",
+    "Application.MailServer.executor": "Run",
+    "Application.Main.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "nuovo-progetto",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/vanes/IdeaProjects/Prog-III/src/main/java",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\vanes\IdeaProjects\Prog-III\src\main\java" />
+      <recent name="C:\Users\vanes\IdeaProjects\Prog-III\src\main\java\com" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\vanes\IdeaProjects\Nuovo progetto\src\main\resources\com\progetto\nuovo_progetto\server" />
       <recent name="C:\Users\vanes\IdeaProjects\Nuovo progetto\src\main\resources\com\progetto\nuovo_progetto\client" />
@@ -97,6 +108,7 @@
       <workItem from="1727095941521" duration="5210000" />
       <workItem from="1727182893640" duration="2823000" />
       <workItem from="1727185953608" duration="111000" />
+      <workItem from="1727186669524" duration="329000" />
     </task>
     <task id="LOCAL-00001" summary="nuovo">
       <option name="closed" value="true" />
@@ -122,7 +134,15 @@
       <option name="project" value="LOCAL" />
       <updated>1727183777174</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Forse così?">
+      <option name="closed" value="true" />
+      <created>1727186837871</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1727186837871</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -132,6 +152,7 @@
     <MESSAGE value="nuovo" />
     <MESSAGE value="manca totalmente il server" />
     <MESSAGE value="manca un pezzo" />
-    <option name="LAST_COMMIT_MESSAGE" value="manca un pezzo" />
+    <MESSAGE value="Forse così?" />
+    <option name="LAST_COMMIT_MESSAGE" value="Forse così?" />
   </component>
 </project>
