@@ -1,25 +1,18 @@
-module com.example.progetto {
+module com.progetto.nuovo_progetto {
     requires javafx.controls;
     requires javafx.fxml;
-    requires javafx.web;
-    requires javafx.graphics;
 
-    requires org.controlsfx.controls;
-    requires com.dlsc.formsfx;
-    requires net.synedra.validatorfx;
-    requires org.kordamp.ikonli.javafx;
-    requires org.kordamp.bootstrapfx.core;
-    requires eu.hansolo.tilesfx;
-    requires com.almasb.fxgl.all;
-    requires java.logging;
+    exports com.progetto.nuovo_progetto;
+    exports com.progetto.nuovo_progetto.client;
+    exports com.progetto.nuovo_progetto.server;
 
-    // Esporta i pacchetti principali del progetto
-    exports com.example.progetto.Model;
-    exports com.example.progetto.Controller;
-    exports com.example.progetto.Main;
+    // Aggiungi questa riga per esportare il pacchetto del controller
+    exports com.progetto.nuovo_progetto.client.controller;
 
-    // Apre i pacchetti per riflessione a javafx.fxml
-    opens com.example.progetto.Model to javafx.fxml;
-    opens com.example.progetto.Controller to javafx.fxml;
-    opens com.example.progetto.Main to javafx.fxml;
+    opens com.progetto.nuovo_progetto to javafx.fxml;
+    opens com.progetto.nuovo_progetto.client to javafx.fxml;
+    opens com.progetto.nuovo_progetto.server to javafx.fxml;
+
+    // Aggiungi questa riga per aprire il pacchetto del controller a javafx.fxml
+    opens com.progetto.nuovo_progetto.client.controller to javafx.fxml;
 }
