@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.progetto.nuovo_progetto.client.controller.EmailViewController" spacing="10" padding="10">
+    <Label fx:id="fromLabel"/>
+    <Label fx:id="toLabel"/>
+    <Label fx:id="subjectLabel"/>
+    <Label fx:id="dateLabel"/>
+    <TextArea fx:id="bodyArea" VBox.vgrow="ALWAYS" editable="false"/>
+</VBox>

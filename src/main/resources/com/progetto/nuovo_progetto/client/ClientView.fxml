@@ -7,8 +7,9 @@
     <HBox>
         <Button text="Compose" onAction="#handleCompose"/>
         <Button text="Refresh" onAction="#handleRefresh"/>
+        <Button text="View" onAction="#handleViewEmail"/>
     </HBox>
-    <TableView fx:id="emailTableView" VBox.vgrow="ALWAYS">
+    <TableView fx:id="emailTableView" VBox.vgrow="ALWAYS" onMouseClicked="#handleViewEmail">
         <columns>
             <TableColumn fx:id="senderColumn" text="From"/>
             <TableColumn fx:id="subjectColumn" text="Subject"/>

@@ -4,7 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb475fbe-3fab-458f-b450-09d153db98cd" name="Changes" comment="Forse così?" />
+    <list default="true" id="eb475fbe-3fab-458f-b450-09d153db98cd" name="Changes" comment="Dobbiamo avere codice!">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/progetto/nuovo_progetto/client/controller/ComposeController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/progetto/nuovo_progetto/client/controller/EmailViewController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/progetto/nuovo_progetto/client/ComposeView.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/progetto/nuovo_progetto/client/EmailView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/progetto/nuovo_progetto/client/controller/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/progetto/nuovo_progetto/client/controller/ClientController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/progetto/nuovo_progetto/common/Email.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/progetto/nuovo_progetto/common/Email.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/progetto/nuovo_progetto/server/MailServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/progetto/nuovo_progetto/server/MailServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/progetto/nuovo_progetto/server/controller/ServerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/progetto/nuovo_progetto/server/controller/ServerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/progetto/nuovo_progetto/server/model/ServerModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/progetto/nuovo_progetto/server/model/ServerModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/progetto/nuovo_progetto/client/ClientView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/progetto/nuovo_progetto/client/ClientView.fxml" afterDir="false" />
+    </list>
+    <list id="24d17c2b-df74-4bce-b2f0-73951d5b4239" name="Changes by fil123456w_ " comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,8 +26,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="FxmlFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -74,6 +87,7 @@
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
     "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.Code With Me",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -108,7 +122,7 @@
       <workItem from="1727095941521" duration="5210000" />
       <workItem from="1727182893640" duration="2823000" />
       <workItem from="1727185953608" duration="111000" />
-      <workItem from="1727186669524" duration="329000" />
+      <workItem from="1727186669524" duration="2023000" />
     </task>
     <task id="LOCAL-00001" summary="nuovo">
       <option name="closed" value="true" />
@@ -142,7 +156,15 @@
       <option name="project" value="LOCAL" />
       <updated>1727186837871</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Dobbiamo avere codice!">
+      <option name="closed" value="true" />
+      <created>1727187266681</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1727187266681</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -153,6 +175,11 @@
     <MESSAGE value="manca totalmente il server" />
     <MESSAGE value="manca un pezzo" />
     <MESSAGE value="Forse così?" />
-    <option name="LAST_COMMIT_MESSAGE" value="Forse così?" />
+    <MESSAGE value="Dobbiamo avere codice!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Dobbiamo avere codice!" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

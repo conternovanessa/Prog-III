@@ -23,7 +23,7 @@ public class ServerModel {
     }
 
     public List<Email> getEmails(String user) {
-        return mailboxes.getOrDefault(user, new ArrayList<>());
+        return new ArrayList<>(mailboxes.getOrDefault(user, new ArrayList<>()));
     }
 
     public ObservableList<String> getLogEntries() {
@@ -32,5 +32,10 @@ public class ServerModel {
 
     public void addLogEntry(String entry) {
         logEntries.add(entry);
+    }
+
+    // New method to clear emails for a user
+    public void clearEmails(String user) {
+        mailboxes.remove(user);
     }
 }

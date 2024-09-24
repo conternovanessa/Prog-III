@@ -11,8 +11,8 @@ public class ServerController {
 
     private ServerModel model;
 
-    public void initialize() {
-        model = new ServerModel();
+    public void setModel(ServerModel model) {
+        this.model = model;
         logListView.setItems(model.getLogEntries());
     }
 
@@ -31,7 +31,4 @@ public class ServerController {
     private void addLogEntry(String entry) {
         Platform.runLater(() -> model.addLogEntry(entry));
     }
-
-    // Altri metodi per gestire le azioni del server
 }
-
