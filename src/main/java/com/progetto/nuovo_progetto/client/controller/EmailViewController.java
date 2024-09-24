@@ -17,6 +17,6 @@ public class EmailViewController {
         toLabel.setText("To: " + String.join(", ", email.getRecipients()));
         subjectLabel.setText("Subject: " + email.getSubject());
         dateLabel.setText("Date: " + email.getSentDate().toString());
-        bodyArea.setText(email.getBody());
+        bodyArea.setText(email.getContent());
     }
 }

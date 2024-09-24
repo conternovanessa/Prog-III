@@ -3,17 +3,36 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.progetto.nuovo_progetto.client.controller.ClientController">
-    <HBox>
-        <Button text="Compose" onAction="#handleCompose"/>
-        <Button text="Refresh" onAction="#handleRefresh"/>
-        <Button text="View" onAction="#handleViewEmail"/>
-    </HBox>
-    <TableView fx:id="emailTableView" VBox.vgrow="ALWAYS" onMouseClicked="#handleViewEmail">
-        <columns>
-            <TableColumn fx:id="senderColumn" text="From"/>
-            <TableColumn fx:id="subjectColumn" text="Subject"/>
-            <TableColumn fx:id="dateColumn" text="Date"/>
-        </columns>
-    </TableView>
-</VBox>
+<HBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.progetto.nuovo_progetto.client.controller.ClientController" spacing="10">
+
+    <!-- Sezione di sinistra: Email TableView -->
+    <VBox spacing="10" HBox.hgrow="ALWAYS">
+        <!-- Toolbar con i pulsanti Compose, Refresh, View -->
+        <HBox spacing="10">
+            <Button text="Compose" onAction="#handleCompose"/>
+            <Button text="Refresh" onAction="#handleRefresh"/>
+            <Button text="View" onAction="#handleViewEmail"/>
+        </HBox>
+
+        <!-- Tabella con le email -->
+        <TableView fx:id="emailTableView" VBox.vgrow="ALWAYS" onMouseClicked="#handleViewEmail">
+            <columns>
+                <TableColumn fx:id="senderColumn" text="From"/>
+                <TableColumn fx:id="subjectColumn" text="Subject"/>
+                <TableColumn fx:id="dateColumn" text="Date"/>
+            </columns>
+        </TableView>
+    </VBox>
+
+    <!-- Sezione di destra: Composizione email con larghezza fissa -->
+    <VBox fx:id="composeSection" spacing="10" visible="false" prefWidth="300">
+        <TextField fx:id="toField" promptText="To"/>
+        <TextField fx:id="subjectField" promptText="Subject"/>
+        <TextArea fx:id="bodyArea" promptText="Write your email here..." prefHeight="200"/>
+        <HBox spacing="10">
+            <Button text="Send" onAction="#handleSend"/>
+            <Button text="Cancel" onAction="#handleCancel"/>
+        </HBox>
+    </VBox>
+
+</HBox>

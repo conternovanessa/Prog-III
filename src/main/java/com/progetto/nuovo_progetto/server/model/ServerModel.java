@@ -1,29 +1,53 @@
 package com.progetto.nuovo_progetto.server.model;
 
 import com.progetto.nuovo_progetto.common.Email;
+import com.progetto.nuovo_progetto.common.EmailFileManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.ObservableMap;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.IOException;
+import java.util.*;
 
 public class ServerModel {
-    private ObservableMap<String, List<Email>> mailboxes;
+    private Map<String, List<Email>> emailStore;
+    private EmailFileManager emailFileManager;
     private ObservableList<String> logEntries;
 
     public ServerModel() {
-        mailboxes = FXCollections.observableHashMap();
-        logEntries = FXCollections.observableArrayList();
+        this.emailStore = new HashMap<>();
+        this.emailFileManager = EmailFileManager.getInstance();
+        this.logEntries = FXCollections.observableArrayList();
+    }
+
+    public List<Email> getEmails(String emailAddress) {
+        return emailStore.getOrDefault(emailAddress, new ArrayList<>());
     }
 
     public void addEmail(String recipient, Email email) {
-        mailboxes.computeIfAbsent(recipient, k -> new ArrayList<>()).add(email);
-        logEntries.add("Email added to " + recipient + "'s mailbox");
+        emailStore.computeIfAbsent(recipient, k -> new ArrayList<>()).add(email);
+        try {
+            emailFileManager.saveEmail(email);
+        } catch (IOException e) {
+            e.printStackTrace();
+            addLogEntry("Error saving email: " + e.getMessage());
+        }
     }
 
-    public List<Email> getEmails(String user) {
-        return new ArrayList<>(mailboxes.getOrDefault(user, new ArrayList<>()));
+    public void markEmailsAsRead(String emailAddress) {
+        List<Email> emails = emailStore.get(emailAddress);
+        if (emails != null) {
+            for (Email email : emails) {
+                email.setRead(true);
+            }
+            try {
+                for (Email email : emails) {
+                    emailFileManager.updateEmailStatus(emailAddress, email.getId(), true);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                addLogEntry("Error marking emails as read: " + e.getMessage());
+            }
+        }
     }
 
     public ObservableList<String> getLogEntries() {
@@ -32,10 +56,5 @@ public class ServerModel {
 
     public void addLogEntry(String entry) {
         logEntries.add(entry);
-    }
-
-    // New method to clear emails for a user
-    public void clearEmails(String user) {
-        mailboxes.remove(user);
     }
 }

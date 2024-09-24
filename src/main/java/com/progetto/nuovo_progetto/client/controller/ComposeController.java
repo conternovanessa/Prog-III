@@ -5,6 +5,7 @@ import com.progetto.nuovo_progetto.common.Email;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -17,6 +18,7 @@ public class ComposeController {
     @FXML private TextField toField;
     @FXML private TextField subjectField;
     @FXML private TextArea bodyArea;
+    @FXML private VBox composeSection;  // Referenza alla sezione di composizione
 
     private ClientModel model;
 
@@ -25,16 +27,22 @@ public class ComposeController {
     }
 
     @FXML
+    private void showComposeSection() {
+        composeSection.setVisible(true);  // Rende visibile la sezione di composizione
+    }
+
+    @FXML
     private void handleSend() {
         Email email = new Email();
         email.setSender(model.getEmailAddress());
         email.setRecipients(Arrays.asList(toField.getText().split(",")));
         email.setSubject(subjectField.getText());
-        email.setBody(bodyArea.getText());
+        email.setContent(bodyArea.getText());
         email.setSentDate(LocalDateTime.now());
 
         sendEmail(email);
-        closeWindow();
+        clearFields();  // Pulisce i campi dopo l'invio
+        composeSection.setVisible(false);  // Nasconde la sezione di composizione
     }
 
     private void sendEmail(Email email) {
@@ -47,16 +55,19 @@ public class ComposeController {
 
         } catch (IOException e) {
             e.printStackTrace();
-            // Show an error dialog
+            // Mostra un errore all'utente
         }
     }
 
     @FXML
     private void handleCancel() {
-        closeWindow();
+        clearFields();  // Pulisce i campi
+        composeSection.setVisible(false);  // Nasconde la sezione di composizione
     }
 
-    private void closeWindow() {
-        ((Stage) toField.getScene().getWindow()).close();
+    private void clearFields() {
+        toField.clear();
+        subjectField.clear();
+        bodyArea.clear();
     }
 }

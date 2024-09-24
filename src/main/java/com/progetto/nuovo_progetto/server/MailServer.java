@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 import com.progetto.nuovo_progetto.server.controller.ServerController;
 import com.progetto.nuovo_progetto.server.model.ServerModel;
 import com.progetto.nuovo_progetto.common.Email;
+import com.progetto.nuovo_progetto.common.EmailFileManager;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -70,10 +71,11 @@ public class MailServer extends Application {
                     handleSendEmail(in);
                     break;
                 default:
-                    System.out.println("Unknown request: " + request);
+                    model.addLogEntry("Unknown request: " + request);
             }
         } catch (Exception e) {
             e.printStackTrace();
+            model.addLogEntry("Error handling client: " + e.getMessage());
         }
     }
 
@@ -82,7 +84,7 @@ public class MailServer extends Application {
         List<Email> emails = model.getEmails(emailAddress);
         out.writeObject(emails);
         out.flush();
-        model.clearEmails(emailAddress); // Clear emails after sending them to the client
+        model.markEmailsAsRead(emailAddress);
     }
 
     private void handleSendEmail(ObjectInputStream in) throws IOException, ClassNotFoundException {

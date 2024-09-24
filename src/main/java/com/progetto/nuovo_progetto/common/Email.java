@@ -1,35 +1,43 @@
 package com.progetto.nuovo_progetto.common;
 
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class Email implements Serializable {
     private static final long serialVersionUID = 1L;
+    private static final AtomicLong ID_GENERATOR = new AtomicLong();
 
-    private String id;
+    private long id;
     private String sender;
     private List<String> recipients;
     private String subject;
-    private String body;
+    private String content;
     private LocalDateTime sentDate;
+    private boolean read;
 
     public Email() {
-        this.id = UUID.randomUUID().toString();
+        this.id = ID_GENERATOR.incrementAndGet();
         this.sentDate = LocalDateTime.now();
+        this.read = false;
     }
 
-    public Email(String sender, List<String> recipients, String subject, String body) {
+    public Email(String sender, List<String> recipients, String subject, String content) {
         this();
         this.sender = sender;
         this.recipients = recipients;
         this.subject = subject;
-        this.body = body;
+        this.content = content;
     }
 
-    public String getId() {
+    public long getId() {
         return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getSender() {
@@ -56,12 +64,12 @@ public class Email implements Serializable {
         this.subject = subject;
     }
 
-    public String getBody() {
-        return body;
+    public String getContent() {
+        return content;
     }
 
-    public void setBody(String body) {
-        this.body = body;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public LocalDateTime getSentDate() {
@@ -72,14 +80,24 @@ public class Email implements Serializable {
         this.sentDate = sentDate;
     }
 
+    public boolean isRead() {
+        return read;
+    }
+
+    public void setRead(boolean read) {
+        this.read = read;
+    }
+
     @Override
     public String toString() {
         return "Email{" +
-                "id='" + id + '\'' +
+                "id=" + id +
                 ", sender='" + sender + '\'' +
                 ", recipients=" + recipients +
                 ", subject='" + subject + '\'' +
                 ", sentDate=" + sentDate +
+                ", read=" + read +
                 '}';
     }
 }
+
