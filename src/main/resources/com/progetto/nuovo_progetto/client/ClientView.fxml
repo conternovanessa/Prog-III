@@ -7,11 +7,9 @@
 
     <!-- Sezione di sinistra: Email TableView -->
     <VBox spacing="10" HBox.hgrow="ALWAYS">
-        <!-- Toolbar con i pulsanti Compose, Refresh, View -->
+        <!-- Toolbar con il pulsante Compose -->
         <HBox spacing="10">
             <Button text="Compose" onAction="#handleCompose"/>
-            <Button text="Refresh" onAction="#handleRefresh"/>
-            <Button text="View" onAction="#handleViewEmail"/>
         </HBox>
 
         <!-- Tabella con le email -->
@@ -24,15 +22,27 @@
         </TableView>
     </VBox>
 
-    <!-- Sezione di destra: Composizione email con larghezza fissa -->
-    <VBox fx:id="composeSection" spacing="10" visible="false" prefWidth="300">
-        <TextField fx:id="toField" promptText="To"/>
-        <TextField fx:id="subjectField" promptText="Subject"/>
-        <TextArea fx:id="bodyArea" promptText="Write your email here..." prefHeight="200"/>
-        <HBox spacing="10">
-            <Button text="Send" onAction="#handleSend"/>
-            <Button text="Cancel" onAction="#handleCancel"/>
-        </HBox>
+    <!-- Sezione di destra: Visualizzazione email o Composizione email con larghezza fissa -->
+    <VBox fx:id="rightSection" spacing="10" prefWidth="300">
+        <!-- Sezione di visualizzazione email -->
+        <VBox fx:id="viewSection" spacing="10" visible="false">
+            <Label fx:id="fromLabel"/>
+            <Label fx:id="toLabel"/>
+            <Label fx:id="subjectLabel"/>
+            <Label fx:id="dateLabel"/>
+            <TextArea fx:id="bodyArea" editable="false" wrapText="true" VBox.vgrow="ALWAYS"/>
+        </VBox>
+
+        <!-- Sezione di composizione email -->
+        <VBox fx:id="composeSection" spacing="10" visible="false">
+            <TextField fx:id="toField" promptText="To"/>
+            <TextField fx:id="subjectField" promptText="Subject"/>
+            <TextArea fx:id="composeBodyArea" promptText="Write your email here..." prefHeight="200"/>
+            <HBox spacing="10">
+                <Button text="Send" onAction="#handleSend"/>
+                <Button text="Cancel" onAction="#handleCancel"/>
+            </HBox>
+        </VBox>
     </VBox>
 
 </HBox>

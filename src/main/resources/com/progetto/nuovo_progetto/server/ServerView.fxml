@@ -3,6 +3,10 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.progetto.nuovo_progetto.server.controller.ServerController">
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.progetto.nuovo_progetto.server.controller.ServerController" spacing="10">
+    <HBox spacing="10">
+        <Button text="Start Server" onAction="#handleStartServer" fx:id="startButton" />
+        <Button text="Stop Server" onAction="#handleStopServer" fx:id="stopButton" disable="true" />
+    </HBox>
     <ListView fx:id="logListView" VBox.vgrow="ALWAYS"/>
 </VBox>

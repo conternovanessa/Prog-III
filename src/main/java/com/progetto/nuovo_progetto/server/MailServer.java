@@ -8,7 +8,6 @@ import javafx.stage.Stage;
 import com.progetto.nuovo_progetto.server.controller.ServerController;
 import com.progetto.nuovo_progetto.server.model.ServerModel;
 import com.progetto.nuovo_progetto.common.Email;
-import com.progetto.nuovo_progetto.common.EmailFileManager;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -18,10 +17,11 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class MailServer extends Application {
-    private static final int PORT = 5000;
+    private static final int PORT = 5000;  // Porta del server
     private ServerController controller;
     private ServerModel model;
     private ExecutorService executorService;
+    private ServerSocket serverSocket;  // Socket del server per fermarlo in modo sicuro
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -30,39 +30,53 @@ public class MailServer extends Application {
         controller = loader.getController();
         model = new ServerModel();
         controller.setModel(model);
+        controller.setServer(this);  // Passa una referenza di MailServer al controller
 
         primaryStage.setTitle("Mail Server");
         primaryStage.setScene(new Scene(root, 400, 300));
         primaryStage.show();
-
-        startServer();
     }
 
-    private void startServer() {
-        executorService = Executors.newCachedThreadPool();
-        new Thread(this::acceptClients).start();
+    /**
+     * Avvia il server di posta.
+     */
+    public void startServer() {
+        executorService = Executors.newCachedThreadPool();  // Per gestire i thread dei client
+        new Thread(this::acceptClients).start();  // Thread separato per accettare connessioni dei client
     }
 
+    /**
+     * Accetta le connessioni dai client.
+     */
     private void acceptClients() {
-        try (ServerSocket serverSocket = new ServerSocket(PORT)) {
-            controller.handleServerStarted(PORT);
-            while (true) {
-                Socket clientSocket = serverSocket.accept();
-                executorService.submit(() -> handleClient(clientSocket));
+        try {
+            serverSocket = new ServerSocket(PORT);  // Apre il ServerSocket sulla porta specificata
+            controller.handleServerStarted(PORT);   // Notifica al controller che il server è avviato
+            while (!serverSocket.isClosed()) {
+                Socket clientSocket = serverSocket.accept();  // Attende le connessioni dei client
+                executorService.submit(() -> handleClient(clientSocket));  // Gestisce ciascun client su un thread separato
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            if (serverSocket.isClosed()) {
+                controller.handleServerStopped();  // Notifica al controller che il server è stato fermato
+            } else {
+                e.printStackTrace();
+                model.addLogEntry("Server error: " + e.getMessage());
+            }
         }
     }
 
+    /**
+     * Gestisce ciascun client connesso.
+     */
     private void handleClient(Socket clientSocket) {
         try (ObjectInputStream in = new ObjectInputStream(clientSocket.getInputStream());
              ObjectOutputStream out = new ObjectOutputStream(clientSocket.getOutputStream())) {
 
             String clientAddress = clientSocket.getInetAddress().getHostAddress();
-            controller.handleClientConnection(clientAddress);
+            controller.handleClientConnection(clientAddress);  // Logga la connessione del client
 
-            String request = (String) in.readObject();
+            String request = (String) in.readObject();  // Legge la richiesta dal client
             switch (request) {
                 case "FETCH_EMAILS":
                     handleFetchEmails(in, out);
@@ -79,23 +93,45 @@ public class MailServer extends Application {
         }
     }
 
+    /**
+     * Gestisce la richiesta di FETCH_EMAILS.
+     */
     private void handleFetchEmails(ObjectInputStream in, ObjectOutputStream out) throws IOException, ClassNotFoundException {
-        String emailAddress = (String) in.readObject();
-        List<Email> emails = model.getEmails(emailAddress);
-        out.writeObject(emails);
+        String emailAddress = (String) in.readObject();  // Legge l'indirizzo email dal client
+        List<Email> emails = model.getEmails(emailAddress);  // Recupera le email dal modello
+        out.writeObject(emails);  // Invia le email al client
         out.flush();
-        model.markEmailsAsRead(emailAddress);
+        model.markEmailsAsRead(emailAddress);  // Marca le email come lette
     }
 
+    /**
+     * Gestisce la richiesta di SEND_EMAIL.
+     */
     private void handleSendEmail(ObjectInputStream in) throws IOException, ClassNotFoundException {
-        Email email = (Email) in.readObject();
+        Email email = (Email) in.readObject();  // Legge l'email inviata dal client
         for (String recipient : email.getRecipients()) {
-            model.addEmail(recipient, email);
+            model.addEmail(recipient, email);  // Aggiunge l'email al destinatario
         }
-        controller.handleEmailReceived(email.getSender(), String.join(", ", email.getRecipients()));
+        controller.handleEmailReceived(email.getSender(), String.join(", ", email.getRecipients()));  // Logga l'email ricevuta
+    }
+
+    /**
+     * Ferma il server di posta in modo sicuro.
+     */
+    public void stopServer() {
+        try {
+            if (serverSocket != null && !serverSocket.isClosed()) {
+                serverSocket.close();  // Chiude il ServerSocket per fermare il server
+                controller.handleServerStopped();  // Notifica al controller che il server è fermato
+                executorService.shutdown();  // Ferma i thread dei client
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            model.addLogEntry("Error stopping server: " + e.getMessage());
+        }
     }
 
     public static void main(String[] args) {
-        launch(args);
+        launch(args);  // Avvia l'applicazione JavaFX
     }
 }
