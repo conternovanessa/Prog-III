@@ -21,37 +21,46 @@ public class EmailFileManager {
         return instance;
     }
 
-    public void saveEmail(Email email) throws IOException {
-        for (String recipient : email.getRecipients()) {
+    // Generazione di un UUID univoco
+    private String generateUUID() {
+        return UUID.randomUUID().toString();
+    }
+
+    // Metodo per salvare un'email
+    public void saveEmail(String sender, List<String> recipients, String subject, String content, LocalDateTime sentDate, boolean isRead) throws IOException {
+        String emailId = generateUUID(); // Genera un UUID univoco per l'email
+
+        for (String recipient : recipients) {
             String userDir = BASE_DIR + File.separator + recipient;
             Files.createDirectories(Paths.get(userDir));
 
-            String fileName = userDir + File.separator + email.getId() + ".txt";
+            String fileName = userDir + File.separator + emailId + ".txt";
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
-                writer.write("From: " + email.getSender());
+                writer.write("From: " + sender);
                 writer.newLine();
-                writer.write("To: " + String.join(", ", email.getRecipients()));
+                writer.write("To: " + String.join(", ", recipients));
                 writer.newLine();
-                writer.write("Subject: " + email.getSubject());
+                writer.write("Subject: " + subject);
                 writer.newLine();
-                writer.write("Date: " + email.getSentDate().format(DATE_FORMAT));
+                writer.write("Date: " + sentDate.format(DATE_FORMAT));
                 writer.newLine();
-                writer.write("Read: " + email.isRead());
+                writer.write("Read: " + isRead);
                 writer.newLine();
                 writer.newLine();
-                writer.write(email.getContent());
+                writer.write(content);
             }
         }
     }
 
-    public List<Email> getEmailSummaries(String userEmail) throws IOException {
+    // Metodo per ottenere i riepiloghi delle email di un utente
+    public List<Map<String, Object>> getEmailSummaries(String userEmail) throws IOException {
         String userDir = BASE_DIR + File.separator + userEmail;
-        List<Email> summaries = new ArrayList<>();
+        List<Map<String, Object>> summaries = new ArrayList<>();
 
         try (DirectoryStream<Path> stream = Files.newDirectoryStream(Paths.get(userDir))) {
             for (Path path : stream) {
                 if (Files.isRegularFile(path) && path.toString().endsWith(".txt")) {
-                    Email summary = readEmailSummary(path);
+                    Map<String, Object> summary = readEmailSummary(path);
                     if (summary != null) {
                         summaries.add(summary);
                     }
@@ -62,62 +71,59 @@ public class EmailFileManager {
         return summaries;
     }
 
-    private Email readEmailSummary(Path path) throws IOException {
+    // Metodo per leggere il riepilogo di una email da file
+    private Map<String, Object> readEmailSummary(Path path) throws IOException {
         try (BufferedReader reader = new BufferedReader(new FileReader(path.toFile()))) {
-            String from = reader.readLine().substring(6);  // Skip "From: "
-            String to = reader.readLine().substring(4);    // Skip "To: "
-            String subject = reader.readLine().substring(9);  // Skip "Subject: "
-            String dateStr = reader.readLine().substring(6);  // Skip "Date: "
-            boolean read = Boolean.parseBoolean(reader.readLine().substring(6));  // Skip "Read: "
+            Map<String, Object> emailSummary = new HashMap<>();
+            emailSummary.put("id", path.getFileName().toString().replace(".txt", ""));
+            emailSummary.put("from", reader.readLine().substring(6));  // Salta "From: "
+            emailSummary.put("to", reader.readLine().substring(4));    // Salta "To: "
+            emailSummary.put("subject", reader.readLine().substring(9));  // Salta "Subject: "
+            String dateStr = reader.readLine().substring(6);  // Salta "Date: "
+            emailSummary.put("date", LocalDateTime.parse(dateStr, DATE_FORMAT));
+            emailSummary.put("read", Boolean.parseBoolean(reader.readLine().substring(6)));  // Salta "Read: "
 
-            long id = Long.parseLong(path.getFileName().toString().replace(".txt", ""));
-
-            Email email = new Email(from, Arrays.asList(to.split(", ")), subject, "");
-            email.setId(id);
-            email.setSentDate(LocalDateTime.parse(dateStr, DATE_FORMAT));
-            email.setRead(read);
-
-            return email;
+            return emailSummary;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
 
-    public Email getFullEmail(String userEmail, long id) throws IOException {
-        String fileName = BASE_DIR + File.separator + userEmail + File.separator + id + ".txt";
+    // Metodo per ottenere l'email completa
+    public Map<String, Object> getFullEmail(String userEmail, String emailId) throws IOException {
+        String fileName = BASE_DIR + File.separator + userEmail + File.separator + emailId + ".txt";
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
-            String from = reader.readLine().substring(6);
-            String to = reader.readLine().substring(4);
-            String subject = reader.readLine().substring(9);
+            Map<String, Object> fullEmail = new HashMap<>();
+            fullEmail.put("from", reader.readLine().substring(6));
+            fullEmail.put("to", reader.readLine().substring(4));
+            fullEmail.put("subject", reader.readLine().substring(9));
             String dateStr = reader.readLine().substring(6);
-            boolean read = Boolean.parseBoolean(reader.readLine().substring(6));
-            reader.readLine();  // Skip empty line
+            fullEmail.put("date", LocalDateTime.parse(dateStr, DATE_FORMAT));
+            fullEmail.put("read", Boolean.parseBoolean(reader.readLine().substring(6)));
+            reader.readLine();  // Salta la riga vuota
             StringBuilder content = new StringBuilder();
             String line;
             while ((line = reader.readLine()) != null) {
                 content.append(line).append("\n");
             }
+            fullEmail.put("content", content.toString());
 
-            Email email = new Email(from, Arrays.asList(to.split(", ")), subject, content.toString());
-            email.setId(id);
-            email.setSentDate(LocalDateTime.parse(dateStr, DATE_FORMAT));
-            email.setRead(read);
-
-            return email;
+            return fullEmail;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
 
-    public void updateEmailStatus(String userEmail, long id, boolean read) throws IOException {
-        String fileName = BASE_DIR + File.separator + userEmail + File.separator + id + ".txt";
+    // Metodo per aggiornare lo stato di lettura di un'email
+    public void updateEmailStatus(String userEmail, String emailId, boolean isRead) throws IOException {
+        String fileName = BASE_DIR + File.separator + userEmail + File.separator + emailId + ".txt";
         Path path = Paths.get(fileName);
         List<String> lines = Files.readAllLines(path);
 
-        // Update the read status
-        lines.set(4, "Read: " + read);
+        // Aggiorna lo stato di lettura
+        lines.set(4, "Read: " + isRead);
 
         Files.write(path, lines);
     }

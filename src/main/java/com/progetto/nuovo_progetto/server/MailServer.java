@@ -13,6 +13,7 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -98,7 +99,7 @@ public class MailServer extends Application {
      */
     private void handleFetchEmails(ObjectInputStream in, ObjectOutputStream out) throws IOException, ClassNotFoundException {
         String emailAddress = (String) in.readObject();  // Legge l'indirizzo email dal client
-        List<Email> emails = model.getEmails(emailAddress);  // Recupera le email dal modello
+        List<Map<String, Object>> emails = model.getEmails(emailAddress);  // Recupera le email dal modello
         out.writeObject(emails);  // Invia le email al client
         out.flush();
         model.markEmailsAsRead(emailAddress);  // Marca le email come lette
@@ -108,12 +109,21 @@ public class MailServer extends Application {
      * Gestisce la richiesta di SEND_EMAIL.
      */
     private void handleSendEmail(ObjectInputStream in) throws IOException, ClassNotFoundException {
-        Email email = (Email) in.readObject();  // Legge l'email inviata dal client
+        Email email = (Email) in.readObject();
         for (String recipient : email.getRecipients()) {
-            model.addEmail(recipient, email);  // Aggiunge l'email al destinatario
+            model.addEmail(
+                    recipient,               // Recipient
+                    email.getSender(),        // Sender
+                    email.getRecipients(),    // List of recipients
+                    email.getSubject(),       // Subject
+                    email.getContent(),       // Content
+                    email.getSentDate(),      // Sent date
+                    email.isRead()            // Read status
+            );
         }
-        controller.handleEmailReceived(email.getSender(), String.join(", ", email.getRecipients()));  // Logga l'email ricevuta
+        controller.handleEmailReceived(email.getSender(), String.join(", ", email.getRecipients()));
     }
+
 
     /**
      * Ferma il server di posta in modo sicuro.

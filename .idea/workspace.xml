@@ -5,16 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="eb475fbe-3fab-458f-b450-09d153db98cd" name="Changes" comment="Bisogna memorizzare le mail">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/progetto/nuovo_progetto/client/controller/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/progetto/nuovo_progetto/client/controller/ClientController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/progetto/nuovo_progetto/client/ClientView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/progetto/nuovo_progetto/client/ClientView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/progetto/nuovo_progetto/client/ComposeView.fxml" beforeDir="false" />
-    </list>
-    <list id="63c51812-ace7-440a-b16d-41f0264c7818" name="Changes by fil123456w_ " comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/progetto/nuovo_progetto/common/EmailFileManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/progetto/nuovo_progetto/common/EmailFileManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/progetto/nuovo_progetto/server/MailServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/progetto/nuovo_progetto/server/MailServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/progetto/nuovo_progetto/server/controller/ServerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/progetto/nuovo_progetto/server/controller/ServerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/progetto/nuovo_progetto/server/ServerView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/progetto/nuovo_progetto/server/ServerView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/progetto/nuovo_progetto/server/model/ServerModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/progetto/nuovo_progetto/server/model/ServerModel.java" afterDir="false" />
     </list>
+    <list id="63c51812-ace7-440a-b16d-41f0264c7818" name="Changes by fil123456w_ " comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -42,12 +39,12 @@
     &quot;assignee&quot;: &quot;conternovanessa&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/conternovanessa/Prog-III/&quot;,
-    &quot;accountId&quot;: &quot;d24558fd-777a-4128-b7fc-0f0c30dcd9f0&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/conternovanessa/Prog-III.git",
+    "accountId": "b86f0b45-02bb-4439-856c-3cd7de2e31c1"
   }
-}</component>
+}]]></component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
