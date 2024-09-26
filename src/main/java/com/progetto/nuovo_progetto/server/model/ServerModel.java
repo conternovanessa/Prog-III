@@ -12,6 +12,11 @@ public class ServerModel {
     private Map<String, List<Map<String, Object>>> emailStore;
     private EmailFileManager emailFileManager;
     private ObservableList<String> logEntries;
+    private static final List<String> VALID_EMAILS = Arrays.asList(
+            "filippoditto@progetto.com",
+            "fabiodelia@progetto.com",
+            "vanessaconterno@progetto.com"
+    );
 
     public ServerModel() {
         this.emailStore = new HashMap<>();
@@ -19,12 +24,10 @@ public class ServerModel {
         this.logEntries = FXCollections.observableArrayList();
     }
 
-    // Metodo per ottenere le email di un determinato indirizzo
     public List<Map<String, Object>> getEmails(String emailAddress) {
         return emailStore.getOrDefault(emailAddress, new ArrayList<>());
     }
 
-    // Metodo per aggiungere un'email e salvarla su file
     public void addEmail(String recipient, String sender, List<String> recipients, String subject, String content, LocalDateTime sentDate, boolean isRead) {
         Map<String, Object> emailData = new HashMap<>();
         emailData.put("from", sender);
@@ -37,7 +40,6 @@ public class ServerModel {
         emailStore.computeIfAbsent(recipient, k -> new ArrayList<>()).add(emailData);
 
         try {
-            // Passa i dettagli dell'email invece dell'oggetto Email
             emailFileManager.saveEmail(sender, recipients, subject, content, sentDate, isRead);
         } catch (IOException e) {
             e.printStackTrace();
@@ -45,7 +47,6 @@ public class ServerModel {
         }
     }
 
-    // Metodo per segnare tutte le email di un determinato indirizzo come lette
     public void markEmailsAsRead(String emailAddress) {
         List<Map<String, Object>> emails = emailStore.get(emailAddress);
         if (emails != null) {
@@ -64,13 +65,16 @@ public class ServerModel {
         }
     }
 
-    // Metodo per ottenere i log
     public ObservableList<String> getLogEntries() {
         return logEntries;
     }
 
-    // Metodo per aggiungere una voce di log
     public void addLogEntry(String entry) {
         logEntries.add(entry);
+    }
+
+    // Nuovo metodo per verificare se un'email è valida
+    public boolean isValidEmail(String email) {
+        return VALID_EMAILS.contains(email);
     }
 }

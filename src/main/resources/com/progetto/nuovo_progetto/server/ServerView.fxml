@@ -5,8 +5,7 @@
 
 <VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.progetto.nuovo_progetto.server.controller.ServerController" spacing="10">
     <HBox spacing="10">
-        <Button text="Start Server" onAction="#handleStartServer" fx:id="startButton" />
-        <Button text="Stop Server" onAction="#handleStopServer" fx:id="stopButton" disable="true" />
+        <Button text="Accendi Server" onAction="#handleToggleServer" fx:id="toggleServerButton" />
     </HBox>
     <ListView fx:id="logListView" VBox.vgrow="ALWAYS"/>
 </VBox>

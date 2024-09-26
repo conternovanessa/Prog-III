@@ -63,6 +63,7 @@ public class EmailFileManager {
                     Map<String, Object> summary = readEmailSummary(path);
                     if (summary != null) {
                         summaries.add(summary);
+                        System.out.println("Read email summary: " + summary);
                     }
                 }
             }

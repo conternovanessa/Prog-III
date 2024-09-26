@@ -5,13 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="eb475fbe-3fab-458f-b450-09d153db98cd" name="Changes" comment="Bisogna memorizzare le mail">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emails/fabiodelia@progetto.com/1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/emails/fabiodelia@progetto.com/2.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/emails/filippoditto@progetto.com/1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/progetto/nuovo_progetto/client/MailClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/progetto/nuovo_progetto/client/MailClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/progetto/nuovo_progetto/client/controller/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/progetto/nuovo_progetto/client/controller/ClientController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/progetto/nuovo_progetto/common/EmailFileManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/progetto/nuovo_progetto/common/EmailFileManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/progetto/nuovo_progetto/server/MailServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/progetto/nuovo_progetto/server/MailServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/progetto/nuovo_progetto/server/controller/ServerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/progetto/nuovo_progetto/server/controller/ServerController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/progetto/nuovo_progetto/server/model/ServerModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/progetto/nuovo_progetto/server/model/ServerModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/progetto/nuovo_progetto/client/EmailView.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/progetto/nuovo_progetto/server/ServerView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/progetto/nuovo_progetto/server/ServerView.fxml" afterDir="false" />
     </list>
-    <list id="63c51812-ace7-440a-b16d-41f0264c7818" name="Changes by fil123456w_ " comment="" />
+    <list id="62591eb5-d5e0-427c-ab75-65a75e944987" name="Changes by dfabi" comment="" />
+    <list id="63c51812-ace7-440a-b16d-41f0264c7818" name="Changes by fil123456w_ " comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/progetto/nuovo_progetto/client/controller/ComposeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/progetto/nuovo_progetto/client/controller/ComposeController.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -41,8 +51,8 @@
 }</component>
   <component name="GithubPullRequestsUISettings"><![CDATA[{
   "selectedUrlAndAccountId": {
-    "url": "https://github.com/conternovanessa/Prog-III.git",
-    "accountId": "b86f0b45-02bb-4439-856c-3cd7de2e31c1"
+    "url": "https://github.com/conternovanessa/Prog-III/",
+    "accountId": "d24558fd-777a-4128-b7fc-0f0c30dcd9f0"
   }
 }]]></component>
   <component name="MavenImportPreferences">
@@ -99,8 +109,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.22855.74" />
-        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.22855.74" />
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23339.11" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23339.11" />
       </set>
     </attachedChunks>
   </component>
@@ -118,6 +128,7 @@
       <workItem from="1727185953608" duration="111000" />
       <workItem from="1727186669524" duration="5385000" />
       <workItem from="1727272985951" duration="4273000" />
+      <workItem from="1727354797298" duration="4646000" />
     </task>
     <task id="LOCAL-00001" summary="nuovo">
       <option name="closed" value="true" />
@@ -180,6 +191,17 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="nuovo" />

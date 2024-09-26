@@ -36,30 +36,26 @@ public class MailServer extends Application {
         primaryStage.setTitle("Mail Server");
         primaryStage.setScene(new Scene(root, 400, 300));
         primaryStage.show();
+
+        startServer();
     }
 
-    /**
-     * Avvia il server di posta.
-     */
     public void startServer() {
-        executorService = Executors.newCachedThreadPool();  // Per gestire i thread dei client
-        new Thread(this::acceptClients).start();  // Thread separato per accettare connessioni dei client
+        executorService = Executors.newCachedThreadPool();
+        new Thread(this::acceptClients).start();
+        controller.handleServerStarted(PORT);  // Notifica al controller che il server è stato avviato
     }
 
-    /**
-     * Accetta le connessioni dai client.
-     */
     private void acceptClients() {
         try {
-            serverSocket = new ServerSocket(PORT);  // Apre il ServerSocket sulla porta specificata
-            controller.handleServerStarted(PORT);   // Notifica al controller che il server è avviato
+            serverSocket = new ServerSocket(PORT);
             while (!serverSocket.isClosed()) {
-                Socket clientSocket = serverSocket.accept();  // Attende le connessioni dei client
-                executorService.submit(() -> handleClient(clientSocket));  // Gestisce ciascun client su un thread separato
+                Socket clientSocket = serverSocket.accept();
+                executorService.submit(() -> handleClient(clientSocket));
             }
         } catch (IOException e) {
             if (serverSocket.isClosed()) {
-                controller.handleServerStopped();  // Notifica al controller che il server è stato fermato
+                controller.handleServerStopped();
             } else {
                 e.printStackTrace();
                 model.addLogEntry("Server error: " + e.getMessage());
@@ -67,23 +63,20 @@ public class MailServer extends Application {
         }
     }
 
-    /**
-     * Gestisce ciascun client connesso.
-     */
     private void handleClient(Socket clientSocket) {
         try (ObjectInputStream in = new ObjectInputStream(clientSocket.getInputStream());
              ObjectOutputStream out = new ObjectOutputStream(clientSocket.getOutputStream())) {
 
             String clientAddress = clientSocket.getInetAddress().getHostAddress();
-            controller.handleClientConnection(clientAddress);  // Logga la connessione del client
+            controller.handleClientConnection(clientAddress);
 
-            String request = (String) in.readObject();  // Legge la richiesta dal client
+            String request = (String) in.readObject();
             switch (request) {
                 case "FETCH_EMAILS":
                     handleFetchEmails(in, out);
                     break;
                 case "SEND_EMAIL":
-                    handleSendEmail(in);
+                    handleSendEmail(in, out, clientSocket);
                     break;
                 default:
                     model.addLogEntry("Unknown request: " + request);
@@ -94,46 +87,61 @@ public class MailServer extends Application {
         }
     }
 
-    /**
-     * Gestisce la richiesta di FETCH_EMAILS.
-     */
     private void handleFetchEmails(ObjectInputStream in, ObjectOutputStream out) throws IOException, ClassNotFoundException {
-        String emailAddress = (String) in.readObject();  // Legge l'indirizzo email dal client
-        List<Map<String, Object>> emails = model.getEmails(emailAddress);  // Recupera le email dal modello
-        out.writeObject(emails);  // Invia le email al client
+        String emailAddress = (String) in.readObject();
+        List<Map<String, Object>> emails = model.getEmails(emailAddress);
+        out.writeObject(emails);
         out.flush();
-        model.markEmailsAsRead(emailAddress);  // Marca le email come lette
+        model.markEmailsAsRead(emailAddress);
     }
 
-    /**
-     * Gestisce la richiesta di SEND_EMAIL.
-     */
-    private void handleSendEmail(ObjectInputStream in) throws IOException, ClassNotFoundException {
+    private void handleSendEmail(ObjectInputStream in, ObjectOutputStream out, Socket clientSocket) throws IOException, ClassNotFoundException {
         Email email = (Email) in.readObject();
+        System.out.println("Received email: " + email);
+        boolean allRecipientsValid = true;
         for (String recipient : email.getRecipients()) {
-            model.addEmail(
-                    recipient,               // Recipient
-                    email.getSender(),        // Sender
-                    email.getRecipients(),    // List of recipients
-                    email.getSubject(),       // Subject
-                    email.getContent(),       // Content
-                    email.getSentDate(),      // Sent date
-                    email.isRead()            // Read status
-            );
+            if (!isValidRecipient(recipient)) {
+                allRecipientsValid = false;
+                break;
+            }
         }
-        controller.handleEmailReceived(email.getSender(), String.join(", ", email.getRecipients()));
+
+        if (allRecipientsValid) {
+            for (String recipient : email.getRecipients()) {
+                model.addEmail(
+                        recipient,
+                        email.getSender(),
+                        email.getRecipients(),
+                        email.getSubject(),
+                        email.getContent(),
+                        email.getSentDate(),
+                        email.isRead()
+                );
+                System.out.println("Email saved for recipient: " + recipient);
+            }
+            controller.handleEmailReceived(email.getSender(), String.join(", ", email.getRecipients()));
+            out.writeObject("SUCCESS: Email inviata con successo");
+        } else {
+            out.writeObject("ERROR: Uno o più destinatari non sono validi");
+        }
+        out.flush();
+    }
+    private boolean isValidRecipient(String email) {
+        return model.isValidEmail(email);
     }
 
+    @Override
+    public void stop() throws Exception {
+        stopServer();
+        super.stop();
+    }
 
-    /**
-     * Ferma il server di posta in modo sicuro.
-     */
     public void stopServer() {
         try {
             if (serverSocket != null && !serverSocket.isClosed()) {
-                serverSocket.close();  // Chiude il ServerSocket per fermare il server
-                controller.handleServerStopped();  // Notifica al controller che il server è fermato
-                executorService.shutdown();  // Ferma i thread dei client
+                serverSocket.close();
+                controller.handleServerStopped();
+                executorService.shutdown();
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -142,6 +150,6 @@ public class MailServer extends Application {
     }
 
     public static void main(String[] args) {
-        launch(args);  // Avvia l'applicazione JavaFX
+        launch(args);
     }
 }
