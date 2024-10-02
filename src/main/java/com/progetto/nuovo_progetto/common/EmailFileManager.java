@@ -26,28 +26,24 @@ public class EmailFileManager {
         return UUID.randomUUID().toString();
     }
 
-    // Metodo per salvare un'email
-    public void saveEmail(String sender, List<String> recipients, String subject, String content, LocalDateTime sentDate, boolean isRead) throws IOException {
-        String emailId = generateUUID(); // Genera un UUID univoco per l'email
-
-        for (String recipient : recipients) {
+    public void saveEmail(Email email) throws IOException {
+        for (String recipient : email.getRecipients()) {
             String userDir = BASE_DIR + File.separator + recipient;
             Files.createDirectories(Paths.get(userDir));
 
-            String fileName = userDir + File.separator + emailId + ".txt";
+            String fileName = userDir + File.separator + email.getId() + ".txt";
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
-                writer.write("From: " + sender);
+                writer.write("From: " + email.getSender());
                 writer.newLine();
-                writer.write("To: " + String.join(", ", recipients));
+                writer.write("To: " + String.join(", ", email.getRecipients()));
                 writer.newLine();
-                writer.write("Subject: " + subject);
+                writer.write("Subject: " + email.getSubject());
                 writer.newLine();
-                writer.write("Date: " + sentDate.format(DATE_FORMAT));
+                writer.write("Date: " + email.getSentDate().format(DATE_FORMAT));
                 writer.newLine();
-                writer.write("Read: " + isRead);
+                writer.write("Read: " + email.isRead());
                 writer.newLine();
-                writer.newLine();
-                writer.write(content);
+                writer.write("Body: " + email.getContent());
             }
         }
     }

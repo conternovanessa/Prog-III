@@ -2,44 +2,47 @@ package com.progetto.nuovo_progetto.client.controller;
 
 import com.progetto.nuovo_progetto.client.model.ClientModel;
 import com.progetto.nuovo_progetto.common.Email;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.net.ConnectException;
 import java.net.Socket;
 import java.time.LocalDateTime;
 import java.util.Arrays;
-import java.util.List;
+import javafx.scene.web.WebView;
 
 public class ClientController {
     @FXML private TableView<Email> emailTableView;
     @FXML private TableColumn<Email, String> senderColumn;
     @FXML private TableColumn<Email, String> subjectColumn;
-    @FXML private TableColumn<Email, String> dateColumn;
+    @FXML private TableColumn<Email, LocalDateTime> dateColumn;
 
     @FXML private VBox rightSection;
     @FXML private VBox viewSection;
     @FXML private VBox composeSection;
 
-    // Campi per la visualizzazione dell'email
     @FXML private Label fromLabel;
     @FXML private Label toLabel;
     @FXML private Label subjectLabel;
     @FXML private Label dateLabel;
     @FXML private TextArea bodyArea;
 
-    // Campi per la composizione dell'email
     @FXML private TextField toField;
     @FXML private TextField subjectField;
     @FXML private TextArea composeBodyArea;
 
+    @FXML private WebView bodyWebView;
+    @FXML private Label bodyLabel;
+
     private ClientModel model;
-    private EmailViewController emailViewController;
     private Email lastAttemptedEmail;
 
     public void initialize() {
@@ -52,15 +55,37 @@ public class ClientController {
                 handleViewEmail();
             }
         });
+
+        emailTableView.setRowFactory(tv -> new TableRow<Email>() {
+            @Override
+            protected void updateItem(Email email, boolean empty) {
+                super.updateItem(email, empty);
+                if (email == null) {
+                    setStyle("");
+                } else if (!email.isRead()) {
+                    setStyle("-fx-font-weight: bold;");
+                } else {
+                    setStyle("");
+                }
+            }
+        });
+
+        emailTableView.getSortOrder().add(dateColumn);
+        emailTableView.sort();
     }
 
     public void setModel(ClientModel model) {
         this.model = model;
         emailTableView.setItems(model.getInbox());
+        fetchEmails();
     }
 
-    public void setEmailViewController(EmailViewController emailViewController) {
-        this.emailViewController = emailViewController;
+    private void fetchEmails() {
+        model.fetchEmails();
+        Platform.runLater(() -> {
+            emailTableView.refresh();
+            emailTableView.sort();
+        });
     }
 
     @FXML
@@ -95,18 +120,18 @@ public class ClientController {
             out.writeObject(email);
             out.flush();
 
-            Object response = in.readObject();
-            if (response instanceof String && ((String) response).startsWith("ERROR")) {
-                showAlert("Errore di invio", (String) response, Alert.AlertType.ERROR);
+            String response = (String) in.readObject();
+            if (response.startsWith("SUCCESS")) {
+                showAlert("Email inviata", "L'email è stata inviata con successo.", Alert.AlertType.INFORMATION);
+                return true;
+            } else {
+                showAlert("Errore", response, Alert.AlertType.ERROR);
                 return false;
             }
 
-            showAlert("Email inviata", "L'email è stata inviata con successo.", Alert.AlertType.INFORMATION);
-            return true;
-
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
-            showAlert("Errore", "Si è verificato un errore durante l'invio dell'email.", Alert.AlertType.ERROR);
+            showAlert("Errore", "Si è verificato un errore durante l'invio dell'email: " + e.getMessage(), Alert.AlertType.ERROR);
             return false;
         }
     }
@@ -150,44 +175,37 @@ public class ClientController {
             toLabel.setText("To: " + String.join(", ", selectedEmail.getRecipients()));
             subjectLabel.setText("Subject: " + selectedEmail.getSubject());
             dateLabel.setText("Date: " + selectedEmail.getSentDate().toString());
-            bodyArea.setText(selectedEmail.getContent());
+
+            // Usa una WebView per visualizzare il contenuto HTML
+            bodyWebView.getEngine().loadContent(selectedEmail.getContent());
+
+            // Imposta anche una label per il corpo del messaggio (per email non HTML)
+            bodyLabel.setText(selectedEmail.getContent());
 
             composeSection.setVisible(false);
             viewSection.setVisible(true);
+
+            if (!selectedEmail.isRead()) {
+                selectedEmail.setRead(true);
+                model.updateEmailStatus(selectedEmail);
+                emailTableView.refresh();
+            }
         }
     }
 
-    public void startEmailListener() {
-        new Thread(() -> {
-            while (true) {
-                try (Socket socket = new Socket("localhost", 5000);
-                     ObjectInputStream in = new ObjectInputStream(socket.getInputStream())) {
-                    System.out.println("Connected to server");
-                    while (true) {
-                        Object obj = in.readObject();
-                        if (obj instanceof Email) {
-                            Email newEmail = (Email) obj;
-                            javafx.application.Platform.runLater(() -> handleNewEmail(newEmail));
-                        }
-                    }
-                } catch (IOException | ClassNotFoundException e) {
-                    e.printStackTrace();
-                    System.out.println("Error connecting to server: " + e.getMessage());
-                    try {
-                        Thread.sleep(5000);
-                    } catch (InterruptedException ie) {
-                        Thread.currentThread().interrupt();
-                        return;
-                    }
-                }
-            }
-        }).start();
+    public void startEmailUpdateTimer() {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
+            fetchEmails();
+        }));
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
     }
 
     public void handleNewEmail(Email newEmail) {
-        model.addEmail(newEmail);
-        javafx.application.Platform.runLater(() -> {
+        Platform.runLater(() -> {
+            model.addEmail(newEmail);
             emailTableView.refresh();
+            emailTableView.sort();
         });
     }
 }

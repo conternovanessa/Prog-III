@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.web.WebView?>
 
 <HBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.progetto.nuovo_progetto.client.controller.ClientController" spacing="10">
 
@@ -30,8 +31,12 @@
             <Label fx:id="toLabel"/>
             <Label fx:id="subjectLabel"/>
             <Label fx:id="dateLabel"/>
-            <TextArea fx:id="bodyArea" editable="false" wrapText="true" VBox.vgrow="ALWAYS"/>
+            <Separator/>
+            <Label text="Message:"/>
+            <WebView fx:id="bodyWebView" VBox.vgrow="ALWAYS"/>
+            <Label fx:id="bodyLabel" wrapText="true" VBox.vgrow="ALWAYS"/>
         </VBox>
+
 
         <!-- Sezione di composizione email -->
         <VBox fx:id="composeSection" spacing="10" visible="false">

@@ -1,16 +1,14 @@
 package com.progetto.nuovo_progetto.common;
 
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.UUID;
 
-public class Email implements Serializable {
+public class Email implements Serializable, Comparable<Email> {
     private static final long serialVersionUID = 1L;
-    private static final AtomicLong ID_GENERATOR = new AtomicLong();
 
-    private long id;
+    private String id;
     private String sender;
     private List<String> recipients;
     private String subject;
@@ -19,7 +17,7 @@ public class Email implements Serializable {
     private boolean read;
 
     public Email() {
-        this.id = ID_GENERATOR.incrementAndGet();
+        this.id = UUID.randomUUID().toString();
         this.sentDate = LocalDateTime.now();
         this.read = false;
     }
@@ -32,11 +30,11 @@ public class Email implements Serializable {
         this.content = content;
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -89,9 +87,14 @@ public class Email implements Serializable {
     }
 
     @Override
+    public int compareTo(Email other) {
+        return other.getSentDate().compareTo(this.getSentDate());
+    }
+
+    @Override
     public String toString() {
         return "Email{" +
-                "id=" + id +
+                "id='" + id + '\'' +
                 ", sender='" + sender + '\'' +
                 ", recipients=" + recipients +
                 ", subject='" + subject + '\'' +
@@ -99,5 +102,17 @@ public class Email implements Serializable {
                 ", read=" + read +
                 '}';
     }
-}
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Email email = (Email) o;
+        return id.equals(email.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
+}

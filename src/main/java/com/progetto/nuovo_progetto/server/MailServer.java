@@ -92,7 +92,7 @@ public class MailServer extends Application {
         List<Map<String, Object>> emails = model.getEmails(emailAddress);
         out.writeObject(emails);
         out.flush();
-        model.markEmailsAsRead(emailAddress);
+        // Rimuovi la chiamata a markEmailsAsRead qui, poiché dovrebbe essere gestita dal client
     }
 
     private void handleSendEmail(ObjectInputStream in, ObjectOutputStream out, Socket clientSocket) throws IOException, ClassNotFoundException {
@@ -108,15 +108,7 @@ public class MailServer extends Application {
 
         if (allRecipientsValid) {
             for (String recipient : email.getRecipients()) {
-                model.addEmail(
-                        recipient,
-                        email.getSender(),
-                        email.getRecipients(),
-                        email.getSubject(),
-                        email.getContent(),
-                        email.getSentDate(),
-                        email.isRead()
-                );
+                model.addEmail(email);
                 System.out.println("Email saved for recipient: " + recipient);
             }
             controller.handleEmailReceived(email.getSender(), String.join(", ", email.getRecipients()));

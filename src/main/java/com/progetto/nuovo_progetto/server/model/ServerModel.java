@@ -1,6 +1,8 @@
 package com.progetto.nuovo_progetto.server.model;
 
+import com.progetto.nuovo_progetto.common.Email;
 import com.progetto.nuovo_progetto.common.EmailFileManager;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -22,28 +24,33 @@ public class ServerModel {
         this.emailStore = new HashMap<>();
         this.emailFileManager = EmailFileManager.getInstance();
         this.logEntries = FXCollections.observableArrayList();
+        loadExistingEmails();
+    }
+
+    private void loadExistingEmails() {
+        for (String emailAddress : VALID_EMAILS) {
+            try {
+                List<Map<String, Object>> emails = emailFileManager.getEmailSummaries(emailAddress);
+                emailStore.put(emailAddress, emails);
+                addLogEntry("Loaded " + emails.size() + " emails for " + emailAddress);
+            } catch (IOException e) {
+                e.printStackTrace();
+                addLogEntry("Error loading emails for " + emailAddress + ": " + e.getMessage());
+            }
+        }
     }
 
     public List<Map<String, Object>> getEmails(String emailAddress) {
         return emailStore.getOrDefault(emailAddress, new ArrayList<>());
     }
 
-    public void addEmail(String recipient, String sender, List<String> recipients, String subject, String content, LocalDateTime sentDate, boolean isRead) {
-        Map<String, Object> emailData = new HashMap<>();
-        emailData.put("from", sender);
-        emailData.put("to", recipients);
-        emailData.put("subject", subject);
-        emailData.put("content", content);
-        emailData.put("date", sentDate);
-        emailData.put("read", isRead);
-
-        emailStore.computeIfAbsent(recipient, k -> new ArrayList<>()).add(emailData);
-
+    public void addEmail(Email email) {
         try {
-            emailFileManager.saveEmail(sender, recipients, subject, content, sentDate, isRead);
+            emailFileManager.saveEmail(email);
+            // Aggiungi l'email alla struttura dati in memoria, se necessario
         } catch (IOException e) {
             e.printStackTrace();
-            addLogEntry("Error saving email: " + e.getMessage());
+            // Gestisci l'errore appropriatamente
         }
     }
 
@@ -70,10 +77,9 @@ public class ServerModel {
     }
 
     public void addLogEntry(String entry) {
-        logEntries.add(entry);
+        Platform.runLater(() -> logEntries.add(entry));
     }
 
-    // Nuovo metodo per verificare se un'email è valida
     public boolean isValidEmail(String email) {
         return VALID_EMAILS.contains(email);
     }

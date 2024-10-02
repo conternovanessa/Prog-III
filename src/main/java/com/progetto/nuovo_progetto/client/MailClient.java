@@ -22,6 +22,7 @@ public class MailClient extends Application {
         ClientController controller = loader.getController();
         ClientModel model = new ClientModel(emailAddress);
         controller.setModel(model);
+        controller.startEmailUpdateTimer();
 
         primaryStage.setTitle("Mail Client - " + emailAddress);
         primaryStage.setScene(new Scene(root, 600, 400));
